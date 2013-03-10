@@ -5,7 +5,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Arma Tu Torta</title>
-	<link rel="stylesheet" type="text/css" href="css/style.css" />
+	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/style.css" />
 	<!--[if IE 8]>
 		<link rel="stylesheet" type="text/css" href="css/ie8.css" />
 	<![endif]-->
@@ -15,6 +15,14 @@
 	<!--[if IE 6]>
 		<link rel="stylesheet" type="text/css" href="css/ie6.css" />
 	<![endif]-->
+	
+	<script type="text/javascript" src="/armaTuTorta/js/jquery.js"></script>
+	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
+	<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+		$("a[rel*=leanModal]").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
+	});
+	</script>
 </head>
 <body>
 	<div id="header">
@@ -25,7 +33,7 @@
 				</div>
 				<div>
 					<div>
-						<a href="/armaTuTorta/ingresar.jsp">Ingresar</a>
+						<a href="#signup" name="signup" rel="leanModal" id="go">Ingresar</a>
 						<a href="/armaTuTorta/registro.jsp" class="last">Registrarse</a>
 					</div>
 				</div>
@@ -141,5 +149,6 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="ventanas.jsp"></jsp:include>
 </body>
 </html>

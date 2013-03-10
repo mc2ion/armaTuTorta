@@ -15,18 +15,26 @@
 	<!--[if IE 6]>
 		<link rel="stylesheet" type="text/css" href="css/ie6.css" />
 	<![endif]-->
+	
+	<script type="text/javascript" src="/armaTuTorta/js/jquery.js"></script>
+	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
+	<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+		$("a[rel*=leanModal]").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
+	});
+	</script>
 </head>
 <body>
 	<div id="header">
 		<div>
 			<div>
 				<div id="logo">
-					<a href="index.html"><img src="/armaTuTorta/images/logo.gif" alt="Logo"/></a>
+					<a href="/armaTuTorta/index.jsp"><img src="/armaTuTorta/images/logo2.png" alt="Logo"/></a>
 				</div>
 				<div>
 					<div>
-						<a href="/armaTuTorta/ingresar.jsp">Ingresar</a>
-						<a href="/armaTuTorta/registrarse.jsp" class="last">Registrarse</a>
+						<a href="#signup" rel="leanModal" id="go">Ingresar</a>
+						<a href="/armaTuTorta/registro.jsp" class="last">Registrarse</a>
 					</div>
 				</div>
 			</div>
@@ -46,7 +54,7 @@
 	<div id="content">
 		<div class="home">
 			<div class="aside">
-				<h1>Bienvenido a nuestra p&aacute;gina</h1>
+				
 				<p>Pastry is the name given to various kinds of baked goods made from ingredients such as flour, butter, shortening, baking powder or eggs. Small cakes, tarts and other sweet baked goods are called &#34;pastries&#34;.</p> 
 				<p>Pastry may also refer to the dough from which such baked goods are made. Pastry dough is rolled out thinly and used as a base for baked goods. Common pastry dishes include pies, tarts and quiches. 
 				<p>Pastry is distinguished from bread by having a higher fat content, which contributes to a flaky or crumbly texture. A good pastry is light and airy and fatty, but firm enough to support the weight of the filling. When making a shortcrust pastry, care must be taken to blend the fat and flour thoroughly before adding. <a href="index.html" class="readmore">read more</a></p>
@@ -139,5 +147,6 @@
 			</div>
 		</div>
 	</div>
+	<jsp:include page="ventanas.jsp"></jsp:include>
 </body>
 </html>
