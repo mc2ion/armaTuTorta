@@ -43,9 +43,9 @@
 				</div>
 			</div>
 			<ul style="margin: 0px; ">
-				<li class="current"><a href="/armaTuTorta/index.jsp">Inicio</a></li>
+				<li><a href="/armaTuTorta/index.jsp">Inicio</a></li>
 				<li><a href="/armaTuTorta/creaTuTorta.jsp">Arma Tu Torta</a></li>
-				<li><a href="/armaTuTorta/dulcesTortas.jsp">Dulces Tortas</a></li>
+				<li class="current"><a href="/armaTuTorta/dulcesTortas.jsp">Dulces Tortas</a></li>
 				<li><a href="/armaTuTorta/cupcakes.jsp">Cupcakes</a></li>
 				<li><a href="/armaTuTorta/ocasionesEspeciales.jsp">Ocasiones Especiales</a></li>
 				<li><a href="/armaTuTorta/galeria.jsp">Galería</a></li>
@@ -56,27 +56,59 @@
 	<div id="content">
 		<div class="home">
 			<div class="aside">
-				<p>En <strong>Arma Tu Torta</strong> elaboramos reposter&iacute;a de forma artesanal, haciendo de la cocina un arte, utilizando la mejor calidad en materia prima y priorizando el sabor de los alimentos.</p>
-				<p>Elaboramos tortas para toda ocasi&oacute;n con los ingredientes, sabores y dise&ntilde;os de tu preferencia. El esp&iacute;ritu de <strong>Arma Tu Torta</strong> est&aacute; en la gastronom&iacute;a como
-				 forma de vida y en la transmisi&oacute;n de ese placer en cada uno de nuestros productos.</p>
-				<p>Elige la forma de tu preferencia, escoge tus sabores favoritos, el relleno que desees, el topping que m&aacute;s te guste... &iexcl;&Aacute;rmala a tu gusto 
-				que nosotros nos encargamos del resto!  &nbsp;<a href="creaTuTorta.jsp" class="readmore"> &iexcl;Solicita aqu&iacute; tu pedido!</a></p>
-			</div>
-			<div class="section">
+				<div class="title"> &iexcl; Deleitate con nuestras m&aacute;s sabrosas tortas! </div>
+				<div class="subtitle">Es muy f&aacute;cil, escoge las tortas que desees ordenar, escoge la cantidad que desees de cada una y haz click en "Ordenar"</div>
+				<div class="cakes">
+					<table border="0">
+						<tr>
+							<td width="220px"> <input type="checkbox" name="option1" value="Milk" > Marquesa de almendras</td>
+							<td width="100px">Bs. 15,00 </td>
+							<td><input type="text" value="Cantidad" size="8" /> </td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="option2" value="Butter" > Marquesa de almendras</td>
+							<td>Bs. 15,00 </td>
+							<td><input type="text" value="Cantidad" size="8" /> </td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="option2" value="Butter" > Pie de lim&oacute;n</td>
+							<td>Bs. 15,00 </td>
+							<td><input type="text" value="Cantidad" size="8" /> </td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="option2" value="Butter" > Pie de parchita</td>
+							<td>Bs. 15,00 </td>
+							<td><input type="text" value="Cantidad" size="8" /> </td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="option2" value="Butter" > Mouse de parchita</td>
+							<td>Bs. 15,00 </td>
+							<td><input type="text" value="Cantidad" size="8" /> </td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" name="option2" value="Butter"> Tiramis&uacute;</td>
+							<td>Bs. 15,00 </td>
+							<td><input type="text" value="Cantidad" size="8" /> </td>
+						</tr>
+					</table>
+					<div class="dt-button">
+						<input type="submit" name="sbmtButton" class="button" value="Ordenar"  />
+					</div> 
+					<div class="subtotal-section"> Sub-total: Bs. 0,00 </div><br>
+					
+				</div>	
+			</div>	
+			
+			<div class="sectionDT">
 				<div>
 					<ul>
 						<li>
-							<a href="index.html"><img src="./images/imagen1.png" alt="Image" /></a>
-						</li>
-						<li>
-							<a href="index.html"><img src="./images/imagen3.png" alt="Image" /></a>
-						</li>
-						<li id="img-last">
-							<a href="index.html"><img src="./images/imagen3.png" alt="Image" /></a>
+							<img src="./images/imagen.png" alt="Image" />
 						</li>
 					</ul>
 				</div>	
 			</div>
+			
 		</div>
 	</div>
 	<div class="push"></div>
