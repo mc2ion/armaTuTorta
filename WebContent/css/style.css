@@ -212,6 +212,8 @@ p a {
 	color: black;
 	margin-top: 30px;
 	margin-left: 30px;
+	font-size: 26px;
+	color: #4d366a;
 }
 
 #content .home .subtitle{
@@ -285,11 +287,6 @@ p a {
 
 
 
-#content .home .title{
-	margin-top: 10px;
-	font-size: 26px;
-	color: #4d366a;
-}
 
 
 #content div#services div.aside span {
