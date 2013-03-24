@@ -55,33 +55,37 @@
 	</div>
 	<div id="content">
 		<div class="home">
-			<div class="sectionLeft">
-				<div>
-					<ul>
-						<li>
-							<img src="./images/paso_torta.png" alt="Image" />
-						</li>
-					</ul>
-				</div>	
+			<div class="title-ocEsp"> ¿Tienes en mente un diseño especial para una torta? ¿Quieres crear cupcakes especiales? ¿Deseas un gelatina innovadora?
+				&iexcl; Est&aacute;s en el lugar indicado! Escr&iacute;benos tu idea, carga im&aacute;genes de referencia que quieras usar y deja que nosotros
+				nos encargemos del resto.
+			</div>
+			<div class="coments-ocEsp">
+				<form>
+					<fieldset>
+						<label for="name">¿Cu&aacute;l es tu ocasi&oacute;n especial?:</label>
+						<select>
+						  <option value="volvo">Boda</option>
+						  <option value="saab">Quincea&ntilde;os</option>
+						  <option value="mercedes">Matrimonio</option>
+						  <option value="audi">Bautizo</option>
+						</select><br><br>
+						<label for="name" style="height:60px;">¿Cu&aacute;les de nuestros productos deseas ordenar?:</label>
+						<input type="checkbox" name="vehicle" value="Bike">Torta<br>
+						<input type="checkbox" name="vehicle" value="Car">Cupcakes <br>
+						<input type="checkbox" name="vehicle" value="Car">Gelatina <br><br>
+						<label for="name">N&uacute;mero apr&oacute;ximado de invitados:</label>
+						<input type="text" name="txtName" id="txtName" size="25" maxlength="50" /> <br><br>
+						<label for="name">¿Tienes un dise&ntilde;o en mente? C&aacute;rgalo aqu&iacute;:</label>
+						<input type="text" name="txtName" id="txtName" size="25" maxlength="50" /> <input type="submit" value="Cargar Archivo"/> <br><br>
+						<label for="name">Cu&eacute;ntanos m&aacute;s acerca de tu idea:</label>
+						<textarea style="resize: none;"></textarea> <br><br>
+					</fieldset>
+					<div class="ocEsp-button">
+							<input type="submit" name="sbmtButton" class="button" value="Enviar"  />
+					</div>
+				</form>
 			</div>
 			
-			<div class="title"> &iexcl; Sigue los pasos a continuaci&oacute;n y  arma la torta que deseas! </div>
-			<div class="asideRight">
-				<p> <span class="step1"> Paso 1: </span>  Elige la forma de tu torta </p>
-				<div class="options-steps">
-					<input type="radio" name="forma" value="1" checked> Redonda<br>
-					<input type="radio" name="forma" value="2" > Cuadrada <br>
-					<input type="radio" name="forma" value="3" > Ovalada
-				</div>
-				<div class="button-section">
-					<input type="submit" name="sbmtButton" class="button" value="Siguiente"  />
-				</div>
-			</div>
-			<div class="subtotal-section"> Sub-total: Bs. 100,00 </div>
-			
-			<div class="banner">
-				<a href="./ocasionesEspeciales.jsp"><img src="./images/banner.png" alt="Image" /></a>
-			</div>
 			
 			
 			
