@@ -5,8 +5,8 @@ public class Album {
 	private long id;
 	private String name;
 	private String image;
-	private boolean isActive;
-	private boolean isNew;
+	private int isActive;
+	private int isNew;
 	
 	/**
 	 * 
@@ -44,7 +44,7 @@ public class Album {
 	 * 
 	 * @param isActive
 	 */
-	public void setActive(boolean isActive) {
+	public void setActive(int isActive) {
 		this.isActive = isActive;
 	}
 
@@ -52,7 +52,7 @@ public class Album {
 	 * 
 	 * @return
 	 */
-	public boolean isActive() {
+	public int isActive() {
 		return isActive;
 	}
 
@@ -64,11 +64,11 @@ public class Album {
 		return image;
 	}
 
-	public void setNew(boolean isNew) {
+	public void setNew(int isNew) {
 		this.isNew = isNew;
 	}
 
-	public boolean isNew() {
+	public int isNew() {
 		return isNew;
 	}	
 

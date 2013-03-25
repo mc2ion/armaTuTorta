@@ -30,7 +30,7 @@ public class CommandExecutor {
 		
 		if (ds == null) {			
 			InitialContext ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/segadental");			
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/armatutorta");			
 		}
 		
 		return ds;
