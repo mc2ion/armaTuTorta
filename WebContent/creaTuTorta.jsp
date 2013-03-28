@@ -73,12 +73,39 @@
 	   $(".rdB3").click(function(){
 	    $("#bt3Disable").hide();
 		$("#bt3").show();
+		var value = $("input:radio[name=sabor]:checked").val();
+		if (value == 1)
+			$("#pasoImgSabor").attr('src',"./images/tortas/torta_chocolate.png");
+		else if (value == 2)
+			$("#pasoImgSabor").attr('src',"./images/tortas/torta_vainilla.png");
+		else if (value == 3)
+			$("#pasoImgSabor").attr('src',"./images/tortas/torta_almendras.png");
+		else if (value == 4)
+			$("#pasoImgSabor").attr('src',"./images/tortas/torta_marmoleada.png");
+		else if (value == 5)
+			$("#pasoImgSabor").attr('src',"./images/tortas/torta_zanahoria.png");
+		else if (value == 6)
+			$("#pasoImgSabor").attr('src',"./images/tortas/torta_naranja.png");
+		else if (value == 7)
+			$("#pasoImgSabor").attr('src',"./images/tortas/torta_chocolate_fudge.png");
+		$("#pasoImgSabor").show();
+		$("#pasoImgBase").hide();
+		
 	  });
 	  
 	  $(".rdB4").click(function(){
 	    $("#bt4Disable").hide();
 		$("#bt4").show();
-		
+		var value = $("input:radio[name=capas]:checked").val();
+		if (value == 1)
+			$("#pasoImgCapas").attr('src',"./images/tortas/1_capa_general.png");
+		else if (value == 2)
+			$("#pasoImgCapas").attr('src',"./images/tortas/2_capa_general.png");
+		else if (value == 3)
+			$("#pasoImgCapas").attr('src',"./images/tortas/3_capa_general.png");
+		else
+			$("#pasoImgCapas").hide();
+		$("#pasoImgCapas").show();
 	  });
 	  
 	  $(".rdB5").click(function(){
@@ -116,7 +143,7 @@
 			$(".block-5").show();
 			$(".block-6").hide();
 	   });
-
+	   
 	});
 	
 	
@@ -156,7 +183,15 @@
 				<div>
 					<ul>
 						<li>
-							<img src="./images/paso_torta.png" alt="Image" />
+							<img id="pasoImgBase" src="./images/paso_torta.png" alt="Image"  />
+							<img id="pasoImgSabor" src="" width="160" height="170" alt="Image" 
+								style="position: absolute;top:287px; left: 291px; display:none;"  />
+							<img id="pasoImgCapas" src="" width="160" height="170" alt="Image" 
+								style="position: absolute; top:287px; left: 291px; display:none;"  />
+							<img id="pasoImgColor" src="" width="160" height="170" alt="Image"
+							style="position: absolute;top:287px; left: 291px;  display: none;"/>
+							<img id="pasoImgDecoracion" src="" width="160" height="170" alt="Image" 
+								style="position: absolute; top:287px; left: 291px;  display:none;" />
 						</li>
 					</ul>
 				</div>	
