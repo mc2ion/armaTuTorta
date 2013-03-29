@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleAdmin.css" />
-<title>Administrador Productos</title>
+<title>Administrador Álbumes</title>
 <script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.js"></script>
 <script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.dataTables.js"></script>
 <script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
@@ -43,20 +43,20 @@
 	} );
 </script>
 <script type="text/javascript">
-	var idProduct;
+	var idAlbum;
 			
 	$(function() {
 		$('a[rel*=leanModal]').leanModal({ top : 200, closeButton: ".close_x" });		
 	});
 	
 	function loadVars(var1, var2) {
-		idProduct = var1;
-		$('.product').text(var2);
+		idAlbum = var1;
+		$('.album').text(var2);
 		
 	};
 	
 	function setV(f){
-		f.elements['productId'].value = idProduct;
+		f.elements['albumId'].value = idAlbum;
 		return true;
 	}
 </script>
@@ -69,7 +69,7 @@
         <div id="menu">
 			<div class="menuitemHome" ><a href="UserLoginServlet">Home</a></div>	
 	    	<ul>
-            	<li class="menuitem"><a href="CreateProductServlet">Agregar Álbum</a></li>
+            	<li class="menuitem"><a href="CreateAlbumServlet">Agregar Álbum</a></li>
             </ul>
 			<div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
         </div>        
@@ -130,10 +130,13 @@
 									<td><%= (a.isActive()==1)?"Si":"No"  %></td>
 									<td><%= (a.isNew()==1)?"Si":"No" %></td>
 									<td><p>
-										<a href="/armaTuTorta/EditProductServlet?productId=<%= a.getId() %>" style="color: transparent" >
+										<a href="/armaTuTorta/ListPhotosServlet?albumId=<%= a.getId() %>" style="color: transparent" >
+											<img alt="logo" src="/armaTuTorta/images/photos.png"  height="16" width="16" />
+										</a> 
+										<a href="/armaTuTorta/EditAlbumServlet?albumId=<%= a.getId() %>" style="color: transparent" >
 											<img alt="logo" src="/armaTuTorta/images/edit.png"  height="16" width="16" />
 										</a> 
-										<a id="go" rel="leanModal" href="#deleteProduct" style="color: #f7941e; font-weight: bold;" 
+										<a id="go" rel="leanModal" href="#deleteAlbum" style="color: #f7941e; font-weight: bold;" 
 										onclick="return loadVars(<%= a.getId()%>,'<%= a.getName()%>' )" >
 										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" style="padding-left: 15px;"/>
 										</a><br>
@@ -155,16 +158,16 @@
 		</div>
  	</div>
 	
-	<div id="deleteProduct">
+	<div id="deleteAlbum">
 		<div id="signup-ct">
-			<h3 id="see_id" class="sprited" > Eliminar Producto</h3>
+			<h3 id="see_id" class="sprited" > Eliminar Álbum</h3>
 			<br><br>
-			<span>¿Está seguro que desea eliminar el producto <span class="product"></span>? </span> <br><br>
+			<span>¿Está seguro que desea eliminar el álbum <span class="album"></span>? </span> <br><br>
 			<div id="signup-header">
 				<a class="close_x" id="close_x"  href="#"></a>
 			</div>
-			<form action="/armaTuTorta/DeleteProductServlet" method="post"  onsubmit="return setV(this)">
-				<input type="hidden" id="productId" class="good_input" name="productId"  value=""/>
+			<form action="/armaTuTorta/DeleteAlbumServlet" method="post"  onsubmit="return setV(this)">
+				<input type="hidden" id="albumId" class="good_input" name="albumId"  value=""/>
 				<div class="btn-fld">
 					<input type="submit"  class="buttonPopUpDelete"  name="sbmtButton" value="Aceptar"  />
 				</div>

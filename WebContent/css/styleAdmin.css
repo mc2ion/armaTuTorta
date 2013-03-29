@@ -1250,7 +1250,7 @@ div.box {
 		
 	}
 	
-	#deleteUser, #deleteProduct, #deleteRequest{
+	#deleteUser, #deleteAlbum, #deleteRequest{
 		position: absolute;
 		text-align: center;
 		width: 295px;

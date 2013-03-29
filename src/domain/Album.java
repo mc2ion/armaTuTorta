@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Formatter;
+
 public class Album {
 	
 	private long id;
@@ -72,4 +74,10 @@ public class Album {
 		return isNew;
 	}	
 
+	public String getDirectory(){
+		 Formatter fmt = new Formatter();
+         fmt.format("%08d",id);
+         
+         return fmt.toString();
+	}
 }
