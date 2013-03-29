@@ -64,7 +64,7 @@
 					</div>
 				</div>
 				<div class="registration">
-					<span class="regis-title">Registro </span></br>
+					<span class="regis-title">Registro </span><br>
 					<fieldset>
 							<label for="name">Nombres:</label>
 							<input type="text" name="txtName" id="txtName" size="35" maxlength="100" /> <br><br>

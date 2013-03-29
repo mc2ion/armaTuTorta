@@ -59,7 +59,7 @@
 				<div class="title"> &iexcl; Deleitate con nuestras m&aacute;s sabrosas tortas! </div>
 				<div class="subtitle">Es muy f&aacute;cil, escoge las tortas que desees ordenar, escoge la cantidad que desees de cada una y haz click en "Ordenar"</div>
 				<div class="cakes">
-					<table border="0">
+					<table style="border:none;">
 						<tr>
 							<td width="220px"> <input type="checkbox" name="option1" value="Milk" > Marquesa de almendras</td>
 							<td width="100px">Bs. 15,00 </td>
