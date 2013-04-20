@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import command.CommandExecutor;
 
@@ -26,7 +27,7 @@ import domain.User;
 @WebServlet(description = "servlet to create albums", urlPatterns = { "/CreateAlbumServlet" })
 public class CreateAlbumServlet extends HttpServlet {
 	
-private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
     
     /**
      * @see HttpServlet#HttpServlet()
@@ -62,12 +63,12 @@ private static final long serialVersionUID = 1L;
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher rd;
+		RequestDispatcher rd;	
+		Properties propertiesFile = new Properties();	
+		propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+		MultipartRequest multipart = new MultipartRequest(request, propertiesFile.getProperty("albumsDirectory"), 5*1024*1024, new DefaultFileRenamePolicy());
 		
-		try{
-			Properties propertiesFile = new Properties();
-			propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
-			MultipartRequest multipart = new MultipartRequest(request, propertiesFile.getProperty("albumsDirectory"));
+		try{			
 			String name = multipart.getParameter("txtName");
 			File imageFile = multipart.getFile("txtImage");
 			String image = imageFile.getName();
@@ -85,18 +86,28 @@ private static final long serialVersionUID = 1L;
 			album.setImage(image);
 			album.setActive(isActive);
 			album.setNew(isNew);
-						
+		
 			Integer rowsUpdated  = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.CreateAlbum(album));
 			
+			album.setId(rowsUpdated);
+			
+			String dir = propertiesFile.getProperty("albumsDirectory") + propertiesFile.getProperty("fileSeparator") + album.getDirectory();
+			File file = new File(dir);
+				
+			file.mkdir();
+			
+			int pointIndex = image.indexOf(".");
+			String extension = image.substring(pointIndex);
+
+			image = album.getId() + "_" + album.getName().toLowerCase().replace(" ", "_") + "_cover" + extension;
+			
+			File destination = new File(dir + propertiesFile.getProperty("fileSeparator") + image);
+				
+			imageFile.renameTo(destination);								
+			album.setImage(image);
+			rowsUpdated  = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.EditAlbum(album));
+				
 			if(rowsUpdated == 1){
-				album = (Album) CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectMaxAlbum());
-				String dir = propertiesFile.getProperty("albumsDirectory") + propertiesFile.getProperty("fileSeparator") + album.getDirectory();
-				File file = new File(dir);
-				file.mkdir();
-				
-				File destination = new File(dir + propertiesFile.getProperty("fileSeparator") + imageFile.getName());
-				imageFile.renameTo(destination);
-				
 				request.setAttribute("info", "El álbum fue creado exitosamente.");
 				request.setAttribute("error", "");
 				rd = getServletContext().getRequestDispatcher("/ListAlbumsServlet");			
@@ -107,8 +118,7 @@ private static final long serialVersionUID = 1L;
 				rd = getServletContext().getRequestDispatcher("/ListAlbumsServlet");			
 
 				rd.forward(request, response);
-			}
-			
+			}			
 		}catch (Exception e) {
 			request.setAttribute("info", "");
 			request.setAttribute("error", "Ocurrió un error durante la creación del álbum. Por favor intente de nuevo y si el error persiste contacte a su administrador.");

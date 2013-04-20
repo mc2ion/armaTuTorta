@@ -7,7 +7,7 @@ public class StepOption {
 	private String name;
 	private int position;
 	private double price;
-	private boolean isUnavailable;
+	private int isUnavailable;
 	
 	public void setId(long id) {
 		this.id = id;
@@ -49,11 +49,11 @@ public class StepOption {
 		return price;
 	}
 
-	public void setUnavailable(boolean isUnavailable) {
+	public void setUnavailable(int isUnavailable) {
 		this.isUnavailable = isUnavailable;
 	}
 
-	public boolean isUnavailable() {
+	public int isUnavailable() {
 		return isUnavailable;
 	}
 	

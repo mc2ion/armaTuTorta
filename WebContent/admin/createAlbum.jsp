@@ -36,7 +36,7 @@
 					<fieldset>
 						<label for="name">Nombre:</label>
 						<input type="text" name="txtName" id="txtName" maxlength="50" size="40" /> <br><br>
-						<label for="image">Imagen: (40x40 px)</label>
+						<label for="image">Imagen:</label>
 						<input type="file" name="txtImage" id="txtImage" maxlength="50" lang="es" /> <br><br>
 						<input type="checkbox" name="txtIsActive" class="check" id="txtIsActive" maxlength="50" size="40" value="isActive" />&nbsp; 
 							&nbsp;&nbsp; Activo <br>

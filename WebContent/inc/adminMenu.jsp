@@ -14,9 +14,9 @@
 %>
     <li><a href="/armaTuTorta/ListOrdersServlet">Pedidos</a></li>
     <li><a href="/armaTuTorta/ListClientsServlet">Clientes</a></li>
-	<li><a href="/armaTuTorta/ListOrderStepsServlet">Cupcakes</a></li>
-    <li><a href="/armaTuTorta/ListOrderStepsServlet">Tortas</a></li>
-    <li><a href="/armaTuTorta/ListOrderStepsServlet">Dulces Tortas</a></li>
+	<li><a href="/armaTuTorta/ListOrderStepsServlet?typeId=2">Cupcakes</a></li>
+    <li><a href="/armaTuTorta/ListOrderStepsServlet?typeId=1">Tortas</a></li>
+    <li><a href="/armaTuTorta/ListOrderStepsServlet?typeId=3">Dulces Tortas</a></li>
 	<li><a href="/armaTuTorta/ListAlbumsServlet">Galería</a></li>
 <%
 	}

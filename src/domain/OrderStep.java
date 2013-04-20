@@ -6,7 +6,8 @@ public class OrderStep {
 	private long orderTypeId;
 	private String name;
 	private int position;
-	private boolean isMultipleChoice;
+	private int oldPosition;
+	private int isMultipleChoice;
 	
 	public void setId(long id) {
 		this.id = id;
@@ -40,12 +41,20 @@ public class OrderStep {
 		return position;
 	}
 
-	public void setMultipleChoice(boolean isMultipleChoice) {
+	public void setMultipleChoice(int isMultipleChoice) {
 		this.isMultipleChoice = isMultipleChoice;
 	}
 
-	public boolean isMultipleChoice() {
+	public int isMultipleChoice() {
 		return isMultipleChoice;
+	}
+
+	public void setOldPosition(int oldPosition) {
+		this.oldPosition = oldPosition;
+	}
+
+	public int getOldPosition() {
+		return oldPosition;
 	}
 
 }
