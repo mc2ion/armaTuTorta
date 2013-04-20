@@ -21,204 +21,8 @@
 	
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
-	<script type="text/javascript" charset="utf-8">
-	$(document).ready(function() {
-		$("a[rel*=leanModal]").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
-	});
-	
-	$(document).ready(function(){
-	  $("#bt1").click(function(){
-	    $(".block").hide();
-		$(".block-2").show();
-	  });
-	  
-	  $("#bt2").click(function(){
-	    $(".block-2").hide();
-		$(".block-3").show();
-	  });
-	  
-	   $("#bt3").click(function(){
-	    $(".block-3").hide();
-		$(".block-4").show();
-	  });
-	  
-	   $("#bt4").click(function(){
-		var value = $("input:radio[name=capas]:checked").val();
-		if (value == '-'){
-			$(".block-4").hide();
-			$(".step6").text("Paso 5:");
-			$(".block-6").show();
-		}else{
-			$(".block-4").hide();
-			$(".block-5").show();
-		}	
-	    
-	  });
-	  
-	  $("#bt5").click(function(){
-	    $(".block-5").hide();
-		$(".block-6").show();
-	  });
-	  
-	  $(".rdB1").click(function(){
-	    $("#bt1Disable").hide();
-		$("#bt1").show();
-	  });
-	  
-	  $(".rdB2").click(function(){
-	    $("#bt2Disable").hide();
-		$("#bt2").show();
-	  });
-	  
-	   $(".rdB3").click(function(){
-	    $("#bt3Disable").hide();
-		$("#bt3").show();
-		
-		var value = $("input:radio[name=sabor]:checked").val();
-		if (value == 1)
-			$("#pasoImgSabor").attr('src',"./images/cupcakes/ponque_chocolate.png");
-		else if (value == 2)
-			$("#pasoImgSabor").attr('src',"./images/cupcakes/ponque_vainilla.png");
-		else if (value == 3)
-			$("#pasoImgSabor").attr('src',"./images/cupcakes/ponque_vainilla_chispas.png");
-		else if (value == 4)
-			$("#pasoImgSabor").attr('src',"./images/cupcakes/ponque_zanahoria.png");
-		else if (value == 5)
-			$("#pasoImgSabor").attr('src',"./images/cupcakes/ponque_limon.png");
-		else if (value == 6)
-			$("#pasoImgSabor").attr('src',"./images/cupcakes/ponque_red.png");
-		else if (value == 7)
-			$("#pasoImgSabor").attr('src',"./images/cupcakes/ponque_chocolate_fuge.png");
-		$("#pasoImgSabor").show();
-		$("#pasoImgBase").hide();
-	  });
-	  
-	  $(".rdB4").click(function(){
-	    $("#bt4Disable").hide();
-		$("#bt4").show();
-		var value = $("input:radio[name=cubierta]:checked").val();
-		if (value == 1)
-			$("#pasoImgCubierta").attr('src',"./images/cupcakes/crema_mantequilla_blanco.png");
-		else if (value == 2)
-			$("#pasoImgCubierta").attr('src',"./images/cupcakes/glaseado_general.png");
-		else if (value == 3)
-			$("#pasoImgCubierta").attr('src',"./images/cupcakes/crema_chocolate.png");
-		else if (value == 4)
-			$("#pasoImgCubierta").attr('src',"./images/cupcakes/crema_queso_crema.png");
-		else if (value == 5)
-			$("#pasoImgCubierta").attr('src',"./images/cupcakes/crema_limon.png");
-		else if (value == 6)
-			$("#pasoImgCubierta").attr('src',"./images/cupcakes/crema_limon.png");
-		$("#pasoImgCubierta").show();
-	  });
-	  
-	  $(".rdB5").click(function(){
-	    $("#bt5Disable").hide();
-		$("#bt5").show();
-		var valueC = $("input:radio[name=cubierta]:checked").val();
-		var value = $(this).val();
-		if (valueC == 1){
-			if (value == 1)
-				$("#pasoImgColor").attr('src',"./images/cupcakes/crema_mantequilla_azul.png");
-			else if (value == 2)
-				$("#pasoImgColor").attr('src',"./images/cupcakes/crema_mantequilla_verde.png");
-			else if (value == 3)
-				$("#pasoImgColor").attr('src',"./images/cupcakes/crema_mantequilla_rosado.png");
-			else if (value == 4)
-				$("#pasoImgColor").attr('src',"./images/cupcakes/crema_mantequilla_morado.png");
-			else if (value == 5)
-				$("#pasoImgColor").attr('src',"./images/cupcakes/crema_mantequilla_rojo.png");
-			else if (value == 6)
-				$("#pasoImgColor").attr('src',"./images/cupcakes/crema_mantequilla_fucsia.png");
-			else if (value == 7)
-				$("#pasoImgColor").attr('src',"./images/cupcakes/crema_mantequilla_amarillo.png");
-			else if (value == 8)
-				$("#pasoImgColor").attr('src',"./images/cupcakes/crema_mantequilla_blanco.png");
-			else if (value == 9)
-				$("#pasoImgColor").attr('src',"./images/cupcakes/crema_mantequilla_blanco.png");
-		}else{
-			if (value == 1)
-				$("#pasoImgColor").attr('src',"./images/cupcakes/glaseado_azul.png");
-			else if (value == 2)
-				$("#pasoImgColor").attr('src',"./images/cupcakes/glaseado_verde.png");
-			else if (value == 3)
-				$("#pasoImgColor").attr('src',"./images/cupcakes/glaseado_rosado.png");
-			else if (value == 4)
-				$("#pasoImgColor").attr('src',"./images/cupcakes/glaseado_morado.png");
-			else if (value == 5)
-				$("#pasoImgColor").attr('src',"./images/cupcakes/glaseado_rojo.png");
-			else if (value == 6)
-				$("#pasoImgColor").attr('src',"./images/cupcakes/glaseado_fucsia.png");
-			else if (value == 7)
-				$("#pasoImgColor").attr('src',"./images/cupcakes/glaseado_amarillo.png");
-			else if (value == 8)
-				$("#pasoImgColor").attr('src',"./images/cupcakes/glaseado_blanco.png");
-			else if (value == 9)
-				$("#pasoImgColor").attr('src',"./images/cupcakes/glaseado_fucsia.png");
-		}
-		$("#pasoImgColor").show();
-	  });
-	  
-	  $(".rdB6").click(function(){
-	    $("#bt6Disable").hide();
-		$("#bt6").show();
-		var value = $("input:radio[name=decoracion]:checked").val();
-		if (value == 1)
-			$("#pasoImgDecoracion").attr('src',"./images/cupcakes/chispas_chocolate.png");
-		else if (value == 2)
-			$("#pasoImgDecoracion").attr('src',"./images/cupcakes/chispas_colores.png");
-		else if (value == 3)
-			$("#pasoImgDecoracion").attr('src',"./images/cupcakes/chispas_colores.png");
-		else if (value == 4)
-			$("#pasoImgDecoracion").attr('src',"./images/cupcakes/chispas_surtidas.png");
-		else if (value == 5){
-			$("#pasoImgDecoracion").hide();
-			return;
-		}
-		
-		$("#pasoImgDecoracion").show();
-	  });
-	
-	  
-	  $("input:checkbox").click(function() {
-		var value = $("input:radio[name=capas]:checked").val();
-		var bol = $("input:checkbox:checked").length >= value;     
-		$("input:checkbox").not(":checked").attr("disabled",bol);
-	  });
-	  
-	  $("#backLink").click(function(event) {
-			$(".block").show();
-			$(".block-2").hide();
-	   });
-	   
-	   $("#backLink2").click(function(event) {
-			$(".block-2").show();
-			$(".block-3").hide();
-	   });
-	   
-	   $("#backLink3").click(function(event) {
-			$(".block-3").show();
-			$(".block-4").hide();
-	   });
-	   
-	   $("#backLink4").click(function(event) {
-			$(".block-4").show();
-			$(".block-5").hide();
-	   });
-	   
-	   $("#backLink5").click(function(event) {
-			$(".block-5").show();
-			$(".block-6").hide();
-	   });
-	   
-	});
-	
-	
-	
-	
-	
-	
-	</script>
+	<script type="text/javascript" src="/armaTuTorta/js/cupcakes.js"></script>
+
 </head>
 <body>
 <div class="wrapper">
@@ -253,14 +57,46 @@
 					<ul>
 						<li>
 							<img id="pasoImgBase" src="./images/paso_cupcakes.png" />
-							<img id="pasoImgSabor" src="" width="180" height="243" alt="Image" 
-								style="position: absolute; top:227px; left: 276px; display:none;"  />
-							<img id="pasoImgCubierta" src="" width="180" height="243" alt="Image" 
-								style="position: absolute; top:227px; left: 276px; display:none;"  />
-							<img id="pasoImgColor" src="" width="180" height="243" alt="Image"
-							style="position: absolute;top:227px; left: 276px;  display: none;"/>
-							<img id="pasoImgDecoracion" src="" width="180" height="243" alt="Image" 
-								style="position: absolute; top:227px; left: 276px;  display:none;" />
+							<!-- Sabores ponqué -->	
+							<img id="pasoImgSabor" src="" width="120" height="183" alt="Image" 
+								style="position: absolute; top:275px; left: 310px; display:none;"  />
+							<!-- Sabores ponqué surtidos -->	
+							<img id="pasoImgSabor1" src="" width="90" height="143" alt="Image" 
+								style="position: absolute; top:275px; left: 255px; display:none;"  />
+							<img id="pasoImgSabor2" src="" width="90" height="143" alt="Image" 
+								style="position: absolute; top:275px; left: 405px;display:none; "  />
+							<img id="pasoImgSabor3" src="" width="120" height="183" alt="Image" 
+								style="position: absolute; top:275px; left: 315px;display:none; "  />
+							<!-- Cubiertas -->
+							<img id="pasoImgCubierta" src="" width="120" height="183" alt="Image" 
+								style="position: absolute; top:275px; left: 310px; display:none;"  />
+							<!-- Cubiertas Surtidas -->
+							<img id="pasoImgCubierta1" src="" width="90" height="143" alt="Image" 
+								style="position: absolute; top:275px; left: 255px; display:none;"  />
+							<img id="pasoImgCubierta2" src="" width="90" height="143" alt="Image" 
+								style="position: absolute; top:275px; left: 405px; display:none;"  />
+							<img id="pasoImgCubierta3" src="" width="120" height="183" alt="Image" 
+								style="position: absolute; top:275px; left: 315px; display:none;"  />
+							<!-- Colores Cubiertas -->
+							<img id="pasoImgColor" src=""width="120" height="183"alt="Image"
+							style="position: absolute; top:275px; left: 310px;  display: none;"/>
+							<!-- Colores Cubiertas Surtidas -->
+							<img id="pasoImgColor1" src=""width="90" height="143"alt="Image"
+							style="position: absolute; top:275px; left: 255px;  display: none;"/>
+							<img id="pasoImgColor2" src=""width="90" height="143"alt="Image"
+							style="position: absolute; top:275px; left: 405px;  display: none;"/>
+							<img id="pasoImgColor3" src=""width="120" height="183"alt="Image"
+							style="position: absolute; top:275px; left: 315px;  display: none;"/>
+							<!-- Decoracion -->							
+							<img id="pasoImgDecoracion" src="" width="120" height="183" alt="Image" 
+								style="position: absolute; top:275px; left: 310px; display:none;" />
+							<!-- Decoracion surtida -->							
+							<img id="pasoImgDecoracion1" src="" width="90" height="143" alt="Image" 
+								style="position: absolute; top:275px; left: 255px; display:none;" />
+							<img id="pasoImgDecoracion2" src="" width="90" height="143" alt="Image" 
+								style="position: absolute; top:275px; left: 405px; display:none;" />
+							<img id="pasoImgDecoracion3" src="" width="120" height="183" alt="Image" 
+								style="position: absolute; top:275px; left: 315px; display:none;" />
 						</li>
 					</ul>
 				</div>	
@@ -271,7 +107,7 @@
 			
 			
 			<div class="asideRight">
-				<div class="block">
+				<div class="block" >
 					<p> <span class="step1"> Paso 1: </span>  Elige el tamaño de tus Cupcakes: </p>
 					<div class="options-steps">
 						<input  class="rdB1" type="radio" name="forma" value="1" > Mini Cupcakes<br>
@@ -342,10 +178,12 @@
 					<p> <span class="step1"> 
 					<a href="#" id="backLink3"> <img src="images/return.png"> </a>
 					Paso 4: </span>   Elige la cubierta de tus cupcakes:</p>
-					<div class="options-steps">
+					<div class="options-steps-left">
 						<input class="rdB4" type="radio" name="cubierta" value="1">  Crema de mantequilla tradicional del color que desees<br>
 						<input class="rdB4" type="radio" name="cubierta" value="2" > Cobertura glaseada, fina capa del color que elijas<br>
 						<input class="rdB4" type="radio" name="cubierta" value="3" > Crema de chocolate<br>
+					</div>
+					<div class="options-steps-right">	
 						<input class="rdB4" type="radio" name="cubierta" value="4" > Cobertura a base de queso crema <br>
 						<input class="rdB4" type="radio" name="cubierta" value="5" > Crema de Lim&oacute;n <br>
 						<input class="rdB4" type="radio" name="cubierta" value="6" > Surtidos <br>
@@ -373,7 +211,7 @@
 						<input class="rdB5" type="checkbox" name="colores" value="6"> Fucsia<br>
 						<input class="rdB5" type="checkbox" name="colores" value="7"> Amarillo <br>
 						<input class="rdB5" type="checkbox" name="colores" value="8"> Blanco <br>
-						<input class="rdB5" type="checkbox" name="colores" value="9"> Surtidos <br>
+						<input class="rdB5" id="surt" type="checkbox" name="colores" value="9"> Surtidos <br>
 					</div>
 					
 					<div class="button-section" id="bt5Disable">
@@ -386,8 +224,8 @@
 				
 				<div class="block-6" style="display:none">
 					<p>
-					<span class="step6">
 					<a href="#" id="backLink5"> <img src="images/return.png"> </a>
+					<span class="step6">
 					Paso 6: </span>  Decora tus Cupcakes:</p>
 					<div class="options-steps">
 						<input class="rdB6" type="radio" name="decoracion" value="1">  Lluvia de chocolate<br>
