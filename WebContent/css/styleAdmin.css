@@ -1250,7 +1250,11 @@ div.box {
 		
 	}
 	
+<<<<<<< HEAD
+	#deleteUser, #deleteProduct, #deleteRequest{
+=======
 	#deleteStep, #deleteAlbum,  #deletePhoto, #deleteRequest, #deleteOption{
+>>>>>>> 6a004633f6a833e11731225e87a9335e8197fdd1
 		position: absolute;
 		text-align: center;
 		width: 295px;

@@ -21,11 +21,8 @@
 	
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
-	<script type="text/javascript" charset="utf-8">
-	$(document).ready(function() {
-		$("a[rel*=leanModal]").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
-	});
-	</script>
+	<script type="text/javascript" src="/armaTuTorta/js/dulcesTortas.js"></script>
+	
 </head>
 <body>
 <div class="wrapper">
@@ -54,47 +51,114 @@
 		</div>
 	</div>
 	<div id="content">
+		<form id="form1">
 		<div class="home">
 			<div class="aside">
 				<div class="title"> &iexcl; Deleitate con nuestras m&aacute;s sabrosas tortas! </div>
 				<div class="subtitle">Es muy f&aacute;cil, escoge las tortas que desees ordenar, escoge la cantidad que desees de cada una y haz click en "Ordenar"</div>
 				<div class="cakes">
+					
 					<table style="border:none;">
-						<tr>
-							<td width="220px"> <input type="checkbox" name="option1" value="Milk" > Marquesa de almendras</td>
-							<td width="100px">Bs. 15,00 </td>
-							<td><input type="text" value="Cantidad" size="8" /> </td>
+						<tr height="28">
+							<td width="220px"> 
+								<input type="checkbox" class="dulcesTortasCheck" value="1" > Marquesa de chocolate</td>
+							<td width="100px">Bs.<span class="price-int1"> 15.00</span> </td>
+							<td>
+								<div class="sel1" style="display:none">
+								Cantidad: &nbsp;
+								<select class="selDulcesTortas1"> 
+									<option value="0"> - </option>
+									<% for(int i = 1; i< 7; i++){ %>
+									<option value="<%= i %>"><%= i %></option>
+									<% } %>
+								</select>
+								</div>
+								
+							</td>
 						</tr>
-						<tr>
-							<td><input type="checkbox" name="option2" value="Butter" > Marquesa de almendras</td>
-							<td>Bs. 15,00 </td>
-							<td><input type="text" value="Cantidad" size="8" /> </td>
+						<tr height="28">
+							<td><input type="checkbox" class="dulcesTortasCheck" value="2" > Marquesa de almendras</td>
+							<td>Bs. <span class="price-int2">15.00</span> </td>
+							<td>
+								<div class="sel2" style="display:none">
+								Cantidad: &nbsp;
+								<select class="selDulcesTortas2"> 
+									<option value="0"> - </option>
+									<% for(int i = 1; i< 7; i++){ %>
+									<option value="<%= i %>"><%= i %></option>
+									<% } %>
+								</select>
+								</div>
+							</td>
 						</tr>
-						<tr>
-							<td><input type="checkbox" name="option2" value="Butter" > Pie de lim&oacute;n</td>
-							<td>Bs. 15,00 </td>
-							<td><input type="text" value="Cantidad" size="8" /> </td>
+						<tr height="28">
+							<td><input type="checkbox" class="dulcesTortasCheck" value="3" > Pie de lim&oacute;n</td>
+							<td>Bs. <span class="price-int3">15.00</span> </td>
+							<td>
+								<div class="sel3" style="display:none">
+								Cantidad: &nbsp;
+								<select class="selDulcesTortas3"> 
+									<option value="0"> - </option>
+									<% for(int i = 1; i< 7; i++){ %>
+									<option value="<%= i %>"><%= i %></option>
+									<% } %>
+								</select>
+								</div>
+							</td>
 						</tr>
-						<tr>
-							<td><input type="checkbox" name="option2" value="Butter" > Pie de parchita</td>
-							<td>Bs. 15,00 </td>
-							<td><input type="text" value="Cantidad" size="8" /> </td>
+						<tr height="28">
+							<td><input type="checkbox" class="dulcesTortasCheck" value="4" > Pie de parchita</td>
+							<td>Bs. <span class="price-int4">15.00 </span></td>
+							<td>
+								<div class="sel4" style="display:none">
+								Cantidad: &nbsp;
+								<select class="selDulcesTortas4"> 
+										<option value="0"> - </option>
+										<% for(int i = 1; i< 7; i++){ %>
+										<option value="<%= i %>"><%= i %></option>
+										<% } %>
+								</select>
+								</div>
+							</td>
 						</tr>
-						<tr>
-							<td><input type="checkbox" name="option2" value="Butter" > Mouse de parchita</td>
-							<td>Bs. 15,00 </td>
-							<td><input type="text" value="Cantidad" size="8" /> </td>
+						<tr  height="28">
+							<td><input type="checkbox" class="dulcesTortasCheck" value="5" > Mouse de parchita</td>
+							<td>Bs.  <span class="price-int5"> 15.00 </span> </td>
+							<td>	
+								<div class="sel5" style="display:none">
+									Cantidad: &nbsp;
+									<select class="selDulcesTortas5"> 
+										<option value="0"> - </option>
+										<% for(int i = 1; i< 7; i++){ %>
+										<option value="<%= i %>"><%= i %></option>
+										<% } %>
+									</select>
+								</div>
+							</td>
 						</tr>
-						<tr>
-							<td><input type="checkbox" name="option2" value="Butter"> Tiramis&uacute;</td>
-							<td>Bs. 15,00 </td>
-							<td><input type="text" value="Cantidad" size="8" /> </td>
+						<tr height="28">
+							<td><input type="checkbox" class="dulcesTortasCheck" value="6"> Tiramis&uacute;</td>
+							<td>Bs. <span class="price-int6"> 15.00</span> </td>
+							<td>
+								<div class="sel6" style="display:none">
+								Cantidad: &nbsp;
+								<select class="selDulcesTortas6"> 
+									<option value="0"> - </option>
+									<% for(int i = 1; i< 7; i++){ %>
+										<option value="<%= i %>"><%= i %></option>
+									<% } %>
+								</select>
+								</div>
+							</td>
 						</tr>
 					</table>
-					<div class="dt-button">
+					<div class="dt-button" style="display: none">
 						<input type="submit" name="sbmtButton" class="button" value="Ordenar"  />
 					</div> 
-					<div class="subtotal-section"> Sub-total: Bs. 0,00 </div><br>
+					<div class="dt-button-dis">
+						<input type="button" name="sbmtButton" class="buttonDisable" value="Ordenar"  />
+					</div> 
+					<div class="subtotal-section"> Sub-total: Bs. <span class="price"> 0,00</span> </div><br>
 					
 				</div>	
 			</div>	
@@ -108,8 +172,8 @@
 					</ul>
 				</div>	
 			</div>
-			
-		</div>
+			</div>
+		</form>
 	</div>
 	<div class="push"></div>
 </div>

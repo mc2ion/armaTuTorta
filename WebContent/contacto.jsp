@@ -57,11 +57,11 @@
 		<div class="home">
 			<div class="aside">
 				<div class="title"> Informaci&oacute;n de Contacto: </div>
+				<div class="title-ins"> Puedes comunicarte directamente con nosotros por cualquiera de estas vías: </div>
+				
 				<div  style="margin-left: 20px;">
-					<img src="/armaTuTorta/images/home.png" width="32" height="32" alt="Logo"/> Aqu&iacute; va la direcci&oacute;n<br> 
-					<img src="/armaTuTorta/images/email.png" width="32" height="32"  alt="Logo"/>Aqu&iacute; va el correo electr&oacute;nico<br>
-					<img src="/armaTuTorta/images/phone.png" width="32" height="32"  alt="Logo"/>Aqu&iacute; va el n&uacute;mero de telefono local<br>
-					<img src="/armaTuTorta/images/mobile.png" width="32" height="32" alt="Logo"/>Aqu&iacute; va el n&uacute;mero celular<br>
+					<img src="/armaTuTorta/images/email.png" width="32" height="32" style="padding-top: 5px;"  alt="Logo"/> Correo Electrónico: armatutorta@gmail.com<br>
+					<img src="/armaTuTorta/images/mobile.png" width="32" height="32" alt="Logo"/>Teléfono Móvil: 04241805226<br>
 				</div>
 			</div>
 			<div class="section-contact">

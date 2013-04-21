@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="domain.Client "%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +29,11 @@
 	</script>
 </head>
 <body>
+<%
+	HttpSession infoPage = request.getSession();
+	session.setAttribute("prevPage", "/armaTuTorta/index.jsp");
+
+%>
 <div class="wrapper">
 	<div id="header">
 		<div>
@@ -35,12 +41,29 @@
 				<div id="logo">
 					<a href="index.html"><img src="/armaTuTorta/images/logo5.png" alt="Logo"/></a>
 				</div>
+				<% 
+					Client client = (Client) infoPage.getAttribute("client");
+					if (client == null){
+				%>
 				<div>
 					<div>
 						<a href="#signup"  rel="leanModal" id="go" class="pestana">Ingresar</a>
 						<a href="/armaTuTorta/registro.jsp" class="pestana">Registrarse</a>
 					</div>
 				</div>
+				<% 
+					}else{
+				%>		
+					
+					<div>
+						<div>
+						<a href="#signup"  rel="leanModal" id="go" class="pestana">Mi Cuenta</a>
+						<a href="/armaTuTorta/registro.jsp" class="pestana">Salir</a>
+						</div>
+					</div>
+				<% 				
+					}
+				%>
 			</div>
 			<ul style="margin: 0px; ">
 				<li class="current"><a href="/armaTuTorta/index.jsp">Inicio</a></li>
@@ -66,13 +89,13 @@
 				<div>
 					<ul>
 						<li>
-							<a href="index.html"><img src="./images/imagen1.png" alt="Image" /></a>
+							<a href="index.html"><img src="./images/imagen1.png" alt="Image" height="160" width="360"/></a>
 						</li>
 						<li>
-							<a href="index.html"><img src="./images/imagen3.png" alt="Image" /></a>
+							<a href="index.html"><img src="./images/imagen2.png" alt="Image" height="165" width="174"/></a>
 						</li>
 						<li id="img-last">
-							<a href="index.html"><img src="./images/imagen3.png" alt="Image" /></a>
+							<a href="index.html"><img src="./images/imagen3.png" alt="Image" height="165" width="174" /></a>
 						</li>
 					</ul>
 				</div>	

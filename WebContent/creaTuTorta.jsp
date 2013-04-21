@@ -21,135 +21,8 @@
 	
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
-	<script type="text/javascript" charset="utf-8">
-	$(document).ready(function() {
-		$("a[rel*=leanModal]").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
-	});
+	<script type="text/javascript" src="/armaTuTorta/js/tortas.js"></script>
 	
-	$(document).ready(function(){
-	  $("#bt1").click(function(){
-	    $(".block").hide();
-		$(".block-2").show();
-	  });
-	  
-	  $("#bt2").click(function(){
-	    $(".block-2").hide();
-		$(".block-3").show();
-	  });
-	  
-	   $("#bt3").click(function(){
-	    $(".block-3").hide();
-		$(".block-4").show();
-	  });
-	  
-	   $("#bt4").click(function(){
-		var value = $("input:radio[name=capas]:checked").val();
-		if (value == '-'){
-			$(".block-4").hide();
-			$(".step6").text("Paso 5:");
-			$(".block-6").show();
-		}else{
-			$(".block-4").hide();
-			$(".block-5").show();
-		}	
-	    
-	  });
-	  
-	  $("#bt5").click(function(){
-	    $(".block-5").hide();
-		$(".block-6").show();
-	  });
-	  
-	  $(".rdB1").click(function(){
-	    $("#bt1Disable").hide();
-		$("#bt1").show();
-	  });
-	  
-	  $(".rdB2").click(function(){
-	    $("#bt2Disable").hide();
-		$("#bt2").show();
-	  });
-	  
-	   $(".rdB3").click(function(){
-	    $("#bt3Disable").hide();
-		$("#bt3").show();
-		var value = $("input:radio[name=sabor]:checked").val();
-		if (value == 1)
-			$("#pasoImgSabor").attr('src',"./images/tortas/torta_chocolate.png");
-		else if (value == 2)
-			$("#pasoImgSabor").attr('src',"./images/tortas/torta_vainilla.png");
-		else if (value == 3)
-			$("#pasoImgSabor").attr('src',"./images/tortas/torta_almendras.png");
-		else if (value == 4)
-			$("#pasoImgSabor").attr('src',"./images/tortas/torta_marmoleada.png");
-		else if (value == 5)
-			$("#pasoImgSabor").attr('src',"./images/tortas/torta_zanahoria.png");
-		else if (value == 6)
-			$("#pasoImgSabor").attr('src',"./images/tortas/torta_naranja.png");
-		else if (value == 7)
-			$("#pasoImgSabor").attr('src',"./images/tortas/torta_chocolate_fudge.png");
-		$("#pasoImgSabor").show();
-		$("#pasoImgBase").hide();
-		
-	  });
-	  
-	  $(".rdB4").click(function(){
-	    $("#bt4Disable").hide();
-		$("#bt4").show();
-		var value = $("input:radio[name=capas]:checked").val();
-		if (value == 1)
-			$("#pasoImgCapas").attr('src',"./images/tortas/1_capa_general.png");
-		else if (value == 2)
-			$("#pasoImgCapas").attr('src',"./images/tortas/2_capa_general.png");
-		else if (value == 3)
-			$("#pasoImgCapas").attr('src',"./images/tortas/3_capa_general.png");
-		else
-			$("#pasoImgCapas").hide();
-		$("#pasoImgCapas").show();
-	  });
-	  
-	  $(".rdB5").click(function(){
-	    $("#bt5Disable").hide();
-		$("#bt5").show();
-	  });
-	  
-	  $("input:checkbox").click(function() {
-		var value = $("input:radio[name=capas]:checked").val();
-		var bol = $("input:checkbox:checked").length >= value;     
-		$("input:checkbox").not(":checked").attr("disabled",bol);
-	  });
-	  
-	  $("#backLink").click(function(event) {
-			$(".block").show();
-			$(".block-2").hide();
-	   });
-	   
-	   $("#backLink2").click(function(event) {
-			$(".block-2").show();
-			$(".block-3").hide();
-	   });
-	   
-	   $("#backLink3").click(function(event) {
-			$(".block-3").show();
-			$(".block-4").hide();
-	   });
-	   
-	   $("#backLink4").click(function(event) {
-			$(".block-4").show();
-			$(".block-5").hide();
-	   });
-	   
-	   $("#backLink5").click(function(event) {
-			$(".block-5").show();
-			$(".block-6").hide();
-	   });
-	   
-	});
-	
-	
-	
-	
-	</script>
 </head>
 <body>
 <div class="wrapper">
@@ -188,9 +61,9 @@
 								style="position: absolute;top:287px; left: 291px; display:none;"  />
 							<img id="pasoImgCapas" src="" width="160" height="170" alt="Image" 
 								style="position: absolute; top:287px; left: 291px; display:none;"  />
-							<img id="pasoImgColor" src="" width="160" height="170" alt="Image"
+							<img id="pasoImgRelleno" src="" width="160" height="170" alt="Image"
 							style="position: absolute;top:287px; left: 291px;  display: none;"/>
-							<img id="pasoImgDecoracion" src="" width="160" height="170" alt="Image" 
+							<img id="pasoImgCubierta" src="" width="160" height="170" alt="Image" 
 								style="position: absolute; top:287px; left: 291px;  display:none;" />
 						</li>
 					</ul>
