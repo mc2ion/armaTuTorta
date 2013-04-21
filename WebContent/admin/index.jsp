@@ -6,6 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<link rel="stylesheet" type="text/css" href="../css/styleAdmin.css" />
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleAdmin.css" />
+	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<title>Arma Tu Torta - Administrador</title>
 	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
 </head>

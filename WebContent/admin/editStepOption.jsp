@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleAdmin.css" />
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
-<title>Crear Opción</title>
+<title>Editar Opción</title>
 </head>
 <body>
 	<div id="container">
@@ -17,8 +17,9 @@
         <div id="menu">
 			<div class="menuitemHome"><a href="UserLoginServlet">Home</a></div>	
 			<ul>      
-			<li class="menuitem"><a href="ListOrderStepsServlet?typeId=<%= request.getAttribute("typeId") %>">Ver Pasos</a></li>      
-			<li class="menuitem"><a href="ListStepOptionsServlet?typeId=<%= request.getAttribute("typeId") %>&stepId=<%= request.getAttribute("stepId") %>">Ver Opciones</a></li>
+				<li class="menuitem"><a href="ListOrderStepsServlet?typeId=<%= request.getAttribute("typeId") %>">Ver Pasos</a></li>      
+				<li class="menuitem"><a href="ListStepOptionsServlet?typeId=<%= request.getAttribute("typeId") %>&stepId=<%= request.getAttribute("stepId") %>">Ver Opciones</a></li>
+            	<li class="menuitem"><a href="CreateStepOptionServlet?typeId=<%= request.getAttribute("typeId") %>&stepId=<%= request.getAttribute("stepId") %>">Agregar opción</a></li>
 			</ul>
 			 <div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
         </div>       
@@ -30,31 +31,42 @@
             <div id="leftmenu_bottom"></div>
         </div>  
 		<div id="content">
-				<h2>Agregar Opción:</h2>
+				<h2>Editar Opción:</h2>
 	        	<p>&nbsp;</p>
            		<p>&nbsp;</p>
-				<form name="form" action="/armaTuTorta/CreateStepOptionServlet" onsubmit="return validateCreateOption(this)" method="post">
+				<form name="form" action="/armaTuTorta/EditStepOptionServlet" onsubmit="return validateEditOption(this)" method="post">
+					<jsp:useBean id="optionInfo" type="domain.StepOption" scope="request"/> 
 					<input type="hidden" name="txtTypeId" value="<%= request.getAttribute("typeId") %>" />
 					<input type="hidden" name="txtStepId" value="<%= request.getAttribute("stepId") %>" />
+					<input type="hidden" name="txtOptionId" value="<%= request.getAttribute("optionId") %>" />
+					<input type="hidden" name="txtCurrentPosition" value="<%= optionInfo.getPosition() %>" />
 					<fieldset>
 						<label for="name">Posición:</label>
-						<input type="number" min="1" name="txtPosition" id="txtPosition" maxlength="3" size="3" value="<%= request.getAttribute("position") %>" /> <br><br>
+						<input type="number" min="1" name="txtPosition" id="txtPosition" maxlength="3" size="3" value="<%= optionInfo.getPosition() %>" /> <br><br>
 						<label for="name">Nombre:</label>
-						<textarea name="txtName" id="txtName" rows="2" cols="50"></textarea> <br><br>
+						<textarea name="txtName" id="txtName" rows="2" cols="50"><%= optionInfo.getName() %></textarea> <br><br>
 						<label for="name">Precio:</label>
-						<input type="text" name="txtPrice" id="txtPrice" maxlength="5" size="5" /> <br><br>
+						<input type="text" name="txtPrice" id="txtPrice" maxlength="5" size="5" value="<%= optionInfo.getPrice() %>" /> <br><br>
+						<%
+						if (optionInfo.isUnavailable() == 1){
+						%>
+						<input type="checkbox" name="txtIsUnavailable" class="check" id="txtIsUnavailable" maxlength="50" size="40" value="isUnavailable" checked />&nbsp; 
+							&nbsp;&nbsp; Está Agotado<br><br>
+						<%
+						}else{
+						%>
 						<input type="checkbox" name="txtIsUnavailable" class="check" id="txtIsUnavailable" maxlength="50" size="40" value="isUnavailable" />&nbsp; 
 							&nbsp;&nbsp; Está Agotado<br><br>
-						
 					<%
-					String error = (String) request.getAttribute("error");
-					if (error != null){
+						}
+						String error = (String) request.getAttribute("error");
+						if (error != null){
 					%>
 						<div>
 							<%= error %>
 						</div>
 						<%
-					}
+						}
 					%>	
 					<br>
 					<div style="text-align:center">

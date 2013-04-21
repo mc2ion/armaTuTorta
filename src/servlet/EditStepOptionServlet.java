@@ -16,17 +16,17 @@ import domain.StepOption;
 import domain.User;
 
 /**
- * Servlet implementation class CreateStepOptionServlet
+ * Servlet implementation class EditOrderStepServlet
  */
-@WebServlet(description = "servlet to create step options", urlPatterns = { "/CreateStepOptionServlet" })
-public class CreateStepOptionServlet extends HttpServlet {
+@WebServlet(description = "servlet to edit step option", urlPatterns = { "/EditStepOptionServlet" })
+public class EditStepOptionServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-    
-    /**
+	
+	/**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateStepOptionServlet() {
+    public EditStepOptionServlet() {
         super();
     }
     
@@ -34,80 +34,89 @@ public class CreateStepOptionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		try{
 			HttpSession session = request.getSession(true);
 			User user = (User) session.getAttribute("user");
 			RequestDispatcher rd;
 			   
 			if(user != null){
-				Integer typeId = Integer.valueOf(request.getParameter("typeId"));
-				Integer stepId = Integer.valueOf(request.getParameter("stepId"));
-				Integer position = (Integer)CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectNextOption(stepId));
+				Long stepId = Long.valueOf(request.getParameter("stepId"));
+				Long typeId = Long.valueOf(request.getParameter("typeId"));
+				Long optionId = Long.valueOf(request.getParameter("optionId"));
+				StepOption optionInfo = (StepOption)CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectStepOption(optionId));
 				
-				request.setAttribute("typeId", typeId);
+				request.setAttribute("optionInfo", optionInfo);
+				
 				request.setAttribute("stepId", stepId);
-				request.setAttribute("position", position);
+				request.setAttribute("typeId", typeId);
+				request.setAttribute("optionId", optionId);
 				
-				rd = getServletContext().getRequestDispatcher("/admin/createStepOption.jsp");			
-				rd.forward(request, response);							
+				rd = getServletContext().getRequestDispatcher("/admin/editStepOption.jsp");		
+				
+				rd.forward(request, response);	
 			} else {
 				rd = getServletContext().getRequestDispatcher("/admin/index.jsp");			
+
 				rd.forward(request, response);
 			}
 		} catch (Exception e) {
 			throw new ServletException(e);
-		}		
+		}
 	}
-	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		RequestDispatcher rd;
-		Integer typeId = Integer.valueOf(request.getParameter("txtTypeId"));
+		Long typeId = Long.valueOf(request.getParameter("txtTypeId"));
 		Long stepId = Long.valueOf(request.getParameter("txtStepId"));
 		
 		try{
+			Long optionId = Long.valueOf(request.getParameter("txtOptionId"));
 			String name = request.getParameter("txtName");
+			Integer oldPosition = Integer.valueOf(request.getParameter("txtCurrentPosition"));
 			Integer position = Integer.valueOf(request.getParameter("txtPosition"));
 			Double price = Double.valueOf(request.getParameter("txtPrice"));
+			
 			int isUnavailable = 0;
 			
 			if (request.getParameter("txtIsUnavailable") != null)
 				isUnavailable = 1;			
-					
+						
 			StepOption option = new StepOption();
+			option.setId(optionId);
 			option.setOrderStepId(stepId);
 			option.setName(name);
-			option.setPosition(position);
 			option.setPrice(price);
-			option.setUnavailable(isUnavailable);
-		
-			Integer rowsUpdated  = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.CreateStepOption(option));
+			option.setPosition(position);
+			option.setOldPosition(oldPosition);
+			option.setUnavailable(isUnavailable);			
 			
-			option.setId(rowsUpdated);
-	
-			if(rowsUpdated != -1){
-				request.setAttribute("info", "La opción fue creada exitosamente.");
+			Integer rowsUpdated = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.EditStepOption(option));
+			
+			if(rowsUpdated == 1){
+				request.setAttribute("info", "La opción fue editada exitosamente.");
 				request.setAttribute("error", "");
-				rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);			
+				rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);				
+
 				rd.forward(request, response);
 			} else {
 				request.setAttribute("info", "");
-				request.setAttribute("error", "Ocurrió un error durante la creación de la opción. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-				rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);	
+				request.setAttribute("error", "Ocurrió un error durante la edición de la opción. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
+				rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);				
 
 				rd.forward(request, response);
 			}
-		}catch (Exception e) {
+			
+		} catch (Exception e) {
 			request.setAttribute("info", "");
-			request.setAttribute("error", "Ocurrió un error durante la creación de la opción. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-			rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);	
+			request.setAttribute("error", "Ocurrió un error durante la edición de la opción. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
+			rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);			
 
 			rd.forward(request, response);
 		}
 	}
-
 }

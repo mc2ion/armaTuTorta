@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleAdmin.css" />
+<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 <jsp:useBean id="typeInfo" type="domain.OrderType" scope="request"/> 
 <title>Administrador <%= typeInfo.getName() %></title>
 <script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.js"></script>

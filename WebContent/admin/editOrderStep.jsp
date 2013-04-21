@@ -5,6 +5,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleAdmin.css" />
+	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
 	<title>Editar Paso</title>
 </head>
@@ -41,7 +42,7 @@
 					<label for="name">Paso:</label>
 					<input type="number" min="1" name="txtPosition" id="txtPosition" maxlength="3" size="3" value="<%= stepInfo.getPosition() %>" /> <br><br>
 					<label for="name">Nombre:</label>
-					<input type="text" name="txtName" id="txtName" maxlength="50" size="40" value="<%= stepInfo.getName() %>" /> <br><br>
+					<textarea name="txtName" id="txtName" rows="4" cols="50"><%= stepInfo.getName() %></textarea> <br><br>
 					<%
 					if (stepInfo.isMultipleChoice() == 1){
 					%>

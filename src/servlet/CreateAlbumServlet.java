@@ -87,13 +87,12 @@ public class CreateAlbumServlet extends HttpServlet {
 			album.setActive(isActive);
 			album.setNew(isNew);
 		
-			Integer rowsUpdated  = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.CreateAlbum(album));
-			
+			Integer rowsUpdated  = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.CreateAlbum(album));			
 			album.setId(rowsUpdated);
 			
 			String dir = propertiesFile.getProperty("albumsDirectory") + propertiesFile.getProperty("fileSeparator") + album.getDirectory();
-			File file = new File(dir);
-				
+			File file = new File(dir);				
+			
 			file.mkdir();
 			
 			int pointIndex = image.indexOf(".");

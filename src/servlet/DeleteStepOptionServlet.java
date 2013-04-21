@@ -12,21 +12,21 @@ import javax.servlet.http.HttpSession;
 
 import command.CommandExecutor;
 
-import domain.OrderStep;
+import domain.StepOption;
 import domain.User;
 
 /**
  * Servlet implementation class DeleteProductServlet
  */
-@WebServlet(description = "servlet to delete order steps", urlPatterns = { "/DeleteOrderStepServlet" })
-public class DeleteOrderStepServlet extends HttpServlet {
+@WebServlet(description = "servlet to delete step options", urlPatterns = { "/DeleteStepOptionServlet" })
+public class DeleteStepOptionServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
 	/**
      * @see HttpServlet#HttpServlet()
      */
-    public DeleteOrderStepServlet() {
+    public DeleteStepOptionServlet() {
         super();
     }
     
@@ -41,8 +41,10 @@ public class DeleteOrderStepServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		RequestDispatcher rd;
-		Long orderTypeId = Long.valueOf(request.getParameter("orderTypeId"));
+		Long typeId = Long.valueOf(request.getParameter("orderTypeId"));
+		Long stepId = Long.valueOf(request.getParameter("stepId"));
 		
 		try {
 			HttpSession session = request.getSession();
@@ -51,21 +53,21 @@ public class DeleteOrderStepServlet extends HttpServlet {
 			if(user != null){
 				
 				// perform delete order step
-				Long stepId = Long.valueOf(request.getParameter("stepId"));
-				OrderStep stepInfo = (OrderStep)CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectOrderStep(stepId));
-				Integer rowsUpdated = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.DeleteOrderStep(stepInfo));
+				Long optionId = Long.valueOf(request.getParameter("optionId"));
+				StepOption option = (StepOption)CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectStepOption(optionId)); 
+				Integer rowsUpdated = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.DeleteStepOption(option));
 				
 				if(rowsUpdated == 1){
 					
-					request.setAttribute("info", "El paso fue eliminado exitosamente.");
+					request.setAttribute("info", "La opción fue eliminada exitosamente.");
 					request.setAttribute("error", "");
-					rd = getServletContext().getRequestDispatcher("/ListOrderStepsServlet?typeId="+orderTypeId);			
+					rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);			
 
 					rd.forward(request, response);
 				} else {
 					request.setAttribute("info", "");
-					request.setAttribute("error", "Ocurrió un error durante la eliminación del paso. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-					rd = getServletContext().getRequestDispatcher("/ListOrderStepsServlet?typeId="+orderTypeId);		
+					request.setAttribute("error", "Ocurrió un error durante la eliminación de la opción. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
+					rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);	
 
 					rd.forward(request, response);
 				}
@@ -74,10 +76,10 @@ public class DeleteOrderStepServlet extends HttpServlet {
 				rd.forward(request, response);
 			}
 			
-		} catch (Exception e) {
+		} catch (Exception e) {			
 			request.setAttribute("info", "");
-			request.setAttribute("error", "Ocurrió un error durante la eliminación del paso. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-			rd = getServletContext().getRequestDispatcher("/ListOrderStepsServlet?typeId="+orderTypeId);		
+			request.setAttribute("error", "Ocurrió un error durante la eliminación de la opción. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
+			rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);			
 
 			rd.forward(request, response);
 		}
