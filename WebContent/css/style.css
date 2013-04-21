@@ -162,6 +162,17 @@ p a {
 	background: url(../images/sprite-buttons.png) no-repeat 0 -97px;
 }
 
+.bienv{
+	width: 800px;
+	margin-left: 50px;
+	margin-top: 40px;
+	text-align: justify;
+}
+
+.bienv-title{
+	font-size: 34px;
+
+}
 
 /**************************** end header ************************/
 
@@ -232,6 +243,15 @@ p a {
 	margin-left: 30px;
 	font-size: 26px;
 	color: #4d366a;
+}
+
+
+#content .home .title-ins{
+	margin-top: 30px;
+	margin-left: 30px;
+	font-size: 22px;
+	color: #4d366a;
+	width: 90%
 }
 
 
@@ -357,6 +377,11 @@ p a {
 	margin-left:420px;
 }
 
+.dt-button-dis{
+	margin-top:10px;
+	margin-left:420px;
+}
+
 #content .home .subtotal-section{
 	float: right;
 	margin-right: 20px;
@@ -436,7 +461,7 @@ p a {
   background: white;
   width: 450px;
   float: right;
-  margin-top: 30px;
+  margin-top: 20px;
   margin-right: 230px;
   border-radius: 15px;
 
@@ -453,6 +478,11 @@ p a {
 	padding-top: 10px;
 }
 
+.separator a{
+	text-decoration: none;
+	color: black;
+}
+
 .separator-current {
 	height: 50px;
 	margin-top: 20px;
@@ -460,6 +490,11 @@ p a {
 	background: url(../images/sprite-buttons.png)  no-repeat 0 -97px;
 	padding-left: 15px;
 	padding-top: 10px;
+}
+
+.separator-current a{
+	text-decoration: none;
+	color: black;
 }
 
 .regis-title{
@@ -477,21 +512,88 @@ p a {
 
 
 
-#content .home .registration fieldset{
-  padding: 10px 1emf;
+#content .home .registration form fieldset{
+  padding: 10px 20px 0;
   border: 0;
   width: 100%;
 }
 
-#content .home .registration label{
+#content .home .registration form label{
   float:left;
-  width:25%;
+  width:30%;
   height: 30px;
   margin-right:0.5em;
   padding-top:0.2em;
   text-align:left;
 }
 
+#content .home .registration form input[type="text"], #content .home .registration form input[type="password"]{
+	margin: 0;
+	padding: 0;
+	height: 15px;
+	border-color: #CCCCCC #E7E6E6 #E7E6E6 #CCCCCC;
+    border-radius: 4px 4px 4px 4px;
+    border-style: solid;
+    border-width: 1px;
+    color: gray;
+    outline: medium none;
+    padding: 6px;
+    
+}
+
+.txtCedId{
+	display: inline;
+
+}
+
+
+
+
+
+#content .home .registration form input[type="checkbox"]{
+	display: inline;
+	padding: 0;
+	margin-bottom: 30px;
+	margin-left: 150px;
+	position: relative;
+}
+
+#content .home .registration form textarea{
+	background: #fff;
+	border: 1px solid #cccccc;
+	height: 40px;
+	padding: 5px;
+	width: 240px;
+}
+
+.error{
+	font-size: 9px; 
+	color:red;
+	display: none;
+	font-family: Arial;
+}
+
+.imgPlus{
+	float: right;
+	margin-right: 30px;
+	margin-top: -25px;
+}
+
+#errorDir, #errorDirEnv{
+	margin-left: 150px;
+}
+
+#content .home .registration .button{
+	background: url(../images/button.png) no-repeat;
+	border: 0;
+	display: block;
+	height: 30px;
+	width: 110px;
+	font-family: 'Economica', sans-serif;
+	font-size: 16px;
+	cursor: pointer;
+	color: black;
+}
 
 .cont-button{
 	float: right;
@@ -502,13 +604,15 @@ p a {
 .reg-button{
 	float: right;
 	margin-right: 40px;
-	margin-bottom: 15px;
+	margin-bottom: 5px;
 }
 
 .ocEsp-button{
 	float: right;
 	margin-right: 220px;
 }
+
+
 
 
 
@@ -822,7 +926,7 @@ p a {
 	height: 270px;
 	width: 270px;
 	margin-right: 30px;
-	margin-top: 40px;
+	margin-top: 70px;
 	background: #fdd470;
 }
 
@@ -1386,25 +1490,14 @@ div.social a {
     text-shadow: none;
 }
 
-#signup .txt-fld {
+#signup .txt-fld, #signup .txt-fld-pass {
     padding: 14px 20px;
     position: relative;
     text-align: right;
     width: 364px;
 }
 
-#signup .txt-fld label {
-    color: #222222;
-    display: block;
-    float: left;
-    font-size: 1.3em;
-    padding-top: 8px;
-    text-align: left;
-    width: 90px;
-}
-
-
-#signup .txt-fld label {
+#signup .txt-fld label, #signup .txt-fld-pass label {
     color: #222222;
     display: block;
     float: left;
@@ -1422,7 +1515,19 @@ div.social a {
 
 
 #signup .txt-fld input {
-    background: none repeat scroll 0 0 #F2E0F7;
+	background: none no-repeat scroll 240px 8px #F2E0F7;
+    border-color: #CCCCCC #E7E6E6 #E7E6E6 #CCCCCC;
+    border-radius: 4px 4px 4px 4px;
+    border-style: solid;
+    border-width: 1px;
+    color: #222222;
+    outline: medium none;
+    padding: 8px;
+    width: 244px;
+}
+
+#signup .txt-fld-pass input {
+	background: none no-repeat scroll 240px 8px #F2E0F7;
     border-color: #CCCCCC #E7E6E6 #E7E6E6 #CCCCCC;
     border-radius: 4px 4px 4px 4px;
     border-style: solid;
@@ -1439,8 +1544,8 @@ div.social a {
     width: 254px;
 }
 
-button {
-    background: none repeat scroll 0 0 #88c9c1;
+#loginPage{
+    background: none repeat scroll 0 0 #BDBDBD;
     border: medium none;
     border-radius: 4px 4px 4px 4px;
     color: #FFFFFF;
@@ -1452,6 +1557,7 @@ button {
     padding: 7px 10px;
     text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
     width: auto;
+	
 }
 
 

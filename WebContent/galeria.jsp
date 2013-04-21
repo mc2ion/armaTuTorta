@@ -60,16 +60,16 @@
 				<div >
 					<ul>
 						<li>
-							<a href="/armaTuTorta/galeria-tortas.jsp"><img src="./images/tortas.png" alt="Image" /></a>
+							<a href="/armaTuTorta/galeria-tortas.jsp"><img src="./images/galeria_tortas/torta_portada.png" alt="Image" height="235" width="235" /></a>
 							Tortas
 						</li>
 						
 						<li>
-							<a href="/armaTuTorta/galeria-cupcakes.jsp"><img src="./images/cupcakes.png" alt="Image" /></a>
+							<a href="/armaTuTorta/galeria-cupcakes.jsp"><img src="./images/galeria_cupcakes/cupcakes_portada.png" alt="Image" height="235" width="235" /></a>
 							Cupcakes
 						</li>
 						<li>
-							<a href="/armaTuTorta/galeria-ocasEsp.jsp"><img src="./images/ocasEsp.png" alt="Image" /></a>
+							<a href="/armaTuTorta/galeria-ocasEsp.jsp"><img src="./images/galeria_ocasionesEsp/ocasiones_portada.png" alt="Image" height="235" width="235" /></a>
 							Ocasiones Especiales
 						</li>
 					</ul>
