@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 function validate(form) {
   var name = form.txtName.value;
   var lastName = form.txtLastName.value;
@@ -369,7 +368,9 @@ function validateClient(form) {
 		    inlineMsg('txtCity','Debe introducir la ciudad donde vive el cliente.',2);
 		    return false;
 	  }
-=======
+
+}
+
 function validateCreateAlbum(form) {
 	  var name = form.txtName.value;
 	  var image = form.txtImage.value;
@@ -394,12 +395,9 @@ function validateEditAlbum(form) {
 	    inlineMsg('txtName','Debe introducir el nombre del álbum.',2);
 	    return false;
 	  }
->>>>>>> 6a004633f6a833e11731225e87a9335e8197fdd1
-	  
 	  return true;
 }
 
-<<<<<<< HEAD
 function validateBenef(form) {
 	  var name = form.txtName.value;
 	  var lastName = form.txtLastName.value;
@@ -455,8 +453,8 @@ function validateAddress(form) {
 	 
 	  return true;
 }
+
 // START OF MESSAGE SCRIPT //
-=======
 function validateCreatePhoto(form) {
 	  var name = form.txtName.value;
 	  var image = form.txtImage.value;
@@ -485,19 +483,12 @@ function validateEditPhoto(form) {
 	  return true;
 }
 
-//START OF MESSAGE SCRIPT //
->>>>>>> 6a004633f6a833e11731225e87a9335e8197fdd1
-
 var MSGTIMER = 20;
 var MSGSPEED = 5;
 var MSGOFFSET = 3;
 var MSGHIDE = 3;
 
-<<<<<<< HEAD
-// build out the divs, set attributes and call the fade function //
-=======
 //build out the divs, set attributes and call the fade function //
->>>>>>> 6a004633f6a833e11731225e87a9335e8197fdd1
 function inlineMsg(target,string,autohide) {
   var msg;
   var msgcontent;
@@ -534,23 +525,16 @@ function inlineMsg(target,string,autohide) {
   window.setTimeout("hideMsg()", (autohide * 1000));
 }
 
-<<<<<<< HEAD
-// hide the form alert //
-=======
+
 //hide the form alert //
->>>>>>> 6a004633f6a833e11731225e87a9335e8197fdd1
 function hideMsg(msg) {
   var msg = document.getElementById('msg');
   if(!msg.timer) {
     msg.timer = setInterval("fadeMsg(0)", MSGTIMER);
-  }
+  };
 }
 
-<<<<<<< HEAD
-// face the message box //
-=======
 //face the message box //
->>>>>>> 6a004633f6a833e11731225e87a9335e8197fdd1
 function fadeMsg(flag) {
   if(flag == null) {
     flag = 1;
@@ -571,14 +555,10 @@ function fadeMsg(flag) {
   } else if(value <= 1) {
     msg.style.display = "none";
     clearInterval(msg.timer);
-  }
+  };
 }
 
-<<<<<<< HEAD
 // calculate the position of the element in relation to the left of the browser //
-=======
-//calculate the position of the element in relation to the left of the browser //
->>>>>>> 6a004633f6a833e11731225e87a9335e8197fdd1
 function leftPosition(target) {
   var left = 0;
   if(target.offsetParent) {
@@ -588,7 +568,7 @@ function leftPosition(target) {
         break;
       }
       target = target.offsetParent;
-    }
+    };
   } else if(target.x) {
     left += target.x;
   }
@@ -605,7 +585,7 @@ function topPosition(target) {
         break;
       }
       target = target.offsetParent;
-    }
+    };
   } else if(target.y) {
     top += target.y;
   }
@@ -616,7 +596,6 @@ function topPosition(target) {
 if(document.images) {
   arrow = new Image(7,80); 
   arrow.src = "./msg_arrow.gif"; 
-<<<<<<< HEAD
 }
 	
 function Siguiente(){
@@ -654,7 +633,7 @@ function validateEmail(element){
 			element.style.background = 'none no-repeat scroll 220px 5px #FFFFFF';
 			$('#errorEmail').show();
 			return false;
-	}
+	};
 }
 
 function validateName(element, i){
@@ -695,12 +674,12 @@ function validateCedIdnt(element){
 			element.style.background = 'none no-repeat scroll 220px 5px #FFFFFF';
 			$('#errorCed').show();
 			return false;
-		}
+		};
 	}else{
 			element.style.background = 'none no-repeat scroll 220px 5px #FFFFFF';
 			$('#errorCed').show();
 			return false;
-	}
+	};
 	
 }
 
@@ -739,7 +718,7 @@ function validateRptPass(element){
 				element.style.background = 'url("/armaTuTorta/images/check.png") no-repeat scroll 220px 5px #FFFFFF';
 				$('#errorRptPass').hide();
 				return true;
-			}
+			};
 		}
 		else{
 			element.style.background = 'none no-repeat scroll 220px 5px #FFFFFF';
@@ -750,7 +729,7 @@ function validateRptPass(element){
 			element.style.background = 'none no-repeat scroll 220px 5px #FFFFFF';
 			$('#errorRptPass').show();
 			return false;
-	}
+	};
 	
 }
 
@@ -810,7 +789,7 @@ function validatePhone(element, i){
 				else
 					$('#errorMovPhone').show();
 				return false;
-			}
+			};
 		}
 		else{
 			element.style.background = 'none no-repeat scroll 220px 5px #FFFFFF';
@@ -819,7 +798,7 @@ function validatePhone(element, i){
 			else
 				$('#errorMovPhone').show();
 			return false;
-		}
+		};
 	}else{
 			element.style.background = 'none no-repeat scroll 220px 5px #FFFFFF';
 			if (i == 1)
@@ -827,9 +806,7 @@ function validatePhone(element, i){
 			else
 				$('#errorMovPhone').show();
 			return false;
-	}
-	
-
+	};
 }
 
 $('#checkDir').click(function() {
@@ -891,10 +868,7 @@ function validateRegCont(){
 			bool = false;
 	}
 	
-	
 	return bool;
-	
 }
-=======
-}
->>>>>>> 6a004633f6a833e11731225e87a9335e8197fdd1
+
+

@@ -60,7 +60,7 @@
 				<div >
 					<ul>
 						<li>
-							<a href="/armaTuTorta/galeria-tortas.jsp"><img src="./images/galeria_tortas/torta_portada.png" alt="Image" height="235" width="235" /></a>
+							<a href="/armaTuTorta/GaleriaTortasServlet"><img src="./images/galeria_tortas/torta_portada.png" alt="Image" height="235" width="235" /></a>
 							Tortas
 						</li>
 						
