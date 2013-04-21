@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 function validate(form) {
   var name = form.txtName.value;
   var lastName = form.txtLastName.value;
@@ -368,10 +369,37 @@ function validateClient(form) {
 		    inlineMsg('txtCity','Debe introducir la ciudad donde vive el cliente.',2);
 		    return false;
 	  }
+=======
+function validateCreateAlbum(form) {
+	  var name = form.txtName.value;
+	  var image = form.txtImage.value;
+	  
+	  if(name == "") {
+	    inlineMsg('txtName','Debe introducir el nombre del álbum.',2);
+	    return false;
+	  }
+	 
+	  if(image == "") {
+	    inlineMsg('txtImage','Debe subir una imagen para el álbum.', 2);
+	    return false;
+	  }
 	  
 	  return true;
 }
 
+function validateEditAlbum(form) {
+	  var name = form.txtName.value;
+	  
+	  if(name == "") {
+	    inlineMsg('txtName','Debe introducir el nombre del álbum.',2);
+	    return false;
+	  }
+>>>>>>> 6a004633f6a833e11731225e87a9335e8197fdd1
+	  
+	  return true;
+}
+
+<<<<<<< HEAD
 function validateBenef(form) {
 	  var name = form.txtName.value;
 	  var lastName = form.txtLastName.value;
@@ -428,13 +456,48 @@ function validateAddress(form) {
 	  return true;
 }
 // START OF MESSAGE SCRIPT //
+=======
+function validateCreatePhoto(form) {
+	  var name = form.txtName.value;
+	  var image = form.txtImage.value;
+	  
+	  if(name == "") {
+	    inlineMsg('txtName','Debe introducir el nombre de la foto.',2);
+	    return false;
+	  }
+	 
+	  if(image == "") {
+	    inlineMsg('txtImage','Debe subir una imagen para la foto.', 2);
+	    return false;
+	  }
+	  
+	  return true;
+}
+
+function validateEditPhoto(form) {
+	  var name = form.txtName.value;
+	  
+	  if(name == "") {
+	    inlineMsg('txtName','Debe introducir el nombre de la foto.',2);
+	    return false;
+	  }
+	  
+	  return true;
+}
+
+//START OF MESSAGE SCRIPT //
+>>>>>>> 6a004633f6a833e11731225e87a9335e8197fdd1
 
 var MSGTIMER = 20;
 var MSGSPEED = 5;
 var MSGOFFSET = 3;
 var MSGHIDE = 3;
 
+<<<<<<< HEAD
 // build out the divs, set attributes and call the fade function //
+=======
+//build out the divs, set attributes and call the fade function //
+>>>>>>> 6a004633f6a833e11731225e87a9335e8197fdd1
 function inlineMsg(target,string,autohide) {
   var msg;
   var msgcontent;
@@ -471,7 +534,11 @@ function inlineMsg(target,string,autohide) {
   window.setTimeout("hideMsg()", (autohide * 1000));
 }
 
+<<<<<<< HEAD
 // hide the form alert //
+=======
+//hide the form alert //
+>>>>>>> 6a004633f6a833e11731225e87a9335e8197fdd1
 function hideMsg(msg) {
   var msg = document.getElementById('msg');
   if(!msg.timer) {
@@ -479,7 +546,11 @@ function hideMsg(msg) {
   }
 }
 
+<<<<<<< HEAD
 // face the message box //
+=======
+//face the message box //
+>>>>>>> 6a004633f6a833e11731225e87a9335e8197fdd1
 function fadeMsg(flag) {
   if(flag == null) {
     flag = 1;
@@ -503,7 +574,11 @@ function fadeMsg(flag) {
   }
 }
 
+<<<<<<< HEAD
 // calculate the position of the element in relation to the left of the browser //
+=======
+//calculate the position of the element in relation to the left of the browser //
+>>>>>>> 6a004633f6a833e11731225e87a9335e8197fdd1
 function leftPosition(target) {
   var left = 0;
   if(target.offsetParent) {
@@ -541,6 +616,7 @@ function topPosition(target) {
 if(document.images) {
   arrow = new Image(7,80); 
   arrow.src = "./msg_arrow.gif"; 
+<<<<<<< HEAD
 }
 	
 function Siguiente(){
@@ -819,3 +895,6 @@ function validateRegCont(){
 	return bool;
 	
 }
+=======
+}
+>>>>>>> 6a004633f6a833e11731225e87a9335e8197fdd1

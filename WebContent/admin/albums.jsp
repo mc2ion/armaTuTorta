@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleAdmin.css" />
-<title>Administrador Álbumes</title>
+<title>Administrador Galería</title>
 <script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.js"></script>
 <script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.dataTables.js"></script>
 <script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
@@ -138,7 +138,7 @@
 										</a> 
 										<a id="go" rel="leanModal" href="#deleteAlbum" style="color: #f7941e; font-weight: bold;" 
 										onclick="return loadVars(<%= a.getId()%>,'<%= a.getName()%>' )" >
-										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" style="padding-left: 15px;"/>
+										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" />
 										</a><br>
 										</p>
 									</td>

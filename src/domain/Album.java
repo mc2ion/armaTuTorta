@@ -9,13 +9,18 @@ public class Album {
 	private String image;
 	private int isActive;
 	private int isNew;
+	private String directory;
 	
 	/**
 	 * 
 	 * @param id
 	 */
 	public void setId(long id) {
+		Formatter fmt = new Formatter();
+        fmt.format("%08d",id);
+        
 		this.id = id;
+		this.setDirectory(fmt.toString());
 	}
 	
 	/**
@@ -75,9 +80,18 @@ public class Album {
 	}	
 
 	public String getDirectory(){
-		 Formatter fmt = new Formatter();
-         fmt.format("%08d",id);
          
-         return fmt.toString();
+         return directory;
+	}
+	
+	public static String getDirectory(long id){
+		Formatter fmt = new Formatter();
+        fmt.format("%08d",id);
+        
+        return fmt.toString();
+	}
+
+	public void setDirectory(String directory) {
+		this.directory = directory;
 	}
 }
