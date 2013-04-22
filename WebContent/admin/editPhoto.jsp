@@ -80,7 +80,7 @@
 					%><br>
 					<div class="buttonCenter">
 						<input type="button" class="button" value="Volver"  onClick="javascript:history.back();"/>
-						<input type="submit" name="sbmtButton" class="button" value="Aceptar" style="margin-left:20px;" />
+						<input type="submit" name="sbmtButton" class="button" value="Editar" style="margin-left:20px;" />
 					</div>
 				 </fieldset>
 				</form>

@@ -71,7 +71,7 @@
 					<br>
 					<div style="text-align:center">
 							<input type="button" class="button" value="Volver"  onClick="javascript:history.back();"/>
-							<input type="submit"  class="button"  name="sbmtButton" value="Agregar" style="margin-left:20px;" />
+							<input type="submit"  class="button"  name="sbmtButton" value="Editar" style="margin-left:20px;" />
 					</div>	
 					</fieldset>			
 			</form>
