@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleAdmin.css" />
+<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 <title>Administrador Galería</title>
 <script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.js"></script>
 <script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.dataTables.js"></script>
@@ -126,7 +127,9 @@
 								<tr class="gradeA">
 									<td><%= a.getId() %></td>
 									<td><%= a.getName() %></td>
-									<td><%= a.getImage() %></td>
+									<td>
+										<img alt="cover" src="<%= "/armaTuTorta/files/" + a.getDirectory() + "/" + a.getImage() %>" width="50" height="50" />
+									</td>
 									<td><%= (a.isActive()==1)?"Si":"No"  %></td>
 									<td><%= (a.isNew()==1)?"Si":"No" %></td>
 									<td><p>

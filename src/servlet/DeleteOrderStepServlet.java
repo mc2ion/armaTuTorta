@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import command.CommandExecutor;
 
+import domain.OrderStep;
 import domain.User;
 
 /**
@@ -51,7 +52,8 @@ public class DeleteOrderStepServlet extends HttpServlet {
 				
 				// perform delete order step
 				Long stepId = Long.valueOf(request.getParameter("stepId"));
-				Integer rowsUpdated = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.DeleteOrderStep(stepId));
+				OrderStep stepInfo = (OrderStep)CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectOrderStep(stepId));
+				Integer rowsUpdated = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.DeleteOrderStep(stepInfo));
 				
 				if(rowsUpdated == 1){
 					

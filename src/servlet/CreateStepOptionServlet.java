@@ -43,9 +43,11 @@ public class CreateStepOptionServlet extends HttpServlet {
 			if(user != null){
 				Integer typeId = Integer.valueOf(request.getParameter("typeId"));
 				Integer stepId = Integer.valueOf(request.getParameter("stepId"));
+				Integer position = (Integer)CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectNextOption(stepId));
 				
 				request.setAttribute("typeId", typeId);
 				request.setAttribute("stepId", stepId);
+				request.setAttribute("position", position);
 				
 				rd = getServletContext().getRequestDispatcher("/admin/createStepOption.jsp");			
 				rd.forward(request, response);							

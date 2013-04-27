@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="domain.User"%> 
+<%@ page import="domain.Album"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleAdmin.css" />
+<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 <title>Administrador Fotos</title>
 <script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.js"></script>
 <script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.dataTables.js"></script>
@@ -130,7 +132,7 @@
 								<tr class="gradeA">
 									<td><%= p.getId() %></td>
 									<td><%= p.getName() %></td>
-									<td><%= p.getImage() %></td>
+									<td><img alt="image" src="<%= "/armaTuTorta/files/" + Album.getDirectory(p.getAlbumId()) + "/" + p.getImage() %>" width="50" height="50" /></td>
 									<td><%= (p.isActive()==1)?"Si":"No"  %></td>
 									<td><%= (p.isNew()==1)?"Si":"No" %></td>
 									<td><p> 

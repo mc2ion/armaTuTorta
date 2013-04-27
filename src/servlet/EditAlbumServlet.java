@@ -82,7 +82,8 @@ public class EditAlbumServlet extends HttpServlet {
 			Long albumId = Long.valueOf(multipart.getParameter("txtAlbumId"));
 			String name = multipart.getParameter("txtName");
 			File imageFile = multipart.getFile("txtImage");
-			String dir = propertiesFile.getProperty("albumsDirectory") + propertiesFile.getProperty("fileSeparator") + Album.getDirectory(albumId);
+			String dir = propertiesFile.getProperty("albumsDirectory") + propertiesFile.getProperty("fileSeparator") + Album.getDirectory(albumId) + 
+				propertiesFile.getProperty("fileSeparator");
 			String image;
 			
 			try{
@@ -93,23 +94,23 @@ public class EditAlbumServlet extends HttpServlet {
 
 				image = albumId + "_" + name.toLowerCase().replace(" ", "_") + "_cover" + extension;
 
-				File destination = new File(dir + propertiesFile.getProperty("fileSeparator") + image);	
+				File destination = new File(dir + image);	
 				String currentImage = multipart.getParameter("txtCurrentImage");
-				File currentFile = new File(dir + propertiesFile.getProperty("fileSeparator") + currentImage);
+				File currentFile = new File(dir + currentImage);
 				
 				currentFile.delete();				
 				imageFile.renameTo(destination);
 				
 			} catch (NullPointerException e){
 				image = multipart.getParameter("txtCurrentImage");
-				imageFile = new File(dir + propertiesFile.getProperty("fileSeparator") + image);
+				imageFile = new File(dir + image);
 				
 				int pointIndex = image.indexOf(".");
 				String extension = image.substring(pointIndex);
 
 				image = albumId + "_" + name.toLowerCase().replace(" ", "_") + "_cover" + extension;
 
-				File destination = new File(dir + propertiesFile.getProperty("fileSeparator") + image);
+				File destination = new File(dir + image);
 				
 				imageFile.renameTo(destination);
 			}

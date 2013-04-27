@@ -398,6 +398,86 @@ function validateEditAlbum(form) {
 	  return true;
 }
 
+function validateCreateStep(form) {
+	  var position = form.txtPosition.value;
+	  var name = form.txtName.value;
+	 
+	  if(position == "") {
+	    inlineMsg('txtPosition','Debe introducir el número del paso.', 2);
+	    return false;
+	  }
+	  
+	  if(name == "") {
+	    inlineMsg('txtName','Debe introducir el nombre del paso.',2);
+	    return false;
+	  }
+	  
+	  return true;
+}
+
+function validateEditStep(form) {
+	  var position = form.txtPosition.value;
+	  var name = form.txtName.value;
+	 
+	  if(position == "") {
+	    inlineMsg('txtPosition','Debe introducir el número del paso.', 2);
+	    return false;
+	  }
+	  
+	  if(name == "") {
+	    inlineMsg('txtName','Debe introducir el nombre del paso.',2);
+	    return false;
+	  }
+	  
+	  return true;
+}
+
+function validateCreateOption(form) {
+	  var position = form.txtPosition.value;
+	  var name = form.txtName.value;
+	  var price = form.txtPrice.value;
+	 
+	  if(position == "") {
+	    inlineMsg('txtPosition','Debe introducir la posición de la opción.', 2);
+	    return false;
+	  }
+	  
+	  if(name == "") {
+	    inlineMsg('txtName','Debe introducir el nombre de la opción.',2);
+	    return false;
+	  }
+	  
+	  if(price == "") {
+	    inlineMsg('txtPrice','Debe introducir el precio de la opción.',2);
+	    return false;
+	  }
+	  
+	  return true;
+}
+
+function validateEditOption(form) {
+	  var position = form.txtPosition.value;
+	  var name = form.txtName.value;
+	  var price = form.txtPrice.value;
+	 
+	  if(position == "") {
+	    inlineMsg('txtPosition','Debe introducir la posición de la opción.', 2);
+	    return false;
+	  }
+	  
+	  if(name == "") {
+	    inlineMsg('txtName','Debe introducir el nombre de la opción.',2);
+	    return false;
+	  }
+	  
+	  if(price == "") {
+	    inlineMsg('txtPrice','Debe introducir el precio de la opción.',2);
+	    return false;
+	  }
+	  
+	  return true;
+}
+
 function validateBenef(form) {
 	  var name = form.txtName.value;
 	  var lastName = form.txtLastName.value;
