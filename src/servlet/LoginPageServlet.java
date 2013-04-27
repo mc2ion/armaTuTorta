@@ -54,11 +54,9 @@ public class LoginPageServlet extends HttpServlet {
 		   
 		if(user != null){
 			rd = getServletContext().getRequestDispatcher("/admin/mainMenu.jsp");			
-
 			rd.forward(request, response);
 		} else {
 			rd = getServletContext().getRequestDispatcher("/admin/index.jsp");			
-
 			rd.forward(request, response);
 		}
 	}
@@ -73,6 +71,8 @@ public class LoginPageServlet extends HttpServlet {
 			String password = request.getParameter("txtPasswordLogin");
 			String encryptPassword = getEncryptPassword(password);
 			String prevPage = (String) request.getSession().getAttribute("prevPage");
+			if (prevPage == null)
+				prevPage = "index.jsp";
 			System.out.println("pagina previa" + prevPage);
 			
 			Client client = (Client) CommandExecutor.getInstance().executeDatabaseCommand(new command.CustomerExists(name, encryptPassword));
@@ -81,13 +81,13 @@ public class LoginPageServlet extends HttpServlet {
 			if(client != null){
 				HttpSession session = request.getSession(true);
 				session.setAttribute("client", client);
-				rd = getServletContext().getRequestDispatcher("/index.jsp");			
+				request.setAttribute("error", "");
+				rd = getServletContext().getRequestDispatcher("/" + prevPage);			
 				rd.forward(request, response);
 			
 			} 	else {
 				request.setAttribute("error", "La información de nombre de usuario o contraseña introducida no es correcta.");
-				rd = getServletContext().getRequestDispatcher("/index.jsp");			
-
+				rd = getServletContext().getRequestDispatcher("/" + prevPage);			
 				rd.forward(request, response);
 			}
 			

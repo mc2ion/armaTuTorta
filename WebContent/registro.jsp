@@ -25,6 +25,11 @@
 
 </head>
 <body>
+<%
+	HttpSession infoPage = request.getSession();
+	session.setAttribute("prevPage", "registro.jsp");
+	
+%>
 <div class="wrapper">
 	<div id="header">
 		<div>
@@ -32,12 +37,7 @@
 				<div id="logo">
 					<a href="index.html"><img src="/armaTuTorta/images/logo5.png" alt="Logo"/></a>
 				</div>
-				<div>
-					<div>
-						<a href="#signup"  rel="leanModal" id="go" class="pestana">Ingresar</a>
-						<a href="/armaTuTorta/registro.jsp" class="pestana_select">Registrarse</a>
-					</div>
-				</div>
+				<jsp:include page="header.jsp"></jsp:include>
 			</div>
 			<ul style="margin: 0px; ">
 				<li><a href="/armaTuTorta/index.jsp">Inicio</a></li>

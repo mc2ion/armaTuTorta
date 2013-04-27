@@ -22,17 +22,20 @@
 	
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
+	<script type="text/javascript" src="/armaTuTorta/js/rotator.js"></script>
 	<script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$("a[rel*=leanModal]").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
 	});
+	
+
 	</script>
 </head>
 <body>
 <%
 	HttpSession infoPage = request.getSession();
-	session.setAttribute("prevPage", "/armaTuTorta/index.jsp");
-
+	session.setAttribute("prevPage", "index.jsp");
+	
 %>
 <div class="wrapper">
 	<div id="header">
@@ -41,29 +44,7 @@
 				<div id="logo">
 					<a href="index.html"><img src="/armaTuTorta/images/logo5.png" alt="Logo"/></a>
 				</div>
-				<% 
-					Client client = (Client) infoPage.getAttribute("client");
-					if (client == null){
-				%>
-				<div>
-					<div>
-						<a href="#signup"  rel="leanModal" id="go" class="pestana">Ingresar</a>
-						<a href="/armaTuTorta/registro.jsp" class="pestana">Registrarse</a>
-					</div>
-				</div>
-				<% 
-					}else{
-				%>		
-					
-					<div>
-						<div>
-						<a href="#signup"  rel="leanModal" id="go" class="pestana">Mi Cuenta</a>
-						<a href="/armaTuTorta/registro.jsp" class="pestana">Salir</a>
-						</div>
-					</div>
-				<% 				
-					}
-				%>
+				<jsp:include page="header.jsp"></jsp:include>
 			</div>
 			<ul style="margin: 0px; ">
 				<li class="current"><a href="/armaTuTorta/index.jsp">Inicio</a></li>
@@ -86,19 +67,17 @@
 				que nosotros nos encargamos del resto!  &nbsp;<a href="creaTuTorta.jsp" class="readmore"> &iexcl;Solicita aqu&iacute; tu pedido!</a></p>
 			</div>
 			<div class="section">
-				<div>
+				<div class="rotator"> 
 					<ul>
-						<li>
-							<a href="index.html"><img src="./images/imagen1.png" alt="Image" height="160" width="360"/></a>
-						</li>
-						<li>
-							<a href="index.html"><img src="./images/imagen2.png" alt="Image" height="165" width="174"/></a>
-						</li>
-						<li id="img-last">
-							<a href="index.html"><img src="./images/imagen3.png" alt="Image" height="165" width="174" /></a>
+						<li><a href="#"><img src="./images/imagen1.png" alt="Image" height="220" width="340"/></a></li>
+						<li><a href="#"><img src="./images/imagen2.png" alt="Image" height="220" width="340"/></a></li>
+						<li><a href="#"><img src="./images/imagen3.png" alt="Image" height="220" width="340" /></a>
 						</li>
 					</ul>
+					
 				</div>	
+				<div class="next"><a href="#"><img src="./images/nextNav.png" /></a> </div>
+				<div class="prev"><a href="#"><img src="./images/prevNav.png" /> </a></div>
 			</div>
 		</div>
 	</div>

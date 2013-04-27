@@ -48,6 +48,95 @@ p a {
 	text-align: center;
 }
 
+.pest{
+	text-decoration: none;
+	color: black;
+	font-size: 16px;
+}
+
+.pestN{
+	font-size: 18px;
+	width: auto;
+	color: #8565ad;
+	position: absolute;
+	margin-top: 2px;
+	margin-left: -160px;
+}
+
+
+.pestCuenta{
+	font-size: 18px;
+	width: auto;
+	color: #8565ad;
+	position: absolute;
+	margin-top: 2px;
+	margin-left: 47px;
+	text-decoration: none;
+}
+
+.pestSalir{
+	font-size: 18px;
+	width: auto;
+	color: #8565ad;
+	position: absolute;
+	margin-top: 2px;
+	margin-left: 130px;
+	text-decoration: none;
+}
+
+.divisor{
+	position: absolute;
+	margin-top: -6px;
+	margin-left: -11px;
+	color: #BDBDBD;
+	font-size: 28px;
+}
+
+.divisor2{
+	position: absolute;
+	margin-top: -6px;
+	margin-left: 30px;
+	color: #BDBDBD;
+	font-size: 28px;
+}
+
+
+.divisor3{
+	position: absolute;
+	margin-top: -6px;
+	margin-left: 110px;
+	color: #BDBDBD;
+	font-size: 28px;
+}
+
+.pestCart{
+	position: absolute;
+	margin-top: 2px;
+	margin-left: -8px;
+}
+
+
+.numCartOne{
+	position: absolute;
+	margin-top: -1px;
+	margin-left: 18px;
+	font-size: 12px;
+	color: #8565ad;
+	font-family: Arial;
+}
+
+.numCart{
+	position: absolute;
+	margin-top: -1px;
+	margin-left: 16px;
+	font-size: 10px;
+	color: #8565ad;
+	font-family: Arial;
+	
+}
+
+
+
 .pestana_select{
 	background: url(../images/pestana_select.png) no-repeat;
 	height: 50px;
@@ -93,8 +182,14 @@ p a {
     padding-bottom: 40px;
 	overflow: hidden;
 	width: auto;
+}
 
-	
+#pestana_larga{
+	background: url(../images/pestana_larga.png) no-repeat;
+	height: 50px !important;
+	width:350px !important;
+	padding-top: 15px;
+	text-align: center;
 }
 
 #header div div div div a {
@@ -464,6 +559,8 @@ p a {
   margin-top: 20px;
   margin-right: 230px;
   border-radius: 15px;
+  	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
 
  
 }
@@ -533,6 +630,8 @@ p a {
 	height: 15px;
 	border-color: #CCCCCC #E7E6E6 #E7E6E6 #CCCCCC;
     border-radius: 4px 4px 4px 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
     border-style: solid;
     border-width: 1px;
     color: gray;
@@ -900,13 +999,22 @@ p a {
 	text-decoration: none;
 }
 
+a.readmore {
+	color: #f8af00;
+	font-weight:bold;
+	text-decoration: none;
+}
+
 #content div.home div.section {
 	float: right;
-	height: 380px;
+	height: 260px;
 	width: 400px;
 	margin-right: 30px;
-	margin-top: 30px;
+	margin-top: 70px;
 	background: #fdd470;
+	border-radius: 7px;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
 }
 
 #content div.home div.section-contact {
@@ -917,6 +1025,8 @@ p a {
 	margin-top: 30px;
 	background: #fff;
 	border-radius: 10px;
+		-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
 	padding-left: 20px;
 	padding-top: 20px;
 }
@@ -940,14 +1050,7 @@ p a {
 	background: #fdd470;
 }
 
-#content div.home div.section div {
-	background: white;
-	height: 360px;
-	margin-top: 10px;
-	width: 380px;
-	margin-left: 10px;
-	
-}
+
 
 #content div.home div.sectionDT div {
 	background: white;
@@ -985,21 +1088,14 @@ p a {
 	
 }
 
-#content div.home div.section ul {
-	float: right;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-	width: 360px;
-	margin-right: 10px;
-}
+
 
 #content div.home div.section-img div ul {
 	list-style: none;
 	overflow: hidden;
 	padding: 0;
 	margin-top: 15px;
-	margin-left: 60px;
+	margin-left: 70px;
 
 	
 }
@@ -1007,20 +1103,21 @@ p a {
 #content div.home div.section-img div ul li {
 	float: left;
 	background: rgb(136,201,193);
-	height: 295px;
-	width: 255px;
+	height: 265px;
+	width: 235px;
 	margin-left: 30px;
 	text-align:center;
 	font-size:24px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
 	border-radius: 10px;
 }
 
 
 #content div.home div.section-img div ul li a {
 	float: left;
-	height: 235px;
+	height: 215px;
 	width: 235px;
-	margin-left: 10px;
 	margin-top: 10px;
 }
 
@@ -1047,12 +1144,6 @@ p a {
 
 
 
-#content div.home div.section ul li {
-	display: block;
-    height: auto;
-    width: auto;
-	margin-top:9px;
-}
 
 
 
@@ -1694,4 +1785,48 @@ html[xmlns] .clearfix { display: block; }
 	width:745px;
 }
 
+/* rotator in-page placement */
+    div.rotator {
+	position:relative;
+	height:345px;
+	margin-left: 15px;
+	display: none;
+}
+/* rotator css */
+	div.rotator ul li {
+	float:left;
+	position:absolute;
+	list-style: none;
+}
+/* rotator image style */	
+	div.rotator ul li img {
+	border: 1px solid #ccc;
+	padding: 4px;
+	background: #FFF;
+	margin-top: 15px;
+	margin-left: 10px;
+	border-radius: 10px;
+}
+    div.rotator ul li.show {
+	z-index:500
+}
+
+.section-img  div ul li a img{
+	border-radius: 10px;
+	margin-top: 10px;
+}
+
+.next{
+	position: relative;
+	top: -235px;
+	left: -7px;
+	z-index:1;
+}
+
+.prev{
+	position: relative;
+	top: -283px;
+	left: 363px;
+	z-index:1;
+}
 	
