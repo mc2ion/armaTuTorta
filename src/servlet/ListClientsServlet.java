@@ -53,10 +53,10 @@ public class ListClientsServlet extends HttpServlet {
 				String error = (String)request.getAttribute("error")!=null?(String)request.getAttribute("error"):"";
 				@SuppressWarnings("unchecked")
 				ArrayList<Client> list = (ArrayList<Client>)CommandExecutor.getInstance().executeDatabaseCommand(new command.ListClients());
-				request.setAttribute("albums", list);
+				request.setAttribute("clients", list);
 				request.setAttribute("info", info);
 				request.setAttribute("error", error);
-				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/albums.jsp");
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/clients.jsp");
 				rd.forward(request, response);
 			} else {
 				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/index.jsp");

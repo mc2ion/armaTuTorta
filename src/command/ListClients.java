@@ -16,7 +16,7 @@ public class ListClients implements DatabaseCommand {
 		
 		ArrayList<Client> list = new ArrayList<Client>();
 		Statement sta = conn.createStatement();
-		ResultSet rs = sta.executeQuery("SELECT C.ID, C.IS_COMPANY, C.IDENTITY_CARD, C.FIRST_NAME, C.LAST_NAME, C.EMAIL, C,PASSWORD, " +
+		ResultSet rs = sta.executeQuery("SELECT C.ID, C.IS_COMPANY, C.IDENTITY_CARD, C.FIRST_NAME, C.LAST_NAME, C.EMAIL, C.PASSWORD, " +
 				"C.ADDRESS, C.PHONE, C.OTHER_PHONE, C.IS_SHIPPING_ADDRESS, C.SHIPPING_ADDRESS FROM CLIENT C WHERE C.IS_DELETED=0");
 		while(rs.next()) {
 			Client client = new Client();

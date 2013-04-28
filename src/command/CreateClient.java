@@ -31,7 +31,7 @@ public class CreateClient implements DatabaseCommand {
 		sta.setString(6,  client.getAddress());
 		sta.setString(7,  client.getPhone());
 		sta.setString(8,  client.getOtherPhone());
-		sta.setBoolean(9, client.isShippingAddress());
+		sta.setInt(9, client.isShippingAddress());
 		sta.setString(10, client.getShippingAddress());
 		sta.setString(11, "0");
 				
