@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="domain.Client "%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +26,11 @@
 
 </head>
 <body>
+<%
+	HttpSession infoPage = request.getSession();
+	session.setAttribute("prevPage", "cupcakes.jsp");
+	Client client = (Client) infoPage.getAttribute("client");
+%>
 <div class="wrapper">
 	<div id="header">
 		<div>
@@ -32,12 +38,7 @@
 				<div id="logo">
 					<a href="index.html"><img src="/armaTuTorta/images/logo5.png" alt="Logo"/></a>
 				</div>
-				<div>
-					<div>
-						<a href="#signup"  rel="leanModal" id="go" class="pestana">Ingresar</a>
-						<a href="/armaTuTorta/registro.jsp" class="pestana">Registrarse</a>
-					</div>
-				</div>
+				<jsp:include page="header.jsp"></jsp:include>
 			</div>
 			<ul style="margin: 0px; ">
 				<li ><a href="/armaTuTorta/index.jsp">Inicio</a></li>
@@ -101,159 +102,169 @@
 					</ul>
 				</div>	
 			</div>
-			
-			<div class="title"> &iexcl; Sigue los pasos a continuaci&oacute;n y  arma la torta que deseas! </div>
-			
+			<% if (client != null){ %>
+				<div class="title"> &iexcl; Sigue los pasos a continuaci&oacute;n y  arma los cupcakes que deseas! </div>
+			<% } %>
+				
 			
 			
 			<div class="asideRight">
-				<div class="block" >
-					<p> <span class="step1"> Paso 1: </span>  Elige el tamaño de tus Cupcakes: </p>
-					<div class="options-steps">
-						<input  class="rdB1" type="radio" name="forma" value="1" > Mini Cupcakes<br>
-						<input  class="rdB1" type="radio" name="forma" value="2" > Cupcakes tradicionales <br>
-					</div>
-					<div class="button-section" id="bt1Disable">
-						<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
-					</div>
-					<div class="button-section" style="display: none;" id="bt1">
-						<input  type="submit" name="sbmtButton" class="button" value="Siguiente"  />
-					</div>
-				</div>
+				<% if (client != null){ %>
 				
-				<div class="block-2" style="display:none">
-					<p> <span class="step1">
-						<a href="#" id="backLink"> <img src="images/return.png"> </a>
-						Paso 2: </span>  Elige la cantidad que deseas:</p>
-					<div class="options-steps">
-						<input class="rdB2" type="radio" name="tamano" value="1"> Una docena en caja para regalar! Incluye lazo y calcomanía personalizada!
-						<br>  Coloca el texto de tu calcomanía aqui: <input type="text" >
-						<br>
-						<input class="rdB2" type="radio" name="tamano" value="2" > Cantidad de docenas
-						<select>
-							<% 
-								for (int i = 2 ; i<13 ; i++){
-							%>
-								<option value="<%= i %>"><%= i %></option>
-							<% 
-								}
-							%>
-						</select>
-						<br>
-					</div>
-					<div class="button-section" id="bt2Disable">
-						<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
-					</div>
-					<div class="button-section" style="display: none;" id="bt2">
-						<input type="submit" name="sbmtButton" class="button" value="Siguiente"  />
-					</div>
-				</div>
-				
-				<div class="block-3" style="display:none">
-					<p> <span class="step1">
-					<a href="#" id="backLink2"> <img src="images/return.png"> </a>	
-					Paso 3: </span>  Elige el o los sabores de tus Cupcakes:</p>
-					<div class="options-steps-left">
-						<input class="rdB3" type="radio" name="sabor" value="1"> Chocolate<br>
-						<input class="rdB3" type="radio" name="sabor" value="2" > Vainilla <br>
-						<input class="rdB3" type="radio" name="sabor" value="3" > Vainilla con chispas de chocolate<br>
-						<input class="rdB3" type="radio" name="sabor" value="4" > Zanahoria <br>
-					</div>
-					<div class="options-steps-right">
-						<input class="rdB3"  type="radio" name="sabor" value="5" > Lim&oacute;n <br>
-						<input class="rdB3"  type="radio" name="sabor" value="6" > Red Velvet <br>
-						<input class="rdB3"  type="radio" name="sabor" value="7" >  Chocolate fudge, el especial de la casa! <br>
-						<input class="rdB3"  type="radio" name="sabor" value="8" >  Surtidos <br>
-				
-					</div>
-					<div class="button-section" id="bt3Disable">
-						<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
-					</div>
-					<div class="button-section" style="display: none;" id="bt3">
-						<input type="submit" name="sbmtButton" class="button" value="Siguiente"  />
-					</div>
-				</div>
-				
-				<div class="block-4" style="display:none">
-					<p> <span class="step1"> 
-					<a href="#" id="backLink3"> <img src="images/return.png"> </a>
-					Paso 4: </span>   Elige la cubierta de tus cupcakes:</p>
-					<div class="options-steps-left">
-						<input class="rdB4" type="radio" name="cubierta" value="1">  Crema de mantequilla tradicional del color que desees<br>
-						<input class="rdB4" type="radio" name="cubierta" value="2" > Cobertura glaseada, fina capa del color que elijas<br>
-						<input class="rdB4" type="radio" name="cubierta" value="3" > Crema de chocolate<br>
-					</div>
-					<div class="options-steps-right">	
-						<input class="rdB4" type="radio" name="cubierta" value="4" > Cobertura a base de queso crema <br>
-						<input class="rdB4" type="radio" name="cubierta" value="5" > Crema de Lim&oacute;n <br>
-						<input class="rdB4" type="radio" name="cubierta" value="6" > Surtidos <br>
-					</div>
-					<div class="button-section" id="bt4Disable">
-						<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
-					</div>
-					<div class="button-section" style="display: none;" id="bt4">
-						<input type="submit" name="sbmtButton" class="button" value="Siguiente"  />
-					</div>
-				</div>
-				
-				<div class="block-5" style="display:none">
-					<p> <span class="step1"> 
-					<a href="#" id="backLink4"> <img src="images/return.png"> </a>
-					Paso 5: </span>  Elige los colores de la cobertura:</p>
-					<div class="options-steps-left">
-						<input class="rdB5" type="checkbox" name="colores" value="1"> Azúl<br>
-						<input class="rdB5" type="checkbox" name="colores" value="2"> Verde<br>
-						<input class="rdB5" type="checkbox" name="colores" value="3"> Rosado<br>
-						<input class="rdB5" type="checkbox" name="colores" value="4"> Morado <br>
-						<input class="rdB5" type="checkbox" name="colores" value="5"> Rojo <br>
-					</div>
-					<div class="options-steps-right">
-						<input class="rdB5" type="checkbox" name="colores" value="6"> Fucsia<br>
-						<input class="rdB5" type="checkbox" name="colores" value="7"> Amarillo <br>
-						<input class="rdB5" type="checkbox" name="colores" value="8"> Blanco <br>
-						<input class="rdB5" id="surt" type="checkbox" name="colores" value="9"> Surtidos <br>
+					<div class="block" >
+						<p> <span class="step1"> Paso 1: </span>  Elige el tamaño de tus Cupcakes: </p>
+						<div class="options-steps">
+							<input  class="rdB1" type="radio" name="forma" value="1" > Mini Cupcakes<br>
+							<input  class="rdB1" type="radio" name="forma" value="2" > Cupcakes tradicionales <br>
+						</div>
+						<div class="button-section" id="bt1Disable">
+							<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
+						</div>
+						<div class="button-section" style="display: none;" id="bt1">
+							<input  type="submit" name="sbmtButton" class="button" value="Siguiente"  />
+						</div>
 					</div>
 					
-					<div class="button-section" id="bt5Disable">
-						<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
+					<div class="block-2" style="display:none">
+						<p> <span class="step1">
+							<a href="#" id="backLink"> <img src="images/return.png"> </a>
+							Paso 2: </span>  Elige la cantidad que deseas:</p>
+						<div class="options-steps">
+							<input class="rdB2" type="radio" name="tamano" value="1"> Una docena en caja para regalar! Incluye lazo y calcomanía personalizada!
+							<br>  Coloca el texto de tu calcomanía aqui: <input type="text" >
+							<br>
+							<input class="rdB2" type="radio" name="tamano" value="2" > Cantidad de docenas
+							<select>
+								<% 
+									for (int i = 2 ; i<13 ; i++){
+								%>
+									<option value="<%= i %>"><%= i %></option>
+								<% 
+									}
+								%>
+							</select>
+							<br>
+						</div>
+						<div class="button-section" id="bt2Disable">
+							<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
+						</div>
+						<div class="button-section" style="display: none;" id="bt2">
+							<input type="submit" name="sbmtButton" class="button" value="Siguiente"  />
+						</div>
 					</div>
-					<div class="button-section" style="display: none;" id="bt5">
-						<input type="submit" name="sbmtButton" class="button" value="Siguiente"  />
+					
+					<div class="block-3" style="display:none">
+						<p> <span class="step1">
+						<a href="#" id="backLink2"> <img src="images/return.png"> </a>	
+						Paso 3: </span>  Elige el o los sabores de tus Cupcakes:</p>
+						<div class="options-steps-left">
+							<input class="rdB3" type="radio" name="sabor" value="1"> Chocolate<br>
+							<input class="rdB3" type="radio" name="sabor" value="2" > Vainilla <br>
+							<input class="rdB3" type="radio" name="sabor" value="3" > Vainilla con chispas de chocolate<br>
+							<input class="rdB3" type="radio" name="sabor" value="4" > Zanahoria <br>
+						</div>
+						<div class="options-steps-right">
+							<input class="rdB3"  type="radio" name="sabor" value="5" > Lim&oacute;n <br>
+							<input class="rdB3"  type="radio" name="sabor" value="6" > Red Velvet <br>
+							<input class="rdB3"  type="radio" name="sabor" value="7" >  Chocolate fudge, el especial de la casa! <br>
+							<input class="rdB3"  type="radio" name="sabor" value="8" >  Surtidos <br>
+					
+						</div>
+						<div class="button-section" id="bt3Disable">
+							<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
+						</div>
+						<div class="button-section" style="display: none;" id="bt3">
+							<input type="submit" name="sbmtButton" class="button" value="Siguiente"  />
+						</div>
 					</div>
-				</div>
-				
-				<div class="block-6" style="display:none">
-					<p>
-					<a href="#" id="backLink5"> <img src="images/return.png"> </a>
-					<span class="step6">
-					Paso 6: </span>  Decora tus Cupcakes:</p>
-					<div class="options-steps">
-						<input class="rdB6" type="radio" name="decoracion" value="1">  Lluvia de chocolate<br>
-						<input class="rdB6" type="radio" name="decoracion" value="2" > Lluvia de chocolate blanco<br>
-						<input class="rdB6" type="radio" name="decoracion" value="3" > Lluvia de colores<br>
-						<input class="rdB6" type="radio" name="decoracion" value="4" > Lluvia surtidas<br>
-						<input class="rdB6" type="radio" name="decoracion" value="5" > Sin topping <br>
+					
+					<div class="block-4" style="display:none">
+						<p> <span class="step1"> 
+						<a href="#" id="backLink3"> <img src="images/return.png"> </a>
+						Paso 4: </span>   Elige la cubierta de tus cupcakes:</p>
+						<div class="options-steps-left">
+							<input class="rdB4" type="radio" name="cubierta" value="1">  Crema de mantequilla tradicional del color que desees<br>
+							<input class="rdB4" type="radio" name="cubierta" value="2" > Cobertura glaseada, fina capa del color que elijas<br>
+							<input class="rdB4" type="radio" name="cubierta" value="3" > Crema de chocolate<br>
+						</div>
+						<div class="options-steps-right">	
+							<input class="rdB4" type="radio" name="cubierta" value="4" > Cobertura a base de queso crema <br>
+							<input class="rdB4" type="radio" name="cubierta" value="5" > Crema de Lim&oacute;n <br>
+							<input class="rdB4" type="radio" name="cubierta" value="6" > Surtidos <br>
+						</div>
+						<div class="button-section" id="bt4Disable">
+							<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
+						</div>
+						<div class="button-section" style="display: none;" id="bt4">
+							<input type="submit" name="sbmtButton" class="button" value="Siguiente"  />
+						</div>
 					</div>
-					<div class="button-section" id="bt6Disable">
-						<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
+					
+					<div class="block-5" style="display:none">
+						<p> <span class="step1"> 
+						<a href="#" id="backLink4"> <img src="images/return.png"> </a>
+						Paso 5: </span>  Elige los colores de la cobertura:</p>
+						<div class="options-steps-left">
+							<input class="rdB5" type="checkbox" name="colores" value="1"> Azúl<br>
+							<input class="rdB5" type="checkbox" name="colores" value="2"> Verde<br>
+							<input class="rdB5" type="checkbox" name="colores" value="3"> Rosado<br>
+							<input class="rdB5" type="checkbox" name="colores" value="4"> Morado <br>
+							<input class="rdB5" type="checkbox" name="colores" value="5"> Rojo <br>
+						</div>
+						<div class="options-steps-right">
+							<input class="rdB5" type="checkbox" name="colores" value="6"> Fucsia<br>
+							<input class="rdB5" type="checkbox" name="colores" value="7"> Amarillo <br>
+							<input class="rdB5" type="checkbox" name="colores" value="8"> Blanco <br>
+							<input class="rdB5" id="surt" type="checkbox" name="colores" value="9"> Surtidos <br>
+						</div>
+						
+						<div class="button-section" id="bt5Disable">
+							<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
+						</div>
+						<div class="button-section" style="display: none;" id="bt5">
+							<input type="submit" name="sbmtButton" class="button" value="Siguiente"  />
+						</div>
 					</div>
-					<div class="button-section" style="display: none;" id="bt6">
-						<input type="submit" name="sbmtButton" class="button" value="Siguiente"  />
+					
+					<div class="block-6" style="display:none">
+						<p>
+						<a href="#" id="backLink5"> <img src="images/return.png"> </a>
+						<span class="step6">
+						Paso 6: </span>  Decora tus Cupcakes:</p>
+						<div class="options-steps">
+							<input class="rdB6" type="radio" name="decoracion" value="1">  Lluvia de chocolate<br>
+							<input class="rdB6" type="radio" name="decoracion" value="2" > Lluvia de chocolate blanco<br>
+							<input class="rdB6" type="radio" name="decoracion" value="3" > Lluvia de colores<br>
+							<input class="rdB6" type="radio" name="decoracion" value="4" > Lluvia surtidas<br>
+							<input class="rdB6" type="radio" name="decoracion" value="5" > Sin topping <br>
+						</div>
+						<div class="button-section" id="bt6Disable">
+							<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
+						</div>
+						<div class="button-section" style="display: none;" id="bt6">
+							<input type="submit" name="sbmtButton" class="button" value="Siguiente"  />
+						</div>
 					</div>
-				</div>
-				
+				<% }else{ %>
+					<br>
+					<div style="text-align: justify;">
+						Disculpe, para tener acceso a esta secci&oacute;n  necesita estar registrado, y haber iniciado sesi&oacute;n. <br><br>
+						
+						En esta secci&oacute;n usted podr&aacute; dise&ntilde;ar los cupcakes totalmente ajustados a sus gustos.  Podr&aacute; escoger
+						el relleno de su preferencia, la cubierta que desea, el sabor del ponqu&eacute;, entre otros.  <br><br>
+						
+						Si no se est&aacute; registrado, comience su <a href="registro.jsp" class="readmore"> registro aqu&iacute;.</a> <br><br>
+						
+						Si ya est&aacute; registrado, <a href="#signup"  rel="leanModal" id="go" class="readmore"> inicie sesi&oacute;n.</a>
+					</div>
+				<% } %>
 			</div>
-			
-			
-			
-			<div class="subtotal-section"> Sub-total: Bs. 100,00 </div>
-			
+			<% if (client != null){ %>
+				<div class="subtotal-section"> Sub-total: Bs. 100,00 </div>
+			<% } %>
 			<div class="banner">
 				<a href="./ocasionesEspeciales.jsp"><img src="./images/banner.png" alt="Image" /></a>
 			</div>
-			
-			
-			
 		</div>
 	</div>
 	<div class="push"></div>

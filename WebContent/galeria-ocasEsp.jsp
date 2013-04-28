@@ -9,6 +9,8 @@
 	<link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/style.css" />
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleImage.css" />
+	<link rel="stylesheet" type="text/css" href="css/styleCar.css" />
+	<link rel="stylesheet" type="text/css" href="css/gridNavigation.css" />
 	
 	<script type="text/javascript" src="/armaTuTorta/js/jquery-1.3.2.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
@@ -28,24 +30,31 @@
 			modal: true
 	});
 	</script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-	<script type="text/javascript" src="/armaTuTorta/js/jquery.carousel.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+	<script type="text/javascript" src="js/jquery.mousewheel.js"></script>
+	<script type="text/javascript" src="js/jquery.gridnav.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function() {
-			$('body').removeClass('no-js');
-		    $('#my-carousel-3').carousel({
-				itemsPerPage: 4,
-				itemsPerTransition: 4,
-				easing: 'linear',
-				nextPrevLinks:false, 
-				pagination: true, 
-    			noOfRows: 2
+		$(function() {
+			$('#tj_container').gridnav({
+				type	: {
+					mode		: 'sequpdown', 	// use def | fade | seqfade | updown | sequpdown | showhide | disperse | rows
+					speed		: 500,			// for fade, seqfade, updown, sequpdown, showhide, disperse, rows
+					easing		: '',			// for fade, seqfade, updown, sequpdown, showhide, disperse, rows	
+					factor		: 100,			// for seqfade, sequpdown, rows
+					reverse		: ''			// for sequpdown
+				}
 			});
 		});
 	</script>
 	
 </head>
 <body>
+<%
+	HttpSession infoPage = request.getSession();
+	session.setAttribute("prevPage", "galeria-ocasEsp.jsp");
+	
+%>
 <div class="wrapper">
 	<div id="header">
 		<div>
@@ -53,12 +62,7 @@
 				<div id="logo">
 					<a href="index.html"><img src="/armaTuTorta/images/logo5.png" alt="Logo"/></a>
 				</div>
-				<div>
-					<div>
-						<a href="#signup"  rel="leanModal" id="go" class="pestana">Ingresar</a>
-						<a href="/armaTuTorta/registro.jsp" class="pestana">Registrarse</a>
-					</div>
-				</div>
+				<jsp:include page="header.jsp"></jsp:include>
 			</div>
 			<ul style="margin: 0px; ">
 				<li ><a href="/armaTuTorta/index.jsp">Inicio</a></li>
@@ -72,57 +76,34 @@
 		</div>
 	</div>
 	<div id="content-aux">
+		<%
+		String[] archivos = (String[]) request.getAttribute("specialsCakesFilesName");	
+         %>		
 		<div class="title-img"><a href="/armaTuTorta/galeria.jsp"> <img src="images/return.png"> </a> Ocasiones Especiales </div>
-		
-		<div id="my-carousel-3" class="carousel module">
-			 <ul id="thumbs">
-				<li class="clearfix">
-					<a href="images/01-birdie-shot-illustration.png" rel="shadowbox[Cakes];height=440;width=440">
-					<img src="images/01-birdie-shot-illustration.png" style="width:180px; height:155px;">
-					</a>
-				</li>
-				<li class="clearfix">
-					<a href="images/02-steampunk-ray-gun.png" rel="shadowbox[Cakes];height=440;width=440">
-						<img src="images/02-steampunk-ray-gun.png" style="width:180px; height:155px;">
-					</a>
-				</li>
-				<li class="clearfix">
-					<a href="images/03-fly-away-airplane.png" rel="shadowbox[Cakes];height=440;width=440">
-					<img src="images/03-fly-away-airplane.png" style="width:180px; height:155px;">
-					</a>
-				</li>
-				<li class="clearfix">
-					<a href="images/04-rooftops-chimney.png" rel="shadowbox[Cakes];height=440;width=440">
-					 <img src="images/04-rooftops-chimney.png" style="width:180px; height:155px;">
-					</a>
-				</li>
-				<li class="clearfix"> 
-					<a href="images/05-map-candy-wrapper.png" rel="shadowbox[Cakes];height=440;width=440">
-					 <img src="images/05-map-candy-wrapper.png" style="width:180px; height:155px;">
-					</a>
-				</li>
-				<li class="clearfix">
-					<a href="images/06-office-mac-desk.png" rel="shadowbox[Cakes];height=440;width=440">
-					<img src="images/06-office-mac-desk.png" style="width:180px; height:155px;">
-					</a>
-				</li>
-				<li class="clearfix">
-					<a href="images/07-toucan-bird-illustration.png" rel="shadowbox[Cakes];height=440;width=440">
-						<img src="images/07-toucan-bird-illustration.png" style="width:180px; height:155px;">
-					</a>
-				</li>
-				<li class="clearfix">
-					<a href="images/08-mickey-mouse-carpet-ride.png" rel="shadowbox[Cakes];height=440;width=440">
-						<img src="images/08-mickey-mouse-carpet-ride.png" style="width:180px; height:155px;">
-					</a>
-				</li>
-				<li class="clearfix">
-					<a href="images/09-strawberry-fruit.png" rel="shadowbox[Cakes];height=440;width=440">
-						<img src="images/09-strawberry-fruit.png" style="width:180px; height:155px;">
-					</a>
-				</li>
-				
-		    </ul>
+		<div class="content example3">
+				<div id="tj_container" class="tj_container">
+					<div class="tj_nav">
+						<span id="tj_prev" class="tj_prev">Previous</span>
+						<span id="tj_next" class="tj_next">Next</span>
+					</div>
+					<div class="tj_wrapper">
+						<ul class="tj_gallery">
+							<% for(int i=0; i<archivos.length; i++){
+								String src = "./images/galeria_ocasionesEsp/" + archivos[i];
+							%>
+							<li>
+								<a href="<%= src %>" rel="shadowbox[Cakes];height=340;width=340">
+									<img src="<%= src %>" alt="image01"   style="width:180px; height:155px;" />
+								</a>
+							</li>
+							<% 
+								}
+							%>
+							
+							
+						</ul>
+					</div>
+				</div>
 		</div>
 	</div>
 	<div class="push"></div>

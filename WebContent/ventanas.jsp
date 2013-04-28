@@ -7,6 +7,14 @@
 			<p>Ingresa tus datos:</p>
 			<a class="modal_close" href="#"></a>
 		</div>
+		<%
+		String error = (String) request.getAttribute("error");
+		if (error != null){
+			if (error.startsWith("La información de nombre")){ %>
+				<span class="errorLogin" style="color:red; margin-left: 10px; font-size: 16px;"></span>
+			<%	}
+		}
+		%>
 		<form name="loginForm" action="/armaTuTorta/LoginPageServlet" method="post">
 		  <div class="missing-info"></div>
 		  <div class="txt-fld">

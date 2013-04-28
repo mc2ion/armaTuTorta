@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="domain.Client "%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +25,12 @@
 	
 </head>
 <body>
+<%
+	HttpSession infoPage = request.getSession();
+	session.setAttribute("prevPage", "dulcesTortas.jsp");
+	Client client = (Client) infoPage.getAttribute("client");
+	
+%>
 <div class="wrapper">
 	<div id="header">
 		<div>
@@ -32,12 +38,7 @@
 				<div id="logo">
 					<a href="index.html"><img src="/armaTuTorta/images/logo5.png" alt="Logo"/></a>
 				</div>
-				<div>
-					<div>
-						<a href="#signup"  rel="leanModal" id="go" class="pestana">Ingresar</a>
-						<a href="/armaTuTorta/registro.jsp" class="pestana">Registrarse</a>
-					</div>
-				</div>
+				<jsp:include page="header.jsp"></jsp:include>
 			</div>
 			<ul style="margin: 0px; ">
 				<li><a href="/armaTuTorta/index.jsp">Inicio</a></li>
@@ -55,6 +56,7 @@
 		<div class="home">
 			<div class="aside">
 				<div class="title"> &iexcl; Deleitate con nuestras m&aacute;s sabrosas tortas! </div>
+				<% if (client != null){ %>
 				<div class="subtitle">Es muy f&aacute;cil, escoge las tortas que desees ordenar, escoge la cantidad que desees de cada una y haz click en "Ordenar"</div>
 				<div class="cakes">
 					
@@ -161,6 +163,19 @@
 					<div class="subtotal-section"> Sub-total: Bs. <span class="price"> 0,00</span> </div><br>
 					
 				</div>	
+				<% }else{ %>
+					<br>
+					<div style="text-align: justify; margin-left: 30px;">
+						Disculpe, para tener acceso a esta secci&oacute;n  necesita estar registrado, y haber iniciado sesi&oacute;n. <br><br>
+						
+						En esta secci&oacute;n usted podr&aacute; ordenar cualquiera de nuestras deliciosas tortas, tales como marquesa de chocolate,
+						pie de lim&oacute;n, pie de parchita, entre muchas otras.<br><br>
+						
+						Si no se est&aacute; registrado, comience su <a href="registro.jsp" class="readmore"> registro aqu&iacute;.</a> <br><br>
+						
+						Si ya est&aacute; registrado, <a href="#signup"  rel="leanModal" id="go" class="readmore"> inicie sesi&oacute;n.</a>
+					</div>
+				<% } %>
 			</div>	
 			
 			<div class="sectionDT">

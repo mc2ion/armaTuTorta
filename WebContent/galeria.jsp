@@ -28,6 +28,11 @@
 	</script>
 </head>
 <body>
+<%
+	HttpSession infoPage = request.getSession();
+	session.setAttribute("prevPage", "galeria.jsp");
+	
+%>
 <div class="wrapper">
 	<div id="header">
 		<div>
@@ -35,12 +40,7 @@
 				<div id="logo">
 					<a href="index.html"><img src="/armaTuTorta/images/logo5.png" alt="Logo"/></a>
 				</div>
-				<div>
-					<div>
-						<a href="#signup"  rel="leanModal" id="go" class="pestana">Ingresar</a>
-						<a href="/armaTuTorta/registro.jsp" class="pestana">Registrarse</a>
-					</div>
-				</div>
+				<jsp:include page="header.jsp"></jsp:include>
 			</div>
 			<ul style="margin: 0px; ">
 				<li><a href="/armaTuTorta/index.jsp">Inicio</a></li>
@@ -60,16 +60,16 @@
 				<div >
 					<ul>
 						<li>
-							<a href="/armaTuTorta/GaleriaTortasServlet"><img src="./images/galeria_tortas/torta_portada.png" alt="Image" height="235" width="235" /></a>
+							<a href="/armaTuTorta/GalleryCakesServlet"><img src="./images/galeria_tortas/torta_portada.png" alt="Image" height="195" width="205" /></a>
 							Tortas
 						</li>
 						
 						<li>
-							<a href="/armaTuTorta/galeria-cupcakes.jsp"><img src="./images/galeria_cupcakes/cupcakes_portada.png" alt="Image" height="235" width="235" /></a>
+							<a href="/armaTuTorta/GalleryCupcakesServlet"><img src="./images/galeria_cupcakes/cupcakes_portada.png" alt="Image" height="195" width="205" /></a>
 							Cupcakes
 						</li>
 						<li>
-							<a href="/armaTuTorta/galeria-ocasEsp.jsp"><img src="./images/galeria_ocasionesEsp/ocasiones_portada.png" alt="Image" height="235" width="235" /></a>
+							<a href="/armaTuTorta/GallerySpecialsCakesServlet"><img src="./images/galeria_ocasionesEsp/ocasiones_portada.png" alt="Image" height="195" width="205" /></a>
 							Ocasiones Especiales
 						</li>
 					</ul>

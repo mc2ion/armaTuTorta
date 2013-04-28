@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="domain.Client "%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,6 +26,11 @@
 	
 </head>
 <body>
+<%
+	HttpSession infoPage = request.getSession();
+	session.setAttribute("prevPage", "creaTuTorta.jsp");
+	Client client = (Client) infoPage.getAttribute("client");
+%>
 <div class="wrapper">
 	<div id="header">
 		<div>
@@ -32,12 +38,7 @@
 				<div id="logo">
 					<a href="index.html"><img src="/armaTuTorta/images/logo5.png" alt="Logo"/></a>
 				</div>
-				<div>
-					<div>
-						<a href="#signup"  rel="leanModal" id="go" class="pestana">Ingresar</a>
-						<a href="/armaTuTorta/registro.jsp" class="pestana">Registrarse</a>
-					</div>
-				</div>
+				<jsp:include page="header.jsp"></jsp:include>
 			</div>
 			<ul style="margin: 0px; ">
 				<li ><a href="/armaTuTorta/index.jsp">Inicio</a></li>
@@ -69,12 +70,13 @@
 					</ul>
 				</div>	
 			</div>
-			
-			<div class="title"> &iexcl; Sigue los pasos a continuaci&oacute;n y  arma la torta que deseas! </div>
-			
+			<% if (client != null){ %>
+				<div class="title"> &iexcl; Sigue los pasos a continuaci&oacute;n y  arma la torta que deseas! </div>
+			<% } %>
 			
 			
 			<div class="asideRight">
+				<% if (client != null){ %>
 				<div class="block">
 					<p> <span class="step1"> Paso 1: </span>  Elige la forma de tu torta </p>
 					<div class="options-steps">
@@ -201,13 +203,25 @@
 						<input type="submit" name="sbmtButton" class="button" value="Siguiente"  />
 					</div>
 				</div>
+				<% }else{ %>
+					<br>
+					<div style="text-align: justify;">
+						Disculpe, para tener acceso a esta secci&oacute;n  necesita estar registrado, y haber iniciado sesi&oacute;n. <br><br>
+						
+						En esta secci&oacute;n usted podr&aacute; dise&ntilde;ar los cupcakes totalmente ajustados a sus gustos.  Podr&aacute; escoger
+						el relleno de su preferencia, la cubierta que desea, el sabor del ponqu&eacute;, entre otros.  <br><br>
+						
+						Si no se est&aacute; registrado, comience su <a href="registro.jsp" class="readmore"> registro aqu&iacute;.</a> <br><br>
+						
+						Si ya est&aacute; registrado, <a href="#signup"  rel="leanModal" id="go" class="readmore"> inicie sesi&oacute;n.</a>
+					</div>
+				<% } %>
 				
 			</div>
 			
-			
-			
-			<div class="subtotal-section"> Sub-total: Bs. 100,00 </div>
-			
+			<% if (client != null){ %>
+				<div class="subtotal-section"> Sub-total: Bs. 100,00 </div>
+			<% } %>
 			<div class="banner">
 				<a href="./ocasionesEspeciales.jsp"><img src="./images/banner.png" alt="Image" /></a>
 			</div>

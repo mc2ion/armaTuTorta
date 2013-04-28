@@ -28,9 +28,9 @@ if (typeof Object.create !== 'function') {
 	// carousel
 	var Carousel = {
 		settings: {
-			itemsPerPage: 1,
-			itemsPerTransition: 1,
-			noOfRows: 1,
+			itemsPerPage: 4,
+			itemsPerTransition: 4,
+			noOfRows: 2,
 			pagination: true,
 			nextPrevLinks: true,
 			speed: 'normal',
