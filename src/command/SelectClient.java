@@ -35,15 +35,15 @@ public class SelectClient implements DatabaseCommand {
 			client.setOtherPhone(rs.getString(7));
 			int shipping = rs.getInt(8);
 			if (shipping == 0)
-				client.setShippingAddress(false);
+				client.setShippingAddress(0);
 			else
-				client.setShippingAddress(true);
+				client.setShippingAddress(1);
 			client.setShippingAddress(rs.getString(9));
 			int company = rs.getInt(10);
 			if (company == 0)
-				client.setCompany(false);
+				client.setCompany(0);
 			else
-				client.setCompany(true);
+				client.setCompany(1);
 		}
 		
 		sta.close();

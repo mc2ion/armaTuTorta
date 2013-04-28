@@ -22,7 +22,11 @@
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
-
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			$("a[rel*=leanModal]").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
+		});
+	</script>
 </head>
 <body>
 <%
@@ -65,8 +69,10 @@
 					<form name="regForm" action="/armaTuTorta/RegisterServlet" method="post" onsubmit="return validateRegCont();" >
 						<div class="block1" >
 							<fieldset>
-								<input type="radio" name="typePers" value="0"> Persona Natural
-								<input type="radio" name="typePers" value="1" >  Persona Jur&iacute;dica <br>
+								<div style="float: right; margin-right: 45px; margin-top: -25px;">
+									<input type="radio" name="typePers" value="0"> Persona Natural
+									<input type="radio" name="typePers" value="1" >  Persona Jur&iacute;dica 
+								</div><br> 
 								<label for="name">Nombres:</label>
 								<input type="text" name="txtName" id="txtName" size="35" maxlength="100" onBlur="validateName(this, '1');" /> 
 								<span class="error" id="errorName">Disculpe, debe introducir un nombre v&aacute;lido</span>
@@ -83,11 +89,10 @@
 								<input type="text" name="txtCed" id="txtCed" size="28" maxlength="50"  onBlur="validateCedIdnt(this);" style="display: inline;" /><br>
 								 
 								<span class="error" id="errorCed">Disculpe, debe introducir un n&uacute;mero de c&eacute;dula v&aacute;lido</span>
-								<br><br>
+								<br>
 								<label for="name">Email:</label>
 								<input type="text" name="txtEmail" id="txtEmail" size="35" maxlength="50" onBlur="validateEmail(this);" /> 
-								<span class="error" id="errorEmail" >Disculpe, debe introducir un correo electr&oacute;nico v&aacute;lido</span>
-								<br>
+								<span class="error" id="errorEmail" >Disculpe, debe introducir un correo electr&oacute;nico v&aacute;lido</span><br>
 								<label for="name">Contrase&ntilde;a:</label>
 								<input type="password" name="txtPass" id="txtPass" size="35" maxlength="50" onBlur="validatePass(this);" /> 
 								<span class="error" id="errorPass" >Disculpe, su contrase&ntilde;a debe ser mayor de 6 caracteres</span>

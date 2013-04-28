@@ -1,9 +1,6 @@
 package servlet;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Util.SendEmail;
 
 import command.CommandExecutor;
 import domain.Client;
@@ -68,6 +64,7 @@ public class ClientAccountServlet extends HttpServlet {
 			String phoneNumber  = request.getParameter("txtPhone");
 			String phoneMovNumber  = request.getParameter("txtMovPhone");
 			String address = request.getParameter("txtDir");
+			String typePers = request.getParameter("typePers");
 		
 			Client client = new Client();
 			client.setFirstName(firstName);
@@ -77,40 +74,24 @@ public class ClientAccountServlet extends HttpServlet {
 			client.setPhone(phoneNumber);
 			client.setOtherPhone(phoneMovNumber);
 			client.setAddress(address);
+			client.setCompany(Integer.valueOf(typePers));
 			String checkbox = request.getParameter("checkDir");
 			
 			if (checkbox != ""){
 				String addressEnv = request.getParameter("txtDirEnv");
 				client.setShippingAddress(addressEnv);
-				client.setShippingAddress(false);
+				client.setShippingAddress(1);
 				
 			}else{
 				client.setShippingAddress(address);
-				client.setShippingAddress(true);
+				client.setShippingAddress(0);
 			}
 		
-			Integer userId = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.CreateClient(client));
+			Integer userId = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.EditClient(client));
 
 			if(userId > 0){
-				new Thread(new Runnable() {
-				    public void run() {
-				    	Properties propertiesFile = new Properties();
-						String context = getServletContext().getInitParameter("properties");
-						try {
-							propertiesFile.load(new FileInputStream(context));
-						} catch (FileNotFoundException e) {
-							e.printStackTrace();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-						SendEmail.sendEmail(propertiesFile, email, firstName + " " + lastName, false, "contrato");
-				    }
-				}).start();
-				
 				rd = getServletContext().getRequestDispatcher("/registroBienv.jsp");			
 				rd.forward(request, response);
-				
-				
 			} 
 		} catch (Exception e) {
 			System.out.println("No se creo");

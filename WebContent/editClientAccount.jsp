@@ -66,6 +66,13 @@
 					<form name="regForm" action="/armaTuTorta/ClientAccountServlet" method="post" onsubmit="return validateRegCont();" >
 						<div class="block1" >
 							<fieldset>
+								<% if (clientInfo.isCompany() == 0){ %>
+									<input type="radio" name="typePers" value="0" checked="checked"> Persona Natural
+									<input type="radio" name="typePers" value="1" >  Persona Jur&iacute;dica <br>
+								<% }else{ %>
+									<input type="radio" name="typePers" value="0" > Persona Natural
+									<input type="radio" name="typePers" value="1" checked="checked" >  Persona Jur&iacute;dica <br>
+								<% } %>
 								<label for="name">Nombres:</label>
 								<input type="text" name="txtName" id="txtName" size="35" maxlength="100" 
 									onBlur="validateName(this, '1');" value="<%= clientInfo.getFirstName() %>" /> 
@@ -135,13 +142,13 @@
 								name="txtDir"><%= clientInfo.getAddress()%></textarea><br>
 								<span class="error" id="errorDir" >Disculpe, debe introducir direcci&oacute;n v&aacute;lida</span>
 								<br>
-								<% if (clientInfo.isShippingAddress()){%>
+								<% if (clientInfo.isShippingAddress() == 0){%>
 									<input type="checkbox" value="remember" checked id="checkDir" name="checkDir"/> ¿Es su dirección de env&iacute;o? <br>
 								<% }else { %>
 									<input type="checkbox" value="remember" id="checkDir" name="checkDir"/> ¿Es su dirección de env&iacute;o? <br>
 								<% } %>
 								
-								<% if (clientInfo.isShippingAddress()){%>
+								<% if (clientInfo.isShippingAddress() == 0){%>
 										<div class="otherDir" style="display: none;">
 								<% }else { %>
 										<div class="otherDir" >

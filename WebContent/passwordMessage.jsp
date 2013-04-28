@@ -57,30 +57,15 @@
 	<div id="content">
 		<div class="home">
 			<div class="bienv">
-			<%
-				if (error != null && error == ""){
-			%>
 				<span class="bienv-title">¡Te hemos env&iacute;ado un correo!</span><br><br>
-				Para completar el proceso solo te falta llevar a cabo un paso sencillo paso:
-				<br><br>
-				Entra en tu bandeja de entrada y haz click en el link de confirmación que te hemos envíado. 
-				De esta forma confirmaremos tus datos y as&iacute; podr&aacute;n disfrutar de todos nuestros servicios.
+				Ingresa a tu bandeja de entrada y verifica la nueva contrase&ntilde;a que te hemos env&iacute;ado 
+				para poder ingresar a tu cuenta. <br><br>
+				Una vez que hayas ingresado a nuestra sistema, podr&aacute;s cambiar esta contrase&ntilde;a facilmente
+				,si as&iacute; lo deseeas, ingresando
+				a: "Mi cuenta" y haciendo click en la opci&oacute;n "Cambiar contrase&ntilde;a".
+				 
 				<br><br>
 				¡Muchas gracias por elegirnos!. 
-			<% }else{ 
-				String name = (String) request.getAttribute("name");
-			%>
-					<span class="bienv-title">Disculpe, el correo que intenta registrar ya existe.</span><br><br>
-					El correo que usted intenta registrar ya aparece en nuestro sistema. Si no recuerda 
-					su clave puede hacer <a href="/armaTuTorta/PasswordGeneratorServlet?email=<%= error %>&name=<%= name %>" 
-					class="readmore"> click aqu&iacute;</a>
-					 y le enviaremos una nueva clave a su correo
-					electr&oacute;nico para que pueda seguir disfrutando de todos nuestros servicios.
-					<br><br>
-					¡Muchas gracias por elegirnos!. 
-
-			<% }%>
-			
 			</div>
 		</div>
 	</div>

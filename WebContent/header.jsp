@@ -30,7 +30,12 @@
 %>		
 	
 	<div id="pestana_larga">
-			<a class="pestN" >Bienvenido, <%= client.getFirstName().substring(0, 14) %> </a>
+			<%
+				String name = client.getFirstName();
+				if (name.length() > 14 )
+					name = client.getFirstName().substring(0, 14);
+			%>
+			<a class="pestN" >Bienvenido, <%= name %> </a>
 			<span class="divisor">|</span> 
 			<a href="#" class="pestCart"> <span class="numCartOne">  0 </span> <img src="./images/cart.png" height="26" width="38"/>   </a>
 			<span class="divisor2">|</span> 
