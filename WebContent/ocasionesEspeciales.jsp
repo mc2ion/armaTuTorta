@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="domain.Client "%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +31,7 @@
 <%
 	HttpSession infoPage = request.getSession();
 	session.setAttribute("prevPage", "ocasionesEspeciales.jsp");
+	Client client = (Client) infoPage.getAttribute("client");
 	
 %>
 <div class="wrapper">
@@ -59,16 +60,13 @@
 				&iexcl; Est&aacute;s en el lugar indicado! Escr&iacute;benos tu idea, carga im&aacute;genes de referencia que quieras usar y deja que nosotros
 				nos encargemos del resto.
 			</div>
+			<% if (client != null){ %>
 			<div class="coments-ocEsp">
 				<form>
 					<fieldset>
 						<label for="name">¿Cu&aacute;l es tu ocasi&oacute;n especial?:</label>
-						<select>
-						  <option value="volvo">Boda</option>
-						  <option value="saab">Quincea&ntilde;os</option>
-						  <option value="mercedes">Matrimonio</option>
-						  <option value="audi">Bautizo</option>
-						</select><br><br>
+						<input type="text" name="txtName" id="txtName" size="25" maxlength="50" />
+							<div style="font-size: 10px; font-family: Arial;">Ejemplo: boda, bautizo, entre otros. </div><br>
 						<label for="name" style="height:60px;">¿Cu&aacute;les de nuestros productos deseas ordenar?:</label>
 						<input type="checkbox" name="vehicle" value="Bike">Torta<br>
 						<input type="checkbox" name="vehicle" value="Car">Cupcakes <br>
@@ -78,14 +76,23 @@
 						<label for="name">¿Tienes un dise&ntilde;o en mente? C&aacute;rgalo aqu&iacute;:</label>
 						<input type="text" name="txtName" id="txtName" size="25" maxlength="50" /> <input type="submit" value="Cargar Archivo"/> <br><br>
 						<label for="name">Cu&eacute;ntanos m&aacute;s acerca de tu idea:</label>
-						<textarea style="resize: none;"></textarea> <br><br>
+						<textarea style="resize: none;"></textarea> <br>
 					</fieldset>
 					<div class="ocEsp-button">
 							<input type="submit" name="sbmtButton" class="button" value="Enviar"  />
 					</div>
 				</form>
 			</div>
-			
+			<% }else{ %>
+					<br><br>
+					<div style="text-align: justify; margin-left: 30px;">
+						Disculpe, para hacer uso de esta secci&oacute;n usted  necesita estar registrado, y haber iniciado sesi&oacute;n. <br><br>
+						
+						Si no se est&aacute; registrado, comience su <a href="registro.jsp" class="readmore"> registro aqu&iacute;.</a> <br><br>
+						
+						Si ya est&aacute; registrado, <a href="#signup"  rel="leanModal" id="go" class="readmore"> inicie sesi&oacute;n.</a>
+					</div>
+				<% } %>
 			
 			
 			

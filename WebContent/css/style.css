@@ -549,7 +549,7 @@ p a {
 	background: #fff;
 	border: 1px solid #cccccc;
 	width: 400px;
-	height: 50px;
+	height: 45px;
 }
 
 #content .home .registration {
@@ -595,9 +595,16 @@ p a {
 }
 
 .regis-title{
-	padding-left: 20px;
 	font-size:30px;
 	color: #4d366a;
+	margin-bottom: 5px;
+
+	margin-left: 20px;
+	padding-top: 15px;
+}
+
+.block1{
+	margin-top: -10px;
 
 }
 
@@ -703,7 +710,6 @@ p a {
 .reg-button{
 	float: right;
 	margin-right: 40px;
-	margin-bottom: 5px;
 }
 
 .ocEsp-button{
@@ -1174,6 +1180,13 @@ a.readmore {
 	display: block;
 	margin: 20px 0;
 }
+
+#content div form input[type="radio"]{
+	color: #aeaeae;
+	display: inline;
+	margin: 0;
+}
+
 
 #content div form input.textcontact {
 	background: url(../images/input-contact.gif) no-repeat 0 0;

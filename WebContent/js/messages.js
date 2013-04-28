@@ -816,6 +816,16 @@ function Siguiente(){
 	
 }
 
+function SiguienteAux(){
+	if (validateRegAux() == true){
+		$(".block1").hide();
+		$("#infPers").attr('class', 'separator');
+		$(".block2").show();
+		$("#infEnv").attr('class', 'separator-current');
+	}
+	
+}
+
 function Back(){
 	$(".block1").show();
 	$("#infPers").attr('class', 'separator-current');
@@ -942,6 +952,7 @@ function validateRptPass(element){
 }
 
 function validateReg(){
+	var empresa = $("input:radio[name=typePers]:checked").val();
 	var name = document.getElementById("txtName");
 	var lastName = document.getElementById("txtLastName");
 	var cedula = document.getElementById("txtCed");
@@ -950,6 +961,9 @@ function validateReg(){
 	var passRpt = document.getElementById("txtRptPass");
 	
 	var bool = true;
+	
+	if (empresa == null)
+		bool = false;	
 
 	if (validateName(name, '1') != true)
 		bool = false;
@@ -971,6 +985,31 @@ function validateReg(){
 	
 	return bool;
 }
+
+
+function validateRegAux(){
+	var name = document.getElementById("txtName");
+	var lastName = document.getElementById("txtLastName");
+	var cedula = document.getElementById("txtCed");
+	var email = document.getElementById("txtEmail");
+	
+	var bool = true;
+
+	if (validateName(name, '1') != true)
+		bool = false;
+
+	if (validateName(lastName, '2') != true)
+		bool = false;
+
+	if (validateCedIdnt(cedula) != true)
+		bool = false;
+	
+	if (validateEmail(email) != true)
+		bool = false;
+
+	return bool;
+}
+
 
 function agregarOtro(){
 	$('.otherPhone').show();
