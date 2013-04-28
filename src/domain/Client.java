@@ -3,7 +3,7 @@ package domain;
 public class Client {
 	
 	private long id;
-	private boolean isCompany;
+	private int isCompany;
 	private String identityCard;
 	private String firstName;
 	private String lastName;
@@ -12,7 +12,7 @@ public class Client {
 	private String address;
 	private String phone;
 	private String otherPhone;
-	private boolean isShippingAddress;
+	private int isShippingAddress;
 	private String shippingAddress;
 	
 	public void setId(long id) {
@@ -23,11 +23,11 @@ public class Client {
 		return id;
 	}
 
-	public void setCompany(boolean isCompany) {
+	public void setCompany(int isCompany) {
 		this.isCompany = isCompany;
 	}
 
-	public boolean isCompany() {
+	public int isCompany() {
 		return isCompany;
 	}
 
@@ -95,11 +95,11 @@ public class Client {
 		return otherPhone;
 	}
 
-	public void setShippingAddress(boolean isShippingAddress) {
+	public void setShippingAddress(int isShippingAddress) {
 		this.isShippingAddress = isShippingAddress;
 	}
 
-	public boolean isShippingAddress() {
+	public int isShippingAddress() {
 		return isShippingAddress;
 	}
 

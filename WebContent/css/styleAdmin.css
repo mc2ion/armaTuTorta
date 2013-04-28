@@ -1250,7 +1250,7 @@ div.box {
 		
 	}
 
-	#deleteStep, #deleteAlbum,  #deletePhoto, #deleteRequest, #deleteOption{
+	#deleteStep, #deleteAlbum,  #deletePhoto, #deleteClient, #deleteOption{
 		position: absolute;
 		text-align: center;
 		width: 295px;

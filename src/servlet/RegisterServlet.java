@@ -107,11 +107,11 @@ public class RegisterServlet extends HttpServlet {
 			if (checkbox != ""){
 				String addressEnv = request.getParameter("txtDirEnv");
 				client.setShippingAddress(addressEnv);
-				client.setShippingAddress(false);
+				client.setShippingAddress(0);
 				
 			}else{
 				client.setShippingAddress(address);
-				client.setShippingAddress(true);
+				client.setShippingAddress(1);
 			}
 		
 			Integer userId = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.CreateClient(client));

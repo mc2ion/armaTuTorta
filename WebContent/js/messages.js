@@ -195,6 +195,134 @@ function show(){
 	}
 }
 
+function validateCreateClient(form) {
+	var select = form.txtTypeId;
+	var position = select.options.selectedIndex;
+	var typeId = select.options[position].value;
+	var identityCard = form.txtIdCard.value;
+	var firstName = form.txtFirstName.value;
+	var lastName = form.txtLastName.value;
+	var name = form.txtName.value;
+	var email = form.txtEmail.value;
+	var password = form.txtPassword.value;
+	var passwordRpt = form.txtPasswordRpt.value;
+	var phone = form.txtPhone.value;
+	var otherPhone = form.txtOtherPhone.value;
+	var address = form.txtAddress.value;
+	var check = form.txtIsShipping;
+	var isShipping = check.checked;
+	var shippingAddress = form.txtShippingAddress.value;	
+	var nameRegex = /[\d\w\sáéíóú]+/i;
+	var cedulaRegex = /^[0-9]+(([\.][0-9])?[0-9]*)*$/;
+	var phoneRegex = /^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/;
+	var emailRegex = /^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/;
+	
+	if((typeId == "V-") || (typeId == "E-")){
+		if(identityCard == "") {
+		    inlineMsg('txtIdCard','Debe introducir el número de cédula del cliente.',2);
+		    return false;
+		}		
+		
+		if(!identityCard.match(cedulaRegex)) {
+			inlineMsg('txtIdCard','Debe introducir un n&uacute;mero de c&eacute;dula correcto.',2);
+		    return false;
+		}
+
+		if(firstName == "") {
+		    inlineMsg('txtFirstName','Debe introducir el nombre del cliente.',2);
+		    return false;
+		}
+		
+		if(!firstName.match(nameRegex)) {
+			inlineMsg('txtFirstName','Debe introducir un nombre válido.',2);
+			return false;
+		}
+
+		if(lastName == "") {
+		    inlineMsg('txtLastName','Debe introducir el apellido del cliente.',2);
+		    return false;
+		}
+		
+		if(!lastName.match(nameRegex)) {
+			inlineMsg('txtLastName','Debe introducir un apellido válido.',2);
+			return false;
+		}
+	} else {
+		if(identityCard == "") {
+		    inlineMsg('txtIdCard','Debe introducir el número de RIF del cliente.',2);
+		    return false;
+		}		
+		
+		if(!identityCard.match(cedulaRegex)) {
+			inlineMsg('txtIdCard','Debe introducir un n&uacute;mero de RIF correcto.',2);
+		    return false;
+		}		
+
+		if(name == "") {
+		    inlineMsg('txtName','Debe introducir el nombre del cliente.',2);
+		    return false;
+		}
+	}
+	
+	if(email == "") {
+	    inlineMsg('txtEmail','Debe introducir el correo electrónico del cliente.',2);
+	    return false;
+	}
+	
+	if(!email.match(emailRegex)) {
+		inlineMsg('txtEmail','Debe introducir un correo electrónico válido.',2);
+	    return false;
+	}	
+	
+	if(password == "") {
+	    inlineMsg('txtPassword','Debe introducir la contrase&ntilde;a del cliente.',2);
+	    return false;
+	}
+	
+	if(passwordRpt == "") {
+	    inlineMsg('txtPasswordRpt','Debe repetir la contrase&ntilde;a del cliente.',2);
+	    return false;
+	}
+	
+	if (password.length < 6){
+		inlineMsg('txtPassword','Las contraseña debe tener una longitud mayor o igual a 6 caracteres.', 2);
+		return false;
+	}
+	
+	if(passwordRpt != password) {
+		inlineMsg('txtPasswordRpt','Las contraseñas deben coincidir.', 2);
+	    return false;
+	}
+	
+	if(phone == "") {
+	    inlineMsg('txtPhone','Debe introducir el número telefónico del cliente.',2);
+	    return false;
+	}
+	
+	if(!phone.match(phoneRegex)) {
+		inlineMsg('txtPhone','Debe introducir un n&uacute;mero telefónico válido.',2);
+	    return false;
+	}	
+	
+	if(otherPhone != ""){
+		if(!otherPhone.match(phoneRegex)) {
+			inlineMsg('txtOtherPhone','Debe introducir un n&uacute;mero telefónico válido.',2);
+		    return false;
+		}
+	}
+	
+	if(address == "") {
+	    inlineMsg('txtAddress','Debe introducir la dirección del cliente.',2);
+	    return false;
+	}
+	
+	if(!isShipping){
+		if(shippingAddress == "") {
+		    inlineMsg('txtShippingAddress','Debe introducir la dirección de envío del cliente.',2);
+		    return false;
+		}
+	}
+}
 
 function validateCreateProduct(form) {
 	  var name = form.txtNameProduct.value;
