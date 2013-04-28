@@ -129,10 +129,10 @@
 									<td><%= c.getIdentityCard() %></td>
 									<td><%= (c.isCompany()==1)?c.getFirstName():c.getFirstName() + " " + c.getLastName() %></td>
 									<td><%= c.getEmail() %></td>
-									<td><%= (c.getOtherPhone()!=null && c.getOtherPhone()!="")?c.getPhone() + " / " + c.getOtherPhone():c.getPhone() %></td>
+									<td><%= (c.getOtherPhone()!=null && !c.getOtherPhone().equalsIgnoreCase(""))?c.getPhone() + " / " + c.getOtherPhone():c.getPhone() %></td>
 									<td><p>
 										<a href="/armaTuTorta/ListClientOrdersServlet?clientId=<%= c.getId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/photos.png"  height="16" width="16" />
+											<img alt="logo" src="/armaTuTorta/images/orders.png"  height="16" width="16" />
 										</a> 
 										<a href="/armaTuTorta/EditClientServlet?clientId=<%= c.getId() %>" style="color: transparent" >
 											<img alt="logo" src="/armaTuTorta/images/edit.png"  height="16" width="16" />

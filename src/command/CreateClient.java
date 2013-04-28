@@ -33,7 +33,7 @@ public class CreateClient implements DatabaseCommand {
 		sta.setString(8,  client.getOtherPhone());
 		sta.setInt(9, client.isShippingAddress());
 		sta.setString(10, client.getShippingAddress());
-		sta.setString(11, "0");
+		sta.setInt(11, client.isCompany());
 				
 		int rowsUpdated = sta.executeUpdate();
 		

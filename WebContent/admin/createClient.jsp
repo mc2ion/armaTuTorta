@@ -63,7 +63,7 @@
         </div>  
 		<div id="content">
 				<h2>Agregar Cliente:</h2>
-				<form name="form" action="/armaTuTorta/CreateClientServlet" onsubmit="return validateCreateClient(this)" method="post" enctype="multipart/form-data">
+				<form name="form" action="/armaTuTorta/CreateClientServlet" onsubmit="return validateCreateClient(this)" method="post">
 					<fieldset>
 						<label for="name"><span id="idCard">Cédula de Identidad:</span></label>
 						<select name="txtTypeId" id="txtTypeId" onchange="changeForm()">
