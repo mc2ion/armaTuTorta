@@ -34,7 +34,7 @@ public class ClientAccountServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String id = request.getParameter("id");
+		Long id = Long.valueOf(request.getParameter("id"));
 		RequestDispatcher rd;
 		try{
 			Client client = (Client) CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectClient(id));

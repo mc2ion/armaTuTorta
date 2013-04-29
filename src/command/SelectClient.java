@@ -8,9 +8,9 @@ import domain.Client;
 
 public class SelectClient implements DatabaseCommand {
 	
-	private String id;
+	private Long id;
 	
-	public SelectClient(String id){
+	public SelectClient(Long id){
 		this.id = id;
 	}
 
@@ -21,7 +21,7 @@ public class SelectClient implements DatabaseCommand {
 				" PHONE, OTHER_PHONE, IS_SHIPPING_ADDRESS, SHIPPING_ADDRESS, IS_COMPANY FROM CLIENT" +
 				" WHERE ID = ?");
 		
-		sta.setString(1, this.id);
+		sta.setLong(1, this.id);
 					
 		ResultSet rs = sta.executeQuery();
 		Client client = new Client();
