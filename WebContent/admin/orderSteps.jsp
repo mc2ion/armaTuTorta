@@ -133,7 +133,7 @@
 									<td><%= (s.isMultipleChoice()==1)?"Si":"No"  %></td>
 									<td><p>
 										<a href="/armaTuTorta/ListStepOptionsServlet?stepId=<%= s.getId() %>&typeId=<%= s.getOrderTypeId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/options.png"  height="16" width="16" />
+											<img alt="logo" src="/armaTuTorta/images/step-options.png"  height="16" width="16" />
 										</a> 
 										<a href="/armaTuTorta/EditOrderStepServlet?stepId=<%= s.getId() %>&typeId=<%= s.getOrderTypeId() %>" style="color: transparent" >
 											<img alt="logo" src="/armaTuTorta/images/edit.png"  height="16" width="16" />

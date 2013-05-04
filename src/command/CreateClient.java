@@ -28,12 +28,11 @@ public class CreateClient implements DatabaseCommand {
 			// El cliente ya tiene ese correo registrado, dar error
 			lastIdInserted = -2;
 			
-		}
-		else{
-			 sta = conn.prepareStatement("INSERT INTO CLIENT" +
+		} else {
+			sta = conn.prepareStatement("INSERT INTO CLIENT" +
 				" (IDENTITY_CARD, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, ADDRESS, PHONE, OTHER_PHONE, IS_SHIPPING_ADDRESS, SHIPPING_ADDRESS, IS_COMPANY) " +
 				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-		
+
 			sta.setString(1,  client.getIdentityCard());
 			sta.setString(2,  client.getFirstName());
 			sta.setString(3,  client.getLastName());
@@ -65,5 +64,4 @@ public class CreateClient implements DatabaseCommand {
 		
 		return new Integer(lastIdInserted);
 	}
-
 }
