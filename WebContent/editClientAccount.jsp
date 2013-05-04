@@ -27,8 +27,8 @@
 <body>
 <%
 	HttpSession infoPage = request.getSession();
-	session.setAttribute("prevPage", "registro.jsp");
-	
+	infoPage.setAttribute("prevPage", "registro.jsp");
+	String message  = (String) request.getAttribute("message");
 %>
 <div class="wrapper">
 	<div id="header">
@@ -53,25 +53,43 @@
 	<div id="content">
 		<div class="home">
 				<div class="datos">
+					<% if (message == null || message == ""){ %>
 					<div class="separator-current" id="infPers">
-						<a href="#" onClick="Back();">Informaci&oacute;n Personal</a>
+						<a href="#" onClick="BackAux();">Informaci&oacute;n Personal</a>
 					</div>
-					<div class="separator" id="infEnv">
-						<a href="#" onClick="SiguienteAux();">Datos de Env&iacute;o</a>
+					<div class="separator" id="infPass">
+						<a href="#" onClick="SiguienteAuxC();">Cambiar Contrase&ntilde;a</a>
 					</div>
+					<% }else{  %>
+						<script>
+							$(function(){
+								$('#passId').click();
+							});
+						</script>
+					<div class="separator" id="infPers">
+						<a href="#" onClick="BackAux();">Informaci&oacute;n Personal</a>
+					</div>
+					<div class="separator-current" id="infPass">
+						<a href="#" onClick="SiguienteAuxC();" id="passId">Cambiar Contrase&ntilde;a</a>
+					</div>
+					<% }  %>
 				</div>
 				<div class="registration">
 				<jsp:useBean id="clientInfo" type="domain.Client" scope="request"/> 
-					<span class="regis-title">Editar Datos Personales </span><br>
+					<span class="regis-title">Editar Datos</span><br>
 					<form name="regForm" action="/armaTuTorta/ClientAccountServlet" method="post" onsubmit="return validateRegCont();" >
 						<div class="block1" >
 							<fieldset>
 								<% if (clientInfo.isCompany() == 0){ %>
-									<input type="radio" name="typePers" value="0" checked="checked"> Persona Natural
-									<input type="radio" name="typePers" value="1" >  Persona Jur&iacute;dica <br>
+									<div style="float: right; margin-right: 45px; margin-top: -25px;">
+										<input type="radio" name="typePers" value="0" checked="checked"> Persona Natural
+										<input type="radio" name="typePers" value="1" >  Persona Jur&iacute;dica 
+									</div><br> 
 								<% }else{ %>
-									<input type="radio" name="typePers" value="0" > Persona Natural
-									<input type="radio" name="typePers" value="1" checked="checked" >  Persona Jur&iacute;dica <br>
+									<div style="float: right; margin-right: 45px; margin-top: -25px;">
+										<input type="radio" name="typePers" value="0" > Persona Natural
+										<input type="radio" name="typePers" value="1" checked="checked" >  Persona Jur&iacute;dica 
+									</div><br> 
 								<% } %>
 								<label for="name">Nombres:</label>
 								<input type="text" name="txtName" id="txtName" size="35" maxlength="100" 
@@ -159,26 +177,64 @@
 											onBlur="validateDir(this, '2');" id="dirEnv" name="txtDirEnv"><%= clientInfo.getShippingAddress() %></textarea><br>
 											<span class="error" id="errorDirEnv" >Disculpe, debe introducir direcci&oacute;n de env&iacute;o v&aacute;lida</span>
 									</div>
-							</fieldset>
-							<div class="reg-button">
-									<input type="submit" name="sbmtButton" class="button" value="Siguiente"   />
+								</fieldset>
+								<div class="reg-button">
+										<input type="submit" name="sbmtButton" class="button" value="Siguiente"   />
+								</div>
 							</div>
+							
+							</form>
+							
+							<div class="block3" style="display:none" >
+								<% if (message == null || message == ""){ %>
+								<form name="passForm" action="/armaTuTorta/ChangePasswordServlet" method="post" onsubmit="return validatePassCont();" >
+								<% 
+									infoPage.setAttribute("clientAux", clientInfo); 
+								%>
+								<input type="hidden" name="email" value ="<%= clientInfo.getEmail() %>" /> 
+								<br>
+								<fieldset>
+									<label for="name">Contrase&ntilde;a Anterior:</label>
+									<input type="password" name="txtOldPass" id="txtOldPass" size="35" maxlength="100" 
+									onBlur="validatePassAux(this);" />
+									<span class="error" id="errorPassOld" >Debe introducir su contraseña anterior </span>
+									<br>
+									<label for="name">Contraseña nueva:</label>
+									<input type="password" name="txtNewPass" id="txtNewPass" size="35" maxlength="100" 
+									onBlur="validatePassNew(this);" />
+									<span class="error" id="errorPassNew" >Disculpe, debe introducir una nueva contraseña</span>
+									<br>
+								
+									<label for="name">Repetir contraseña:</label>
+									<input type="password" name="txtNewPassRpt" id="txtNewPassRpt" size="35" maxlength="100" 
+									onBlur="validatePassRptNew(this);" />
+									<span class="error" id="errorPassRpt" >Disculpe, las contraseñas deben coincidir</span>
+									<br>
+									
+								</fieldset>
+								<div class="reg-button">
+										<input type="submit" name="sbmtButton" class="button" value="Aceptar"   />
+								</div>
+								</form>	
+								<% }else{ %>
+									<H2> &iexcl;La contrase&ntilde;a fue cambiada exitosamente!</H2>
+									<% request.setAttribute("message", ""); %>
+								<% } %>
+							</div>
+							
+							
 						</div>
-						
-					</form>
-					
+						</div>
 				</div>
-		</div>
-	</div>
 	<div class="push"></div>
-</div>
-<div id="footer">
-	<div id="navigation">
-		<div>
-			<p>Arma Tu Torta &copy; 2013 - Todos los derechos reservados</p>
-		</div>
 	</div>
-	<div class="social">
+	<div id="footer">
+		<div id="navigation">
+			<div>
+				<p>Arma Tu Torta &copy; 2013 - Todos los derechos reservados</p>
+			</div>
+		</div>
+		<div class="social">
 		<a href="http://www.facebook.com/armatutorta" target="_blank"><img class="facebook" src="./images/facebook_social.png" alt="Facebook" title="Nuestra p&aacute;gina en Facebook"/></a>
 		<a href="http://www.twitter.com/armatutorta" target="_blank"><img class="twitter" src="./images/twitter_social.png" alt="Twitter" title="Nuestra cuenta en Twitter"/></a>
 	</div>

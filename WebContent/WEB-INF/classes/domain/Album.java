@@ -15,12 +15,9 @@ public class Album {
 	 * 
 	 * @param id
 	 */
-	public void setId(long id) {
-		Formatter fmt = new Formatter();
-        fmt.format("%08d",id);
-        
+	public void setId(long id) {        
 		this.id = id;
-		this.setDirectory(fmt.toString());
+		this.setDirectory(id);
 	}
 	
 	/**
@@ -91,7 +88,7 @@ public class Album {
         return fmt.toString();
 	}
 
-	public void setDirectory(String directory) {
-		this.directory = directory;
+	public void setDirectory(long id) {
+		this.directory = getDirectory(id);
 	}
 }

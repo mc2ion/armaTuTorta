@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import command.CommandExecutor;
 
 import domain.Client;
+import domain.StepOption;
 import domain.User;
 
 import sun.misc.BASE64Encoder;
@@ -82,11 +84,13 @@ public class LoginPageServlet extends HttpServlet {
 				HttpSession session = request.getSession(true);
 				session.setAttribute("client", client);
 				request.setAttribute("error", "");
+				request.setAttribute("options", new ArrayList<StepOption>());
 				rd = getServletContext().getRequestDispatcher("/" + prevPage);			
 				rd.forward(request, response);
 			
 			} 	else {
 				request.setAttribute("error", "La información de nombre de usuario o contraseña introducida no es correcta.");
+				request.setAttribute("options", new ArrayList<StepOption>());
 				rd = getServletContext().getRequestDispatcher("/" + prevPage);			
 				rd.forward(request, response);
 			}

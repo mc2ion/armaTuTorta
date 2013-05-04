@@ -6,6 +6,7 @@ public class StepOption {
 	private long orderStepId;
 	private String name;
 	private int position;
+	private int oldPosition;
 	private double price;
 	private int isUnavailable;
 	
@@ -55,6 +56,14 @@ public class StepOption {
 
 	public int isUnavailable() {
 		return isUnavailable;
+	}
+
+	public void setOldPosition(int oldPosition) {
+		this.oldPosition = oldPosition;
+	}
+
+	public int getOldPosition() {
+		return oldPosition;
 	}
 	
 	

@@ -31,7 +31,7 @@
 <body>
 <%
 	HttpSession infoPage = request.getSession();
-	session.setAttribute("prevPage", "registroBienv.jsp");
+	session.setAttribute("prevPage", "index.jsp");
 	String error = (String) request.getAttribute("emailExist");
 %>	
 <div class="wrapper">

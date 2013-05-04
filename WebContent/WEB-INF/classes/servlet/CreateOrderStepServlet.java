@@ -42,7 +42,9 @@ public class CreateOrderStepServlet extends HttpServlet {
 			   
 			if(user != null){
 				Integer typeId = Integer.valueOf(request.getParameter("typeId"));
+				Integer position = (Integer)CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectNextStep(typeId));
 				request.setAttribute("typeId", typeId);
+				request.setAttribute("position", position);
 				
 				rd = getServletContext().getRequestDispatcher("/admin/createOrderStep.jsp");			
 				rd.forward(request, response);							

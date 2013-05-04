@@ -179,9 +179,47 @@ function validateInfo() {
 	return bool;
 }
 
+function validateInfoAux() {
+
+	var emailElement = document.getElementById("email");
+	var email = document.getElementById("email").value;
+	var emailRegex = /^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
+	
+	var bool = true;
+	if(email == "") {
+		bool = false;
+	}
+	
+	if(!email.match(emailRegex)) {
+		emailElement.style.background = 'none no-repeat scroll 240px 8px #F2E0F7';
+	    bool = false;
+	}else{
+		emailElement.style.background = 'url("/armaTuTorta/images/check.png") no-repeat scroll 240px 8px #F2E0F7';
+	}
+	
+	return bool;
+}
+
 function show(){
 	var boton = document.getElementById("loginPage");
 	if (validateInfo()){
+		boton.style.backgroundColor = "#88c9c1";
+		boton.disabled = false;
+		boton.style.cursor="pointer";
+		
+    }
+	else {
+		boton.style.backgroundColor = "#BDBDBD";
+		boton.disabled = true;
+		boton.style.cursor="default";
+
+	}
+}
+
+
+function showAux(){
+	var boton = document.getElementById("passRcvB");
+	if (validateInfoAux()){
 		boton.style.backgroundColor = "#88c9c1";
 		boton.disabled = false;
 		boton.style.cursor="pointer";
@@ -816,6 +854,18 @@ function Siguiente(){
 	
 }
 
+
+function SiguienteAuxC(){
+	$(".block1").hide();
+	$(".block3").show();
+	$(".regis-title").text("Cambiar Contraseña");
+	
+	$("#infPers").attr('class', 'separator');
+	$("#infPass").attr('class', 'separator-current');
+}
+
+
+
 function SiguienteAux(){
 	if (validateRegAux() == true){
 		$(".block1").hide();
@@ -831,6 +881,16 @@ function Back(){
 	$("#infPers").attr('class', 'separator-current');
 	$(".block2").hide();
 	$("#infEnv").attr('class', 'separator');
+	
+}
+
+function BackAux(){
+	$(".block1").show();
+	$("#infPers").attr('class', 'separator-current');
+	$(".regis-title").text("Editar Datos");
+	$(".block2").hide();
+	$(".block3").hide();
+	$("#infPass").attr('class', 'separator');
 	
 }
 
@@ -921,6 +981,49 @@ function validatePass(element){
 	
 }
 
+
+function validatePassAux(element){
+	if (element.value != ""){
+		if (element.value.length >= 6){
+			element.style.background = 'url("/armaTuTorta/images/check.png") no-repeat scroll 220px 5px #FFFFFF';
+			$('#errorPassOld').hide();
+			return true;
+		}
+		else{
+			element.style.background = 'none no-repeat scroll 220px 5px #FFFFFF';
+			$('#errorPassOld').show();
+			return false;
+		}
+	}else{
+			element.style.background = 'none no-repeat scroll 220px 5px #FFFFFF';
+			$('#errorPassOld').show();
+			return false;
+	}
+	
+}
+
+
+function validatePassNew(element){
+	if (element.value != ""){
+		if (element.value.length >= 6){
+			element.style.background = 'url("/armaTuTorta/images/check.png") no-repeat scroll 220px 5px #FFFFFF';
+			$('#errorPassNew').hide();
+			return true;
+		}
+		else{
+			element.style.background = 'none no-repeat scroll 220px 5px #FFFFFF';
+			$('#errorPassNew').show();
+			return false;
+		}
+	}else{
+			element.style.background = 'none no-repeat scroll 220px 5px #FFFFFF';
+			$('#errorPassNew').show();
+			return false;
+	}
+	
+}
+
+
 function validateRptPass(element){
 	var pass = document.getElementById("txtPass").value;
 
@@ -946,6 +1049,37 @@ function validateRptPass(element){
 	}else{
 			element.style.background = 'none no-repeat scroll 220px 5px #FFFFFF';
 			$('#errorRptPass').show();
+			return false;
+	};
+	
+}
+
+
+function validatePassRptNew(element){
+	var pass = document.getElementById("txtNewPass").value;
+
+	if (element.value != ""){
+		if (element.value.length >= 6){
+			if (element.value != pass){
+				element.style.background = 'none no-repeat scroll 220px 5px #FFFFFF';
+				$('#errorPassRpt').show();
+				return false;
+			
+			}
+			else{
+				element.style.background = 'url("/armaTuTorta/images/check.png") no-repeat scroll 220px 5px #FFFFFF';
+				$('#errorPassRpt').hide();
+				return true;
+			};
+		}
+		else{
+			element.style.background = 'none no-repeat scroll 220px 5px #FFFFFF';
+			$('#errorPassRpt').show();
+			return false;
+		}
+	}else{
+			element.style.background = 'none no-repeat scroll 220px 5px #FFFFFF';
+			$('#errorPassRpt').show();
 			return false;
 	};
 	
@@ -1100,8 +1234,6 @@ function validateRegCont(){
 		bool = false;
 		
 	if (styleDir != 'none'){
-		alert('no deberia');
-	
 		if (validatePhone(phoneMov, '2') != true)
 			bool = false;
 	}
@@ -1117,5 +1249,32 @@ function validateRegCont(){
 	
 	return bool;
 }
+
+
+function validatePassCont(){
+	var oldPass = document.getElementById("txtOldPass");
+	var newPass = document.getElementById("txtNewPass");
+	var rptPass = document.getElementById("txtNewPassRpt");
+	
+	var bool = true;
+	
+	if (validatePassAux(oldPass) != true)
+		bool = false;
+		
+	if (validatePassNew(newPass) != true)
+		bool = false;
+	
+	if (validatePassRptNew(rptPass) != true)
+		bool = false;
+		
+	return bool;
+}
+
+function forgotPass(){
+	$('#login').hide();
+	$('#passRcv').show();
+	
+}
+
 
 

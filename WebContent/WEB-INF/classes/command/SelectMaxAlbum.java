@@ -9,7 +9,7 @@ import domain.Album;
 
 
 public class SelectMaxAlbum implements DatabaseCommand {
-
+	
 	@Override
 	public Object executeDatabaseOperation(Connection conn) throws SQLException {
 		// Selects the most recent album

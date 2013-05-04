@@ -64,7 +64,7 @@
 								style="position: absolute; top:287px; left: 291px; display:none;"  />
 							<img id="pasoImgRelleno" src="" width="160" height="170" alt="Image"
 							style="position: absolute;top:287px; left: 291px;  display: none;"/>
-							<img id="pasoImgCubierta" src="" width="160" height="170" alt="Image" 
+							<img id="pasoImgCubierta" src="./images/tortas/capa_general.png" width="160" height="170" alt="Image" 
 								style="position: absolute; top:287px; left: 291px;  display:none;" />
 						</li>
 					</ul>
@@ -185,16 +185,16 @@
 					<a href="#" id="backLink5"> <img src="images/return.png"> </a>
 					Paso 6: </span>   Elige la cubierta de tu preferencia:</p>
 					<div class="options-steps-left">
-						<input class="rdB3" type="radio" name="cubierta" value="1">   Chocolate<br>
-						<input class="rdB3" type="radio" name="cubierta" value="2" >  Arequipe <br>
+						<input class="rdB6" type="radio" name="cubierta" value="1">   Chocolate<br>
+						<input class="rdB6" type="radio" name="cubierta" value="2" >  Arequipe <br>
 						<input class="rdB3" type="radio" name="cubierta" value="3" >  Crema Chantilly con fresas<br>
 						<input class="rdB3" type="radio" name="cubierta" value="4" >  Crema Chantilly con melocotones <br>
 					</div>
 					<div class="options-steps-right">
-						<input class="rdB3"  type="radio" name="cubierta" value="5" >  Crema Chantilly  <br>
-						<input class="rdB3"  type="radio" name="cubierta" value="6" >  Almendras <br>
-						<input class="rdB3"  type="radio" name="cubierta" value="7" >  Crema de Oreo <br>
-						<input class="rdB3"  type="radio" name="cubierta" value="8" >  Fondant con la imagen o foto que desees, Cárgala aquí! <br>
+						<input class="rdB6"  type="radio" name="cubierta" value="5" >  Crema Chantilly  <br>
+						<input class="rdB6"  type="radio" name="cubierta" value="6" >  Almendras <br>
+						<input class="rdB6"  type="radio" name="cubierta" value="7" >  Crema de Oreo <br>
+						<input class="rdB6"  type="radio" name="cubierta" value="8" >  Fondant con la imagen o foto que desees, Cárgala aquí! <br>
 					</div>
 					<div class="button-section" id="bt6Disable">
 						<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />

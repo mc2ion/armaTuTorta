@@ -38,13 +38,10 @@ public class LogoutPageServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String prevPage = (String) request.getSession().getAttribute("prevPage");
-		System.out.println("pagina previa" + prevPage);
-		
 		RequestDispatcher rd;
 		HttpSession session = request.getSession(true);
 		session.removeAttribute("client");
-		rd = getServletContext().getRequestDispatcher("/"+ prevPage);			
+		rd = getServletContext().getRequestDispatcher("/index.jsp");			
 		rd.forward(request, response);
     }
     

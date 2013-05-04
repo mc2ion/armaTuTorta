@@ -37,42 +37,7 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-//		try{
-//			HttpSession session = request.getSession(true);
-//			User user = (User) session.getAttribute("user");
-//			RequestDispatcher rd;
-//
-//			if(user != null){
-//				int roleId = user.getRoleId();
-//
-//				if(roleId == 1 || roleId == 8){
-//
-//					ArrayList<UserRole> roleList = (ArrayList<UserRole>)CommandExecutor.getInstance().executeDatabaseCommand(new command.ListUserRoles());
-//					request.setAttribute("userRoles", roleList);
-//
-//					ArrayList<UserRoom> roomList = (ArrayList<UserRoom>)CommandExecutor.getInstance().executeDatabaseCommand(new command.ListUserRooms());
-//					request.setAttribute("userRooms", roomList);
-//
-//					ArrayList<Product> productList = (ArrayList<Product>)CommandExecutor.getInstance().executeDatabaseCommand(new command.ListActiveProducts());
-//					request.setAttribute("products",  productList);
-//
-//					rd = getServletContext().getRequestDispatcher("/createUser.jsp");			
-//
-//					rd.forward(request, response);
-//				} else {
-//					request.setAttribute("error", "Usted no posee permisos para realizar esta operación");
-//					rd = getServletContext().getRequestDispatcher("/mainMenu.jsp");
-//					rd.forward(request, response);
-//				}			
-//			} else {
-//				rd = getServletContext().getRequestDispatcher("/index.jsp");			
-//
-//				rd.forward(request, response);
-//			}
-//		} catch (Exception e) {
-//			throw new ServletException(e);
-//		}		
+		doPost(request, response);
 	}
 
 	/**
@@ -92,7 +57,9 @@ public class RegisterServlet extends HttpServlet {
 			String phoneNumber  = request.getParameter("txtPhone");
 			String phoneMovNumber  = request.getParameter("txtMovPhone");
 			String address = request.getParameter("txtDir");
-		
+			String typePers = request.getParameter("typePers");
+			
+			
 			Client client = new Client();
 			client.setFirstName(firstName);
 			client.setLastName(lastName);
@@ -102,16 +69,17 @@ public class RegisterServlet extends HttpServlet {
 			client.setPhone(phoneNumber);
 			client.setOtherPhone(phoneMovNumber);
 			client.setAddress(address);
+			client.setCompany(Integer.valueOf(typePers));
 			String checkbox = request.getParameter("checkDir");
 			
 			if (checkbox != ""){
 				String addressEnv = request.getParameter("txtDirEnv");
 				client.setShippingAddress(addressEnv);
-				client.setShippingAddress(false);
+				client.setShippingAddress(1);
 				
 			}else{
 				client.setShippingAddress(address);
-				client.setShippingAddress(true);
+				client.setShippingAddress(0);
 			}
 		
 			Integer userId = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.CreateClient(client));
@@ -132,11 +100,18 @@ public class RegisterServlet extends HttpServlet {
 				    }
 				}).start();
 				
+				request.setAttribute("emailExist", "");
 				rd = getServletContext().getRequestDispatcher("/registroBienv.jsp");			
 				rd.forward(request, response);
 				
 				
-			} 
+			}
+			else if (userId == -2){
+				request.setAttribute("emailExist", email);
+				request.setAttribute("name", firstName);
+				rd = getServletContext().getRequestDispatcher("/registroBienv.jsp");			
+				rd.forward(request, response);
+			}
 		} catch (Exception e) {
 			System.out.println("No se creo");
 		}

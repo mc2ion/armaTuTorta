@@ -559,8 +559,9 @@ p a {
   margin-top: 20px;
   margin-right: 230px;
   border-radius: 15px;
-  	-moz-border-radius: 15px;
-	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+-webkit-border-radius: 15px;
+	min-height: 300px;
 
  
 }
@@ -568,7 +569,7 @@ p a {
 
 .separator {
 	height: 50px;
-	margin-top: 20px;
+	margin-top: 2px;
 	width: 160px;
 	background: url(../images/sprite-buttons.png) no-repeat 0 -205px;
 	padding-left: 15px;
@@ -582,7 +583,7 @@ p a {
 
 .separator-current {
 	height: 50px;
-	margin-top: 20px;
+	margin-top: 2px;
 	width: 160px;
 	background: url(../images/sprite-buttons.png)  no-repeat 0 -97px;
 	padding-left: 15px;
@@ -611,7 +612,7 @@ p a {
 .datos{
 	width: 250px;
 	float: left;
-	margin-top: 10px;
+	margin-top: 30px;
 }
 
 
@@ -1649,7 +1650,7 @@ div.social a {
     width: 254px;
 }
 
-#loginPage{
+#loginPage, #passRcvB{
     background: none repeat scroll 0 0 #BDBDBD;
     border: medium none;
     border-radius: 4px 4px 4px 4px;
@@ -1843,3 +1844,19 @@ html[xmlns] .clearfix { display: block; }
 	z-index:1;
 }
 	
+h2{
+	font-size: 24px;
+	margin-top: 20px;
+	margin-left: 30px;
+	font-weight: normal;
+	color: rgb(241, 84, 84);
+}
+
+.missing-info{
+	text-align: justify;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 5px;
+}
+
+

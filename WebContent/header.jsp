@@ -5,12 +5,24 @@
 	String error = (String) request.getAttribute("error");
 	if (error != null){
 		if (error.startsWith("La información de nombre")){
-			System.out.println("entro");
+			
 	%>
 			<script>
 				$(function(){
 					$('.errorLogin').text('El nombre de usuario o la contraseña introducidos no son correctos.');
 					$('#go').click();
+				});
+			</script>
+	<%
+		}else if (error.startsWith("El correo introducido")){
+			
+	%>
+			<script>
+				$(function(){
+					$('.errorLogin').text('El correo que introdujo no está registrado. Por favor, verifique e intente de nuevo.');
+					$('#go').click();
+					$('#login').hide();
+					$('#passRcv').show();
 				});
 			</script>
 	<%
