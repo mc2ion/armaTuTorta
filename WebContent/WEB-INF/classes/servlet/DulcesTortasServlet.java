@@ -42,9 +42,9 @@ public class DulcesTortasServlet extends HttpServlet {
 			
 			if(user != null){
 				// perform list user operations
-				Integer stepId = Integer.valueOf(request.getParameter("stepId"));
+				Integer typeId = Integer.valueOf(request.getParameter("typeId"));
 				@SuppressWarnings("unchecked")
-				ArrayList<StepOption> list = (ArrayList<StepOption>)CommandExecutor.getInstance().executeDatabaseCommand(new command.ListDulcesTortas(stepId));
+				ArrayList<StepOption> list = (ArrayList<StepOption>)CommandExecutor.getInstance().executeDatabaseCommand(new command.ListDulcesTortas(typeId));
 				
 				System.out.println("aqui");
 				request.setAttribute("options", list);

@@ -405,20 +405,22 @@ p a {
 #content .home .asideRight .options-steps-left {
     float: left;
 	margin-right: 50px;
-	margin-left: 30px;
-	padding-top: 10px;
 	font-size: 18px;
-	width: 250px;
+	width: 200px;
 
 }
 
 #content .home .asideRight .options-steps-right {
     overflow: hidden;
-	padding-top: 10px;
-	padding-bottom: 20px;
 	width: 250px;
 	font-size: 18px;
 
+}
+
+.subtotal-section{
+	float: right;
+	margin-right: 15px;
+	margin-top: -5px;
 }
 
 
@@ -427,9 +429,8 @@ p a {
 }
 
 #content .home .banner a img{
-	margin-top: 10px;
+	margin-top: 35px;
 }
-
 
 #content .home .button{
 	background: url(../images/button.png) no-repeat;
@@ -440,6 +441,7 @@ p a {
 	font-family: 'Economica', sans-serif;
 	font-size: 16px;
 	cursor: pointer;
+	color: #000;
 }
 
 #content .home .buttonDisable{
@@ -468,20 +470,21 @@ p a {
 }
 
 .dt-button{
-	margin-top:10px;
-	margin-left:420px;
+	position: absolute;
+	top:520px;
+	left:730px;
 }
 
 .dt-button-dis{
-	margin-top:10px;
-	margin-left:420px;
+	position: absolute;
+	top:520px;
+	left:730px;
 }
 
 #content .home .subtotal-section{
-	float: right;
-	margin-right: 20px;
-	margin-top: 2px;
-
+	position: absolute;
+	top:540px;
+	left:730px;
 }
 
 #content .home .aside .cakes .subtotal-section{
@@ -646,6 +649,56 @@ p a {
     outline: medium none;
     padding: 6px;
     
+}
+
+.section-contact form input[type="text"]{
+	margin: 0 !important;
+	padding: 0;
+	height: 15px;
+	border-color: #CCCCCC #E7E6E6 #E7E6E6 #CCCCCC;
+    border-radius: 4px 4px 4px 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    color: gray;
+    outline: medium none;
+    padding: 6px;
+    
+}
+
+.section-contact form textarea{
+	height: 40px !important;
+	width: 240px !important;
+	margin: 0 !important;
+	padding: 0;
+	border-color: #CCCCCC #E7E6E6 #E7E6E6 #CCCCCC;
+    border-radius: 4px 4px 4px 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    color: gray;
+    outline: medium none;
+    padding: 6px;
+}
+
+.section-contact fieldset{
+	padding: 10px 0 !important;
+}
+
+.section-contact form input[type="checkbox"]{
+	padding: 0 !important;
+	margin: 0 !important;
+	display: inline !important;
+	
+}
+
+.txtCheck{
+	 font-size: 16px;
+	 margin-left: 100px;
+	 margin-top: 2px;
+
 }
 
 .txtCedId{

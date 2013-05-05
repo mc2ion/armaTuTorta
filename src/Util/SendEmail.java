@@ -120,6 +120,112 @@ public class SendEmail  extends Thread  {
 			   ex.printStackTrace();
 		   }
 	 }
+	
+	
+	public static void sendContactEmail(Properties propertiesFile, String email, String name, String phone, String msg,  boolean attach, String pref) {
+		
+		  String to = propertiesFile.getProperty(pref + "EmailCountFrom");
+		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
+		  final String password =  propertiesFile.getProperty(pref + "EmailPasswordFrom");
+				
+		  Properties properties = System.getProperties();
+		  properties.setProperty("mail.smtp.host", propertiesFile.getProperty(pref + "EmailServer") );
+		  properties.setProperty("mail.smtp.port", "587");
+		  properties.setProperty("mail.smtp.starttls.enable", "true");
+		  properties.put("mail.smtp.auth", "true");
+		  
+		  Session session = Session.getDefaultInstance(properties,
+		   new javax.mail.Authenticator() {
+			  protected PasswordAuthentication getPasswordAuthentication() {
+			   return new PasswordAuthentication(user,password);
+			  }
+		  });
+		   
+		  try{
+			  // Create a default MimeMessage object.
+		         MimeMessage message = new MimeMessage(session);
+
+		         // Set From: header field of the header.
+		         message.setFrom(new InternetAddress(user));
+
+		         // Set To: header field of the header.
+		         message.addRecipient(Message.RecipientType.TO,
+		                                  new InternetAddress(to));
+
+		         // Set Subject: header field
+		         message.setSubject("Tienes un nuevo comentario o mensaje");
+
+		         // Send the actual HTML message, as big as you like
+		         String messa = "<div style='color: #8904B1;'>Hola, has recibido un nuevo comentario a través de " +
+		         		"la p&aacute;gina web de Arma Tu Torta.<br><br>" +
+		        		 "A continuación encontrarás los datos de la persona que escribi&oacute; y su mensaje: <br><br>"
+		        		 + "<strong>Nombre: </strong>" + name + "<br>"
+		        		 + "<strong>Email:</strong> " + email + "<br>"
+		        		 + "<strong>Tel&efono:</strong> " + phone + "<br>"
+		        		 + "<strong>Mensaje:</strong> " + msg + "<br>";
+		         message.setContent(messa,"text/html" );
+
+		         // Send message
+		         Transport.send(message);
+		   }catch (MessagingException ex) {
+			   ex.printStackTrace();
+		   }
+	 }
+	
+	
+	public static void sendContactEmailCopy(Properties propertiesFile, String email, String name, String phone, String msg,  boolean attach, String pref) {
+		
+		  String to = email;
+		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
+		  final String password =  propertiesFile.getProperty(pref + "EmailPasswordFrom");
+				
+		  Properties properties = System.getProperties();
+		  properties.setProperty("mail.smtp.host", propertiesFile.getProperty(pref + "EmailServer") );
+		  properties.setProperty("mail.smtp.port", "587");
+		  properties.setProperty("mail.smtp.starttls.enable", "true");
+		  properties.put("mail.smtp.auth", "true");
+		  
+		  Session session = Session.getDefaultInstance(properties,
+		   new javax.mail.Authenticator() {
+			  protected PasswordAuthentication getPasswordAuthentication() {
+			   return new PasswordAuthentication(user,password);
+			  }
+		  });
+		   
+		  try{
+			  // Create a default MimeMessage object.
+		         MimeMessage message = new MimeMessage(session);
+
+		         // Set From: header field of the header.
+		         message.setFrom(new InternetAddress(user));
+
+		         // Set To: header field of the header.
+		         message.addRecipient(Message.RecipientType.TO,
+		                                  new InternetAddress(to));
+
+		         // Set Subject: header field
+		         message.setSubject("Copia de mensaje envíado a Arma Tu Torta");
+
+		         // Send the actual HTML message, as big as you like
+		         String messa = "<div style='color: #8904B1;'>Hola, " + name + ", <br><br>"
+		        		 + "A continuación encontrarás una copia del mensaje que nos enviaste " +
+		        		 " Arma Tu Torta <br><br>"
+		        		 + "<strong> Nombre:</strong>  " + name + "<br>"
+		        		 + "<strong> Email:</strong> " + email + "<br>"
+		        		 + "<strong> Tel&efono:</strong> " + phone + "<br>"
+		        		 + "<strong> Mensaje:</strong> " + msg + "<br><br>" +
+        		 		"Gracias por escribirnos, te responderemos en la brevedad posible.<br><br>" +
+        		 		"Atentamente, Equipo de Apoyo de Arma Tu Torta.";
+		         
+		         
+		         message.setContent(messa,"text/html" );
+
+		         // Send message
+		         Transport.send(message);
+		   }catch (MessagingException ex) {
+			   ex.printStackTrace();
+		   }
+	 }
 		
 	
 }

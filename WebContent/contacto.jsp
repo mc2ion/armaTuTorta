@@ -5,6 +5,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Arma Tu Torta</title>
+	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/style.css" />
@@ -31,7 +32,7 @@
 <%
 	HttpSession infoPage = request.getSession();
 	session.setAttribute("prevPage", "contacto.jsp");
-	
+	String mensajeExitoso = (String) request.getAttribute("mensaje");
 %>
 <div class="wrapper">
 	<div id="header">
@@ -45,7 +46,7 @@
 			<ul style="margin: 0px; ">
 				<li><a href="/armaTuTorta/index.jsp">Inicio</a></li>
 				<li><a href="/armaTuTorta/creaTuTorta.jsp">Arma Tu Torta</a></li>
-				<li><a href="/armaTuTorta/dulcesTortas.jsp">Dulces Tortas</a></li>
+				<li><a href="/armaTuTorta/DulcesTortasServlet?typeId=3">Dulces Tortas</a></li>
 				<li><a href="/armaTuTorta/cupcakes.jsp">Cupcakes</a></li>
 				<li><a href="/armaTuTorta/ocasionesEspeciales.jsp">Ocasiones Especiales</a></li>
 				<li><a href="/armaTuTorta/galeria.jsp">Galería</a></li>
@@ -65,22 +66,29 @@
 				</div>
 			</div>
 			<div class="section-contact">
-						Cont&aacute;ctanos:<br><br>
-						Env&iacute;anos un mensaje con tus dudas o comentarios.<br>
+						Cont&aacute;ctanos:<br>
+						<span style="font-size: 18px;"> "Env&iacute;anos un mensaje con tus dudas o comentarios.</span><br>
+						<% if (mensajeExitoso != null){ %>
+							<span style="color:red;"> <%= mensajeExitoso %></span>
+						<% } %>
+						<form name="contactForm" action="/armaTuTorta/ContactServlet" method="post" >
 						<fieldset>
-							<label for="name">Nombre:</label>
-							<input type="text" name="txtName" id="txtName" size="35" maxlength="100" /> <br><br>
-							<label for="name">Email:</label>
-							<input type="text" name="txtName" id="txtName" size="35"  maxlength="50" /> <br><br>
-							<label for="name">Tel&eacute;fono:</label>
-							<input type="text" name="txtName" id="txtName" size="35" maxlength="50" /> <br><br>
-							<label for="name">Mensaje:</label>
-							<textarea rows="4" cols="28" style="resize: none;">
-							</textarea>
-						</fieldset>
-						<div class="cont-button">
-							<input type="submit" name="sbmtButton" class="button" value="Enviar"  />
-						</div>
+								<label for="name">Nombre (*):</label>
+								<input type="text" name="txtName" id="txtName" size="35" maxlength="100" /> <br>
+								<label for="name">Email (*):</label>
+								<input type="text" name="txtEmail" id="txtEmail" size="35"  maxlength="50" /> <br>
+								<label for="name">Tel&eacute;fono:</label>
+								<input type="text" name="txtPhone" id="txtPhone" size="35" maxlength="50" /> <br>
+								<label for="name">Mensaje (*):</label>
+								<textarea name="txtMsg" rows="4" cols="28" style="resize: none;"></textarea>
+								<div class="txtCheck">
+									<input type="checkbox" name="txtCheck"  value="1"> Enviar copia de este mensaje a mi correo <br>
+								</div>
+							</fieldset>
+							<div class="cont-button">
+								<input type="submit" name="sbmtButton" class="button" value="Enviar"  />
+							</div>
+						</form>
 			</div>
 			</div>
 		</div>

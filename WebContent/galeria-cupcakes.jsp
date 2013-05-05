@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleImage.css" />
 	<link rel="stylesheet" type="text/css" href="css/styleCar.css" />
 	<link rel="stylesheet" type="text/css" href="css/gridNavigation.css" />
-	
+	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<script type="text/javascript" src="/armaTuTorta/js/jquery-1.3.2.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
 	<script type="text/javascript" charset="utf-8">

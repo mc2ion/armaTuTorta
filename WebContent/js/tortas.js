@@ -20,7 +20,7 @@ $(document).ready(function() {
 	});
   
 	$("#bt4").click(function(){
-		var value = $("input:radio[name=capas]:checked").val();
+		var value = $("input:radio[name=4]:checked").val();
 		if (value == '-'){
 			$(".block-4").hide();
 			$(".block-6").show();
@@ -52,7 +52,7 @@ $(document).ready(function() {
    $(".rdB3").click(function(){
 	$("#bt3Disable").hide();
 	$("#bt3").show();
-	var value = $("input:radio[name=sabor]:checked").val();
+	var value = $("input:radio[name=3]:checked").val();
 	$("#pasoImgCubierta").show();
 	if (value == 1)
 		$("#pasoImgSabor").attr('src',"./images/tortas/ponque_chocolate.png");
@@ -76,7 +76,7 @@ $(document).ready(function() {
   $(".rdB4").click(function(){
 	$("#bt4Disable").hide();
 	$("#bt4").show();
-	var value = $("input:radio[name=capas]:checked").val();
+	var value = $("input:radio[name=4]:checked").val();
 	if (value == 1)
 		$("#pasoImgCapas").attr('src',"./images/tortas/1_capa_general.png");
 	else if (value == 2)
@@ -102,7 +102,7 @@ $(document).ready(function() {
 	function mostrarSaborCapa(element){
 		var value = $(element).val();
 		var checked = $(element).is(':checked');
-		var valueCapas = $("input:radio[name=capas]:checked").val();
+		var valueCapas = $("input:radio[name=4]:checked").val();
 		if (checked){
 			if (value == 1){
 				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_capas_chocolate.png");
@@ -139,7 +139,7 @@ $(document).ready(function() {
   }
   
   $("input:checkbox").click(function() {
-	var value = $("input:radio[name=capas]:checked").val();
+	var value = $("input:radio[name=4]:checked").val();
 	var bol = $("input:checkbox:checked").length >= value;     
 	$("input:checkbox").not(":checked").attr("disabled",bol);
   });
@@ -147,7 +147,7 @@ $(document).ready(function() {
   
   /* Funciones q permiten echar para atras */
   
-  $("#backLink").click(function(event) {
+  $("#backLink1").click(function(event) {
 		mostrarPaso1();
 		$(".block").show();
 		$(".block-2").hide();
@@ -188,7 +188,7 @@ $(document).ready(function() {
    });
    
    $("#backLink5").click(function(event) {
-		var valueCubierta = $("input:radio[name=capas]:checked").val();
+		var valueCubierta = $("input:radio[name=4]:checked").val();
 		eliminarCubierta();
 		if (valueCubierta == "-"){
 			mostrarPaso4_block5();

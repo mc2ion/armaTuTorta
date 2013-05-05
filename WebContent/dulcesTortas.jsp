@@ -8,7 +8,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/style.css" />
-	
+	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<!--[if IE 8]>
 		<link rel="stylesheet" type="text/css" href="css/ie8.css" />
 	<![endif]-->
@@ -27,7 +27,7 @@
 <body>
 <%
 	HttpSession infoPage = request.getSession();
-	session.setAttribute("prevPage", "DulcesTortasServlet?typeId=3&stepId=14");
+	session.setAttribute("prevPage", "DulcesTortasServlet?typeId=3");
 	Client client = (Client) infoPage.getAttribute("client");
 	
 %>
@@ -63,7 +63,7 @@
 					
 					<table style="border:none;">
 						<%
-							for(int i= 1; i< options.size(); i++) { 	
+							for(int i= 1; i<= options.size(); i++) { 	
 								int aux = i -1;
 								domain.StepOption o = options.get(aux);
 							
@@ -77,7 +77,7 @@
 								Cantidad: &nbsp;
 								<select class="selDulcesTortas<%= i %>"> 
 									<option value="0"> - </option>
-									<% for(int j = 1; j< 7; j++){ %>
+									<% for(int j = 1; j < 7; j++){ %>
 									<option value="<%= j %>"><%= j %></option>
 									<% } %>
 								</select>

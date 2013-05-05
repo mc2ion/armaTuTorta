@@ -9,7 +9,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/style.css" />
-	
+	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<!--[if IE 8]>
 		<link rel="stylesheet" type="text/css" href="css/ie8.css" />
 	<![endif]-->
@@ -49,7 +49,7 @@
 			<ul style="margin: 0px; ">
 				<li class="current"><a href="/armaTuTorta/index.jsp">Inicio</a></li>
 				<li><a href="/armaTuTorta/creaTuTorta.jsp">Arma Tu Torta</a></li>
-				<li><a href="/armaTuTorta/DulcesTortasServlet?typeId=3&stepId=14">Dulces Tortas</a></li>
+				<li><a href="/armaTuTorta/DulcesTortasServlet?typeId=3">Dulces Tortas</a></li>
 				<li><a href="/armaTuTorta/cupcakes.jsp">Cupcakes</a></li>
 				<li><a href="/armaTuTorta/ocasionesEspeciales.jsp">Ocasiones Especiales</a></li>
 				<li><a href="/armaTuTorta/galeria.jsp">Galería</a></li>
