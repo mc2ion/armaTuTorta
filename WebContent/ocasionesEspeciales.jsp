@@ -45,11 +45,11 @@
 			</div>
 			<ul style="margin: 0px; ">
 				<li><a href="/armaTuTorta/index.jsp">Inicio</a></li>
-				<li><a href="/armaTuTorta/creaTuTorta.jsp">Arma Tu Torta</a></li>
-				<li><a href="/armaTuTorta/dulcesTortas.jsp">Dulces Tortas</a></li>
-				<li><a href="/armaTuTorta/cupcakes.jsp">Cupcakes</a></li>
-				<li class="current"><a href="/armaTuTorta/ocasionesEspeciales.jsp">Ocasiones Especiales</a></li>
-				<li><a href="/armaTuTorta/galeria.jsp">Galería</a></li>
+				<li><a href="/armaTuTorta/ArmaTuTortaServlet?typeId=1">Arma Tu Torta</a></li>
+				<li><a href="/armaTuTorta/DulcesTortasServlet?typeId=3">Dulces Tortas</a></li>
+				<li><a href="/armaTuTorta/CupcakesServlet?typeId=2">Cupcakes</a></li>
+				<li class="current"><a href="/armaTuTorta/OcasionesEspecialesServlet">Ocasiones Especiales</a></li>
+				<li class="current"><a href="/armaTuTorta/GalleryServlet">Galería</a></li>
 				<li><a href="/armaTuTorta/contacto.jsp">Contacto</a></li>
 			</ul>
 		</div>
@@ -62,26 +62,27 @@
 			</div>
 			<% if (client != null){ %>
 			<div class="coments-ocEsp">
-				<form>
+				<form name="ocasEspForm" action="/armaTuTorta/OcasionesEspecialesServlet" method="post" enctype="multipart/form-data" >
 					<fieldset>
 						<label for="name">¿Cu&aacute;l es tu ocasi&oacute;n especial?:</label>
 						<input type="text" name="txtName" id="txtName" size="25" maxlength="50" />
-							<div style="font-size: 10px; font-family: Arial;">Ejemplo: boda, bautizo, entre otros. </div><br>
+						<div style="font-size: 10px; font-family: Arial;">Ejemplo: boda, bautizo, entre otros. </div><br>
 						<label for="name" style="height:60px;">¿Cu&aacute;les de nuestros productos deseas ordenar?:</label>
-						<input type="checkbox" name="vehicle" value="Bike">Torta<br>
-						<input type="checkbox" name="vehicle" value="Car">Cupcakes <br>
-						<input type="checkbox" name="vehicle" value="Car">Gelatina <br><br>
+						<input type="checkbox" name="eventoT" value="1">Torta<br>
+						<input type="checkbox" name="eventoC" value="2">Cupcakes <br>
+						<input type="checkbox" name="eventoG" value="3">Gelatina <br><br>
 						<label for="name">N&uacute;mero apr&oacute;ximado de invitados:</label>
-						<input type="text" name="txtName" id="txtName" size="25" maxlength="50" /> <br><br>
+						<input type="text" name="txtInv" id="txtInv" size="25" maxlength="50" /> <br><br>
 						<label for="name">¿Tienes un dise&ntilde;o en mente? C&aacute;rgalo aqu&iacute;:</label>
-						<input type="text" name="txtName" id="txtName" size="25" maxlength="50" /> <input type="submit" value="Cargar Archivo"/> <br><br>
+						<input type="file" name="txtImage" id="txtImage" maxlength="50" lang="es" /> <br><br>
 						<label for="name">Cu&eacute;ntanos m&aacute;s acerca de tu idea:</label>
-						<textarea style="resize: none;"></textarea> <br>
+						<textarea name="idea" style="resize: none;"></textarea> <br>
 					</fieldset>
 					<div class="ocEsp-button">
+							<input type="button" name="sbmtButton" class="button" value="Guardar"  />
 							<input type="submit" name="sbmtButton" class="button" value="Enviar"  />
 					</div>
-				</form>
+					</form>
 			</div>
 			<% }else{ %>
 					<br><br>

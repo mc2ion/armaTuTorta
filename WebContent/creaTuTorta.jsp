@@ -46,11 +46,11 @@
 			</div>
 			<ul style="margin: 0px; ">
 				<li ><a href="/armaTuTorta/index.jsp">Inicio</a></li>
-				<li  class="current"><a href="/armaTuTorta/creaTuTorta.jsp">Arma Tu Torta</a></li>
-				<li><a href="/armaTuTorta/dulcesTortas.jsp">Dulces Tortas</a></li>
-				<li><a href="/armaTuTorta/cupcakes.jsp">Cupcakes</a></li>
-				<li><a href="/armaTuTorta/ocasionesEspeciales.jsp">Ocasiones Especiales</a></li>
-				<li><a href="/armaTuTorta/galeria.jsp">Galería</a></li>
+				<li class="current"><a href="/armaTuTorta/ArmaTuTortaServlet?typeId=1">Arma Tu Torta</a></li>
+				<li><a href="/armaTuTorta/DulcesTortasServlet?typeId=3">Dulces Tortas</a></li>
+				<li><a href="/armaTuTorta/CupcakesServlet?typeId=2">Cupcakes</a></li>
+				<li><a href="/armaTuTorta/OcasionesEspecialesServlet">Ocasiones Especiales</a></li>
+				<li><a href="/armaTuTorta/GalleryServlet">Galería</a></li>
 				<li><a href="/armaTuTorta/contacto.jsp">Contacto</a></li>
 			</ul>
 		</div>
@@ -150,16 +150,14 @@
 				<% 
 					}
 				}
-				%>
-				
-				</div>
-				<% }else{ %>
+			}else{ 
+			%>
 					<br>
 					<div style="text-align: justify;">
 						Disculpe, para tener acceso a esta secci&oacute;n  necesita estar registrado, y haber iniciado sesi&oacute;n. <br><br>
 						
-						En esta secci&oacute;n usted podr&aacute; dise&ntilde;ar los cupcakes totalmente ajustados a sus gustos.  Podr&aacute; escoger
-						el relleno de su preferencia, la cubierta que desea, el sabor del ponqu&eacute;, entre otros.  <br><br>
+						En esta secci&oacute;n usted podr&aacute; crear tortas ajustadas a sus gustos y preferencias.  Podr&aacute; escoger 
+						el sabor del ponqu&eacute; el n&uacute;mero de capas de relleno, sus sabores, el sabor de la cubierta, entre otros. <br><br>
 						
 						Si no se est&aacute; registrado, comience su <a href="registro.jsp" class="readmore"> registro aqu&iacute;.</a> <br><br>
 						

@@ -44,33 +44,40 @@
 			</div>
 			<ul style="margin: 0px; ">
 				<li><a href="/armaTuTorta/index.jsp">Inicio</a></li>
-				<li><a href="/armaTuTorta/creaTuTorta.jsp">Arma Tu Torta</a></li>
-				<li><a href="/armaTuTorta/dulcesTortas.jsp">Dulces Tortas</a></li>
-				<li><a href="/armaTuTorta/cupcakes.jsp">Cupcakes</a></li>
-				<li><a href="/armaTuTorta/ocasionesEspeciales.jsp">Ocasiones Especiales</a></li>
-				<li class="current"><a href="/armaTuTorta/galeria.jsp">Galería</a></li>
+				<li><a href="/armaTuTorta/ArmaTuTortaServlet?typeId=1">Arma Tu Torta</a></li>
+				<li><a href="/armaTuTorta/DulcesTortasServlet?typeId=3">Dulces Tortas</a></li>
+				<li><a href="/armaTuTorta/CupcakesServlet?typeId=2">Cupcakes</a></li>
+				<li><a href="/armaTuTorta/OcasionesEspecialesServlet">Ocasiones Especiales</a></li>
+				<li class="current"><a href="/armaTuTorta/GalleryServlet">Galería</a></li>
 				<li><a href="/armaTuTorta/contacto.jsp">Contacto</a></li>
 			</ul>
 		</div>
 	</div>
 	<div id="content">
+		<jsp:useBean id="albums" type="java.util.ArrayList<domain.Album>" scope="request"/>  	
+        		
 		<div class="home">
 			<div class="title"> Productos </div>
 			<div class="section-img">
 				<div >
 					<ul>
 						<li>
-							<a href="/armaTuTorta/GalleryCakesServlet"><img src="./images/galeria_tortas/torta_portada.png" alt="Image" height="195" width="205" /></a>
-							Tortas
+							<a href="/armaTuTorta/GalleryCakesServlet?albumId=<%=albums.get(0).getId() %>">
+								<img src="<%= "/armaTuTorta/files/" + albums.get(0).getDirectory() + "/" + albums.get(0).getImage() %>" alt="Image" height="195" width="205" /></a>
+							<%=  albums.get(0).getName() %>
 						</li>
 						
 						<li>
-							<a href="/armaTuTorta/GalleryCupcakesServlet"><img src="./images/galeria_cupcakes/cupcakes_portada.png" alt="Image" height="195" width="205" /></a>
-							Cupcakes
+							<a href="/armaTuTorta/GalleryCupcakesServlet?albumId=<%=albums.get(1).getId() %>">
+								<img src="<%= "/armaTuTorta/files/" + albums.get(1).getDirectory() + "/" + albums.get(1).getImage() %>" alt="Image" height="195" width="205" /></a>
+							<%=  albums.get(1).getName() %>
+
 						</li>
 						<li>
-							<a href="/armaTuTorta/GallerySpecialsCakesServlet"><img src="./images/galeria_ocasionesEsp/ocasiones_portada.png" alt="Image" height="195" width="205" /></a>
-							Ocasiones Especiales
+							<a href="/armaTuTorta/GallerySpecialsCakesServlet?albumId=<%=albums.get(2).getId() %>">
+								<img src="<%= "/armaTuTorta/files/" + albums.get(2).getDirectory() + "/" + albums.get(2).getImage() %>" alt="Image" height="195" width="205" /></a>
+							<%=  albums.get(2).getName() %>
+							
 						</li>
 					</ul>
 				</div>	

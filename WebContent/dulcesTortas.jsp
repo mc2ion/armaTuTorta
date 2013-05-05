@@ -42,11 +42,11 @@
 			</div>
 			<ul style="margin: 0px; ">
 				<li><a href="/armaTuTorta/index.jsp">Inicio</a></li>
-				<li><a href="/armaTuTorta/creaTuTorta.jsp">Arma Tu Torta</a></li>
-				<li class="current"><a href="/armaTuTorta/dulcesTortas.jsp">Dulces Tortas</a></li>
-				<li><a href="/armaTuTorta/cupcakes.jsp">Cupcakes</a></li>
-				<li><a href="/armaTuTorta/ocasionesEspeciales.jsp">Ocasiones Especiales</a></li>
-				<li><a href="/armaTuTorta/galeria.jsp">Galería</a></li>
+				<li><a href="/armaTuTorta/ArmaTuTortaServlet?typeId=1">Arma Tu Torta</a></li>
+				<li class="current"><a href="/armaTuTorta/DulcesTortasServlet?typeId=3">Dulces Tortas</a></li>
+				<li><a href="/armaTuTorta/CupcakesServlet?typeId=2">Cupcakes</a></li>
+				<li><a href="/armaTuTorta/OcasionesEspecialesServlet">Ocasiones Especiales</a></li>
+				<li><a href="/armaTuTorta/GalleryServlet">Galería</a></li>
 				<li><a href="/armaTuTorta/contacto.jsp">Contacto</a></li>
 			</ul>
 		</div>

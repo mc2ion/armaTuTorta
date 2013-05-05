@@ -22,13 +22,18 @@
 	
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
-	<script type="text/javascript" src="/armaTuTorta/js/rotator.js"></script>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
+	<script src="/armaTuTorta/js/jqbanner.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" media="screen" href="/armaTuTorta/css/jqbanner.css" />
+	
 	<script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$("a[rel*=leanModal]").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
 	});
 	
 
+	
 	</script>
 </head>
 <body>
@@ -47,16 +52,19 @@
 				<jsp:include page="header.jsp"></jsp:include>
 			</div>
 			<ul style="margin: 0px; ">
-				<li class="current"><a href="/armaTuTorta/index.jsp">Inicio</a></li>
-				<li><a href="/armaTuTorta/creaTuTorta.jsp">Arma Tu Torta</a></li>
+				<li class="current"><a href="/armaTuTorta/HomePageServlet">Inicio</a></li>
+				<li><a href="/armaTuTorta/ArmaTuTortaServlet?typeId=1">Arma Tu Torta</a></li>
 				<li><a href="/armaTuTorta/DulcesTortasServlet?typeId=3">Dulces Tortas</a></li>
-				<li><a href="/armaTuTorta/cupcakes.jsp">Cupcakes</a></li>
-				<li><a href="/armaTuTorta/ocasionesEspeciales.jsp">Ocasiones Especiales</a></li>
-				<li><a href="/armaTuTorta/galeria.jsp">Galería</a></li>
+				<li><a href="/armaTuTorta/CupcakesServlet?typeId=2">Cupcakes</a></li>
+				<li><a href="/armaTuTorta/OcasionesEspecialesServlet">Ocasiones Especiales</a></li>
+				<li><a href="/armaTuTorta/GalleryServlet">Galería</a></li>
 				<li><a href="/armaTuTorta/contacto.jsp">Contacto</a></li>
 			</ul>
 		</div>
 	</div>
+	<%
+		String[] archivos = (String[]) request.getAttribute("filesName");	
+    %>	
 	<div id="content">
 		<div class="home">
 			<div class="aside">
@@ -67,17 +75,21 @@
 				que nosotros nos encargamos del resto!  &nbsp;<a href="creaTuTorta.jsp" class="readmore"> &iexcl;Solicita aqu&iacute; tu pedido!</a></p>
 			</div>
 			<div class="section">
-				<div class="rotator"> 
-					<ul>
-						<li><a href="#"><img src="./images/imagen1.png" alt="Image" height="220" width="340"/></a></li>
-						<li><a href="#"><img src="./images/imagen2.png" alt="Image" height="220" width="340"/></a></li>
-						<li><a href="#"><img src="./images/imagen3.png" alt="Image" height="220" width="340" /></a>
-						</li>
-					</ul>
+				<div id="jqb_object">
+					<div class="jqb_slides">
+						<% for (int i = 0 ; i < archivos.length; i++){
+							String src = "./images/galeria_inicio/" + archivos[i];
+						%>
+							<div class="jqb_slide" title="slide title" ><a href="/armaTuTorta/GalleryServlet"><img src="<%= src %>"  height="220" width="340"/></a></div>
+						<% } %>
+					</div>
 					
-				</div>	
-				<div class="next"><a href="#"><img src="./images/nextNav.png" /></a> </div>
-				<div class="prev"><a href="#"><img src="./images/prevNav.png" /> </a></div>
+					<div class="jqb_bar">
+						<div id="btn_next" class="jqb_btn jqb_btn_next"></div>
+						<div id="btn_pauseplay" class="jqb_btn jqb_btn_pause"></div>
+						<div id="btn_prev" class="jqb_btn jqb_btn_prev"></div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

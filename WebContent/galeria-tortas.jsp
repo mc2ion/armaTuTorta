@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="domain.Album"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,8 +34,6 @@
 	});
 	</script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-		<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
-		<script type="text/javascript" src="js/jquery.mousewheel.js"></script>
 		<script type="text/javascript" src="js/jquery.gridnav.js"></script>
 		<script type="text/javascript">
 			$(function() {
@@ -68,22 +67,20 @@
 			</div>
 			<ul style="margin: 0px; ">
 				<li ><a href="/armaTuTorta/index.jsp">Inicio</a></li>
-				<li><a href="/armaTuTorta/creaTuTorta.jsp">Arma Tu Torta</a></li>
-				<li><a href="/armaTuTorta/dulcesTortas.jsp">Dulces Tortas</a></li>
-				<li><a href="/armaTuTorta/cupcakes.jsp">Cupcakes</a></li>
-				<li><a href="/armaTuTorta/ocasionesEspeciales.jsp">Ocasiones Especiales</a></li>
-				<li class="current"><a href="/armaTuTorta/galeria.jsp">Galería</a></li>
+				<li><a href="/armaTuTorta/ArmaTuTortaServlet?typeId=1">Arma Tu Torta</a></li>
+				<li><a href="/armaTuTorta/DulcesTortasServlet?typeId=3">Dulces Tortas</a></li>
+				<li><a href="/armaTuTorta/CupcakesServlet?typeId=2">Cupcakes</a></li>
+				<li><a href="/armaTuTorta/OcasionesEspecialesServlet">Ocasiones Especiales</a></li>
+				<li class="current"><a href="/armaTuTorta/GalleryServlet">Galería</a></li>
 				<li><a href="/armaTuTorta/contacto.jsp">Contacto</a></li>
 			</ul>
 		</div>
 	</div>
 	<div id="content-aux">
-		<div class="title-img"><a href="/armaTuTorta/galeria.jsp"> <img src="images/return.png"> </a> Tortas </div>
-		
-		<%
-		String[] archivos = (String[]) request.getAttribute("cakesFilesName");	
-         %>		
-		<div class="content example3">
+		<div class="title-img"><a href="/armaTuTorta/GalleryServlet"> <img src="images/return.png"> </a> Tortas </div>
+		<jsp:useBean id="photos" type="java.util.ArrayList<domain.Photo>" scope="request"/>  	
+        <% 	if (photos.size() > 0){ %>
+        	<div class="content example3">
 				<div id="tj_container" class="tj_container">
 					<div class="tj_nav">
 						<span id="tj_prev" class="tj_prev">Previous</span>
@@ -91,8 +88,9 @@
 					</div>
 					<div class="tj_wrapper">
 						<ul class="tj_gallery">
-							<% for(int i=0; i<archivos.length; i++){
-								String src = "./images/galeria_tortas/" + archivos[i];
+							<%
+									for(domain.Photo p : photos) { 											
+									String src = "/armaTuTorta/files/" + Album.getDirectory(p.getAlbumId()) + "/" + p.getImage();
 							%>
 							<li><a href="<%= src %>" rel="shadowbox[Cakes];height=340;width=340">
 								<img src="<%= src %>" alt="image01"   style="width:180px; height:155px;" />
@@ -107,6 +105,11 @@
 					</div>
 				</div>
 			</div>
+	<% 
+	}else{
+	%>	
+		<br> <span style="margin-left: 30px">En estos momentos no tenemos fotos para mostrar. Intente m&aacute;s tarde.</span>
+	<% } %>
 	</div>
 	<div class="push"></div>
 </div>

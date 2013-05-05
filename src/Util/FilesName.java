@@ -31,12 +31,12 @@ public class FilesName  {
 		System.out.println("Specials Cakes's cache was clear");
 	}
 
-	public static String[] getFilesNamesCupcakes(HttpServletRequest request) {
+	public static String[] getFilesNamesIndex(HttpServletRequest request) {
 		
 		String[] filesName;
 		if (fileNamesCupcakes.get(CUPCAKES) == null){
 			String path = request.getSession().getServletContext().getRealPath("/");
-			path = path + "images\\galeria_cupcakes";
+			path = path + "images\\galeria_inicio";
 			
 			File folder = new File(path);
 			File[] listOfFiles = folder.listFiles();

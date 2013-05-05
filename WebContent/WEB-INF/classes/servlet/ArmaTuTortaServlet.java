@@ -46,22 +46,22 @@ public class ArmaTuTortaServlet extends HttpServlet {
 				Integer typeId = Integer.valueOf(request.getParameter("typeId"));
 				System.out.println("typeId" + typeId);
 				@SuppressWarnings("unchecked")
-				ArrayList<ListOrder_Step> list = (ArrayList<ListOrder_Step>)CommandExecutor.getInstance().executeDatabaseCommand(new command.ListArmaTuTorta(typeId));
+				ArrayList<ListOrder_Step> list = (ArrayList<ListOrder_Step>)CommandExecutor.getInstance().executeDatabaseCommand(new command.ListPasos(typeId));
 				
 				System.out.println("aqui " + list.size());
 				request.setAttribute("options", list);
 				
-				RequestDispatcher rd = getServletContext().getRequestDispatcher("/armaTuTorta.jsp");
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/creaTuTorta.jsp");
 				rd.forward(request, response);
 			} else {
 				request.setAttribute("options", new ArrayList<StepOption>());
-				RequestDispatcher rd = getServletContext().getRequestDispatcher("/armaTuTorta.jsp");
+				RequestDispatcher rd = getServletContext().getRequestDispatcher("/creaTuTorta.jsp");
 				rd.forward(request, response);
 			}
 			
 		} catch (Exception e) {
 			request.setAttribute("options", new ArrayList<StepOption>());
-			RequestDispatcher rd = getServletContext().getRequestDispatcher("/armaTuTorta.jsp");
+			RequestDispatcher rd = getServletContext().getRequestDispatcher("/creaTuTorta.jsp");
 			rd.forward(request, response);
 		}
 	}

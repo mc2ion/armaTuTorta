@@ -6,6 +6,8 @@ $(document).ready(function(){
 	var unPonqueAux = true;
 	var unaCubierta = true;
 	var coloresSurtidos = false;
+	var cubiertaEscogida = "";
+	var variasDocenas = false;
 
 	/* Cambio de las secciones y la imagen del paso asociado*/
 	$("#bt1").click(function(){
@@ -27,7 +29,7 @@ $(document).ready(function(){
 	});
   
 	$("#bt4").click(function(){
-		var value = $("input:radio[name=cubierta]:checked").val();
+		var value = $("input:radio[name=4]:checked").val();
 		if (value == '1'){
 			$(".block-4").hide();
 			$(".block-5").show();
@@ -64,6 +66,11 @@ $(document).ready(function(){
 	$(".rdB2").click(function(){
 		$("#bt2Disable").hide();
 		$("#bt2").show();
+		value = $(this).val();
+		if (value == 2){
+			variasDocenas = true;
+		}
+			
 	});
 	
 	
@@ -71,14 +78,14 @@ $(document).ready(function(){
 	$(".rdB3").click(function(){
 		$("#bt3Disable").hide();
 		$("#bt3").show();
-		mostrarImgPonque();
+		mostrarImgPonque(this);
 	});
 	
 	/* Click en cualquier radio button del paso 4*/
 	$(".rdB4").click(function(){
 		$("#bt4Disable").hide();
 		$("#bt4").show();
-		mostrarImgCubierta();
+		mostrarImgCubierta(this);
 	});
 	
 	
@@ -93,13 +100,26 @@ $(document).ready(function(){
 	$(".rdB6").click(function(){
 		$("#bt6Disable").hide();
 		$("#bt6").show();
-		mostrarImgDecoracion();
+		mostrarImgDecoracion(this);
 	});
   
 	/* -----------------------------------*/
 	
-	function mostrarImgPonque(){
-		var value = $("input:radio[name=sabor]:checked").val();
+	function mostrarImgPonque(element){
+		if($(element).attr('type') !='radio'){
+			var checked = $(element).is(':checked');
+			if (!checked){
+				sabor = "./images/cupcakes/ponque_general.png";
+				unPonque = true;
+				$("#pasoImgSabor").attr('src', sabor);
+				$("#pasoImgSabor").show();
+				$("#pasoImgSabor1").hide();
+				$("#pasoImgSabor2").hide();
+				$("#pasoImgSabor3").hide();
+				return;
+			}
+		}
+		var value = $(element).val();
 		if (value == 1)
 			sabor = "./images/cupcakes/ponque_chocolate.png";
 		else if (value == 2)
@@ -134,13 +154,14 @@ $(document).ready(function(){
 		$("#pasoImgSabor3").hide();
 	}
 	
-	function mostrarImgCubierta(){
+	function mostrarImgCubierta(element){
 	
 		unaCubierta = true;
 		unPonqueAux = true;
 	
 		/* Cubierta escogida */
-		var value = $("input:radio[name=cubierta]:checked").val();
+		var value = $(element).val();
+		cubiertaEscogida = value;
 		var cubierta = "";
 		$("#pasoImgBase").attr('src',"./images/paso_cupcakes_4.png");
 		if (value == 1){
@@ -225,7 +246,7 @@ $(document).ready(function(){
 	
 	
 	function mostrarImgColor(element){
-		var valueC = $("input:radio[name=cubierta]:checked").val();
+		var valueC = cubiertaEscogida;
 		var value = $(element).val();
 		var color = "";
 		var checked = $(element).is(':checked');
@@ -447,9 +468,9 @@ $(document).ready(function(){
 	
 	function mostrarImgDecoracion(){
 		/* Obtengo el valor de la cubierta escogida */
-		var valueCubierta = $("input:radio[name=cubierta]:checked").val();
+		var valueCubierta = $("input:radio[name=4]:checked").val();
 		/* Valor de la decoracion escogida*/
-		var value = $("input:radio[name=decoracion]:checked").val();
+		var value = $("input:radio[name=6]:checked").val();
 		
 		if (value == 1){
 			/* Verifico cual cubierta se escogio para mostrar la imagen correspondiente de la decoracion */
@@ -668,7 +689,7 @@ $(document).ready(function(){
   
 	/* Funciones q permiten echar para atras */
 	
-	$("#backLink").click(function(event) {
+	$("#backLink1").click(function(event) {
 		mostrarPaso1();
 		$(".block").show();
 		$(".block-2").hide();
@@ -742,7 +763,7 @@ $(document).ready(function(){
 	});
 	
 	 $("#backLink5").click(function(event) {
-		var valueCubierta = $("input:radio[name=cubierta]:checked").val();
+		var valueCubierta = $("input:radio[name=4]:checked").val();
 		eliminarDecoracion();
 		$(".rdB6").attr('checked', false);
 		if (valueCubierta == 1){

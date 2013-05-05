@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,9 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Util.FilesName;
-
 import command.CommandExecutor;
+import domain.Photo;
 
 /**
  * Servlet implementation class UserLoginServlet
@@ -42,11 +42,18 @@ public class GalleryCupcakesServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		RequestDispatcher rd;
-		String[] files = FilesName.getFilesNamesCupcakes(request);
-		request.setAttribute("cupcakesFilesName", files);
-		
-		rd = getServletContext().getRequestDispatcher("/galeria-cupcakes.jsp");			
-		rd.forward(request, response);
+		try {
+			Integer albumId = Integer.valueOf(request.getParameter("albumId"));
+			@SuppressWarnings("unchecked")
+			ArrayList<Photo> list = (ArrayList<Photo>)CommandExecutor.getInstance().executeDatabaseCommand(new command.ListPhotos(albumId));
+			request.setAttribute("photos", list);
+			
+			rd = getServletContext().getRequestDispatcher("/galeria-cupcakes.jsp");			
+			rd.forward(request, response);
+		} catch (Exception e) {
+			request.setAttribute("photos", new ArrayList<Photo>() );
+			rd = getServletContext().getRequestDispatcher("/galeria-cupcakes.jsp");	
+		}
 	}
 
 	/**
