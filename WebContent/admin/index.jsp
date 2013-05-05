@@ -42,6 +42,9 @@
 						<input type="submit" name="sbmtButton" class="button" value="Acceder" />
 					</div>
 				</form>
+				<div>
+					<a href="#" style="margin-top: 5px; text-decoration:none;" onClick="forgotPass();">&iquest;Olvidaste tu contrase&ntilde;a?</a>
+				</div>
 			</div>
             <div id="footer"></div>
    			</div>

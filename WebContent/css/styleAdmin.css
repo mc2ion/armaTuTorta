@@ -360,6 +360,12 @@ color:#7198E1;
 	color: #ffffff;
 }
 
+.menuitemPass{
+	position:absolute;
+	left: 800px;
+	color: #ffffff;
+}
+
 .menuitemSalir a {
 	float: left;
 	height: 36px;
