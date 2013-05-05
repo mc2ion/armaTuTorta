@@ -59,4 +59,84 @@ public class EditClientServlet extends HttpServlet {
 			throw new ServletException(e);
 		}	
 	}
+	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		RequestDispatcher rd;
+		
+		try{
+			Long clientId = Long.valueOf(request.getParameter("txtClientId"));
+			String typeId = request.getParameter("txtTypeId");
+			String cardId = request.getParameter("txtIdCard");
+			String identityCard = typeId + cardId;
+			
+			String firstName, lastName = "";
+			int isCompany;
+			
+			if(typeId.equalsIgnoreCase("J-")){
+				firstName = request.getParameter("txtName");
+				isCompany = 1;
+			} else {
+				firstName = request.getParameter("txtFirstName");
+				lastName = request.getParameter("txtLastName");		
+				isCompany = 0;		
+			}
+			
+			String email = request.getParameter("txtEmail");
+			String phone = request.getParameter("txtPhone");
+			String otherPhone = request.getParameter("txtOtherPhone");
+			String address = request.getParameter("txtAddress");
+			int isShippingAddress = 0;
+			String shippingAddress = "";
+			
+			if (request.getParameter("txtIsShipping") != null){
+				isShippingAddress = 1;		
+			} else {
+				shippingAddress = request.getParameter("txtShippingAddress");
+			}
+						
+			Client client = new Client();
+			client.setId(clientId);
+			client.setIdentityCard(identityCard);
+			client.setFirstName(firstName);
+			client.setLastName(lastName);
+			client.setCompany(isCompany);
+			client.setEmail(email);
+			client.setPhone(phone);
+			client.setOtherPhone(otherPhone);
+			client.setAddress(address);
+			client.setShippingAddress(isShippingAddress);
+			client.setShippingAddress(shippingAddress);
+			
+			/*System.out.println("++++ clientId:'"+clientId+"', identityCard:'"+identityCard+"', firstName:'"+firstName+
+					"', lastName:'"+lastName+"', isCompany:'"+isCompany+"', email:'"+email+"', phone:'"+phone+"', otherPhone:'"+otherPhone+
+					"', address:'"+address+"', isShippingAddress:'"+isShippingAddress+"', shippingAddress:'"+shippingAddress+"'");*/
+			
+			Integer rowsUpdated = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.EditClient(client));
+			
+			if(rowsUpdated == 1){
+				request.setAttribute("info", "El cliente fue editado exitosamente.");
+				request.setAttribute("error", "");
+				rd = getServletContext().getRequestDispatcher("/ListClientsServlet");				
+
+				rd.forward(request, response);
+			} else {
+				request.setAttribute("info", "");
+				request.setAttribute("error", "Ocurrió un error durante la edición de los datos del cliente. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
+				rd = getServletContext().getRequestDispatcher("/ListClientsServlet");				
+
+				rd.forward(request, response);
+			}
+			
+		} catch (Exception e) {
+			request.setAttribute("info", "");
+			request.setAttribute("error", "Ocurrió un error durante la edición de los datos del cliente. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
+			rd = getServletContext().getRequestDispatcher("/ListClientsServlet");			
+
+			rd.forward(request, response);
+		}
+	}
 }

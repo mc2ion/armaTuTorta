@@ -1,3 +1,32 @@
+function validatePassword(form) {
+	var oldPass = form.txtOldPassword.value;
+	var pass = form.txtPassword.value;
+	var passRpt = form.txtPasswordRpt.value;
+	
+	if(oldPass == "") {
+	    inlineMsg('txtOldPassword','Debe introducir la contrase&ntilde;a anterior del cliente.', 2);
+	    return false;
+	}
+	
+	if(pass == "") {
+	    inlineMsg('txtPassword','Debe introducir la contrase&ntilde;a del cliente.', 2);
+	    return false;
+	}
+	if(passRpt == "") {
+	    inlineMsg('txtPasswordRpt','Debe repetir la contrase&ntilde;a del cliente.', 2);
+	    return false;
+	}
+	if (pass.length < 6){
+	  inlineMsg('txtPassword','Las contraseña debe tener una longitud mayor o igual a 6 caracteres.', 2);
+	  return false;
+	}
+	if(passRpt != pass) {
+	  inlineMsg('txtPasswordRpt','Las contraseñas deben coincidir', 2);
+	  return false;
+	}
+   return true;
+}
+
 function validate(form) {
   var name = form.txtName.value;
   var lastName = form.txtLastName.value;
@@ -241,8 +270,6 @@ function validateEditClient(form) {
 	var lastName = form.txtLastName.value;
 	var name = form.txtName.value;
 	var email = form.txtEmail.value;
-	var password = form.txtPassword.value;
-	var passwordRpt = form.txtPasswordRpt.value;
 	var phone = form.txtPhone.value;
 	var otherPhone = form.txtOtherPhone.value;
 	var address = form.txtAddress.value;
@@ -308,26 +335,6 @@ function validateEditClient(form) {
 	
 	if(!email.match(emailRegex)) {
 		inlineMsg('txtEmail','Debe introducir un correo electrónico válido.',2);
-	    return false;
-	}	
-	
-	if(password == "") {
-	    inlineMsg('txtPassword','Debe introducir la contrase&ntilde;a del cliente.',2);
-	    return false;
-	}
-	
-	if(passwordRpt == "") {
-	    inlineMsg('txtPasswordRpt','Debe repetir la contrase&ntilde;a del cliente.',2);
-	    return false;
-	}
-	
-	if (password.length < 6){
-		inlineMsg('txtPassword','Las contraseña debe tener una longitud mayor o igual a 6 caracteres.', 2);
-		return false;
-	}
-	
-	if(passwordRpt != password) {
-		inlineMsg('txtPasswordRpt','Las contraseñas deben coincidir.', 2);
 	    return false;
 	}
 	

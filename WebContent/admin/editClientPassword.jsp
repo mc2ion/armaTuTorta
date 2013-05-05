@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleAdmin.css" />
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
-	<title>Editar Paso</title>
+	<title>Editar Cliente</title>	
 </head>
 <body>
 	<div id="container">
@@ -17,8 +17,8 @@
         <div id="menu">
         	<div class="menuitemHome"><a href="UserLoginServlet">Home</a></div>	
 	  		<ul>
-           		<li class="menuitem"><a href="ListOrderStepsServlet?typeId=<%= request.getAttribute("typeId") %>">Ver Pasos</a></li>
-           		<li class="menuitem"><a href="CreateOrderStepServlet?typeId=<%= request.getAttribute("typeId") %>">Agregar Paso</a></li>
+           		<li class="menuitem"><a href="ListClientsServlet">Ver Clientes</a></li>
+           		<li class="menuitem"><a href="CreateClientServlet?clientId=<%= request.getAttribute("clientId") %>">Agregar Cliente</a></li>
             </ul>
 			<div class="menuitemPass"><a href="admin/index.jsp">Cambiar Contraseña</a></div>
         	<div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
@@ -31,43 +31,29 @@
             <div id="leftmenu_bottom"></div>
         </div>  
 		<div id="content">
-        		<h2>Editar Paso:</h2>
+        		<h2>Modificar contraseña del cliente:</h2>
 	        	<p>&nbsp;</p>
            		<p>&nbsp;</p>
-				<form action="/armaTuTorta/EditOrderStepServlet" onsubmit="return validateEditStep(this)" method="post">
-				<jsp:useBean id="stepInfo" type="domain.OrderStep" scope="request"/> 
-				<input type="hidden" name="txtStepId" value="<%= request.getAttribute("stepId") %>" />
-				<input type="hidden" name="txtTypeId" value="<%= request.getAttribute("typeId") %>" />
-				<input type="hidden" name="txtCurrentPosition" value="<%= stepInfo.getPosition() %>" />
-				<fieldset>
-					<label for="name">Paso:</label>
-					<input type="number" min="1" name="txtPosition" id="txtPosition" maxlength="3" size="3" value="<%= stepInfo.getPosition() %>" /> <br><br>
-					<label for="name">Nombre:</label>
-					<textarea name="txtName" id="txtName" rows="4" cols="50"><%= stepInfo.getName() %></textarea> <br><br>
-					<%
-					if (stepInfo.isMultipleChoice() == 1){
-					%>
-					<input type="checkbox" name="txtIsMultSel" class="check" id="txtIsMultSel" maxlength="50" size="40" value="isMulSel" checked />&nbsp; 
-						&nbsp;&nbsp; Es de Selección Múltiple<br><br>
-					<%
-					}else{
-					%>
-					<input type="checkbox" name="txtIsMultSel" class="check" id="txtIsMultSel" maxlength="50" size="40" value="isMulSel" />&nbsp; 
-						&nbsp;&nbsp; Es de Selección Múltiple<br><br>
-					<%
-					}
-
+           		<%
 					String error = (String) request.getAttribute("error");
-					
 					if (error != null){
 					%>
-						<div>
-							<%= error %>
-						</div>
-						<%
+						<p class="error-msg"><%= error %></p>      
+					<%
 					}
 					%>	
-					<br>
+				<br>
+				<form action="/armaTuTorta/EditClientPasswordServlet" onsubmit="return validatePassword(this)" method="post">
+				<input type="hidden" name="txtClientId" value="<%= request.getAttribute("clientId") %>" />				
+				<fieldset>
+						<label for="oldPassword">Contraseña anterior:</label>
+						<input type="password" name="txtOldPassword" id="txtOldPassword" maxlength="50"  /><br><br>
+						<label for="LastName">Contraseña nueva:</label>
+						<input type="password" name="txtPassword" id="txtPassword" maxlength="50"  /><br><br>
+						<label for="LastName">Repita contraseña:</label>
+						<input type="password" name="txtPasswordRpt" id="txtPasswordRpt" maxlength="50" /><br><br>
+					
+					<br><br><br><br><br>
 					<div style="text-align:center">
 							<input type="button" class="button" value="Volver"  onClick="javascript:history.back();"/>
 							<input type="submit"  class="button"  name="sbmtButton" value="Editar" style="margin-left:20px;" />

@@ -24,7 +24,7 @@
 				null,
 				null,
 				null,
-				{ "bSearchable": false, "asSorting": false }
+				{ "bSearchable": false, "asSorting": false, "sWidth": "15%" }
 			],
 			"oLanguage": {
 	            "sLengthMenu": "Mostrar _MENU_ registros",
@@ -72,6 +72,7 @@
 	    	<ul>
             	<li class="menuitem"><a href="CreateClientServlet">Agregar Cliente</a></li>
             </ul>
+			<div class="menuitemPass"><a href="admin/index.jsp">Cambiar Contraseña</a></div>
 			<div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
         </div>        
        <div id="leftmenu">
@@ -130,18 +131,20 @@
 									<td><%= (c.isCompany()==1)?c.getFirstName():c.getFirstName() + " " + c.getLastName() %></td>
 									<td><%= c.getEmail() %></td>
 									<td><%= (c.getOtherPhone()!=null && !c.getOtherPhone().equalsIgnoreCase(""))?c.getPhone() + " / " + c.getOtherPhone():c.getPhone() %></td>
-									<td><p>
+									<td>
 										<a href="/armaTuTorta/ListClientOrdersServlet?clientId=<%= c.getId() %>" style="color: transparent" >
 											<img alt="logo" src="/armaTuTorta/images/orders.png"  height="16" width="16" />
 										</a> 
 										<a href="/armaTuTorta/EditClientServlet?clientId=<%= c.getId() %>" style="color: transparent" >
 											<img alt="logo" src="/armaTuTorta/images/edit.png"  height="16" width="16" />
 										</a> 
+										<a href="/armaTuTorta/EditClientPasswordServlet?clientId=<%= c.getId() %>" style="color: transparent" >
+											<img alt="logo" src="/armaTuTorta/images/editPassword2.png"  height="16" width="16" />
+										</a> 
 										<a id="go" rel="leanModal" href="#deleteClient" style="color: #f7941e; font-weight: bold;" 
 										onclick="return loadVars(<%= c.getId()%>,'<%= (c.isCompany()==1)?c.getFirstName():c.getFirstName() + " " + c.getLastName()%>' )" >
 										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" />
-										</a><br>
-										</p>
+										</a>
 									</td>
 								</tr>
 							<% 

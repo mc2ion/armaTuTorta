@@ -52,6 +52,7 @@
 			<ul>      
 			<li class="menuitem"><a href="ListClientsServlet">Ver Clientes</a></li>
 			</ul>
+			<div class="menuitemPass"><a href="admin/index.jsp">Cambiar Contraseña</a></div>
 			 <div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
         </div>       
 	  <div id="leftmenu">
