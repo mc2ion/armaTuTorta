@@ -8,6 +8,9 @@ public class Order {
 	private String orderDate;
 	private double total;
 	private String deliveryDate;
+	private int isPending;
+	private String orderTypeName;
+	private String clientName;
 	
 	public void setId(long id) {
 		this.id = id;
@@ -55,5 +58,34 @@ public class Order {
 
 	public String getDeliveryDate() {
 		return deliveryDate;
+	}
+
+	public void setIsPending(int isPending) {
+		this.isPending = isPending;
+	}
+
+	public int getIsPending() {
+		return isPending;
+	}
+
+	public void setOrderTypeName(String orderTypeName) {
+		this.orderTypeName = orderTypeName;
+	}
+
+	public String getOrderTypeName() {
+		return orderTypeName;
+	}
+
+	public void setClientName(String firstName, String lastName) {
+		
+		if(lastName != null && !lastName.equalsIgnoreCase("")){
+			this.clientName = firstName + " " + lastName;
+		} else {
+			this.clientName = firstName;
+		}
+	}
+
+	public String getClientName() {
+		return clientName;
 	}
 }
