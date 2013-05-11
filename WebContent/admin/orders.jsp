@@ -24,6 +24,7 @@
 				null,
 				null,
 				null,
+				null,
 				{ "bSearchable": false, "asSorting": false, "sWidth": "15%" }
 			],
 			"oLanguage": {
@@ -44,20 +45,20 @@
 	} );
 </script>
 <script type="text/javascript">
-	var idClient;
+	var idClientOrder;
 			
 	$(function() {
 		$('a[rel*=leanModal]').leanModal({ top : 200, closeButton: ".close_x" });		
 	});
 	
 	function loadVars(var1, var2) {
-		idClient = var1;
-		$('.client').text(var2);
+		idClientOrder = var1;
+		$('.clientorder').text(var2);
 		
 	};
 	
 	function setV(f){
-		f.elements['clientId'].value = idClient;
+		f.elements['clientOrderId'].value = idClientOrder;
 		return true;
 	}
 </script>
@@ -70,7 +71,7 @@
         <div id="menu">
 			<div class="menuitemHome" ><a href="UserLoginServlet">Home</a></div>	
 	    	<ul>
-            	<li class="menuitem"><a href="CreateClientServlet">Agregar Cliente</a></li>
+            	<li class="menuitem"><a href="CreateOrderServlet">Armar Pedido</a></li>
             </ul>
 			<div class="menuitemPass"><a href="admin/index.jsp">Cambiar Contraseña</a></div>
 			<div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
@@ -83,8 +84,8 @@
             <div id="leftmenu_bottom"></div>
         </div>  
 		<div id="content">  
-        		<jsp:useBean id="clients" type="java.util.ArrayList<domain.Client>" scope="request"/>  	
-        		<h2>Clientes Registrados:</h2>
+        		<jsp:useBean id="orders" type="java.util.ArrayList<domain.Order>" scope="request"/>  	
+        		<h2>Pedidos Registrados:</h2>
 				<%
         			String info = (String)request.getAttribute("info");
         			String error = (String)request.getAttribute("error");
@@ -100,10 +101,10 @@
 				<p class="error-msg"><%= error %></p>      
            		<%	
 					}
-					if (clients.size() == 0) {
+					if (orders.size() == 0) {
 				%>	
 					<p>&nbsp;</p> 
-					<p class="noReg">En estos momentos no hay clientes registrados.</p>  
+					<p class="noReg">En estos momentos no hay pedidos registrados.</p>  
 				<%
 				} else {
 				%>		
@@ -114,35 +115,37 @@
 						<thead>
 							<tr>
 								<th>ID</th>
-								<th>Cédula</th>
-								<th>Nombre</th>
-								<th>Email</th>
-								<th>Teléfono</th>
+								<th>Cliente</th>
+								<th>Tipo</th>
+								<th>Fecha Pedido</th>
+								<th>Status</th>
+								<th>Fecha Entrega</th>
 								<th>Acciones</th>
 							</tr>
 						</thead>
 						<tbody>
 							<%
-							for(domain.Client c : clients) { 											
+							for(domain.Order o : orders) { 											
 							%>
 								<tr class="gradeA">
-									<td><%= c.getId() %></td>
-									<td><%= c.getIdentityCard() %></td>
-									<td><%= (c.isCompany()==1)?c.getFirstName():c.getFirstName() + " " + c.getLastName() %></td>
-									<td><%= c.getEmail() %></td>
-									<td><%= (c.getOtherPhone()!=null && !c.getOtherPhone().equalsIgnoreCase(""))?c.getPhone() + " / " + c.getOtherPhone():c.getPhone() %></td>
+									<td><%= o.getId() %></td>
+									<td><%= o.getClientName() %></td>
+									<td><%= o.getOrderTypeName() %></td>
+									<td><%= o.getOrderDate() %></td>
+									<td><%= (o.getIsPending()==1)?"Pendiente":"Entregado" %></td>
+									<td><%= o.getDeliveryDate() %></td>
 									<td>
-										<a href="/armaTuTorta/ListClientOrdersServlet?clientId=<%= c.getId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/orders.png"  height="16" width="16" />
+										<a href="/armaTuTorta/ShowClientOrderServlet?orderId=<%= o.getId() %>" style="color: transparent" >
+											<img alt="logo" src="/armaTuTorta/images/detail.png"  height="16" width="16" />
 										</a> 
-										<a href="/armaTuTorta/EditClientServlet?clientId=<%= c.getId() %>" style="color: transparent" >
+										<a href="/armaTuTorta/PrintClientOrderServlet?orderId=<%= o.getId() %>" style="color: transparent" >
+											<img alt="logo" src="/armaTuTorta/images/print.png"  height="16" width="16" />
+										</a> 
+										<a href="/armaTuTorta/EditClientOrderServlet?orderId=<%= o.getId() %>" style="color: transparent" >
 											<img alt="logo" src="/armaTuTorta/images/edit.png"  height="16" width="16" />
 										</a> 
-										<a href="/armaTuTorta/EditClientPasswordServlet?clientId=<%= c.getId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/editPassword2.png"  height="16" width="16" />
-										</a> 
-										<a id="go" rel="leanModal" href="#deleteClient" style="color: #f7941e; font-weight: bold;" 
-										onclick="return loadVars(<%= c.getId()%>,'<%= (c.isCompany()==1)?c.getFirstName():c.getFirstName() + " " + c.getLastName()%>' )" >
+										<a id="go" rel="leanModal" href="#deleteClientOrder" style="color: #f7941e; font-weight: bold;" 
+										onclick="return loadVars(<%= o.getId()%>,'<%= o.getId()%>' )" >
 										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" />
 										</a>
 									</td>
@@ -162,16 +165,16 @@
 		</div>
  	</div>
 	
-	<div id="deleteClient">
+	<div id="deleteClientOrder">
 		<div id="signup-ct">
-			<h3 id="see_id" class="sprited" > Eliminar Cliente</h3>
+			<h3 id="see_id" class="sprited" > Eliminar Pedido</h3>
 			<br><br>
-			<span>¿Está seguro que desea eliminar el cliente <span class="client"></span>? </span> <br><br>
+			<span>¿Está seguro que desea eliminar el pedido número <span class="clientorder"></span>? </span> <br><br>
 			<div id="signup-header">
 				<a class="close_x" id="close_x"  href="#"></a>
 			</div>
-			<form action="/armaTuTorta/DeleteClientServlet" method="post"  onsubmit="return setV(this)">
-				<input type="hidden" id="clientId" class="good_input" name="clientId"  value=""/>
+			<form action="/armaTuTorta/DeleteClientOrderServlet" method="post"  onsubmit="return setV(this)">
+				<input type="hidden" id="clientOrderId" class="good_input" name="clientOrderId"  value=""/>
 				<div class="btn-fld">
 					<input type="submit"  class="buttonPopUpDelete"  name="sbmtButton" value="Aceptar"  />
 				</div>
