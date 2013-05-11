@@ -1,3 +1,4 @@
+<%@page import="Util.FilesName"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="domain.Client "%> 
@@ -23,7 +24,6 @@
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
 	
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
 	<script src="/armaTuTorta/js/jqbanner.js" type="text/javascript"></script>
 	<link rel="stylesheet" type="text/css" media="screen" href="/armaTuTorta/css/jqbanner.css" />
 	
@@ -31,15 +31,12 @@
 	$(document).ready(function() {
 		$("a[rel*=leanModal]").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
 	});
-	
-
-	
 	</script>
 </head>
 <body>
 <%
 	HttpSession infoPage = request.getSession();
-	session.setAttribute("prevPage", "index.jsp");
+	session.setAttribute("prevPage", "HomePageServlet");
 	
 %>
 <div class="wrapper">
@@ -58,12 +55,12 @@
 				<li><a href="/armaTuTorta/CupcakesServlet?typeId=2">Cupcakes</a></li>
 				<li><a href="/armaTuTorta/OcasionesEspecialesServlet">Ocasiones Especiales</a></li>
 				<li><a href="/armaTuTorta/GalleryServlet">Galería</a></li>
-				<li><a href="/armaTuTorta/contacto.jsp">Contacto</a></li>
+				<li><a href="/armaTuTorta/ContactServlet">Contacto</a></li>
 			</ul>
 		</div>
 	</div>
 	<%
-		String[] archivos = (String[]) request.getAttribute("filesName");	
+		String[] archivos = FilesName.getFilesNamesIndex(request);;	
     %>	
 	<div id="content">
 		<div class="home">
@@ -72,7 +69,7 @@
 				<p>Elaboramos tortas para toda ocasi&oacute;n con los ingredientes, sabores y dise&ntilde;os de tu preferencia. El esp&iacute;ritu de <strong>Arma Tu Torta</strong> est&aacute; en la gastronom&iacute;a como
 				 forma de vida y en la transmisi&oacute;n de ese placer en cada uno de nuestros productos.</p>
 				<p>Elige la forma de tu preferencia, escoge tus sabores favoritos, el relleno que desees, el topping que m&aacute;s te guste... &iexcl;&Aacute;rmala a tu gusto 
-				que nosotros nos encargamos del resto!  &nbsp;<a href="creaTuTorta.jsp" class="readmore"> &iexcl;Solicita aqu&iacute; tu pedido!</a></p>
+				que nosotros nos encargamos del resto!  &nbsp;<a href="ArmaTuTortaServlet?typeId=1" class="readmore"> &iexcl;Solicita aqu&iacute; tu pedido!</a></p>
 			</div>
 			<div class="section">
 				<div id="jqb_object">

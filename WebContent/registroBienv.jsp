@@ -44,13 +44,13 @@
 				<jsp:include page="header.jsp"></jsp:include>
 			</div>
 			<ul style="margin: 0px; ">
-				<li><a href="/armaTuTorta/index.jsp">Inicio</a></li>
+				<li><a href="/armaTuTorta/HomePageServlet">Inicio</a></li>
 				<li><a href="/armaTuTorta/ArmaTuTortaServlet?typeId=1">Arma Tu Torta</a></li>
 				<li><a href="/armaTuTorta/DulcesTortasServlet?typeId=3">Dulces Tortas</a></li>
 				<li><a href="/armaTuTorta/CupcakesServlet?typeId=2">Cupcakes</a></li>
 				<li><a href="/armaTuTorta/OcasionesEspecialesServlet">Ocasiones Especiales</a></li>
-				<li class="current"><a href="/armaTuTorta/GalleryServlet">Galería</a></li>
-				<li><a href="/armaTuTorta/contacto.jsp">Contacto</a></li>
+				<li><a href="/armaTuTorta/GalleryServlet">Galería</a></li>
+				<li><a href="/armaTuTorta/ContactServlet">Contacto</a></li>
 			</ul>
 		</div>
 	</div>

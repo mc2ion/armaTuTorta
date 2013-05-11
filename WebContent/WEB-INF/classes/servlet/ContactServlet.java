@@ -17,7 +17,7 @@ import Util.SendEmail;
 
 
 /**
- * Servlet implementation class RegisterServlet
+ * Servlet implementation class ContactServlet
  */
 @WebServlet(description = "servlet to create users", urlPatterns = { "/ContactServlet" })
 public class ContactServlet extends HttpServlet {
@@ -35,7 +35,9 @@ public class ContactServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		RequestDispatcher rd;
+		rd = getServletContext().getRequestDispatcher("/contacto.jsp");			
+		rd.forward(request, response);
 	}
 
 	/**

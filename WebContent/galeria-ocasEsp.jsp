@@ -50,9 +50,10 @@
 	
 </head>
 <body>
+<jsp:useBean id="photos" type="java.util.ArrayList<domain.Photo>" scope="request"/>  	
 <%
 	HttpSession infoPage = request.getSession();
-	session.setAttribute("prevPage", "galeria-ocasEsp.jsp");
+	session.setAttribute("prevPage", "GallerySpecialsCakesServlet?albumId=" + photos.get(0).getAlbumId());
 	
 %>
 <div class="wrapper">
@@ -65,19 +66,18 @@
 				<jsp:include page="header.jsp"></jsp:include>
 			</div>
 			<ul style="margin: 0px; ">
-				<li ><a href="/armaTuTorta/index.jsp">Inicio</a></li>
+				<li><a href="/armaTuTorta/HomePageServlet">Inicio</a></li>
 				<li><a href="/armaTuTorta/ArmaTuTortaServlet?typeId=1">Arma Tu Torta</a></li>
 				<li><a href="/armaTuTorta/DulcesTortasServlet?typeId=3">Dulces Tortas</a></li>
 				<li><a href="/armaTuTorta/CupcakesServlet?typeId=2">Cupcakes</a></li>
 				<li><a href="/armaTuTorta/OcasionesEspecialesServlet">Ocasiones Especiales</a></li>
 				<li class="current"><a href="/armaTuTorta/GalleryServlet">Galería</a></li>
-				<li><a href="/armaTuTorta/contacto.jsp">Contacto</a></li>
+				<li><a href="/armaTuTorta/ContactServlet">Contacto</a></li>
 			</ul>
 		</div>
 	</div>
 	<div id="content-aux">
-		<jsp:useBean id="photos" type="java.util.ArrayList<domain.Photo>" scope="request"/>  	
-      	<div class="title-img"><a href="/armaTuTorta/GalleryServlet"> <img src="images/return.png"> </a> Ocasiones Especiales </div>
+		<div class="title-img"><a href="/armaTuTorta/GalleryServlet"> <img src="images/return.png"> </a> Ocasiones Especiales </div>
 		<% 	if (photos.size() > 0){ %>
 		<div class="content example3">
 				<div id="tj_container" class="tj_container">

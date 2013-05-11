@@ -46,7 +46,6 @@ public class OcasionesEspecialesServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd;	
-		
 		String path = request.getSession().getServletContext().getRealPath("/");
 		path = path + "files\\pedidosOcasionesEspeciales";
 		

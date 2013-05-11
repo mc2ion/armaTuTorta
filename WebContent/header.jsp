@@ -49,11 +49,9 @@
 			%>
 			<a class="pestN" >Bienvenido, <%= name %> </a>
 			<span class="divisor">|</span> 
-			<a href="#" class="pestCart"> <span class="numCartOne">  0 </span> <img src="./images/cart.png" height="26" width="38"/>   </a>
-			<span class="divisor2">|</span> 
 			<a href="/armaTuTorta/ClientAccountServlet?id=<%= client.getId() %>" class="pestCuenta"> Mi cuenta </a>
 			<span class="divisor3">|</span> 
-			<a href="/armaTuTorta/LogoutPageServlet" class="pestSalir"> Salir </a>
+			<a href="/armaTuTorta/LogoutPageServlet" class="pestSalir"> Salir <img src="images/exit.png" width="18" height="18"></a>
 			
 	</div>
 <% 				

@@ -60,7 +60,7 @@ p a {
 	color: #8565ad;
 	position: absolute;
 	margin-top: 2px;
-	margin-left: -160px;
+	margin-left: -145px;
 }
 
 
@@ -70,7 +70,7 @@ p a {
 	color: #8565ad;
 	position: absolute;
 	margin-top: 2px;
-	margin-left: 47px;
+	margin-left: 35px;
 	text-decoration: none;
 }
 
@@ -80,31 +80,22 @@ p a {
 	color: #8565ad;
 	position: absolute;
 	margin-top: 2px;
-	margin-left: 130px;
+	margin-left: 110px;
 	text-decoration: none;
 }
 
 .divisor{
 	position: absolute;
 	margin-top: -6px;
-	margin-left: -11px;
+	margin-left: 20px;
 	color: #BDBDBD;
 	font-size: 28px;
 }
-
-.divisor2{
-	position: absolute;
-	margin-top: -6px;
-	margin-left: 30px;
-	color: #BDBDBD;
-	font-size: 28px;
-}
-
 
 .divisor3{
 	position: absolute;
 	margin-top: -6px;
-	margin-left: 110px;
+	margin-left: 100px;
 	color: #BDBDBD;
 	font-size: 28px;
 }
