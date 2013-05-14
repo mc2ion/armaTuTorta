@@ -397,7 +397,7 @@ p a {
     float: left;
 	margin-right: 50px;
 	font-size: 18px;
-	width: 200px;
+	width: 210px;
 
 }
 
@@ -416,12 +416,12 @@ p a {
 
 
 #content .home .asideRight .options-steps input, #content .home .asideRight .options-steps-right input, #content .home .asideRight .options-steps-left input{
-	margin-top: 15px;
+	margin: 5px;
+	display: inline;
+	
+	
 }
 
-#content .home .banner a img{
-	margin-top: 35px;
-}
 
 #content .home .button{
 	background: url(../images/button.png) no-repeat;
@@ -435,6 +435,20 @@ p a {
 	color: #000;
 }
 
+
+#content .home .buttonInline{
+	background: url(../images/button.png) no-repeat;
+	border: 0;
+	display: inline;
+	height: 30px;
+	width: 110px;
+	font-family: 'Economica', sans-serif;
+	font-size: 16px;
+	cursor: pointer;
+	color: #000;
+	margin-top: 20px;
+}
+
 #content .home .coments-ocEsp .button{
 	background: url(../images/button.png) no-repeat;
 	border: 0;
@@ -442,7 +456,7 @@ p a {
 	height: 30px;
 	width: 110px;
 	font-family: 'Economica', sans-serif;
-	font-size: 16px;
+	font-size: 14px;
 	cursor: pointer;
 	color: #000;
 	margin-right: 20px;
@@ -466,7 +480,7 @@ p a {
 	cursor: pointer;
 	position: absolute;
 	right: 220px;
-	top: 460px;
+	top: 445px;
 }
 
 #content .home .cakes .button-section{
@@ -483,6 +497,10 @@ p a {
 	left:730px;
 }
 
+.dt-buttonInline{
+	margin-left: 240px;
+}
+
 .dt-button-dis{
 	position: absolute;
 	top:520px;
@@ -493,6 +511,11 @@ p a {
 	position: absolute;
 	top:540px;
 	left:730px;
+}
+
+#content .home .subtotal-sectionTortas{
+	float: right;
+	margin-right: 20px;
 }
 
 #content .home .aside .cakes .subtotal-section{
@@ -1230,7 +1253,7 @@ a.readmore {
     margin: 0;
     padding-bottom: 20px;
     text-align: justify;
-    width: 420px;
+    width: 550px;
 }
 
 #content div form p span {
@@ -1241,6 +1264,12 @@ a.readmore {
 	color: rgb(60,60,60);
 	display: block;
 	margin: 20px 0;
+}
+
+#content div form  .bienv input{
+	color: rgb(60,60,60);
+	display: inline;
+	margin: 0;
 }
 
 #content div form input[type="radio"]{
@@ -1926,4 +1955,57 @@ h2{
 	margin: 0 !important;
 
 
+}
+
+#imgFudge{
+	width: 20px;
+	height: 20px;
+	margin-left: 5px;
+}
+
+.imgBack{
+	width: 20px;
+}
+
+
+.options-steps-especial{
+	float: left;
+	font-size: 17px;
+	margin-top:20px;
+}
+
+#pedido{
+	background-color: white;
+	width: 600px;
+	-webkit-border-top-left-radius: 20px;
+	-webkit-border-top-right-radius: 20px;
+	-moz-border-radius-topleft: 20px;
+	-moz-border-radius-topright: 20px;
+	border-top-left-radius: 20px;
+	border-top-right-radius: 20px;
+	padding-bottom: 5px;
+	padding-left: 20px;
+	padding-top: 5px;
+	padding-right: 20px;
+}
+
+.total {
+	-webkit-border-bottom-right-radius: 20px;
+	-webkit-border-bottom-left-radius: 20px;
+	-moz-border-radius-bottomright: 20px;
+	-moz-border-radius-bottomleft: 20px;
+	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 20px;
+	background-color: gray;
+	width: 600px;
+	padding-left: 20px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: right;
+	padding-right: 20px;
+	
+}
+
+.bannerTorta img{
+	margin-top: 30px;
 }

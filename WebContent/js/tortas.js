@@ -1,26 +1,33 @@
 $(document).ready(function() {
+	var priceTotal = 0;
+	var priceTotalAux = 0;
+	
 	$("a[rel*=leanModal]").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
 
 	$("#bt1").click(function(){
 		$(".block").hide();
 		$(".block-2").show();
 		mostrarPaso2();
+		setPriceTotal();
 	});
   
 	$("#bt2").click(function(){
 		$(".block-2").hide();
 		$(".block-3").show();
 		mostrarPaso3();	
+		setPriceTotal();
 	});
   
 	$("#bt3").click(function(){
 		$(".block-3").hide();
 		$(".block-4").show();
 		mostrarPaso4();
+		setPriceTotal();
 	});
   
 	$("#bt4").click(function(){
 		var value = $("input:radio[name=4]:checked").val();
+		setPriceTotal();
 		if (value == '-'){
 			$(".block-4").hide();
 			$(".block-6").show();
@@ -37,21 +44,60 @@ $(document).ready(function() {
 		$(".block-5").hide();
 		$(".block-6").show();
 		mostrarPaso6();
+		setPriceTotal();
 	});
   
 	$(".rdB1").click(function(){
 		$("#bt1Disable").hide();
 		$("#bt1").show();
+		var j = $(this).val();
+		getPrice(1,j);
 	});
-  
+	
+	function getPrice(i,j){
+		var priceAux = priceTotal;
+		var selectIdAux = '.price-int' + i+j;
+		var price = $(selectIdAux).text();
+		priceAux = priceAux + Number(price);
+		var priceText = priceAux + '.00';
+		$('.price').text(priceText);
+		priceTotalAux = priceAux;
+		
+	}
+	
+	function deletePrice(i,j){
+		var priceAux = priceTotal;
+		var priceText = priceAux + '.00';
+		$('.price').text(priceText);
+		priceTotalAux = priceAux;
+		
+	}
+	
+	function setPriceTotal(){
+		priceTotal = priceTotalAux;
+		
+	}
+	
+	$('#target').submit(function() {
+	  var priceText = priceTotalAux + '.00';
+	  $("#priceCake").val(priceText);
+	  return true;
+	});
+	
+	
+	
 	$(".rdB2").click(function(){
 		$("#bt2Disable").hide();
 		$("#bt2").show();
+		var j = $(this).val();
+		getPrice(2,j);
 	});
   
    $(".rdB3").click(function(){
 	$("#bt3Disable").hide();
 	$("#bt3").show();
+	var j = $(this).val();
+	getPrice(3,j);
 	var value = $("input:radio[name=3]:checked").val();
 	$("#pasoImgCubierta").show();
 	if (value == 1)
@@ -76,6 +122,8 @@ $(document).ready(function() {
   $(".rdB4").click(function(){
 	$("#bt4Disable").hide();
 	$("#bt4").show();
+	var j = $(this).val();
+	getPrice(4,j);
 	var value = $("input:radio[name=4]:checked").val();
 	if (value == 1)
 		$("#pasoImgCapas").attr('src',"./images/tortas/1_capa_general.png");
@@ -95,7 +143,22 @@ $(document).ready(function() {
   $(".rdB5").click(function(){
 	$("#bt5Disable").hide();
 	$("#bt5").show();
+	var j = $(this).val();
+	var checked = $(this).is(':checked');
+	if (checked)
+		getPrice(5,j);
+	else
+		deletePrice(5,j);
 	mostrarSaborCapa(this);
+	
+  });
+  
+  $(".rdB6").click(function(){
+	$("#bt6Disable").hide();
+	$("#bt6").show();
+	var j = $(this).val();
+	getPrice(6,j);
+	mostrarSaborCubierta(this);
 	
   });
   
@@ -133,9 +196,36 @@ $(document).ready(function() {
 			}
 		}else{
 			$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_capa_general.png");
-		
-		
 		}
+  }
+  
+  function mostrarSaborCubierta(element){
+		var value = $(element).val();
+		if (value == 1){
+			$("#pasoImgCubierta").attr('src',"./images/tortas/chocolate.png");
+		}
+		else if (value == 2){
+			$("#pasoImgCubierta").attr('src',"./images/tortas/arequipe.png");
+		}
+		else if (value == 3){
+			$("#pasoImgCubierta").attr('src',"./images/tortas/chantilli_fresa_2.png");
+		}
+		else if (value == 4){
+			$("#pasoImgCubierta").attr('src',"./images/tortas/chantilli_melocoton.png");
+		}
+		else if (value == 5){
+			$("#pasoImgCubierta").attr('src',"./images/tortas/crema_chantilly.png");
+		}
+		else if (value == 6){
+			$("#pasoImgCubierta").attr('src',"./images/tortas/almendras.png");
+		}
+		else if (value == 7){
+			$("#pasoImgCubierta").attr('src',"./images/tortas/crema_oreo.png");
+		}
+		else if (value == 8){
+			$("#pasoImgCubierta").attr('src',"./images/tortas/chocolate.png");
+		}
+		
   }
   
   $("input:checkbox").click(function() {
@@ -178,13 +268,14 @@ $(document).ready(function() {
    
    $("#backLink4").click(function(event) {
 		mostrarPaso4();
-		eliminarRelleno();
-		$(".block-4").show();
 		$(".block-5").hide();
+		$(".block-4").show();
 		$(".rdB5").removeAttr('disabled');
 		$(".rdB5").attr('checked', false);
 		$("#bt5Disable").show();
 		$("#bt5").hide();
+		eliminarRelleno();
+	
    });
    
    $("#backLink5").click(function(event) {
@@ -243,6 +334,7 @@ $(document).ready(function() {
   
 	function eliminarTorta(){
 		$("#pasoImgSabor").hide();
+		$("#pasoImgCubierta").hide();
 	}
 	
 	function eliminarCapa(){
@@ -250,11 +342,12 @@ $(document).ready(function() {
 	}
 	
 	function eliminarRelleno(){
-		$("#pasoImgRelleno").hide();
+		var valueCapas = $("input:radio[name=4]:checked").val();
+		$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_capa_general.png");
 	}
 	
 	function eliminarCubierta(){
-		$("#pasoImgCubierta").hide();
+		$("#pasoImgCubierta").attr('src',"./images/tortas/capa_general.png");
 	}
    
 });

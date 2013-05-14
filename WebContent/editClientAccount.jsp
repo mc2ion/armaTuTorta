@@ -1,3 +1,4 @@
+<%@page import="domain.Client"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -29,6 +30,9 @@
 	HttpSession infoPage = request.getSession();
 	infoPage.setAttribute("prevPage", "registro.jsp");
 	String message  = (String) request.getAttribute("message");
+	String error = (String) request.getAttribute("editClient");
+	Client client = (Client) infoPage.getAttribute("client");
+
 %>
 <div class="wrapper">
 	<div id="header">
@@ -78,6 +82,7 @@
 				<jsp:useBean id="clientInfo" type="domain.Client" scope="request"/> 
 					<span class="regis-title">Editar Datos</span><br>
 					<form name="regForm" action="/armaTuTorta/ClientAccountServlet" method="post" onsubmit="return validateRegCont();" >
+					<input type="hidden" name="clientId" value=<%= client.getId() %>>
 						<div class="block1" >
 							<fieldset>
 								<% if (clientInfo.isCompany() == 0){ %>
@@ -140,12 +145,12 @@
 									
 								<span class="error" id="errorPhone" >Debe introducir un telef&oacute;no v&aacute;lido (C&oacute;d. &Aacute;rea + N&uacute;mero) </span>
 								
-								<% 
-								if (clientInfo.getOtherPhone() != null && !clientInfo.getOtherPhone().equals("")) { %>
-								<div class = "otherPhone" >
-								<% }else{ %>
-								<div class = "otherPhone" style="display: none;">
-								<% } %>
+								<%	String style=""; 
+								if (clientInfo.getOtherPhone() == null || clientInfo.getOtherPhone().equals("")){
+									style = "style=\"display: none;\"";
+								}
+								%>
+								<div class = "otherPhone" <%= style %>>
 								<br>
 								
 									<label for="name">Tel&eacute;fono M&oacute;vil:</label>
@@ -160,18 +165,18 @@
 								name="txtDir"><%= clientInfo.getAddress()%></textarea><br>
 								<span class="error" id="errorDir" >Disculpe, debe introducir direcci&oacute;n v&aacute;lida</span>
 								<br>
-								<% if (clientInfo.isShippingAddress() == 0){%>
+								<% if (clientInfo.isShippingAddress() == 1){%>
 									<input type="checkbox" value="remember" checked id="checkDir" name="checkDir"/> ¿Es su dirección de env&iacute;o? <br>
 								<% }else { %>
 									<input type="checkbox" value="remember" id="checkDir" name="checkDir"/> ¿Es su dirección de env&iacute;o? <br>
 								<% } %>
 								
-								<% if (clientInfo.isShippingAddress() == 0){%>
-										<div class="otherDir" style="display: none;">
-								<% }else { %>
-										<div class="otherDir" >
-								<% } %>
-										
+								<%	style=""; 
+									if (clientInfo.isShippingAddress() == 1){
+										style = "style=\"display: none;\"";
+									}
+								%>
+									<div class="otherDir" <%= style %>>
 											<label for="name">Direcci&oacute;n de Env&iacute;o:</label>
 											<textarea rows="4" cols="28" style="resize: none;" 
 											onBlur="validateDir(this, '2');" id="dirEnv" name="txtDirEnv"><%= clientInfo.getShippingAddress() %></textarea><br>
@@ -179,14 +184,13 @@
 									</div>
 								</fieldset>
 								<div class="reg-button">
-										<input type="submit" name="sbmtButton" class="button" value="Siguiente"   />
+										<input type="submit" name="sbmtButton" class="button" value="Guardar"   />
 								</div>
 							</div>
 							
 							</form>
 							
 							<div class="block3" style="display:none" >
-								<% if (message == null || message == ""){ %>
 								<form name="passForm" action="/armaTuTorta/ChangePasswordServlet" method="post" onsubmit="return validatePassCont();" >
 								<% 
 									infoPage.setAttribute("clientAux", clientInfo); 
@@ -213,32 +217,16 @@
 									
 								</fieldset>
 								<div class="reg-button">
-										<input type="submit" name="sbmtButton" class="button" value="Aceptar"   />
+										<input type="submit" name="sbmtButton" class="button" value="Cambiar"   />
 								</div>
 								</form>	
-								<% }else{ %>
-									<H2> &iexcl;La contrase&ntilde;a fue cambiada exitosamente!</H2>
-									<% request.setAttribute("message", ""); %>
-								<% } %>
 							</div>
-							
-							
 						</div>
 						</div>
 				</div>
 	<div class="push"></div>
 	</div>
-	<div id="footer">
-		<div id="navigation">
-			<div>
-				<p>Arma Tu Torta &copy; 2013 - Todos los derechos reservados</p>
-			</div>
-		</div>
-		<div class="social">
-		<a href="http://www.facebook.com/armatutorta" target="_blank"><img class="facebook" src="./images/facebook_social.png" alt="Facebook" title="Nuestra p&aacute;gina en Facebook"/></a>
-		<a href="http://www.twitter.com/armatutorta" target="_blank"><img class="twitter" src="./images/twitter_social.png" alt="Twitter" title="Nuestra cuenta en Twitter"/></a>
-	</div>
-</div>
+<jsp:include page="footer.jsp"></jsp:include>
 <jsp:include page="ventanas.jsp"></jsp:include>
 </body>
 </html>

@@ -29,11 +29,6 @@
 				  <a href="#" style="margin-top: 5px; text-decoration:none;" onClick="forgotPass();">&iquest;Olvidaste tu contrase&ntilde;a?</a>
 				</div>
 			  </div>
-			 
-			  
-			  <div class="txt-fld-text-aux">
-				 <input type="checkbox" value="remember"/> Recordar Contrase&ntilde;a
-			  </div>
 			  <div class="btn-fld">
 					<input type="submit" id="loginPage" value ="Iniciar Sesi&oacute;n &raquo;" disabled="disabled" />
 				</div>

@@ -1,3 +1,4 @@
+<%@page import="java.util.HashMap"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="domain.Client "%> 
 <!DOCTYPE html>
@@ -29,7 +30,7 @@
 	HttpSession infoPage = request.getSession();
 	session.setAttribute("prevPage", "DulcesTortasServlet?typeId=3");
 	Client client = (Client) infoPage.getAttribute("client");
-	
+	HashMap<String, String> hashMap = new HashMap<String, String>();
 %>
 <div class="wrapper">
 	<div id="header">
@@ -41,7 +42,7 @@
 				<jsp:include page="header.jsp"></jsp:include>
 			</div>
 			<ul style="margin: 0px; ">
-				<li class="current"><a href="/armaTuTorta/HomePageServlet">Inicio</a></li>
+				<li><a href="/armaTuTorta/HomePageServlet">Inicio</a></li>
 				<li><a href="/armaTuTorta/ArmaTuTortaServlet?typeId=1">Arma Tu Torta</a></li>
 				<li class="current"><a href="/armaTuTorta/DulcesTortasServlet?typeId=3">Dulces Tortas</a></li>
 				<li><a href="/armaTuTorta/CupcakesServlet?typeId=2">Cupcakes</a></li>
@@ -52,7 +53,9 @@
 		</div>
 	</div>
 	<div id="content">
-		<form id="form1">
+		<form id="formDulcesTortas" action="DulcesTortasServlet" method="post">
+		<input type="hidden" id="priceDulcCake" name="priceDulcCake" value = "0">
+	
 		<div class="home">
 			<div class="aside">
 				<div class="title"> &iexcl; Deleitate con nuestras m&aacute;s sabrosas tortas! </div>
@@ -66,16 +69,16 @@
 							for(int i= 1; i<= options.size(); i++) { 	
 								int aux = i -1;
 								domain.StepOption o = options.get(aux);
-							
+								hashMap.put(i +"", o.getName());
 						%>
 						<tr height="28">
 							<td width="220px"> 
-								<input type="checkbox" class="dulcesTortasCheck" value="<%= i %>" > <%= o.getName() %></td>
+								<input type="checkbox" name="dulcesTortas" class="dulcesTortasCheck" value="<%= i %>" > <%= o.getName() %></td>
 							<td width="100px">Bs.<span class="price-int<%= i %>"> <%= o.getPrice() %></span> </td>
 							<td>
 								<div class="sel<%= i %>" style="display:none">
 								Cantidad: &nbsp;
-								<select class="selDulcesTortas<%= i %>"> 
+								<select class="selDulcesTortas<%= i %>" name="selDulcesTortas<%= i %>"> 
 									<option value="0"> - </option>
 									<% for(int j = 1; j < 7; j++){ %>
 									<option value="<%= j %>"><%= j %></option>
@@ -85,7 +88,9 @@
 								
 							</td>
 						</tr>
-						<% } %>
+						<% }
+						session.setAttribute("hashMapDulcesTortas", hashMap);
+						%>
 					</table>
 					<div class="dt-button" style="display: none">
 						<input type="submit" name="sbmtButton" class="button" value="Ordenar"  />
@@ -93,7 +98,7 @@
 					<div class="dt-button-dis">
 						<input type="button" name="sbmtButton" class="buttonDisable" value="Ordenar"  />
 					</div> 
-					<div class="subtotal-section"> Sub-total: Bs. <span class="price"> 0,00</span> </div><br>
+					<div class="subtotal-section"> Sub-total: Bs. <span class="price" id="priceTotal"> 0,00</span> </div><br>
 					
 				</div>	
 				<% }else{ %>
@@ -125,17 +130,7 @@
 	</div>
 	<div class="push"></div>
 </div>
-<div id="footer">
-	<div id="navigation">
-		<div>
-			<p>Arma Tu Torta &copy; 2013 - Todos los derechos reservados</p>
-		</div>
-	</div>
-	<div class="social">
-		<a href="http://www.facebook.com/armatutorta" target="_blank"><img class="facebook" src="./images/facebook_social.png" alt="Facebook" title="Nuestra p&aacute;gina en Facebook"/></a>
-		<a href="http://www.twitter.com/armatutorta" target="_blank"><img class="twitter" src="./images/twitter_social.png" alt="Twitter" title="Nuestra cuenta en Twitter"/></a>
-	</div>
-</div>
+<jsp:include page="footer.jsp"></jsp:include>
 <jsp:include page="ventanas.jsp"></jsp:include>
 </body>
 </html>

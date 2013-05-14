@@ -1,3 +1,4 @@
+<%@page import="java.util.HashMap"%>
 <%@page import="java.util.List"%>
 <%@page import="domain.StepOption"%>
 <%@page import="domain.ListOrder_Step"%>
@@ -34,6 +35,9 @@
 	HttpSession infoPage = request.getSession();
 	session.setAttribute("prevPage", "ArmaTuTortaServlet?typeId=1");
 	Client client = (Client) infoPage.getAttribute("client");
+	HashMap<String, String> hashMap = new HashMap<String, String>();
+	
+	
 %>
 <div class="wrapper">
 	<div id="header">
@@ -73,6 +77,7 @@
 						</li>
 					</ul>
 				</div>	
+				<span style="font-size: 8.4px; font-family: Arial; ">Imagen de referencia, no debe ser interpretada como versión final de tu pedido</span>
 			</div>
 			<jsp:useBean id="options" type="java.util.ArrayList<domain.ListOrder_Step>" scope="request"/>  	
         		
@@ -80,15 +85,21 @@
 				<div class="title"> &iexcl; Sigue los pasos a continuaci&oacute;n y  arma la torta que deseas! </div>
 			<% } %>
 			
-			
 			<div class="asideRight">
 				<% if (client != null){ %>
+				<form id="target" action="/armaTuTorta/ArmaTuTortaServlet?typeId=1&pr=1" method="post"
+				 enctype="multipart/form-data" onSubmit="return setPrice()">
+				<input type="hidden" id="priceCake"  name="priceCake" value="0">
 					<%
 							for(int i= 1; i<= options.size(); i++) { 	
 								int aux = i -1;
 								ListOrder_Step listO = options.get(aux);
 								List<StepOption> actualOptions = listO.getOrderTypeId();
 								OrderStep actualOrder = listO.getOrder();
+								int isMultChoice = actualOrder.isMultipleChoice();
+								String type = "radio";
+								if (isMultChoice == 1)
+									type = "checkbox";
 							
 					%>
 					<% if ( i == 1) { %>
@@ -98,17 +109,20 @@
 								<% for(int j= 1; j<= actualOptions.size(); j++) {
 									int aux2 = j - 1;
 									StepOption step = actualOptions.get(aux2);
-								
+									System.out.println("valores " + i + "" +j + " nombre " + step.getName());
+									hashMap.put(i + "" +j, step.getName());
 								%>
-							<input  class="rdB<%= i %>" type="radio" name="<%= i %>" value="<%= j %>" > <%= step.getName()  %> <br>
+							
+							<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <%= step.getName()  %> <br>
+							<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 							<% }
 							%>
 						</div>
 						<div class="button-section" id="bt1Disable">
-							<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
+							<input  type="button" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
 						</div>
 						<div class="button-section" style="display: none;" id="bt<%= i %>">
-							<input  type="submit" name="sbmtButton" class="button" value="Siguiente"  />
+							<input  type="button" name="sbmtButton" class="button" value="Siguiente"  />
 						</div>
 					</div>
 				<% 
@@ -116,21 +130,47 @@
 				%>
 					<div class="block-<%=i%>" style="display:none">
 						<p>
-						<a href="#" id="backLink<%=aux%>"><img src="images/return.png"></a>
+						<a href="#" id="backLink<%=aux%>"><img class="imgBack"  src="images/return.png"></a>
 						<span class="step1"> Paso <%= i %>: </span>  <%= actualOrder.getName() %> </p>
 						<div class="options-steps">
 								<% for(int j= 1; j<= actualOptions.size(); j++) {
 									int aux2 = j - 1;
 									StepOption step = actualOptions.get(aux2);
+									System.out.println("valores " + i + "" +j + " nombre " + step.getName());
+									hashMap.put(i + "" +j, step.getName());
 									if (actualOptions.size() > 4){
+										String img = "<img  id=\"imgFudge\" src=\"./images/question.png\" title=\"Deliciosa y esponjosa torta de chocolate oscuro, no podrás parar de comerla!\"  />";
+										if (!step.getName().startsWith("Chocolate fudge,")){
+											img = "";
+										}
+									
+										
 								%>
+									<%
+										if (!step.getName().contains("imagen")){
+									%>
 										<div class="options-steps-left">
-											<input  class="rdB<%= i %>" type="radio" name="<%= i %>" value="<%= j %>" > <%= step.getName()  %> <br>
+											<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <%= step.getName()  %><%= img  %> <br>
+											<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 										</div>	
+									<%
+										}else{
+									%>
+										<div class="options-steps-especial">
+											<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <%= step.getName()  %><%= img  %>
+											<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
+											<input type="file" name="txtImage" id="txtImage" maxlength="25" lang="es" />  <br>
+										</div>
+									
+									<%	
+										}
+									
+									%>
 								<%
 									}else{
 								%>
-									<input  class="rdB<%= i %>" type="radio" name="<%= i %>" value="<%= j %>" > <%= step.getName()  %> <br>
+									<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <%= step.getName()  %> <br>
+									<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 								
 								<% 
 									}
@@ -138,22 +178,35 @@
 								%>
 							
 						</div>
-						<div class="button-section" id="bt1Disable">
-							<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
-						</div>
-						<div class="button-section" style="display: none;" id="bt<%= i %>">
-							<input  type="submit" name="sbmtButton" class="button" value="Siguiente"  />
-						</div>
+				<% if (i != 6){%>
+					<div class="button-section" id="bt1Disable">
+						<input  type="button" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
+					</div>
+					<div class="button-section" style="display: none;" id="bt<%= i %>">
+						<input  type="button" name="sbmtButtonPrev" class="button" value="Siguiente"  />
+					</div>
+					
+				<% }else{%>
+					<div class="button-section" id="bt1Disable">
+						<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
+					</div>
+					<div class="button-section" style="display: none;" id="bt<%= i %>">
+						<input  type="submit" name="sbmtButtonPrev" class="button" value="Siguiente"  />
 					</div>
 				
-				
+				<% }%>
+				</div>
 				<% 
 					}
 				}
+				session.setAttribute("hashMap", hashMap);
+			%>	
+				</form>
+			<%
 			}else{ 
 			%>
 					<br>
-					<div style="text-align: justify;">
+					<div class="msg-inicio" style="text-align: justify;">
 						Disculpe, para tener acceso a esta secci&oacute;n  necesita estar registrado, y haber iniciado sesi&oacute;n. <br><br>
 						
 						En esta secci&oacute;n usted podr&aacute; crear tortas ajustadas a sus gustos y preferencias.  Podr&aacute; escoger 
@@ -161,18 +214,24 @@
 						
 						Si no se est&aacute; registrado, comience su <a href="registro.jsp" class="readmore"> registro aqu&iacute;.</a> <br><br>
 						
-						Si ya est&aacute; registrado, <a href="#signup"  rel="leanModal" id="go" class="readmore"> inicie sesi&oacute;n.</a><br><br>
+						Si ya est&aacute; registrado, <a href="#signup"  rel="leanModal" id="go" class="readmore"> inicie sesi&oacute;n.</a><br><br><br><br>
 					</div>
 				<% } %>
 				
 			</div>
 			
 			<% if (client != null){ %>
-				<div class="subtotal-section"> Sub-total: Bs. 100,00 </div>
+				<div class="subtotal-sectionTortas"> Sub-total: Bs. <span class="price"> 0,00</span> </div>
 			<% } %>
+			<% if (client != null){ %>
 			<div class="banner">
 				<a href="./ocasionesEspeciales.jsp"><img src="./images/banner_tortas.png" alt="Image" /></a>
 			</div>
+			<% }else{ %>
+			<div class="bannerTorta">
+				<a href="./ocasionesEspeciales.jsp"><img src="./images/banner_tortas.png" alt="Image" /></a>
+			</div>
+			<% } %>
 			
 			
 			
@@ -180,17 +239,7 @@
 	</div>
 	<div class="push"></div>
 </div>
-<div id="footer">
-	<div id="navigation">
-		<div>
-			<p>Arma Tu Torta &copy; 2013 - Todos los derechos reservados</p>
-		</div>
-	</div>
-	<div class="social">
-		<a href="http://www.facebook.com/armatutorta" target="_blank"><img class="facebook" src="./images/facebook_social.png" alt="Facebook" title="Nuestra p&aacute;gina en Facebook"/></a>
-		<a href="http://www.twitter.com/armatutorta" target="_blank"><img class="twitter" src="./images/twitter_social.png" alt="Twitter" title="Nuestra cuenta en Twitter"/></a>
-	</div>
-</div>
+<jsp:include page="footer.jsp"></jsp:include>
 <jsp:include page="ventanas.jsp"></jsp:include>
 </body>
 </html>

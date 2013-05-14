@@ -2,6 +2,8 @@ package servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -67,6 +69,18 @@ public class DulcesTortasServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		String[] productos = request.getParameterValues("dulcesTortas");
+		if (productos == null)
+			doGet(request,response);
+		else{
+			HttpSession infoPage = request.getSession();
+			@SuppressWarnings("unchecked")
+			HashMap<String, String> hashMap = (HashMap<String, String>) infoPage.getAttribute("hashMapDulcesTortas");
+			String price = request.getParameter("priceDulcCake");
+			for (int i = 0 ; i < productos.length ; i++){
+				String cantidad = request.getParameter("selDulcesTortas" + productos[i]);
+				System.out.println("Productos " + hashMap.get(productos[i]) + " cantidad " + cantidad + " precio " + price);
+			}
+		}
 	}
 }

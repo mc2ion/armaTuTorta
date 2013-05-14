@@ -105,6 +105,8 @@
 						</li>
 					</ul>
 				</div>	
+				<span style="font-size: 8.4px; font-family: Arial; ">Imagen de referencia, no debe ser interpretada como versión final de tu pedido</span>
+		
 			</div>
 			<% if (client != null){ %>
 				<div class="title"> &iexcl; Sigue los pasos a continuaci&oacute;n y  arma los cupcakes que deseas! </div>
@@ -281,26 +283,16 @@
 				<% } %>
 			</div>
 			<% if (client != null){ %>
-				<div class="subtotal-section"> Sub-total: Bs. 100,00 </div>
+				<div class="subtotal-sectionTortas"> Sub-total: Bs. 100,00 </div>
 			<% } %>
-			<div class="banner">
+			<div class="bannerCupcakes">
 				<a href="./ocasionesEspeciales.jsp"><img src="./images/banner_cupcakes.png" alt="Image" /></a>
 			</div>
 		</div>
 	</div>
 	<div class="push"></div>
 </div>
-<div id="footer">
-	<div id="navigation">
-		<div>
-			<p>Arma Tu Torta &copy; 2013 - Todos los derechos reservados</p>
-		</div>
-	</div>
-	<div class="social">
-		<a href="http://www.facebook.com/armatutorta" target="_blank"><img class="facebook" src="./images/facebook_social.png" alt="Facebook" title="Nuestra p&aacute;gina en Facebook"/></a>
-		<a href="http://www.twitter.com/armatutorta" target="_blank"><img class="twitter" src="./images/twitter_social.png" alt="Twitter" title="Nuestra cuenta en Twitter"/></a>
-	</div>
-</div>
+<jsp:include page="footer.jsp"></jsp:include>
 <jsp:include page="ventanas.jsp"></jsp:include>
 </body>
 </html>

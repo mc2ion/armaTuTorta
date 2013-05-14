@@ -108,4 +108,11 @@ $(document).ready(function() {
 			$('.dt-button').show();
 		}
 	}
+	
+	$('#formDulcesTortas').submit(function() {
+		  var priceText = Number($("#priceTotal").text());
+		  alert(priceText);
+		  $("#priceDulcCake").val(priceText);
+		  return true;
+		});
 });

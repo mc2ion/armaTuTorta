@@ -1,7 +1,9 @@
 package servlet;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,8 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Util.SendEmail;
+
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import command.CommandExecutor;
 
 import domain.Client;
 
@@ -46,14 +51,16 @@ public class OcasionesEspecialesServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd;	
-		String path = request.getSession().getServletContext().getRealPath("/");
-		path = path + "files\\pedidosOcasionesEspeciales";
-		
-		MultipartRequest multipart = new MultipartRequest(request, path,
+		final Properties propertiesFile = new Properties();
+		propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+		String dirPath = propertiesFile.getProperty("pedidosOcasionesEspecialesDirectory");
+	
+		MultipartRequest multipart = new MultipartRequest(request, dirPath,
 					5*1024*1024, new DefaultFileRenamePolicy());
 		
 		HttpSession infoPage = request.getSession();
-		Client client = (Client) infoPage.getAttribute("client");
+		Client clientAux = (Client) infoPage.getAttribute("client");
+		
 		try{			
 			String name = multipart.getParameter("txtName");
 			String torta = multipart.getParameter("eventoT");
@@ -63,40 +70,39 @@ public class OcasionesEspecialesServlet extends HttpServlet {
 			String idea = multipart.getParameter("idea");
 			File imageFile = multipart.getFile("txtImage");
 			String image = "";
-			if (imageFile != null)
+			boolean attach = false;
+			if (imageFile != null){
 				image = imageFile.getName();
+				attach = true;		
 			
-			System.out.println("oca " + name + '/' + torta + '/' + cupcakes + '/' + gelatina + '/' + invitados  
-					+  '/' + idea + '/' + image + '/' + client.getId());
-//			
-//			String dir = propertiesFile.getProperty("albumsDirectory") + propertiesFile.getProperty("fileSeparator") + album.getDirectory();
-//			File file = new File(dir);				
-//			
-//			file.mkdir();
-//			
-//			int pointIndex = image.indexOf(".");
-//			String extension = image.substring(pointIndex);
-//
-//			image = album.getId() + "_" + album.getName().toLowerCase().replace(" ", "_") + "_cover" + extension;
-//			
-//			File destination = new File(dir + propertiesFile.getProperty("fileSeparator") + image);
-//				
-//			imageFile.renameTo(destination);								
-//			album.setImage(image);
-//			rowsUpdated  = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.EditAlbum(album));
-//				
-//			if(rowsUpdated == 1){
-//				request.setAttribute("info", "El álbum fue creado exitosamente.");
-//				request.setAttribute("error", "");
-//				rd = getServletContext().getRequestDispatcher("/ListAlbumsServlet");			
-//				rd.forward(request, response);
-//			} else {
-//				request.setAttribute("info", "");
-//				request.setAttribute("error", "Ocurrió un error durante la creación del álbum. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-//				rd = getServletContext().getRequestDispatcher("/ListAlbumsServlet");			
-//
-//				rd.forward(request, response);
-//			}			
+			}
+			final boolean attachment = attach;
+			final  String[] productos = { torta, cupcakes, gelatina};
+			
+			final Client client = (Client) CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectClient(Long.valueOf(clientAux.getId())));
+			
+			/* Creación del archivo para enviarlo por correo*/	
+			String dir = dirPath;
+			int pointIndex = image.indexOf(".");
+			String extension = image.substring(pointIndex);
+			String nameImg = image.substring(0,pointIndex);
+			// Nombre del usuario actual
+			image = nameImg.toLowerCase().replace(" ", "_") + "_" + client.getLastName() + extension;
+			File destination = new File(dir + image);
+			imageFile.renameTo(destination);
+			final String[] datos = {name, invitados,  idea, "17/05/2153", dir + image};
+			
+			
+			new Thread(new Runnable() {
+			    public void run() {
+		    		SendEmail.sendEmailOrderOcEsp(propertiesFile, "123", attachment, "contrato", datos, productos, client);
+						
+			    }
+			}).start();
+			
+			rd = getServletContext().getRequestDispatcher("/ocaEspConfirmation.jsp");
+			rd.forward(request, response);
+		
 		}catch (Exception e) {
 			request.setAttribute("info", "");
 			request.setAttribute("error", "Ocurrió un error durante la creación del álbum. Por favor intente de nuevo y si el error persiste contacte a su administrador.");

@@ -75,7 +75,6 @@ public class LoginPageServlet extends HttpServlet {
 			String prevPage = (String) request.getSession().getAttribute("prevPage");
 			if (prevPage == null)
 				prevPage = "index.jsp";
-			System.out.println("pagina previa" + prevPage);
 			
 			Client client = (Client) CommandExecutor.getInstance().executeDatabaseCommand(new command.CustomerExists(name, encryptPassword));
 			RequestDispatcher rd;

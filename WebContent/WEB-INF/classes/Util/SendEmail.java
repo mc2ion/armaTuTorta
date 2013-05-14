@@ -1,5 +1,6 @@
 package Util;
 
+import java.util.Arrays;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -14,8 +15,6 @@ import javax.mail.internet.MimeMessage;
 public class SendEmail  extends Thread  {
 
 	public static void sendEmail(Properties propertiesFile, String email, String name, boolean attach, String pref) {
-		
-		
 		
 		  String to = email;
 		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
@@ -67,7 +66,7 @@ public class SendEmail  extends Thread  {
 		   }catch (MessagingException ex) {
 			   ex.printStackTrace();
 		   }
-		 }
+	}
 		
 	
 	public static void sendEmailPassword(Properties propertiesFile, String email, String name, String newPassword, boolean attach, String pref) {
@@ -226,6 +225,70 @@ public class SendEmail  extends Thread  {
 			   ex.printStackTrace();
 		   }
 	 }
+	
+	
+	public static void sendEmailOrderCake(Properties propertiesFile, String numPedido, boolean attach, String pref,
+			String[] datos, String[] relleno, String nombre, String correo, String telefono) {
+		
+	
+		
+		  String to = propertiesFile.getProperty(pref + "EmailCountFrom");
+		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
+		  final String password =  propertiesFile.getProperty(pref + "EmailPasswordFrom");
+				
+		  Properties properties = System.getProperties();
+		  properties.setProperty("mail.smtp.host", propertiesFile.getProperty(pref + "EmailServer") );
+		  properties.setProperty("mail.smtp.port", "587");
+		  properties.setProperty("mail.smtp.starttls.enable", "true");
+		  properties.put("mail.smtp.auth", "true");
+		  properties.put("mail.debug", "true");
+		  
+		  Session session = Session.getDefaultInstance(properties,
+		   new javax.mail.Authenticator() {
+			  protected PasswordAuthentication getPasswordAuthentication() {
+			   return new PasswordAuthentication(user,password);
+			  }
+		  });
+		   
+		  try{
+			  
+			  // Create a default MimeMessage object.
+		         MimeMessage message = new MimeMessage(session);
+	
+		         // Set From: header field of the header.
+		         message.setFrom(new InternetAddress(user));
+	
+		         // Set To: header field of the header.
+		         message.addRecipient(Message.RecipientType.TO,
+		                                  new InternetAddress(to));
+	
+		         // Set Subject: header field
+		         message.setSubject("Tienes un nuevo pedido: No." + numPedido);
+	
+		         // Send the actual HTML message, as big as you like
+		         String messa = "Has recibido un nuevo pedido. <br><br>" +
+		    		"<strong> Datos del pedido.</strong><br><br>" +
+		    		" Producto pedido: Torta<br>" +
+		    		" Forma: " + datos[0] + "<br>" +
+		     		" Tama&ntilde;o: " + datos[1]  + "<br>" +
+		     		" Sabor del ponqu&eacute; " + datos[2]  + "<br>" +
+		     		" Cantidad de capas: " + datos[3]  + "<br>" +
+		     		" Sabores de capas: " + Arrays.deepToString(relleno) + "<br>" +
+		     		" Sabores de cubierta: " + datos[4] + ".<br><br>" +
+		     		" <strong>Datos del comprador:</strong> <br><br> " +
+		     		" Nombre :" + nombre +  "<br>" +
+		     		" Correo Electr&oacute;nico :" + correo + "<br>" +
+		     		" Tel&eacute;fono :" + telefono + ".";
+		         message.setContent(messa,"text/html" );
+		         
+		         
+		      Transport.send(message);
+		 
+		   }catch (MessagingException ex) {
+			   ex.printStackTrace();
+		   }
+	}
+		
 		
 	
 }
