@@ -52,7 +52,7 @@ public class RegisterServlet extends HttpServlet {
 			String identityCardNum = request.getParameter("txtCed");
 			String identityCardId = request.getParameter("txtCedId");
 			final String email = request.getParameter("txtEmail");
-			String password =request.getParameter("txtPass");
+			final String password =request.getParameter("txtPass");
 			String encryptPassword = UserLoginServlet.getEncryptPassword(password);
 			String phoneNumber  = request.getParameter("txtPhone");
 			String phoneMovNumber  = request.getParameter("txtMovPhone");
@@ -96,7 +96,7 @@ public class RegisterServlet extends HttpServlet {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						SendEmail.sendEmail(propertiesFile, email, firstName + " " + lastName, false, "contrato");
+						SendEmail.sendEmail(propertiesFile, email, firstName + " " + lastName, password, false, "contrato");
 				    }
 				}).start();
 				

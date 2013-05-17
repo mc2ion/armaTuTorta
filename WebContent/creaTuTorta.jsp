@@ -36,7 +36,8 @@
 	session.setAttribute("prevPage", "ArmaTuTortaServlet?typeId=1");
 	Client client = (Client) infoPage.getAttribute("client");
 	HashMap<String, String> hashMap = new HashMap<String, String>();
-	
+	HashMap<String, Double> hashMapPrice = new HashMap<String, Double>();
+	HashMap<String, Long> hashMapId = new HashMap<String, Long>();
 	
 %>
 <div class="wrapper">
@@ -82,7 +83,7 @@
 			<jsp:useBean id="options" type="java.util.ArrayList<domain.ListOrder_Step>" scope="request"/>  	
         		
 			<% if (client != null){ %>
-				<div class="title"> &iexcl; Sigue los pasos a continuaci&oacute;n y  arma la torta que deseas! </div>
+				<div class="titleTortas"> &iexcl; Sigue los pasos a continuaci&oacute;n y  arma la torta que deseas! </div>
 			<% } %>
 			
 			<div class="asideRight">
@@ -109,8 +110,9 @@
 								<% for(int j= 1; j<= actualOptions.size(); j++) {
 									int aux2 = j - 1;
 									StepOption step = actualOptions.get(aux2);
-									System.out.println("valores " + i + "" +j + " nombre " + step.getName());
 									hashMap.put(i + "" +j, step.getName());
+									hashMapPrice.put(step.getName(), step.getPrice());
+									hashMapId.put(step.getName(), step.getId());
 								%>
 							
 							<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <%= step.getName()  %> <br>
@@ -136,8 +138,10 @@
 								<% for(int j= 1; j<= actualOptions.size(); j++) {
 									int aux2 = j - 1;
 									StepOption step = actualOptions.get(aux2);
-									System.out.println("valores " + i + "" +j + " nombre " + step.getName());
 									hashMap.put(i + "" +j, step.getName());
+									hashMapPrice.put(step.getName(), step.getPrice());
+									hashMapId.put(step.getName(), step.getId());
+										
 									if (actualOptions.size() > 4){
 										String img = "<img  id=\"imgFudge\" src=\"./images/question.png\" title=\"Deliciosa y esponjosa torta de chocolate oscuro, no podrás parar de comerla!\"  />";
 										if (!step.getName().startsWith("Chocolate fudge,")){
@@ -179,18 +183,18 @@
 							
 						</div>
 				<% if (i != 6){%>
-					<div class="button-section" id="bt1Disable">
+					<div class="button-sectionTortas" id="bt1Disable">
 						<input  type="button" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
 					</div>
-					<div class="button-section" style="display: none;" id="bt<%= i %>">
+					<div class="button-sectionTortas" style="display: none;" id="bt<%= i %>">
 						<input  type="button" name="sbmtButtonPrev" class="button" value="Siguiente"  />
 					</div>
 					
 				<% }else{%>
-					<div class="button-section" id="bt1Disable">
+					<div class="button-sectionTortas" id="bt1Disable">
 						<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
 					</div>
-					<div class="button-section" style="display: none;" id="bt<%= i %>">
+					<div class="button-sectionTortas" style="display: none;" id="bt<%= i %>">
 						<input  type="submit" name="sbmtButtonPrev" class="button" value="Siguiente"  />
 					</div>
 				
@@ -200,6 +204,8 @@
 					}
 				}
 				session.setAttribute("hashMap", hashMap);
+				session.setAttribute("hashMapPrice", hashMapPrice);
+				session.setAttribute("hashMapId", hashMapId);
 			%>	
 				</form>
 			<%

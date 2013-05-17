@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
@@ -24,7 +26,9 @@ import Util.SendEmail;
 import command.CommandExecutor;
 import domain.Client;
 import domain.ListOrder_Step;
+import domain.Order;
 import domain.OrderCake;
+import domain.OrderItem;
 import domain.StepOption;
 
 /**
@@ -171,10 +175,73 @@ public class ArmaTuTortaServlet extends HttpServlet {
 		String fecha = request.getParameter("txtFecha");
 		String clientId =  request.getParameter("clientId");
 		
+		HttpSession infoPage = request.getSession();
+		@SuppressWarnings("unchecked")
+		HashMap<String, Double> hashMapPrice = (HashMap<String, Double>) infoPage.getAttribute("hashMapPrice");
+		@SuppressWarnings("unchecked")
+		HashMap<String, Long> hashMapId = (HashMap<String, Long>) infoPage.getAttribute("hashMapId");
+		
+		/* Establezco los valores de las cosas pedidas */
+		List<OrderItem> orderItems = new LinkedList<OrderItem>();
+		
+		
+		/* Forma */
+		OrderItem item = new OrderItem();
+		item.setPrice(hashMapPrice.get(forma));
+		item.setStepOptionId(hashMapId.get(forma));
+		orderItems.add(item);
+		
+		/* Tamano */
+		item = new OrderItem();
+		item.setPrice(hashMapPrice.get(tam));
+		item.setStepOptionId(hashMapId.get(tam));
+		orderItems.add(item);
+		
+		/* Sabor */
+		item = new OrderItem();
+		item.setPrice(hashMapPrice.get(sabor));
+		item.setStepOptionId(hashMapId.get(sabor));
+		orderItems.add(item);
+		
+		/* Capas */
+		item = new OrderItem();
+		item.setPrice(hashMapPrice.get(capas));
+		item.setStepOptionId(hashMapId.get(capas));
+		orderItems.add(item);
+		
+		/* Cubierta */ 
+		item = new OrderItem();
+		item.setPrice(hashMapPrice.get(cubierta));
+		item.setStepOptionId(hashMapId.get(cubierta));
+		orderItems.add(item);
+		
+		
+		/* Relleno */
+		for (int i = 0; i < relleno.length; i++){
+			item = new OrderItem();
+			item.setPrice(hashMapPrice.get(relleno[i]));
+			item.setStepOptionId(hashMapId.get(relleno[i]));
+			orderItems.add(item);
+		}
+		
+		
 		try{
 		final Client client = (Client) CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectClient(Long.valueOf(clientId)));
 		
+		/* Almacenamiento de la informacion en bd*/
+		
+		Order order = new Order();
+		order.setClientId(client.getId());
+		order.setDeliveryDate(fecha);
+		order.setOrderTypeId(1);
+		order.setTotal(Double.parseDouble(precio));
+		order.setIsPending(1);
+		
+		
+		final Long rowsUpdated  = (Long) CommandExecutor.getInstance().executeDatabaseCommand(new command.CreateOrder(order, orderItems));	
+		
 		String nombreImagen = request.getParameter("nombreImagen");
+		
 		boolean attach = false;
 		if (nombreImagen != "")
 			attach = true;
@@ -185,12 +252,17 @@ public class ArmaTuTortaServlet extends HttpServlet {
 		final String[] datos = {forma, tam, sabor, capas, cubierta, precio, nombreImagen, fecha};
 		new Thread(new Runnable() {
 		    public void run() {
-	    		SendEmail.sendEmailOrderCake(propertiesFile, "123", attachment, "contrato", datos, relle, client);
+	    		SendEmail.sendEmailOrderCake(propertiesFile, String.valueOf(rowsUpdated), attachment, "contrato", datos, relle, client);
 					
 		    }
 		}).start();
 
+		infoPage.removeAttribute("hashMapPrice");
+		infoPage.removeAttribute("hashMapId");
+		infoPage.removeAttribute("hashMap");
 		
-		} catch (Exception e) {}
+		} catch (Exception e) { 
+			System.out.println("Ocurrio un error al insertar la orden del cliente: " + clientId + ", el error fue:" + e.getMessage());
+		}
 	}
 }

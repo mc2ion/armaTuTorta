@@ -109,7 +109,7 @@
 		
 			</div>
 			<% if (client != null){ %>
-				<div class="title"> &iexcl; Sigue los pasos a continuaci&oacute;n y  arma los cupcakes que deseas! </div>
+				<div class="titleTortas"> &iexcl; Sigue los pasos a continuaci&oacute;n y  arma los cupcakes que deseas! </div>
 			<% } %>
 				
 			<jsp:useBean id="options" type="java.util.ArrayList<domain.ListOrder_Step>" scope="request"/>  	
@@ -178,7 +178,7 @@
 												<% 
 													for (int k = 1 ; k<3 ; k++){
 												%>
-													<br><option value="<%= k %>"><%= k %></option>
+													<option value="<%= k %>"><%= k %></option>
 												<% 
 													}
 												%>
@@ -202,7 +202,7 @@
 										<% 
 											for (int k = 1 ; k<3 ; k++){
 										%>
-											<br><option value="<%= k %>"><%= k %></option>
+											<option value="<%= k %>"><%= k %></option>
 										<% 
 											}
 										%>
@@ -285,9 +285,15 @@
 			<% if (client != null){ %>
 				<div class="subtotal-sectionTortas"> Sub-total: Bs. 100,00 </div>
 			<% } %>
-			<div class="bannerCupcakes">
+			<% if (client != null){ %>
+			<div class="banner">
 				<a href="./ocasionesEspeciales.jsp"><img src="./images/banner_cupcakes.png" alt="Image" /></a>
 			</div>
+			<% }else{ %>
+			<div class="bannerTorta">
+				<a href="./ocasionesEspeciales.jsp"><img src="./images/banner_cupcakes.png" alt="Image" /></a>
+			</div>
+			<% } %>
 		</div>
 	</div>
 	<div class="push"></div>

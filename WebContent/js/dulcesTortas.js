@@ -19,8 +19,9 @@ $(document).ready(function() {
 				
 			}
 		});
-		verificarCheckboxes();
 		verificarSelectsVacios();
+		verificarCheckboxes();
+		
 	});
 	
 
@@ -73,6 +74,7 @@ $(document).ready(function() {
 	
 	/* Verifica si hay al menos un checkbox seleccionado, sino lo hay bloquea el botón de ordenar*/
 	function verificarCheckboxes(){
+		
 		var checkboxes = document.getElementsByClassName('dulcesTortasCheck');
 		var cont = 0; 
 		for (var x=0; x < checkboxes.length; x++) {

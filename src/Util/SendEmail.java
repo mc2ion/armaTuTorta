@@ -23,7 +23,7 @@ import domain.Client;
 
 public class SendEmail  extends Thread  {
 
-	public static void sendEmail(Properties propertiesFile, String email, String name, boolean attach, String pref) {
+	public static void sendEmail(Properties propertiesFile, String email, String name, String passwordUser, boolean attach, String pref) {
 		
 		  String to = email;
 		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
@@ -56,16 +56,14 @@ public class SendEmail  extends Thread  {
 		                                  new InternetAddress(to));
 	
 		         // Set Subject: header field
-		         message.setSubject("Recuperación de Contraseña");
+		         message.setSubject("Registro en la Página Web de ArmaTuTorta ");
 	
 		         // Send the actual HTML message, as big as you like
 		         String messa = "Hola," + name + "<br><br>" +
-		    		" Haz click en el siguiente bot&oacute;n para activar su cuenta. <br><br> " +
-	    			" <div style='background-color: #8565ad; padding: 10px; text-decoration:none; color:#ffffff; text-align:center;'><strong>" +
-	    			" <a href='www.facebook.com'>Activar Mi Cuenta</a></strong></div> <br><br>" +
-		    		" Si el anterior vínculo no funciona, copie y pegue la anterior URL en la barra de dirección del explorador <br>" +
-		    		" www.prueba.com .<br><br>" +
-		    		" Atentamente, equipo de apoyo de Arma Tu Torta";
+		    		" A continuaci&oacute;n encontrar&aacute;s la informaci&oacute;n de tu cuenta: <br><br> " +
+		        	" <strong> Nombre de Usuario: </strong>" + email + "<br><br>"+	 
+		        	" <strong> Contrase&ntilde;a </strong>" + passwordUser + "<br><br>"+	 
+		    		" Atentamente, equipo de apoyo de <a href=\"www.armatutorta.com.ve\"> Arma Tu Torta </a>";
 	
 		         message.setContent(messa,"text/html" );
 		         
@@ -271,7 +269,7 @@ public class SendEmail  extends Thread  {
 		                                  new InternetAddress(to));
 	
 		         // Set Subject: header field
-		         message.setSubject("Tienes un nuevo pedido: No." + numPedido);
+		         message.setSubject("Tienes un nuevo pedido de tortas. Orden N°" + numPedido);
 	
 		         String rell = "";
 		         for (int i = 0; i< relleno.length; i++){
@@ -296,12 +294,12 @@ public class SendEmail  extends Thread  {
 		     		" Fecha de Entrega: " + datos[7] + ".<br><br>" +
 		     		
 		     		" <strong>Datos del comprador:</strong> <br><br> " +
-		     		" Nombre :" + client.getFirstName() + " "  + client.getLastName() +  "<br>" +
-		     		" Correo Electr&oacute;nico :" + client.getEmail() + "<br>" +
-		     		" Tel&eacute;fono :" + client.getPhone() + "<br>";
-		         	if (client.getOtherPhone() != null)
-		         		messa += "Otro Tel&eacute;fono :" + client.getOtherPhone() + "<br>";
-		         	messa += "Dirección de Envío:" + client.getShippingAddress() + ".<br><br>";
+		     		" Nombre: " + client.getFirstName() + " "  + client.getLastName() +  "<br>" +
+		     		" Correo Electr&oacute;nico: " + client.getEmail() + "<br>" +
+		     		" Tel&eacute;fono: " + client.getPhone() + "<br>";
+		         	if (client.getOtherPhone() != null && !client.getOtherPhone().equals(""))
+		         		messa += "Otro Tel&eacute;fono: " + client.getOtherPhone() + "<br>";
+		         	messa += "Dirección de Envío: " + client.getShippingAddress() + ".<br><br>";
 		         	if (attach)
 		         		messa += "Adjunto encontrar&aacute;s la imagen que el usuario quiere usar para la cubierta de la torta.";
 		         
@@ -388,15 +386,15 @@ public class SendEmail  extends Thread  {
 		    		" Ocasi&oacute;n: " + datos[0] + "<br>" +
 		     		" N&uacute;mero aproximado de invitados: " + datos[1]  + "<br>" +
 		     		" Informaci&oacute;n sobre la idea del usuario: " + datos[2]  + "<br>" +
-		     		" Fecha de Entrega: Bs." + datos[3] + ".<br><br>" +
+		     		" Fecha de Entrega: " + datos[3] + ".<br><br>" +
 		     		
 		     		" <strong>Datos del comprador:</strong> <br><br> " +
 		     		" Nombre :" + client.getFirstName() + " " + client.getLastName() +  "<br>" +
 		     		" Correo Electr&oacute;nico :" + client.getEmail() + "<br>" +
 		     		" Tel&eacute;fono :" + client.getPhone() + ".<br><br>"; 
 	               	if (client.getOtherPhone() != null)
-	               		messa += "Otro Tel&eacute;fono :" + client.getOtherPhone() + "<br>";
-		         	messa += "Dirección de Envío:" + client.getShippingAddress() + ".<br><br>";
+	               		messa += "Otro Tel&eacute;fono: " + client.getOtherPhone() + "<br>";
+		         	messa += "Dirección de Envío: " + client.getShippingAddress() + ".<br><br>";
 		         	if (attach)
 		     			messa += "Anexo encontrar&aacute;s la imagen de referencia que mand&oacute; el usuario.";
 		         
@@ -429,6 +427,77 @@ public class SendEmail  extends Thread  {
 			   ex.printStackTrace();
 		   }
 	}
+	
+	
+	public static void sendEmailOrderDulcesTortas(Properties propertiesFile, String numPedido, boolean attach, String pref,
+			String[] datos, String[] productos, Client client) {
+		
+		  String to = propertiesFile.getProperty(pref + "EmailCountFrom");
+		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
+		  final String password =  propertiesFile.getProperty(pref + "EmailPasswordFrom");
+				
+		  Properties properties = System.getProperties();
+		  properties.setProperty("mail.smtp.host", propertiesFile.getProperty(pref + "EmailServer") );
+		  properties.setProperty("mail.smtp.port", "587");
+		  properties.setProperty("mail.smtp.starttls.enable", "true");
+		  properties.put("mail.smtp.auth", "true");
+		  
+		  Session session = Session.getDefaultInstance(properties,
+		   new javax.mail.Authenticator() {
+			  protected PasswordAuthentication getPasswordAuthentication() {
+			   return new PasswordAuthentication(user,password);
+			  }
+		  });
+		   
+		  try{
+			  
+			  // Create a default MimeMessage object.
+		         MimeMessage message = new MimeMessage(session);
+	
+		         // Set From: header field of the header.
+		         message.setFrom(new InternetAddress(user));
+	
+		         // Set To: header field of the header.
+		         message.addRecipient(Message.RecipientType.TO,
+		                                  new InternetAddress(to));
+	
+		         // Set Subject: header field
+		         message.setSubject("Tienes una nueva compra de dulces tortas: No." + numPedido);
+	
+		         // Send the actual HTML message, as big as you like
+		         String messa = "Has recibido una nueva compra de dulces tortas. <br><br>" +
+		    		"<strong> Datos de la orden:</strong><br><br>" +
+		        	" Productos pedidos: <br>";
+		         
+		         	for (int j = 0; j < productos.length; j++){
+		         		messa += "* " + productos[j] + "<br>";
+		         	}
+		        	
+		         	messa += "<br> Fecha de Entrega: " + datos[0] + ".<br>" +
+		         			" Total: Bs." + datos[1] + ".<br><br>" +
+		     		" <strong>Datos del comprador:</strong> <br><br> " +
+		     		" Nombre :" + client.getFirstName() + " " + client.getLastName() +  "<br>" +
+		     		" Correo Electr&oacute;nico: " + client.getEmail() + "<br>" +
+		     		" Tel&eacute;fono: " + client.getPhone() + ".<br>"; 
+	               	if (client.getOtherPhone() != null && !client.getOtherPhone().equals(""))
+	               		messa += "Otro Tel&eacute;fono: " + client.getOtherPhone() + "<br>";
+		         	messa += "Dirección de Envío: " + client.getShippingAddress() + ".<br><br>";
+		        
+		         	MimeBodyPart mbp1 = new MimeBodyPart();
+		         	
+		         mbp1.setText(messa);
+		         mbp1.setContent(messa, "text/html");
+		         Multipart mp = new MimeMultipart();
+		         mp.addBodyPart(mbp1);
+
+		         message.setContent(mp);
+		         message.setSentDate(new Date());
+		         Transport.send(message);
+		   }catch (MessagingException ex) {
+			   ex.printStackTrace();
+		   }
+	}
+	
 		
 		
 	

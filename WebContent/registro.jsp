@@ -72,7 +72,9 @@
 								<div style="float: right; margin-right: 45px; margin-top: -25px;">
 									<input type="radio" name="typePers" value="0"> Persona Natural
 									<input type="radio" name="typePers" value="1" >  Persona Jur&iacute;dica 
-								</div><br> 
+								</div>
+								<span class="error" id="errorType" style="float:right; margin-right:50px;">Disculpe, debe indicar si es persona jur&iacute;dica o natural</span>
+								<br> 
 								<label for="name">Nombres:</label>
 								<input type="text" name="txtName" id="txtName" size="35" maxlength="100" onBlur="validateName(this, '1');" /> 
 								<span class="error" id="errorName">Disculpe, debe introducir un nombre v&aacute;lido</span>

@@ -8,6 +8,9 @@
 	<link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/demos.css" />
+	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/ui.theme.css" />
+	
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<!--[if IE 8]>
 		<link rel="stylesheet" type="text/css" href="css/ie8.css" />
@@ -26,6 +29,13 @@
 		$("a[rel*=leanModal]").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
 	});
 	</script>
+	<script type="text/javascript" src="/armaTuTorta/js/ui.core.js"></script>
+	<script type="text/javascript" src="/armaTuTorta/js/ui.datepicker.js"></script>
+	<script> 
+	$(function() {
+		$("#datepicker").datepicker({minDate: +1});
+	});
+	</script> 
 </head>
 <body>
 <%
@@ -71,10 +81,17 @@
 						<input type="checkbox" name="eventoT" value="1">Torta<br>
 						<input type="checkbox" name="eventoC" value="2">Cupcakes <br>
 						<input type="checkbox" name="eventoG" value="3">Gelatina <br><br>
-						<label for="name">N&uacute;mero apr&oacute;ximado de invitados:</label>
-						<input type="text" name="txtInv" id="txtInv" size="25" maxlength="50" /> <br><br>
 						<label for="name">¿Tienes un dise&ntilde;o en mente? C&aacute;rgalo aqu&iacute;:</label>
-						<input type="file" name="txtImage" id="txtImage" maxlength="50" lang="es" /> <br><br>
+						<input type="file" name="txtImage" id="txtImage" maxlength="50" lang="es" /> <br><br><br>
+						<div style="float:left; width: 340px;">
+							<label for="name"  style="width:59%">N&uacute;mero apr&oacute;ximado de invitados:</label>
+							<input type="text" name="txtInv" id="txtInv" size="10" maxlength="50" /> 
+						</div>
+						<div style="float:left; width: 340px;">
+							<label for="name" style="width:28%">Fecho del evento:</label>
+							<input type="text" id="datepicker" name="txtFecha" /> 
+						</div>
+						<br><br>
 						<label for="name">Cu&eacute;ntanos m&aacute;s acerca de tu idea:</label>
 						<textarea name="idea" style="resize: none;"></textarea> <br>
 					</fieldset>

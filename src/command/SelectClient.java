@@ -26,6 +26,7 @@ public class SelectClient implements DatabaseCommand {
 		ResultSet rs = sta.executeQuery();
 		Client client = new Client();
 		if (rs.next()) {
+			client.setId(this.id);
 			client.setIdentityCard(rs.getString(1));
 			client.setFirstName(rs.getString(2));
 			client.setLastName(rs.getString(3));
@@ -34,11 +35,11 @@ public class SelectClient implements DatabaseCommand {
 			client.setPhone(rs.getString(6));
 			client.setOtherPhone(rs.getString(7));
 			int shipping = rs.getInt(8);
-			if (shipping == 0)
-				client.setShippingAddress(0);
-			else
-				client.setShippingAddress(1);
-			client.setShippingAddress(rs.getString(9));
+			client.setShippingAddress(shipping);
+			if (shipping == 0){
+				client.setShippingAddress(rs.getString(9));
+			}else
+				client.setShippingAddress(rs.getString(5));
 			int company = rs.getInt(10);
 			if (company == 0)
 				client.setCompany(0);

@@ -1228,8 +1228,12 @@ function validateReg(){
 	var email = document.getElementById("txtEmail");
 	var pass = document.getElementById("txtPass");
 	var passRpt = document.getElementById("txtRptPass");
+	var type = $('input[name=typePers]:checked').val();
 	
 	var bool = true;
+	
+	if (validateTypePerson(type)!= true)
+		bool = false;
 	
 	if (empresa == null)
 		bool = false;	
@@ -1378,6 +1382,19 @@ function validateDir(element, i){
 }
 
 
+
+function validateTypePerson(element){
+	if (element == null){
+		$('#errorType').show();
+		return false;
+	}
+	else{
+		$('#errorType').hide();
+		return true;
+	}
+	
+}
+
 function validateRegCont(){
 	var phone = document.getElementById("txtPhone");
 	var phoneMov = document.getElementById("txtMovPhone");
@@ -1386,7 +1403,7 @@ function validateRegCont(){
 	var styleDir = $('.otherPhone').css('display');
 	
 	var bool = true;
-	
+		
 	if (validatePhone(phone, '1') != true)
 		bool = false;
 		

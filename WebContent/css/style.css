@@ -307,7 +307,7 @@ p a {
 
 #content .home .cakes{
 	color: black;
-	margin-top: 20px;
+	margin-top: 10px;
 	margin-left: 40px;
 	width:550px;
 }
@@ -325,11 +325,19 @@ p a {
 
 
 #content .home .title{
+	margin-top: 0px;
+	margin-left: 30px;
+	font-size: 26px;
+	color: #4d366a;
+}
+
+#content .home .titleTortas, #content .home .titleCupcakes{
 	margin-top: 30px;
 	margin-left: 30px;
 	font-size: 26px;
 	color: #4d366a;
 }
+
 
 
 #content .home .title-ins{
@@ -483,6 +491,13 @@ p a {
 	top: 445px;
 }
 
+#content .home .button-sectionTortas{
+	cursor: pointer;
+	position: absolute;
+	right: 220px;
+	top: 415px;
+}
+
 #content .home .cakes .button-section{
 	float: right;
 	margin-top: 20px;
@@ -552,7 +567,7 @@ p a {
 
 #content .coments-ocEsp form label{
   float:left;
-  width:35%;
+  width:25%;
   height: 30px;
   margin-right:0.5em;
   padding-top:0.2em;
@@ -2008,4 +2023,9 @@ h2{
 
 .bannerTorta img{
 	margin-top: 30px;
+}
+
+.date{
+	margin-left: 25px;
+	margin-top: 20px;
 }

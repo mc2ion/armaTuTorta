@@ -68,6 +68,9 @@ public class OcasionesEspecialesServlet extends HttpServlet {
 			String gelatina = multipart.getParameter("eventoG");
 			String invitados = multipart.getParameter("txtInv");
 			String idea = multipart.getParameter("idea");
+			String fecha = multipart.getParameter("txtFecha");
+			
+			
 			File imageFile = multipart.getFile("txtImage");
 			String image = "";
 			boolean attach = false;
@@ -90,7 +93,7 @@ public class OcasionesEspecialesServlet extends HttpServlet {
 			image = nameImg.toLowerCase().replace(" ", "_") + "_" + client.getLastName() + extension;
 			File destination = new File(dir + image);
 			imageFile.renameTo(destination);
-			final String[] datos = {name, invitados,  idea, "17/05/2153", dir + image};
+			final String[] datos = {name, invitados,  idea, fecha, dir + image};
 			
 			
 			new Thread(new Runnable() {
