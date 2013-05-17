@@ -55,13 +55,11 @@ public class DulcesTortasServlet extends HttpServlet {
 				@SuppressWarnings("unchecked")
 				ArrayList<StepOption> list = (ArrayList<StepOption>)CommandExecutor.getInstance().executeDatabaseCommand(new command.ListDulcesTortas(typeId));
 				
-				System.out.println("aqui");
 				request.setAttribute("options", list);
 				
 				RequestDispatcher rd = getServletContext().getRequestDispatcher("/dulcesTortas.jsp");
 				rd.forward(request, response);
 			} else {
-				System.out.println("aqui error");
 				request.setAttribute("options", new ArrayList<StepOption>());
 				RequestDispatcher rd = getServletContext().getRequestDispatcher("/dulcesTortas.jsp");
 				rd.forward(request, response);
@@ -82,68 +80,82 @@ public class DulcesTortasServlet extends HttpServlet {
 		else{
 			HttpSession infoPage = request.getSession();
 			Client clientAux = (Client) infoPage.getAttribute("client");
-			@SuppressWarnings("unchecked")
-			HashMap<String, String> hashMap = (HashMap<String, String>) infoPage.getAttribute("hashMapDulcesTortas");
-			@SuppressWarnings("unchecked")
-			HashMap<String, Double> hashMapPrice = (HashMap<String, Double>) infoPage.getAttribute("hashMapPriceDulcesTortas");
-			@SuppressWarnings("unchecked")
-			HashMap<String, Long> hashMapId = (HashMap<String, Long>) infoPage.getAttribute("hashMapIdDulcesTortas");
+			RequestDispatcher rd;	
+				
+			if (clientAux == null){
+				rd = getServletContext().getRequestDispatcher("/HomePageServlet");
+				rd.forward(request, response);
+			}else{
 			
-			String price = request.getParameter("priceDulcCake");
-			String date = request.getParameter("txtFecha");
-			final String[] cantProd = new String[productos.length];
+				@SuppressWarnings("unchecked")
+				HashMap<String, String> hashMap = (HashMap<String, String>) infoPage.getAttribute("hashMapDulcesTortas");
+				@SuppressWarnings("unchecked")
+				HashMap<String, Double> hashMapPrice = (HashMap<String, Double>) infoPage.getAttribute("hashMapPriceDulcesTortas");
+				@SuppressWarnings("unchecked")
+				HashMap<String, Long> hashMapId = (HashMap<String, Long>) infoPage.getAttribute("hashMapIdDulcesTortas");
+				
+				String price = request.getParameter("priceDulcCake");
+				String date = request.getParameter("txtFecha");
+				final String[] cantProd = new String[productos.length];
+				
+				for (int i = 0 ; i < productos.length ; i++){
+					String cantidad = request.getParameter("selDulcesTortas" + productos[i]);
+					cantProd[i] = cantidad + " " + hashMap.get(productos[i]);
+				}
+				
+					
+				final Properties propertiesFile = new Properties();
+				propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+				
+				/* Establezco los valores de las cosas pedidas */
+				List<OrderItem> orderItems = new LinkedList<OrderItem>();
+				
+				OrderItem item = new OrderItem();
+				/* Tortas pedidas */
+				for (int i = 0; i < productos.length; i++){
+					item = new OrderItem();
+					String productName = hashMap.get(productos[i]);
+					item.setPrice(hashMapPrice.get(productName));
+					item.setStepOptionId(hashMapId.get(productName));
+					orderItems.add(item);
+				}
+				
 			
-			for (int i = 0 ; i < productos.length ; i++){
-				String cantidad = request.getParameter("selDulcesTortas" + productos[i]);
-				cantProd[i] = cantidad + " " + hashMap.get(productos[i]);
+				try{
+					final Client client = (Client) CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectClient(Long.valueOf(clientAux.getId())));
+					
+					Order order = new Order();
+					order.setClientId(client.getId());
+					order.setDeliveryDate(date);
+					order.setIsPending(1);
+					order.setOrderTypeId(3);
+					order.setTotal(Double.valueOf(price));
+					
+					
+					final Long rowsUpdated  = (Long) CommandExecutor.getInstance().executeDatabaseCommand(new command.CreateOrder(order, orderItems));	
+	
+					final String[] datos = {date, price};
+					new Thread(new Runnable() {
+					    public void run() {
+				    		SendEmail.sendEmailOrderDulcesTortas(propertiesFile, String.valueOf(rowsUpdated), false, "contrato", datos, cantProd, client);
+								
+					    }
+					}).start();
+					
+					request.setAttribute("info", "2");
+					request.setAttribute("error", "");
+					rd = getServletContext().getRequestDispatcher("/creaTuTortaConfirmation.jsp");
+					rd.forward(request, response);
+					
+				}catch (Exception e) {
+					System.out.println("Ocurrio un error al insertar la orden del cliente: " + clientAux.getId() + ", el error fue:" + e.getMessage());
+					request.setAttribute("info", "2");
+					request.setAttribute("error", "error");
+					rd = getServletContext().getRequestDispatcher("/creaTuTortaConfirmation.jsp");
+					rd.forward(request, response);
+				}
+				
 			}
-			
-				
-			final Properties propertiesFile = new Properties();
-			propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
-			
-			/* Establezco los valores de las cosas pedidas */
-			List<OrderItem> orderItems = new LinkedList<OrderItem>();
-			
-			OrderItem item = new OrderItem();
-			/* Tortas pedidas */
-			for (int i = 0; i < productos.length; i++){
-				item = new OrderItem();
-				String productName = hashMap.get(productos[i]);
-				item.setPrice(hashMapPrice.get(productName));
-				item.setStepOptionId(hashMapId.get(productName));
-				orderItems.add(item);
-			}
-			
-		
-			try{
-				final Client client = (Client) CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectClient(Long.valueOf(clientAux.getId())));
-				
-				Order order = new Order();
-				order.setClientId(client.getId());
-				order.setDeliveryDate(date);
-				order.setIsPending(1);
-				order.setOrderTypeId(3);
-				order.setTotal(Double.valueOf(price));
-				
-				
-				final Long rowsUpdated  = (Long) CommandExecutor.getInstance().executeDatabaseCommand(new command.CreateOrder(order, orderItems));	
-
-				final String[] datos = {date, price};
-				new Thread(new Runnable() {
-				    public void run() {
-			    		SendEmail.sendEmailOrderDulcesTortas(propertiesFile, String.valueOf(rowsUpdated), false, "contrato", datos, cantProd, client);
-							
-				    }
-				}).start();
-				
-			}catch (Exception e) {
-				System.out.println("Ocurrio un error al insertar la orden del cliente: " + clientAux.getId() + ", el error fue:" + e.getMessage());
-			}
-			request.setAttribute("info", "2");
-			RequestDispatcher  rd;
-			rd = getServletContext().getRequestDispatcher("/creaTuTortaConfirmation.jsp");
-			rd.forward(request, response);
 		}
 	}
 }

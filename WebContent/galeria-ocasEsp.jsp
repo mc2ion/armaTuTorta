@@ -13,6 +13,8 @@
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleImage.css" />
 	<link rel="stylesheet" type="text/css" href="css/styleCar.css" />
 	<link rel="stylesheet" type="text/css" href="css/gridNavigation.css" />
+	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/demos.css" />
+	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/ui.theme.css" />
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<script type="text/javascript" src="/armaTuTorta/js/jquery-1.3.2.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
@@ -23,6 +25,16 @@
 	
 	
 	</script>
+	
+	<script type="text/javascript" src="/armaTuTorta/js/ui.core.js"></script>
+	<script type="text/javascript" src="/armaTuTorta/js/ui.datepicker.js"></script>
+	<script> 
+	$(function() {
+		$("#datepicker").datepicker({
+			minDate: +2
+		});
+	});
+	</script> 
 	
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/shadowbox.css">
 	<script type="text/javascript" src="/armaTuTorta/js/shadowbox.js"></script>

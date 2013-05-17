@@ -126,6 +126,8 @@
 			</div>
 			<% 
 				}else{
+					String error = (String) request.getAttribute("error");
+					if (error.equals("")){
 			%>
 			<div id="datosVerif" >
 				<div class="bienv">
@@ -143,7 +145,17 @@
 
 			   </div>
 			</div>
-			<% 
+			 <% }else{ %>
+			   <div class="bienv">
+					<span class="bienv-title">&iexcl; Le pedimos mil disculpas!.</span><br><br>
+						Ha ocurrido un error al intentar procesar su solicitud. Lo invitamos a que intente m&aacute;s tarde. 
+						En caso de que el error persista puede comunicarse con nuestro equipo de soporte, bien sea
+						llam&aacute;ndonos directamente o mand&aacute;ndonos un correo. <a href="/armaTuTorta/ContactServlet"  class="readmore">Aqu&iacute;</a> 
+						podr&aacute; encontrar nuestros datos.
+
+						<br><br>
+			   </div>
+			    <% } 
 				}
 			%>
 		</div>

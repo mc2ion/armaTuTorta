@@ -8,9 +8,10 @@
 	<title>Arma Tu Torta</title>
 	<link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/style.css" />
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/demos.css" />
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/ui.theme.css" />
+	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/style.css" />
+	
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<!--[if IE 8]>
 		<link rel="stylesheet" type="text/css" href="css/ie8.css" />

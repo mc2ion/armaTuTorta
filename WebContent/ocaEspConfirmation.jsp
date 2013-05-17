@@ -1,6 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
+<%@page import="domain.Client"%>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -8,8 +7,6 @@
 	<link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/style.css" />
-	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/demos.css" />
-	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/ui.theme.css" />
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<!--[if IE 8]>
 		<link rel="stylesheet" type="text/css" href="css/ie8.css" />
@@ -23,27 +20,19 @@
 	
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
-	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function() {
 			$("a[rel*=leanModal]").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
 		});
 	</script>
-	<script type="text/javascript" src="/armaTuTorta/js/ui.core.js"></script>
-	<script type="text/javascript" src="/armaTuTorta/js/ui.datepicker.js"></script>
-	<script> 
-	$(function() {
-		$("#datepicker").datepicker({
-			minDate: +2
-		});
-	});
-	</script> 
+	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
+	
 </head>
 <body>
 <%
 	HttpSession infoPage = request.getSession();
-	session.setAttribute("prevPage", "index.jsp");
-	String error = (String) request.getAttribute("editClient");
+	session.setAttribute("prevPage", "HomePageServlet");
+	Client client = (Client) infoPage.getAttribute("client");
 %>	
 <div class="wrapper">
 	<div id="header">
@@ -67,29 +56,35 @@
 	</div>
 	<div id="content">
 		<div class="home">
-			<div class="bienv">
-			<%
-				if (error.equals("successUser")){
-			%>
-				<span class="bienv-title">&iexcl; Modificación exitosa!</span><br><br>
-					Se han modificado exitosamente los datos de tu usuario. 
-			<% }else if (error.equals("errorUser")){ 
-			%>
-				<span class="bienv-title">&iexcl; Error al modificar el usuario!</span><br><br>
-					Se ha presentado un problema al intentar modificar los datos del usuario. Por favor, intente nuevamente.
+			<div id="datosVerif" > 
+				<% String error = (String) request.getAttribute("error");
+					if (error.equals("")){
+				%>
+				<div class="bienv">
+					<span class="bienv-title">&iexcl; Muchas gracias!.</span><br><br>
+						Hemos recibido su solicitud, en los pr&oacute;ximos d&iacute;as lo
+						estaremos contactando para confirmar su pedido y poderle ofrecer un presupuesto. 
+						<br><br>
 
-			<% }%>
-			<%
-				if (error.equals("successPass")){
-			%>
-				<span class="bienv-title">&iexcl; Modificación exitosa!</span><br><br>
-					La contrase&ntilde;a de su usuario fue modificado exitosamente.
-			<% }else if (error.equals("errorPass")){ 
-			%>
-				<span class="bienv-title">&iexcl; Error al modificar la contrase&ntilde;a!</span><br><br>
-					Se ha presentado un problema al intentar modificar la contrase&ntilde;a. Por favor, aseg&uacute;rese de introducir correctamente su contrase&ntilde;a
-					anterior e intente de nuevo. Si el error persiste, lo invitamos a comunicarse con nosotros para transmitirnos el error.
-			<% }%>
+						Cualquier duda o inquietud lo invitamos a comunicarse con nosotros. <a href="/armaTuTorta/ContactServlet"  class="readmore">Aqu&iacute;</a> 
+						podr&aacute; encontrar nuestros datos.
+
+						<br><br>
+
+						&iexcl;Hasta pronto!
+
+			   </div>
+			   <% }else{ %>
+			   <div class="bienv">
+					<span class="bienv-title">&iexcl; Le pedimos mil disculpas!.</span><br><br>
+						Ha ocurrido un error al intentar procesar su solicitud. Lo invitamos a que intente m&aacute;s tarde. 
+						En caso de que el error persista puede comunicarse con nuestro equipo de soporte, bien sea
+						llam&aacute;ndonos directamente o mand&aacute;ndonos un correo. <a href="/armaTuTorta/ContactServlet"  class="readmore">Aqu&iacute;</a> 
+						podr&aacute; encontrar nuestros datos.
+
+						<br><br>
+			   </div>
+			    <% } %>
 			</div>
 		</div>
 	</div>

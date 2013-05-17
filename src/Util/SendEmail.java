@@ -336,7 +336,7 @@ public class SendEmail  extends Thread  {
 		
 	
 	public static void sendEmailOrderOcEsp(Properties propertiesFile, String numPedido, boolean attach, String pref,
-			String[] datos, String[] productos, Client client) {
+			String[] datos, String productos, Client client) {
 		
 		  String to = propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
@@ -370,19 +370,10 @@ public class SendEmail  extends Thread  {
 		         // Set Subject: header field
 		         message.setSubject("Tienes una nueva solicitud de presupuesto: No." + numPedido);
 	
-		         String prod  = "";
-		         for (int i = 0; i < productos.length; i++){
-		        	 if (productos[i] != null){
-			        	 if (i == productos.length - 1)
-			        		 prod += " y " + productos[i];
-			        	 else
-			        		 prod +=  productos[i] + ", ";
-		        	 }
-		         }
     	         // Send the actual HTML message, as big as you like
 		         String messa = "Has recibido una nueva solicitud de presupuesto. <br><br>" +
 		    		"<strong> Datos de la solicitud.</strong><br><br>" +
-		    		" Productos pedido: " + prod + "<br>" +
+		    		" Productos pedidos: " + productos + "<br>" +
 		    		" Ocasi&oacute;n: " + datos[0] + "<br>" +
 		     		" N&uacute;mero aproximado de invitados: " + datos[1]  + "<br>" +
 		     		" Informaci&oacute;n sobre la idea del usuario: " + datos[2]  + "<br>" +
@@ -415,14 +406,16 @@ public class SendEmail  extends Thread  {
 		         message.setContent(mp);
 		         message.setSentDate(new Date());
 		         Transport.send(message);
-		         if (attach){
+		        
+		         
+		         /*if (attach){
 			         File file = new File(datos[4]);
 			         if(file.delete()){
 		    			System.out.println(file.getName() + " is deleted!");
 			         }else{
 		    			System.out.println("Delete operation is failed.");
 			         }
-		         }
+		         }*/
 		   }catch (MessagingException ex) {
 			   ex.printStackTrace();
 		   }

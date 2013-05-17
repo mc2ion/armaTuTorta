@@ -63,9 +63,7 @@ public class ArmaTuTortaServlet extends HttpServlet {
 				@SuppressWarnings("unchecked")
 				ArrayList<ListOrder_Step> list = (ArrayList<ListOrder_Step>)CommandExecutor.getInstance().executeDatabaseCommand(new command.ListPasos(typeId));
 				
-				System.out.println("aqui " + list.size());
 				request.setAttribute("options", list);
-				
 				RequestDispatcher rd = getServletContext().getRequestDispatcher("/creaTuTorta.jsp");
 				rd.forward(request, response);
 			} else {
@@ -91,22 +89,30 @@ public class ArmaTuTortaServlet extends HttpServlet {
 		if (type == null)
 			doGet(request, response);
 		else{
-			Properties propertiesFile = new Properties();
-			propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
-			OrderCake orderCake = new OrderCake();
-			if  (type.equals("1")){
-				String dirPath = propertiesFile.getProperty("pedidosTortasDirectory");
-				orderCake = requestMultipart(request, response, dirPath );
-			}else{
-				requestPlain(request, response, propertiesFile);
-			}
-			RequestDispatcher  rd;
-			request.setAttribute("pedido", orderCake);
-			request.setAttribute("info", type);
-		
-			rd = getServletContext().getRequestDispatcher("/creaTuTortaConfirmation.jsp");
-			rd.forward(request, response);
 			
+			HttpSession infoPage = request.getSession();
+			Client clientAux = (Client) infoPage.getAttribute("client");
+			RequestDispatcher rd;	
+				
+			if (clientAux == null){
+				rd = getServletContext().getRequestDispatcher("/HomePageServlet");
+				rd.forward(request, response);
+			}else{
+				Properties propertiesFile = new Properties();
+				propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+				OrderCake orderCake = new OrderCake();
+				if  (type.equals("1")){
+					String dirPath = propertiesFile.getProperty("pedidosTortasDirectory");
+					orderCake = requestMultipart(request, response, dirPath );
+				}else{
+					requestPlain(request, response, propertiesFile);
+				}
+				request.setAttribute("pedido", orderCake);
+				request.setAttribute("info", type);
+			
+				rd = getServletContext().getRequestDispatcher("/creaTuTortaConfirmation.jsp");
+				rd.forward(request, response);
+			}
 		}
 	}
 	

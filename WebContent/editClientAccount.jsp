@@ -9,6 +9,9 @@
 	<link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/demos.css" />
+	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/ui.theme.css" />
+	
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<!--[if IE 8]>
 		<link rel="stylesheet" type="text/css" href="css/ie8.css" />
@@ -23,6 +26,15 @@
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
+	<script type="text/javascript" src="/armaTuTorta/js/ui.core.js"></script>
+	<script type="text/javascript" src="/armaTuTorta/js/ui.datepicker.js"></script>
+	<script> 
+	$(function() {
+		$("#datepicker").datepicker({
+			minDate: +2
+		});
+	});
+	</script> 
 
 </head>
 <body>
