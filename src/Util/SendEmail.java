@@ -320,14 +320,14 @@ public class SendEmail  extends Thread  {
 		         message.setContent(mp);
 		         message.setSentDate(new Date());
 		         Transport.send(message);
-		         if (attach){
-			         File file = new File(datos[6]);
-			         if(file.delete()){
-		    			System.out.println(file.getName() + " is deleted!");
-			         }else{
-		    			System.out.println("Delete operation is failed.");
-			         }
-		         }
+//		         if (attach){
+//			         File file = new File(datos[6]);
+//			         if(file.delete()){
+//		    			System.out.println(file.getName() + " is deleted!");
+//			         }else{
+//		    			System.out.println("Delete operation is failed.");
+//			         }
+//		         }
 		 
 		   }catch (MessagingException ex) {
 			   ex.printStackTrace();
@@ -490,8 +490,5 @@ public class SendEmail  extends Thread  {
 			   ex.printStackTrace();
 		   }
 	}
-	
-		
-		
-	
+
 }

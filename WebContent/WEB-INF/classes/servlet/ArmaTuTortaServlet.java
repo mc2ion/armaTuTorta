@@ -101,15 +101,21 @@ public class ArmaTuTortaServlet extends HttpServlet {
 				Properties propertiesFile = new Properties();
 				propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
 				OrderCake orderCake = new OrderCake();
+				String error = "";
 				if  (type.equals("1")){
 					String dirPath = propertiesFile.getProperty("pedidosTortasDirectory");
 					orderCake = requestMultipart(request, response, dirPath );
 				}else{
-					requestPlain(request, response, propertiesFile);
+					error = requestPlain(request, response, propertiesFile);
 				}
 				request.setAttribute("pedido", orderCake);
 				request.setAttribute("info", type);
-			
+				if (error.equals("")){
+					request.setAttribute("error", "");
+					
+				}else{
+					request.setAttribute("error", "error");
+				}
 				rd = getServletContext().getRequestDispatcher("/creaTuTortaConfirmation.jsp");
 				rd.forward(request, response);
 			}
@@ -170,7 +176,7 @@ public class ArmaTuTortaServlet extends HttpServlet {
 		return orderCake;
 	}
 	
-	static void requestPlain(HttpServletRequest request, HttpServletResponse response, final Properties propertiesFile){
+	static String requestPlain(HttpServletRequest request, HttpServletResponse response, final Properties propertiesFile){
 		String forma = request.getParameter("forma");
 		String tam = request.getParameter("tam");
 		String sabor = request.getParameter("sabor");
@@ -180,6 +186,8 @@ public class ArmaTuTortaServlet extends HttpServlet {
 		String precio = request.getParameter("priceCake");
 		String fecha = request.getParameter("txtFecha");
 		String clientId =  request.getParameter("clientId");
+		
+		String error = "";
 		
 		HttpSession infoPage = request.getSession();
 		@SuppressWarnings("unchecked")
@@ -232,43 +240,45 @@ public class ArmaTuTortaServlet extends HttpServlet {
 		
 		
 		try{
-		final Client client = (Client) CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectClient(Long.valueOf(clientId)));
-		
-		/* Almacenamiento de la informacion en bd*/
-		
-		Order order = new Order();
-		order.setClientId(client.getId());
-		order.setDeliveryDate(fecha);
-		order.setOrderTypeId(1);
-		order.setTotal(Double.parseDouble(precio));
-		order.setIsPending(1);
-		
-		
-		final Long rowsUpdated  = (Long) CommandExecutor.getInstance().executeDatabaseCommand(new command.CreateOrder(order, orderItems));	
-		
-		String nombreImagen = request.getParameter("nombreImagen");
-		
-		boolean attach = false;
-		if (nombreImagen != "")
-			attach = true;
-		final boolean attachment = attach;
-		final String[] relle = relleno;
-		
-		System.out.println(attach);
-		final String[] datos = {forma, tam, sabor, capas, cubierta, precio, nombreImagen, fecha};
-		new Thread(new Runnable() {
-		    public void run() {
-	    		SendEmail.sendEmailOrderCake(propertiesFile, String.valueOf(rowsUpdated), attachment, "contrato", datos, relle, client);
-					
-		    }
-		}).start();
-
-		infoPage.removeAttribute("hashMapPrice");
-		infoPage.removeAttribute("hashMapId");
-		infoPage.removeAttribute("hashMap");
+			final Client client = (Client) CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectClient(Long.valueOf(clientId)));
+			
+			/* Almacenamiento de la informacion en bd*/
+			
+			Order order = new Order();
+			order.setClientId(client.getId());
+			order.setDeliveryDate(fecha);
+			order.setOrderTypeId(1);
+			order.setTotal(Double.parseDouble(precio));
+			order.setIsPending(1);
+			
+			
+			final Long rowsUpdated  = (Long) CommandExecutor.getInstance().executeDatabaseCommand(new command.CreateOrder(order, orderItems));	
+			
+			String nombreImagen = request.getParameter("nombreImagen");
+			
+			boolean attach = false;
+			if (nombreImagen != "")
+				attach = true;
+			final boolean attachment = attach;
+			final String[] relle = relleno;
+			
+			final String[] datos = {forma, tam, sabor, capas, cubierta, precio, nombreImagen, fecha};
+			new Thread(new Runnable() {
+			    public void run() {
+		    		SendEmail.sendEmailOrderCake(propertiesFile, String.valueOf(rowsUpdated), attachment, "contrato", datos, relle, client);
+						
+			    }
+			}).start();
+	
+			infoPage.removeAttribute("hashMapPrice");
+			infoPage.removeAttribute("hashMapId");
+			infoPage.removeAttribute("hashMap");
 		
 		} catch (Exception e) { 
 			System.out.println("Ocurrio un error al insertar la orden del cliente: " + clientId + ", el error fue:" + e.getMessage());
+			error = "error";
 		}
+		return error;
 	}
+	
 }

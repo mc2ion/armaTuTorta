@@ -34,7 +34,7 @@
 <div>
 	<div>
 		<a href="#signup"  rel="leanModal" id="go" class="pestana">Ingresar</a>
-		<a href="/armaTuTorta/registro.jsp" class="pestana">Registrarse</a>
+		<a href="/armaTuTorta/RegisterServlet" class="pestana">Registrarse</a>
 	</div>
 </div>
 <% 
@@ -44,8 +44,10 @@
 	<div id="pestana_larga">
 			<%
 				String name = client.getFirstName();
-				if (name.length() > 14 )
-					name = client.getFirstName().substring(0, 14);
+				if (name.length() > 14 ){
+					name = client.getFirstName().substring(0, 12);
+					name += "...";
+				}
 			%>
 			<a class="pestN" >Bienvenido, <%= name %> </a>
 			<span class="divisor">|</span> 

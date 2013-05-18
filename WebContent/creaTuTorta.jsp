@@ -14,30 +14,11 @@
 	<link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/style.css" />
-	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/demos.css" />
-	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/ui.theme.css" />
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
-	<!--[if IE 8]>
-		<link rel="stylesheet" type="text/css" href="css/ie8.css" />
-	<![endif]-->
-	<!--[if IE 7]>
-		<link rel="stylesheet" type="text/css" href="css/ie7.css" />
-	<![endif]-->
-	<!--[if IE 6]>
-		<link rel="stylesheet" type="text/css" href="css/ie6.css" />
-	<![endif]-->
-	
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/tortas.js"></script>
-	<script type="text/javascript" src="/armaTuTorta/js/ui.core.js"></script>
-	<script type="text/javascript" src="/armaTuTorta/js/ui.datepicker.js"></script>
-	<script> 
-	$(function() {
-		$("#datepicker").datepicker({minDate: +1});
-	});
-	</script> 
-	
+
 </head>
 <body>
 <%
@@ -114,7 +95,7 @@
 					%>
 					<% if ( i == 1) { %>
 					<div class="block">
-						<p> <span class="step1"> Paso <%= i %>: </span>  <%= actualOrder.getName() %> </p>
+						<p> <span class="step1"> Paso <%= i %>: </span> <span class="desc<%= i %>"> <%= actualOrder.getName() %> </span></p>
 						<div class="options-steps">
 								<% for(int j= 1; j<= actualOptions.size(); j++) {
 									int aux2 = j - 1;
@@ -124,25 +105,23 @@
 									hashMapId.put(step.getName(), step.getId());
 								%>
 							
-							<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <%= step.getName()  %> <br>
+							<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%> </span> <br>
 							<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 							<% }
 							%>
 						</div>
-						<div class="button-section" id="bt1Disable">
-							<input  type="button" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
-						</div>
-						<div class="button-section" style="display: none;" id="bt<%= i %>">
-							<input  type="button" name="sbmtButton" class="button" value="Siguiente"  />
-						</div>
+						<span style="display: inline;" class="buttons">
+							<input  type="button" name="sbmtButtonPrev" class="buttonR" value="Reiniciar" />
+							<input  type="button" name="sbmtButton" class="buttonDisable" value="Siguiente" id="bt1Disable"  />
+							<input  type="button" name="sbmtButton" class="button" value="Siguiente"  style="display: none;" id="bt<%= i %>" />
+						</span>						
 					</div>
 				<% 
 					}else{
 				%>
 					<div class="block-<%=i%>" style="display:none">
 						<p>
-						<a href="#" id="backLink<%=aux%>"><img class="imgBack"  src="images/return.png"></a>
-						<span class="step1"> Paso <%= i %>: </span>  <%= actualOrder.getName() %> </p>
+						<span class="step1"> Paso <%= i %>: </span> <span class="desc<%= i %>"> <%= actualOrder.getName() %> </span> </p>
 						<div class="options-steps">
 								<% for(int j= 1; j<= actualOptions.size(); j++) {
 									int aux2 = j - 1;
@@ -163,16 +142,16 @@
 										if (!step.getName().contains("imagen")){
 									%>
 										<div class="options-steps-left">
-											<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <%= step.getName()  %><%= img  %> <br>
+											<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%><%= img  %> </span> <br>
 											<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 										</div>	
 									<%
 										}else{
 									%>
 										<div class="options-steps-especial">
-											<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <%= step.getName()  %><%= img  %>
+											<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%><%= img  %> </span>
 											<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
-											<input type="file" name="txtImage" id="txtImage" maxlength="25" lang="es" />  <br>
+											<input type="file" accept='image/*' name="txtImage" id="txtImage" maxlength="25" lang="es"  style="display:none;"/>  <br>
 										</div>
 									
 									<%	
@@ -182,7 +161,7 @@
 								<%
 									}else{
 								%>
-									<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <%= step.getName()  %> <br>
+									<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%> </span> <br>
 									<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 								
 								<% 
@@ -192,21 +171,18 @@
 							
 						</div>
 				<% if (i != 6){%>
-					<div class="button-sectionTortas" id="bt1Disable">
-						<input  type="button" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
-					</div>
-					<div class="button-sectionTortas" style="display: none;" id="bt<%= i %>">
-						<input  type="button" name="sbmtButtonPrev" class="button" value="Siguiente"  />
-					</div>
+					<span style="display: inline;" class="buttons">
+							<input  type="button" name="sbmtButtonPrev" class="buttonR" value="Reiniciar"  />
+							<input  type="button" name="sbmtButton" class="buttonDisable" value="Siguiente" id="bt<%= i %>Disable"  />
+							<input  type="button" name="sbmtButton" class="button" value="Siguiente"  style="display: none;" id="bt<%= i %>" />
+					</span>		
 					
 				<% }else{%>
-					<div class="button-sectionTortas" id="bt1Disable">
-						<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
-					</div>
-					<div class="button-sectionTortas" style="display: none;" id="bt<%= i %>">
-						<input  type="submit" name="sbmtButtonPrev" class="button" value="Siguiente"  />
-					</div>
-				
+					<span style="display: inline;" class="buttons">
+						<input  type="button" name="sbmtButtonPrev" class="buttonR" value="Reiniciar"  />
+						<input  type="button" name="sbmtButton" class="buttonDisable" value="Siguiente" id="bt<%= i %>Disable"  />
+						<input  type="submit" name="sbmtButton" class="button" value="Ordenar"  style="display: none;" id="bt<%= i %>" />
+					</span>		
 				<% }%>
 				</div>
 				<% 

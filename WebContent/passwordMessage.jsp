@@ -32,7 +32,7 @@
 <%
 	HttpSession infoPage = request.getSession();
 	session.setAttribute("prevPage", "HomePageServlet");
-	String error = (String) request.getAttribute("emailExist");
+	String error = (String) request.getAttribute("error");
 %>	
 <div class="wrapper">
 	<div id="header">
@@ -57,15 +57,24 @@
 	<div id="content">
 		<div class="home">
 			<div class="bienv">
-				<span class="bienv-title">¡Te hemos env&iacute;ado un correo!</span><br><br>
-				Ingresa a tu bandeja de entrada y verifica la nueva contrase&ntilde;a que te hemos env&iacute;ado 
-				para poder ingresar a tu cuenta. <br><br>
-				Una vez que hayas ingresado a nuestra sistema, podr&aacute;s cambiar esta contrase&ntilde;a facilmente
-				,si as&iacute; lo deseeas, ingresando
-				a: "Mi cuenta" y haciendo click en la opci&oacute;n "Cambiar contrase&ntilde;a".
-				 
-				<br><br>
-				¡Muchas gracias por elegirnos!. 
+				<% if (error.equals("")) { %>
+					<span class="bienv-title">¡Te hemos env&iacute;ado un correo!</span><br><br>
+					Ingresa a tu bandeja de entrada y verifica la nueva contrase&ntilde;a que te hemos env&iacute;ado 
+					para poder ingresar a tu cuenta. <br><br>
+					Una vez que hayas ingresado a nuestra sistema, podr&aacute;s cambiar esta contrase&ntilde;a f&aacute;cilmente, 
+					si as&iacute; lo deseeas, ingresando
+					a: 'Mi cuenta' y haciendo click en la opci&oacute;n  'Cambiar contrase&ntilde;a'.
+					 
+					<br><br>
+					¡Muchas gracias por elegirnos!. 
+				<% }else{ %>
+					<span class="bienv-title">¡Te pedimos disculpas!</span><br><br>
+					Ha ocurrido un error al intentar generar tu nueva contrase&ntilde;a. Por favor, intente m&aacute;s tarde. 
+					De persistir el problema lo invitamos a comunicarse con nosotros para transmitirnos el error.
+					
+					<br><br>
+					¡Muchas gracias por elegirnos!. 
+				<% } %>
 			</div>
 		</div>
 	</div>

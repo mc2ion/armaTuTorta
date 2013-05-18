@@ -331,14 +331,19 @@ p a {
 	color: #4d366a;
 }
 
-#content .home .titleTortas, #content .home .titleCupcakes{
+#content .home .titleTortas, #content .home .titleCupcakes {
 	margin-top: 30px;
 	margin-left: 30px;
 	font-size: 26px;
 	color: #4d366a;
 }
 
-
+#content .home .titleGallery {
+	margin-top: 30px;
+	margin-left: 30px;
+	font-size: 30px;
+	color: #4d366a;
+}
 
 #content .home .title-ins{
 	margin-top: 30px;
@@ -398,14 +403,15 @@ p a {
 }
 
 #content .home .asideRight .options-steps{
-	margin-left: 60px;
+	margin-left: 20px;
+	height: 162px;
 }
 
 #content .home .asideRight .options-steps-left {
     float: left;
 	margin-right: 50px;
 	font-size: 18px;
-	width: 210px;
+	width: 220px;
 
 }
 
@@ -431,10 +437,23 @@ p a {
 }
 
 
+
+#content .home .buttonR{
+	background: url(../images/button_red.png) no-repeat;
+	border: 0;
+	display: inline;
+	height: 30px;
+	width: 110px;
+	font-family: 'Economica', sans-serif;
+	font-size: 16px;
+	cursor: pointer;
+	color: #000;
+}
+
 #content .home .button{
 	background: url(../images/button.png) no-repeat;
 	border: 0;
-	display: block;
+	display: inline;
 	height: 30px;
 	width: 110px;
 	font-family: 'Economica', sans-serif;
@@ -477,7 +496,7 @@ p a {
 #content .home .buttonDisable{
 	background: url(../images/button_disable.png) no-repeat;
 	border: 0;
-	display: block;
+	display: inline;
 	height: 30px;
 	width: 110px;
 	font-family: 'Economica', sans-serif;
@@ -486,16 +505,12 @@ p a {
 
 #content .home .button-section{
 	cursor: pointer;
-	position: absolute;
-	right: 220px;
-	top: 445px;
+
 }
 
 #content .home .button-sectionTortas{
 	cursor: pointer;
-	position: absolute;
-	right: 220px;
-	top: 415px;
+
 }
 
 #content .home .cakes .button-section{
@@ -1266,13 +1281,13 @@ a.readmore {
 #content div form p {
 	line-height: 28px;
     margin: 0;
-    padding-bottom: 20px;
+    padding-bottom: 5px;
     text-align: justify;
     width: 550px;
 }
 
 #content div form p span {
-	color: #5F5D5E;
+	color: #000;
 }
 
 #content div form input {
@@ -2028,4 +2043,17 @@ h2{
 .date{
 	margin-left: 25px;
 	margin-top: 20px;
+}
+
+.buttons{
+	display: inline;
+	float: right;
+}
+
+.desc5{
+	font-size: 19px;
+}
+
+.titleVent{
+	font-size: 2em;
 }

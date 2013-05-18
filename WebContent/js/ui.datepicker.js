@@ -43,7 +43,7 @@ function Datepicker() {
 		closeText: 'Done', // Display text for close link
 		prevText: '', // Display text for previous month link
 		nextText: '', // Display text for next month link
-		currentText: 'Today', // Display text for current month link
+		currentText: 'Hoy', // Display text for current month link
 		monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
 			'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'], // Names of months for drop-down and formatting
 		monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'], // For formatting
@@ -248,6 +248,7 @@ $.extend(Datepicker.prototype, {
 		this._dialogInput.val(dateText);
 
 		this._pos = (pos ? (pos.length ? pos : [pos.pageX, pos.pageY]) : null);
+		
 		if (!this._pos) {
 			var browserWidth = window.innerWidth || document.documentElement.clientWidth ||	document.body.clientWidth;
 			var browserHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;

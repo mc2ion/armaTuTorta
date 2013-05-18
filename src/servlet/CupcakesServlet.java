@@ -44,11 +44,11 @@ public class CupcakesServlet extends HttpServlet {
 			if(user != null){
 				// perform list user operations
 				Integer typeId = Integer.valueOf(request.getParameter("typeId"));
-				System.out.println("typeId" + typeId);
+				
 				@SuppressWarnings("unchecked")
 				ArrayList<ListOrder_Step> list = (ArrayList<ListOrder_Step>)CommandExecutor.getInstance().executeDatabaseCommand(new command.ListPasos(typeId));
 				
-				System.out.println("aqui " + list.size());
+				
 				request.setAttribute("options", list);
 				
 				RequestDispatcher rd = getServletContext().getRequestDispatcher("/cupcakes.jsp");

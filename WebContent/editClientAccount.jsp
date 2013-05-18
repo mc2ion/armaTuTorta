@@ -9,33 +9,11 @@
 	<link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/style.css" />
-	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/demos.css" />
-	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/ui.theme.css" />
-	
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
-	<!--[if IE 8]>
-		<link rel="stylesheet" type="text/css" href="css/ie8.css" />
-	<![endif]-->
-	<!--[if IE 7]>
-		<link rel="stylesheet" type="text/css" href="css/ie7.css" />
-	<![endif]-->
-	<!--[if IE 6]>
-		<link rel="stylesheet" type="text/css" href="css/ie6.css" />
-	<![endif]-->
-	
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
-	<script type="text/javascript" src="/armaTuTorta/js/ui.core.js"></script>
-	<script type="text/javascript" src="/armaTuTorta/js/ui.datepicker.js"></script>
-	<script> 
-	$(function() {
-		$("#datepicker").datepicker({
-			minDate: +2
-		});
-	});
-	</script> 
-
+	
 </head>
 <body>
 <%
@@ -110,12 +88,12 @@
 								<% } %>
 								<label for="name">Nombres:</label>
 								<input type="text" name="txtName" id="txtName" size="35" maxlength="100" 
-									onBlur="validateName(this, '1');" value="<%= clientInfo.getFirstName() %>" /> 
+								oninput="validateName(this, '1');"	onBlur="validateName(this, '1');" value="<%= clientInfo.getFirstName() %>" /> 
 								<span class="error" id="errorName">Disculpe, debe introducir un nombre v&aacute;lido</span>
 								<br>
 								<label for="name">Apellidos:</label>
 								<input type="text" name="txtLastName" id="txtLastName" size="35"  maxlength="50" 
-								 onBlur="validateName(this, '2');" value="<%= clientInfo.getLastName() %>"/> 
+								oninput="validateName(this, '2');" onBlur="validateName(this, '2');" value="<%= clientInfo.getLastName() %>"/> 
 								<span class="error" id="errorLastName">Disculpe, debe introducir un apellido v&aacute;lido</span>
 								<br>
 								<label for="name">C&eacute;dula:</label>
@@ -129,14 +107,15 @@
 									<option value="V-">V</option>
 									<option value="E-">E</option>
 								</select>
-								<input type="text" name="txtCed" id="txtCed" size="28" maxlength="50"  onBlur="validateCedIdnt(this);"
+								<input type="text" name="txtCed" id="txtCed" size="28" maxlength="50"  
+								oninput="validateCedIdnt(this);" onBlur="validateCedIdnt(this);"
 								style="display: inline;" value="<%=  cedN %>" /><br>
 								 
 								<span class="error" id="errorCed">Disculpe, debe introducir un n&uacute;mero de c&eacute;dula v&aacute;lido</span>
 								<br>
 								<label for="name">Email:</label>
 								<input type="text" name="txtEmail" id="txtEmail" size="35" maxlength="50" 
-								onBlur="validateEmail(this);" value="<%= clientInfo.getEmail() %>" /> 
+								oninput="validateEmail(this);" onBlur="validateEmail(this);" value="<%= clientInfo.getEmail() %>" /> 
 								<span class="error" id="errorEmail" >Disculpe, debe introducir un correo electr&oacute;nico v&aacute;lido</span>
 								<br>
 							</fieldset>
@@ -167,13 +146,14 @@
 								
 									<label for="name">Tel&eacute;fono M&oacute;vil:</label>
 									<input type="text" name="txtMovPhone" id="txtMovPhone" size="35" maxlength="100"
-									 onBlur="validatePhone(this, '2');"  value="<%= clientInfo.getOtherPhone() %>" />
+									oninput="validatePhone(this, '2');"  onBlur="validatePhone(this, '2');"  value="<%= clientInfo.getOtherPhone() %>" />
 									<span class="error" id="errorMovPhone" >Debe introducir un telef&oacute;no v&aacute;lido (C&oacute;d. Operador + N&uacute;mero)</span>									
 								</div>
 
 								<br>
 								<label for="name">Direcci&oacute;n:</label>
-								<textarea rows="4" cols="28" style="resize: none;" onBlur="validateDir(this, '1');" id="dir" 
+								<textarea rows="4" cols="28" style="resize: none;" oninput="validateDir(this, '1');"
+								 onBlur="validateDir(this, '1');" id="dir" 
 								name="txtDir"><%= clientInfo.getAddress()%></textarea><br>
 								<span class="error" id="errorDir" >Disculpe, debe introducir direcci&oacute;n v&aacute;lida</span>
 								<br>
@@ -191,7 +171,7 @@
 									<div class="otherDir" <%= style %>>
 											<label for="name">Direcci&oacute;n de Env&iacute;o:</label>
 											<textarea rows="4" cols="28" style="resize: none;" 
-											onBlur="validateDir(this, '2');" id="dirEnv" name="txtDirEnv"><%= clientInfo.getShippingAddress() %></textarea><br>
+											oninput="validateDir(this, '2');" onBlur="validateDir(this, '2');" id="dirEnv" name="txtDirEnv"><%= clientInfo.getShippingAddress() %></textarea><br>
 											<span class="error" id="errorDirEnv" >Disculpe, debe introducir direcci&oacute;n de env&iacute;o v&aacute;lida</span>
 									</div>
 								</fieldset>
@@ -212,18 +192,18 @@
 								<fieldset>
 									<label for="name">Contrase&ntilde;a Anterior:</label>
 									<input type="password" name="txtOldPass" id="txtOldPass" size="35" maxlength="100" 
-									onBlur="validatePassAux(this);" />
+									oninput="validatePassAux(this);" onBlur="validatePassAux(this);" />
 									<span class="error" id="errorPassOld" >Debe introducir su contraseña anterior </span>
 									<br>
 									<label for="name">Contraseña nueva:</label>
 									<input type="password" name="txtNewPass" id="txtNewPass" size="35" maxlength="100" 
-									onBlur="validatePassNew(this);" />
+									oninput="validatePassNew(this);" onBlur="validatePassNew(this);" />
 									<span class="error" id="errorPassNew" >Disculpe, debe introducir una nueva contraseña</span>
 									<br>
 								
 									<label for="name">Repetir contraseña:</label>
 									<input type="password" name="txtNewPassRpt" id="txtNewPassRpt" size="35" maxlength="100" 
-									onBlur="validatePassRptNew(this);" />
+									oninput="validatePassRptNew(this);" onBlur="validatePassRptNew(this);" />
 									<span class="error" id="errorPassRpt" >Disculpe, las contraseñas deben coincidir</span>
 									<br>
 									

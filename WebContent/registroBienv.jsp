@@ -31,7 +31,7 @@
 <body>
 <%
 	HttpSession infoPage = request.getSession();
-	session.setAttribute("prevPage", "index.jsp");
+	session.setAttribute("prevPage", "HomePageServlet");
 	String error = (String) request.getAttribute("emailExist");
 %>	
 <div class="wrapper">
@@ -67,7 +67,8 @@
 				PD: Te hemos env&iacute;ado un correo electr&oacute;nico con la informaci&oacute;n de tu cuenta.
 				<br><br>
 				¡Muchas gracias por elegirnos!. 
-			<% }else{ 
+				
+			<% }else if(!error.equals("no se creo")){ 
 				String name = (String) request.getAttribute("name");
 			%>
 					<span class="bienv-title">Disculpe, el correo que intenta registrar ya existe.</span><br><br>
@@ -76,6 +77,15 @@
 					class="readmore"> click aqu&iacute;</a>
 					 y le enviaremos una nueva clave a su correo
 					electr&oacute;nico para que pueda seguir disfrutando de todos nuestros servicios.
+					<br><br>
+					¡Muchas gracias por elegirnos!. 
+
+			<% }else{ 
+			%>
+					<span class="bienv-title">¡Te pedimos disculpas!</span><br><br>
+					Ha ocurrido un error al intentar registrar su cuenta en el sistema. Por favor, intente m&aacute;s tarde. 
+					De persistir el problema lo invitamos a comunicarse con nosotros para transmitirnos el error.
+					
 					<br><br>
 					¡Muchas gracias por elegirnos!. 
 
