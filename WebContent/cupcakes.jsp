@@ -1,4 +1,5 @@
 <%@page import="java.util.List"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="domain.ListOrder_Step"%>
 <%@page import="domain.OrderStep"%>
 <%@page import="domain.StepOption"%>
@@ -25,6 +26,9 @@
 	HttpSession infoPage = request.getSession();
 	session.setAttribute("prevPage", "CupcakesServlet?typeId=2");
 	Client client = (Client) infoPage.getAttribute("client");
+	HashMap<String, String> hashMap = new HashMap<String, String>();
+	HashMap<String, Double> hashMapPrice = new HashMap<String, Double>();
+	HashMap<String, Long> hashMapId = new HashMap<String, Long>();
 %>
 <div class="wrapper">
 	<div id="header">
@@ -108,6 +112,9 @@
 			
 			<div class="asideRight">
 				<% if (client != null){ %>
+					<form id="target" action="/armaTuTorta/CupcakesServlet?typeId=2&pr=1" method="post" onSubmit="return setPrice()">
+					<input type="hidden" id="priceCake"  name="priceCake" value="0">
+			
 					<%
 							for(int i= 1; i<= options.size(); i++) { 	
 								int aux = i -1;
@@ -121,34 +128,40 @@
 					%>
 					<% if ( i == 1) { %>
 					<div class="block">
-						<p> <span class="step1"> Paso <%= i %>: </span>  <%= actualOrder.getName() %> </p>
+						<p> <span class="step1"> Paso <%= i %>: </span>  <span class="desc<%= i %>"> <%= actualOrder.getName() %> </span> </p>
 						<div class="options-steps">
 								<% for(int j= 1; j<= actualOptions.size(); j++) {
 									int aux2 = j - 1;
 									StepOption step = actualOptions.get(aux2);
+									hashMap.put(i + "" +j, step.getName());
+									hashMapPrice.put(step.getName(), step.getPrice());
+									hashMapId.put(step.getName(), step.getId());
 								
 								%>
-							<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <%= step.getName()  %> <br>
+							<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" ><span id="name<%= i+ "" +j%>">  <%= step.getName()%> <br>
+							<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 							<% }
 							%>
 						</div>
-						<div class="button-section" id="bt1Disable">
-							<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
-						</div>
-						<div class="button-section" style="display: none;" id="bt<%= i %>">
-							<input  type="submit" name="sbmtButton" class="button" value="Siguiente"  />
-						</div>
+						<span style="display: inline;" class="buttons">
+							<input  type="button" name="sbmtButtonPrev" class="buttonR" value="Reiniciar" />
+							<input  type="button" name="sbmtButton" class="buttonDisable" value="Siguiente" id="bt1Disable"  />
+							<input  type="button" name="sbmtButton" class="button" value="Siguiente"  style="display: none;" id="bt<%= i %>" />
+						</span>			
 					</div>
 					<% 
 					}else if (i==2){ %>
 						<div class="block-<%=i%>" style="display:none">
 						<p>
-						<a href="#" id="backLink<%=aux%>"><img src="images/return.png"></a>
-						<span class="step1"> Paso <%= i %>: </span>  <%= actualOrder.getName() %> </p>
+						<span class="step1"> Paso <%= i %>: </span> <span class="desc<%= i %>"> <%= actualOrder.getName() %> </span> </p>
 						<div class="options-steps">
 								<% for(int j= 1; j<= actualOptions.size(); j++) {
 									int aux2 = j - 1;
 									StepOption step = actualOptions.get(aux2);
+									hashMap.put(i + "" +j, step.getName());
+									hashMapPrice.put(step.getName(), step.getPrice());
+									hashMapId.put(step.getName(), step.getId());
+									
 									boolean regalo = false;
 									boolean cantidad = false;
 									if (step.getName().contains("regalar")){
@@ -156,18 +169,23 @@
 									}else if (step.getName().contains("antidad")){
 										cantidad = true;
 									}
+									String div = "";
 									if (actualOptions.size() > 4){
+										div = "options-steps-left";
 									
+									}
 								%>
-										<div class="options-steps-left">
-											<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <%= step.getName()  %> 
+										<div class="<%= div %>">
+											<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%>
+											<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 											<% if (regalo){  %>
-											<br> <span style="color: gray; font-size: 16px; margin-left: 15px;"> Coloca el texto de tu calcoman&iacute;a aqu&iacute; </span>: <input type="text" >
+											<br> <span style="color: gray; font-size: 16px; margin-left: 15px;"> Coloca el texto de tu calcoman&iacute;a aqu&iacute; </span>: 
+											<input name="txtCalcomania" id="txtCalcomania" type="text" >
 											<br>
 											<% }else if (cantidad){ %>
-												<select>
+												<select name="cantCupcakes" id="cantCupcakes">
 												<% 
-													for (int k = 1 ; k<3 ; k++){
+													for (int k = 1 ; k<13 ; k++){
 												%>
 													<option value="<%= k %>"><%= k %></option>
 												<% 
@@ -175,71 +193,50 @@
 												%>
 											</select>
 											<span style="color: gray; font-size: 16px; margin-left: 15px;">
-												<br>(Si desea ordenar m&aacute;s de 2 docenas, le invitamos a solicitar su pedido por aqu&iacute;)
+												<br>(Los sabores de las docenas ser&aacute;n iguales. Si desea ordenar diversos sabores lo invitamos
+												a realizar varios pedidos)
 											</span>
 											<% }else{ %>
 											<br>
 											<% }%>
 										</div>	
 								<%
-									}else{
-								%>
-									<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <%= step.getName()  %> 
-									<% if (regalo){  %>
-											<br> <span style="color: gray; font-size: 16px; margin-left: 15px;"> Coloca el texto de tu calcoman&iacute;a aqu&iacute; </span>: <input type="text" >
-											<br>
-									<% }else if (cantidad){ %>
-										<select>
-										<% 
-											for (int k = 1 ; k<3 ; k++){
-										%>
-											<option value="<%= k %>"><%= k %></option>
-										<% 
-											}
-										%>
-									</select>
-									<span style="color: gray; font-size: 16px; margin-left: 15px;">
-												<br>(Si desea ordenar m&aacute;s de 2 docenas, le invitamos a solicitar su pedido por aqu&iacute;)
-									</span>
-									<% }else{ %>
-									<br>
-									<% }%>
-								<% 
-									}
+								
+									
 								}
 								%>
 							
 						</div>
-						<div class="button-section" id="bt1Disable">
-							<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
-						</div>
-						<div class="button-section" style="display: none;" id="bt<%= i %>">
-							<input  type="submit" name="sbmtButton" class="button" value="Siguiente"  />
-						</div>
+						<span style="display: inline;" class="buttons">
+							<input  type="button" name="sbmtButtonPrev" class="buttonR" value="Reiniciar" />
+							<input  type="button" name="sbmtButton" class="buttonDisable" value="Siguiente" id="bt<%=i%>Disable"  />
+							<input  type="button" name="sbmtButton" class="button" value="Siguiente"  style="display: none;" id="bt<%= i %>" />
+						</span>		
 					</div>
-				
-					
-					
 					<%
 					}else{
 					%>
-					<div class="block-<%=i%>" style="display:none">
+							<div class="block-<%=i%>" style="display:none">
 						<p>
-						<a href="#" id="backLink<%=aux%>"><img src="images/return.png"></a>
 						<span class="step1"> Paso <%= i %>: </span>  <%= actualOrder.getName() %> </p>
 						<div class="options-steps">
 								<% for(int j= 1; j<= actualOptions.size(); j++) {
 									int aux2 = j - 1;
 									StepOption step = actualOptions.get(aux2);
+									hashMap.put(i + "" +j, step.getName());
+									hashMapPrice.put(step.getName(), step.getPrice());
+									hashMapId.put(step.getName(), step.getId());
 									if (actualOptions.size() > 4){
 								%>
 										<div class="options-steps-left">
-											<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <%= step.getName()  %> <br>
+											<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" ><span id="name<%= i+ "" +j%>">  <%= step.getName()%> <br>
+											<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 										</div>	
 								<%
 									}else{
 								%>
-									<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <%= step.getName()  %> <br>
+									<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" ><span id="name<%= i+ "" +j%>">  <%= step.getName()%> <br>
+									<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 								
 								<% 
 									}
@@ -247,19 +244,29 @@
 								%>
 							
 						</div>
-						<div class="button-section" id="bt1Disable">
-							<input  type="submit" name="sbmtButton" class="buttonDisable" value="Siguiente"  />
-						</div>
-						<div class="button-section" style="display: none;" id="bt<%= i %>">
-							<input  type="submit" name="sbmtButton" class="button" value="Siguiente"  />
-						</div>
+						<% if (i != 6){%>
+							<span style="display: inline;" class="buttons">
+									<input  type="button" name="sbmtButtonPrev" class="buttonR" value="Reiniciar"  />
+									<input  type="button" name="sbmtButton" class="buttonDisable" value="Siguiente" id="bt<%= i %>Disable"  />
+									<input  type="button" name="sbmtButton" class="button" value="Siguiente"  style="display: none;" id="bt<%= i %>" />
+							</span>		
+						<% }else{%>
+							<span style="display: inline;" class="buttons">
+								<input  type="button" name="sbmtButtonPrev" class="buttonR" value="Reiniciar"  />
+								<input  type="button" name="sbmtButton" class="buttonDisable" value="Siguiente" id="bt<%= i %>Disable"  />
+								<input  type="submit" name="sbmtButton" class="button" value="Ordenar"  style="display: none;" id="bt<%= i %>" />
+							</span>		
+						<% }%>
 					</div>
-				
-				
 				<% 
 					}
-				}
-			}else{ %>
+				 }
+				 session.setAttribute("hashMapCup", hashMap);
+				 session.setAttribute("hashMapPriceCup", hashMapPrice);
+				 session.setAttribute("hashMapIdCup", hashMapId);
+				%>
+				</form>
+			<%}else{ %>
 					<br>
 					<div style="text-align: justify;">
 						Disculpe, para tener acceso a esta secci&oacute;n  necesita estar registrado, y haber iniciado sesi&oacute;n. <br><br>
@@ -272,9 +279,10 @@
 						Si ya est&aacute; registrado, <a href="#signup"  rel="leanModal" id="go" class="readmore"> inicie sesi&oacute;n.</a>
 					</div>
 				<% } %>
+			</form>
 			</div>
 			<% if (client != null){ %>
-				<div class="subtotal-sectionTortas"> Sub-total: Bs. 100,00 </div>
+				<div class="subtotal-sectionTortas"> Sub-total: <span class="price"> 0,00</span> </div>
 			<% } %>
 			<% if (client != null){ %>
 			<div class="banner">

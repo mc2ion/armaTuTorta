@@ -1,7 +1,6 @@
 package Util;
 
 
-import java.io.File;
 import java.util.Date;
 import java.util.Properties;
 
@@ -28,11 +27,12 @@ public class SendEmail  extends Thread  {
 		  String to = email;
 		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String password =  propertiesFile.getProperty(pref + "EmailPasswordFrom");
-				
+		  final String port = propertiesFile.getProperty(pref + "EmailPort");
 		  Properties properties = System.getProperties();
 		  properties.setProperty("mail.smtp.host", propertiesFile.getProperty(pref + "EmailServer") );
-		  properties.setProperty("mail.smtp.port", "587");
+		  properties.setProperty("mail.smtp.port", port);
 		  properties.setProperty("mail.smtp.starttls.enable", "true");
+		  properties.put("mail.transport.protocol", "smtps");
 		  properties.put("mail.smtp.auth", "true");
 		  properties.put("mail.debug", "true");
 		  
@@ -78,15 +78,15 @@ public class SendEmail  extends Thread  {
 	
 	public static void sendEmailPassword(Properties propertiesFile, String email, String name, String newPassword, boolean attach, String pref) {
 		
-		
-		
 		  String to = email;
 		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String password =  propertiesFile.getProperty(pref + "EmailPasswordFrom");
-				
+		  final String port = propertiesFile.getProperty(pref + "EmailPort");
+			 	
 		  Properties properties = System.getProperties();
 		  properties.setProperty("mail.smtp.host", propertiesFile.getProperty(pref + "EmailServer") );
-		  properties.setProperty("mail.smtp.port", "587");
+		  properties.setProperty("mail.smtp.port", port);
+		  properties.put("mail.transport.protocol", "smtp");
 		  properties.setProperty("mail.smtp.starttls.enable", "true");
 		  properties.put("mail.smtp.auth", "true");
 		  
@@ -133,10 +133,12 @@ public class SendEmail  extends Thread  {
 		  String to = propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String password =  propertiesFile.getProperty(pref + "EmailPasswordFrom");
-				
+		  final String port = propertiesFile.getProperty(pref + "EmailPort");
+			 
 		  Properties properties = System.getProperties();
 		  properties.setProperty("mail.smtp.host", propertiesFile.getProperty(pref + "EmailServer") );
-		  properties.setProperty("mail.smtp.port", "587");
+		  properties.setProperty("mail.smtp.port", port);
+		  properties.put("mail.transport.protocol", "smtps");
 		  properties.setProperty("mail.smtp.starttls.enable", "true");
 		  properties.put("mail.smtp.auth", "true");
 		  
@@ -184,10 +186,11 @@ public class SendEmail  extends Thread  {
 		  String to = email;
 		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String password =  propertiesFile.getProperty(pref + "EmailPasswordFrom");
-				
+		  final String port = propertiesFile.getProperty(pref + "EmailPort");
+			 
 		  Properties properties = System.getProperties();
 		  properties.setProperty("mail.smtp.host", propertiesFile.getProperty(pref + "EmailServer") );
-		  properties.setProperty("mail.smtp.port", "587");
+		  properties.setProperty("mail.smtp.port", port);
 		  properties.setProperty("mail.smtp.starttls.enable", "true");
 		  properties.put("mail.smtp.auth", "true");
 		  
@@ -237,15 +240,14 @@ public class SendEmail  extends Thread  {
 	public static void sendEmailOrderCake(Properties propertiesFile, String numPedido, boolean attach, String pref,
 			String[] datos, String[] relleno, Client client) {
 		
-	
-		
 		  String to = propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String password =  propertiesFile.getProperty(pref + "EmailPasswordFrom");
-				
+		  final String port = propertiesFile.getProperty(pref + "EmailPort");
+			 
 		  Properties properties = System.getProperties();
 		  properties.setProperty("mail.smtp.host", propertiesFile.getProperty(pref + "EmailServer") );
-		  properties.setProperty("mail.smtp.port", "587");
+		  properties.setProperty("mail.smtp.port", port);
 		  properties.setProperty("mail.smtp.starttls.enable", "true");
 		  properties.put("mail.smtp.auth", "true");
 		  
@@ -341,10 +343,11 @@ public class SendEmail  extends Thread  {
 		  String to = propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String password =  propertiesFile.getProperty(pref + "EmailPasswordFrom");
-				
+		  final String port = propertiesFile.getProperty(pref + "EmailPort");
+			 
 		  Properties properties = System.getProperties();
 		  properties.setProperty("mail.smtp.host", propertiesFile.getProperty(pref + "EmailServer") );
-		  properties.setProperty("mail.smtp.port", "587");
+		  properties.setProperty("mail.smtp.port", port);
 		  properties.setProperty("mail.smtp.starttls.enable", "true");
 		  properties.put("mail.smtp.auth", "true");
 		  
@@ -422,16 +425,121 @@ public class SendEmail  extends Thread  {
 	}
 	
 	
+	public static void sendEmailOrderCupcake(Properties propertiesFile, String numPedido, boolean attach, String pref,
+			String[] datos, String[] color, Client client) {
+		
+		  String to = propertiesFile.getProperty(pref + "EmailCountFrom");
+		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
+		  final String password =  propertiesFile.getProperty(pref + "EmailPasswordFrom");
+		  final String port = propertiesFile.getProperty(pref + "EmailPort");
+			 
+		  Properties properties = System.getProperties();
+		  properties.setProperty("mail.smtp.host", propertiesFile.getProperty(pref + "EmailServer") );
+		  properties.setProperty("mail.smtp.port", port);
+		  properties.setProperty("mail.smtp.starttls.enable", "true");
+		  properties.put("mail.smtp.auth", "true");
+		  
+		  Session session = Session.getDefaultInstance(properties,
+		   new javax.mail.Authenticator() {
+			  protected PasswordAuthentication getPasswordAuthentication() {
+			   return new PasswordAuthentication(user,password);
+			  }
+		  });
+		   
+		  try{
+			  
+			  // Create a default MimeMessage object.
+		         MimeMessage message = new MimeMessage(session);
+	
+		         // Set From: header field of the header.
+		         message.setFrom(new InternetAddress(user));
+	
+		         // Set To: header field of the header.
+		         message.addRecipient(Message.RecipientType.TO,
+		                                  new InternetAddress(to));
+	
+		         // Set Subject: header field
+		         message.setSubject("Tienes un nuevo pedido de cupcakes. Orden N°" + numPedido);
+	
+		         String rell = "";
+		         if (color != null){
+			         for (int i = 0; i< color.length; i++){
+			        	 if (i == color.length - 1)
+			        		 rell += color[i] ;
+			        	 else
+			        		 rell += color[i] + "," ;
+			         }
+		         }
+		         
+		         // Send the actual HTML message, as big as you like
+		         String messa = "Has recibido un nuevo pedido. <br><br>" +
+		    		"<strong> Datos del pedido.</strong><br><br>" +
+		    		" Producto pedido: Cupcakes<br>" +
+		    		" Tama&ntilde;o: " + datos[0] + "<br>";
+		         	if (datos[6] != null)
+		         		messa += " Cantidad: " + datos[6] + "" + datos[1]  + "<br>";
+		         	else{
+		         		messa += " Cantidad: " + datos[1]  + "<br>";
+    					messa += " Texto de la Calcoman&iacute;a: " + datos[5] + "<br>";
+		         	}
+		     		messa += " Sabor de los cupcakes: " + datos[2]  + "<br>" +
+		     		" Cubierta: " + datos[3]  + "<br>" +
+		     		" Decoraci&oacute;n: " + datos[4] + "<br>";
+		     		if (color!= null)
+		     			messa += " Color(es): " + rell + "<br>";
+		     		messa += " Precio: Bs." + datos[7] + ".<br><br>" +
+		     		" Fecha de Entrega: " + datos[8] + ".<br><br>" +
+		     		
+		     		" <strong>Datos del comprador:</strong> <br><br> " +
+		     		" Nombre: " + client.getFirstName() + " "  + client.getLastName() +  "<br>" +
+		     		" Correo Electr&oacute;nico: " + client.getEmail() + "<br>" +
+		     		" Tel&eacute;fono: " + client.getPhone() + "<br>";
+		         	if (client.getOtherPhone() != null && !client.getOtherPhone().equals(""))
+		         		messa += "Otro Tel&eacute;fono: " + client.getOtherPhone() + "<br>";
+		         	messa += "Dirección de Envío: " + client.getShippingAddress() + ".<br><br>";
+		          
+		         MimeBodyPart mbp1 = new MimeBodyPart();
+		         mbp1.setText(messa);
+		         mbp1.setContent(messa, "text/html");
+		         Multipart mp = new MimeMultipart();
+		         mp.addBodyPart(mbp1);
+
+		         if (attach){
+		             MimeBodyPart mbp = new MimeBodyPart();
+		             FileDataSource fds = new FileDataSource(datos[6]);
+		             mbp.setDataHandler(new DataHandler(fds));
+		             mbp.setFileName(fds.getName());
+		             mp.addBodyPart(mbp);
+		         }
+		        
+		         message.setContent(mp);
+		         message.setSentDate(new Date());
+		         Transport.send(message);
+//		         if (attach){
+//			         File file = new File(datos[6]);
+//			         if(file.delete()){
+//		    			System.out.println(file.getName() + " is deleted!");
+//			         }else{
+//		    			System.out.println("Delete operation is failed.");
+//			         }
+//		         }
+		 
+		   }catch (MessagingException ex) {
+			   ex.printStackTrace();
+		   }
+	}
+	
 	public static void sendEmailOrderDulcesTortas(Properties propertiesFile, String numPedido, boolean attach, String pref,
 			String[] datos, String[] productos, Client client) {
 		
 		  String to = propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String password =  propertiesFile.getProperty(pref + "EmailPasswordFrom");
-				
+		  final String port = propertiesFile.getProperty(pref + "EmailPort");
+			 
 		  Properties properties = System.getProperties();
 		  properties.setProperty("mail.smtp.host", propertiesFile.getProperty(pref + "EmailServer") );
-		  properties.setProperty("mail.smtp.port", "587");
+		  properties.setProperty("mail.smtp.port", port);
 		  properties.setProperty("mail.smtp.starttls.enable", "true");
 		  properties.put("mail.smtp.auth", "true");
 		  

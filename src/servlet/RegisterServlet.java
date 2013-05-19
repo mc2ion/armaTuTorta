@@ -98,7 +98,7 @@ public class RegisterServlet extends HttpServlet {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						SendEmail.sendEmail(propertiesFile, email, firstName + " " + lastName, password, false, "contrato");
+						SendEmail.sendEmail(propertiesFile, email, firstName + " " + lastName, password, false, "soporte");
 				    }
 				}).start();
 				request.setAttribute("emailExist", "");

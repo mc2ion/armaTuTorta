@@ -60,7 +60,7 @@ public class PasswordGeneratorServlet extends HttpServlet {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						SendEmail.sendEmailPassword(propertiesFile, email, name, password, false, "contrato");
+						SendEmail.sendEmailPassword(propertiesFile, email, name, password, false, "soporte");
 						
 				    }
 				}).start();

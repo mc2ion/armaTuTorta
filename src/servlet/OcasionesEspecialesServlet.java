@@ -145,7 +145,7 @@ public class OcasionesEspecialesServlet extends HttpServlet {
 				
 				new Thread(new Runnable() {
 				    public void run() {
-			    		SendEmail.sendEmailOrderOcEsp(propertiesFile, String.valueOf(rowsUpdated), attachment, "contrato", datos, productos, client);
+			    		SendEmail.sendEmailOrderOcEsp(propertiesFile, String.valueOf(rowsUpdated), attachment, "ventas", datos, productos, client);
 						
 				    }
 				}).start();

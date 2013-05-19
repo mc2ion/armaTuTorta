@@ -137,7 +137,7 @@ public class DulcesTortasServlet extends HttpServlet {
 					final String[] datos = {date, price};
 					new Thread(new Runnable() {
 					    public void run() {
-				    		SendEmail.sendEmailOrderDulcesTortas(propertiesFile, String.valueOf(rowsUpdated), false, "contrato", datos, cantProd, client);
+				    		SendEmail.sendEmailOrderDulcesTortas(propertiesFile, String.valueOf(rowsUpdated), false, "ventas", datos, cantProd, client);
 								
 					    }
 					}).start();

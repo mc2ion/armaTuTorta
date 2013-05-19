@@ -24,7 +24,6 @@ public class CreateClient implements DatabaseCommand {
 		sta.setString(1, client.getEmail());
 		ResultSet rs = sta.executeQuery();
 		if (rs.next()){
-			System.out.println("encontro el cliente");
 			// El cliente ya tiene ese correo registrado, dar error
 			lastIdInserted = -2;
 			

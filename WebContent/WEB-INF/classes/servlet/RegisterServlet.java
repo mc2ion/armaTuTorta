@@ -37,7 +37,9 @@ public class RegisterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		RequestDispatcher rd;
+		rd = getServletContext().getRequestDispatcher("/registro.jsp");			
+		rd.forward(request, response);
 	}
 
 	/**
@@ -96,15 +98,12 @@ public class RegisterServlet extends HttpServlet {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						SendEmail.sendEmail(propertiesFile, email, firstName + " " + lastName, password, false, "contrato");
+						SendEmail.sendEmail(propertiesFile, email, firstName + " " + lastName, password, false, "soporte");
 				    }
 				}).start();
-				
 				request.setAttribute("emailExist", "");
 				rd = getServletContext().getRequestDispatcher("/registroBienv.jsp");			
 				rd.forward(request, response);
-				
-				
 			}
 			else if (userId == -2){
 				request.setAttribute("emailExist", email);
@@ -113,7 +112,9 @@ public class RegisterServlet extends HttpServlet {
 				rd.forward(request, response);
 			}
 		} catch (Exception e) {
-			System.out.println("No se creo");
+			request.setAttribute("emailExist", "no se creo");
+			rd = getServletContext().getRequestDispatcher("/registroBienv.jsp");			
+			rd.forward(request, response);
 		}
 	}
 }

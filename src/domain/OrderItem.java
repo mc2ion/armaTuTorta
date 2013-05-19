@@ -6,6 +6,9 @@ public class OrderItem {
 	private long orderId;
 	private long stepOptionId;
 	private double price;
+	private String nameImage;
+	private String txtCalcomania;
+	private String cantDocenas;
 	
 	public void setId(long id) {
 		this.id = id;
@@ -37,6 +40,30 @@ public class OrderItem {
 
 	public double getPrice() {
 		return price;
+	}
+	
+	public void setNombreImg(String nombreImg) {
+		this.nameImage = nombreImg;
+	}
+
+	public String getNombreImg() {
+		return nameImage;
+	}
+	
+	public void setTxtCalcomania(String txtCalcomania) {
+		this.txtCalcomania = txtCalcomania;
+	}
+
+	public String getTxtCalcomania() {
+		return txtCalcomania;
+	}
+	
+	public void setCantDocenas(String cantDocenas) {
+		this.cantDocenas = cantDocenas;
+	}
+
+	public String getCantDocenas() {
+		return cantDocenas;
 	}
 	
 

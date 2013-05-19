@@ -118,7 +118,90 @@
 					</div>
 				<% 
 					}else{
-				%>
+				
+					if (i == 5){
+				%>	
+						<div class="block-<%=i%>" style="display:none">
+							<p>
+							<span class="step1"> Paso <%= i %>: </span> <span class="desc<%= i %>"> <%= actualOrder.getName() %> </span> 
+							</p>
+							<div class="options-steps">
+								<div id="capa1" style="display:none">
+									Capa 1: <select name="capa1"  id="selectCapa1"> 
+									<option value="0">  Seleccione Sabor
+									<% for(int j= 1; j<= actualOptions.size(); j++) {
+										int aux2 = j - 1;
+										StepOption step = actualOptions.get(aux2);
+										hashMap.put(i + "" +j, step.getName());
+										hashMapPrice.put(step.getName(), step.getPrice());
+										hashMapId.put(step.getName(), step.getId());
+											
+									%>
+									<option value="<%= j %>"> <%= step.getName()%>
+									<% }
+									%>
+									</select>
+									<span style="display:none;" class="price-intC10"> 0</span>
+									<% for(int j= 1; j<= actualOptions.size(); j++) {
+										int aux2 = j - 1;
+										StepOption step = actualOptions.get(aux2);
+									%>
+										<span style="display:none;" class="price-intC1<%= j %>"> <%= step.getPrice() %></span>
+									<% }%>
+								</div>
+								<div id="capa2" style="display:none">
+									Capa 2: <select name="capa2"  id="selectCapa2"> 
+									<option value="0">  Seleccione Sabor
+									<% for(int j= 1; j<= actualOptions.size(); j++) {
+										int aux2 = j - 1;
+										StepOption step = actualOptions.get(aux2);
+									%>
+									<option value="<%= j %>"><%= step.getName()%>
+									<% }
+									%>
+									</select>
+									<span style="display:none;" class="price-intC20"> 0</span>
+									<% for(int j= 1; j<= actualOptions.size(); j++) {
+										int aux2 = j - 1;
+										StepOption step = actualOptions.get(aux2);
+									%>
+										<span style="display:none;" class="price-intC2<%= j %>"> <%= step.getPrice() %></span>
+									<% }%>
+								</div>
+								
+								<div id="capa3" style="display:none">
+									Capa 3: <select name="capa3" id="selectCapa3"> 
+									<option value="0">  Seleccione Sabor 
+									<% for(int j= 1; j<= actualOptions.size(); j++) {
+										int aux2 = j - 1;
+										StepOption step = actualOptions.get(aux2);
+										
+											
+									%>
+									<option value="<%= j %>"><%= step.getName()%>
+									<% }
+									%>
+									</select>
+									<span style="display:none;" class="price-intC30"> 0</span>
+									<% for(int j= 1; j<= actualOptions.size(); j++) {
+										int aux2 = j - 1;
+										StepOption step = actualOptions.get(aux2);
+									%>
+										<span style="display:none;" class="price-intC3<%= j %>"> <%= step.getPrice() %></span>
+									<% }%>
+								</div>
+							</div>
+					
+						
+						<span style="display: inline;" class="buttons">
+							<input  type="button" name="sbmtButtonPrev" class="buttonR" value="Reiniciar"  />
+							<input  type="button" name="sbmtButton" class="buttonDisable" value="Siguiente" id="bt<%= i %>Disable"  />
+							<input  type="button" name="sbmtButton" class="button" value="Siguiente"  style="display: none;" id="bt<%= i %>" />
+						</span>	
+						</div>						
+					
+				<%	}else{ %>	
+				
 					<div class="block-<%=i%>" style="display:none">
 						<p>
 						<span class="step1"> Paso <%= i %>: </span> <span class="desc<%= i %>"> <%= actualOrder.getName() %> </span> </p>
@@ -185,6 +268,8 @@
 					</span>		
 				<% }%>
 				</div>
+				<%	} %>	
+				
 				<% 
 					}
 				}

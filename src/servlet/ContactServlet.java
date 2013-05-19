@@ -71,7 +71,7 @@ public class ContactServlet extends HttpServlet {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						SendEmail.sendContactEmail(propertiesFile, email, name, phone, message, false, "contrato");
+						SendEmail.sendContactEmail(propertiesFile, email, name, phone, message, false, "soporte");
 				    }
 				}).start();
 				new Thread(new Runnable() {
@@ -85,7 +85,7 @@ public class ContactServlet extends HttpServlet {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						SendEmail.sendContactEmailCopy(propertiesFile, email, name, phone, message, false, "contrato");
+						SendEmail.sendContactEmailCopy(propertiesFile, email, name, phone, message, false, "soporte");
 				    }
 				}).start();
 				
@@ -101,7 +101,7 @@ public class ContactServlet extends HttpServlet {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						SendEmail.sendContactEmail(propertiesFile, email, name, phone, message, false, "contrato");
+						SendEmail.sendContactEmail(propertiesFile, email, name, phone, message, false, "soporte");
 				    }
 				}).start();
 			}

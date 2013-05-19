@@ -2,6 +2,9 @@ $(document).ready(function() {
 	var priceTotal = 0;
 	var priceTotalAux = 0;
 	var capas = 0;
+	var priceCapa1 = 0;
+	var priceCapa2 = 0;
+	var priceCapa3 = 0;
 	
 	$("a[rel*=leanModal]").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
 
@@ -40,6 +43,16 @@ $(document).ready(function() {
 		}else{
 			$(".block-4").hide();
 			$(".block-5").show();
+			if (capas == 1)	{
+				$("#capa1").show();
+			}else if (capas == 2)	{
+				$("#capa1").show();
+				$("#capa2").show();
+			}else{
+				$("#capa1").show();
+				$("#capa2").show();
+				$("#capa3").show();
+			}
 			mostrarPaso5();
 		}	
 		
@@ -337,6 +350,28 @@ $(document).ready(function() {
 		
 	}
 	
+	function getPriceCapa(i,j){
+		var priceAux = priceTotal;
+		var selectIdAux = '.price-intC' + i+j;
+		var price = $(selectIdAux).text();
+		priceAux = priceAux + Number(price);
+		if ( i == 1)
+			priceAux += Number(priceCapa2) + Number(priceCapa3);
+		if ( i == 2)
+			priceAux += Number(priceCapa1) + Number(priceCapa3);
+		if ( i == 3)
+			priceAux += Number(priceCapa1) + Number(priceCapa2);
+		
+		var priceText = priceAux + '.00';
+		$('.price').text(priceText);
+		priceTotalAux = priceAux;
+		if (i == 5)
+			setPriceTotal();
+		return price;
+		
+	}
+	
+	
 	/* Obtiene el precio del elemento seleccionado y lo elimina del total */
 	function deletePrice(i,j){
 		var priceAux = priceTotal;
@@ -366,5 +401,71 @@ $(document).ready(function() {
 		$("#priceCake").val(priceText);
 		return true;
 	});
+	
+	$('#selectCapa1').change(function() {
+		j = $(this).val();
+		priceCapa1 = getPriceCapa(1,j);
+		bool = checkCapas();
+		if (bool){
+			$("#bt5Disable").hide();
+			$("#bt5").show();
+		}else{
+			$("#bt5Disable").show();
+			$("#bt5").hide();
+		}
+	});
+	
+	$('#selectCapa2').change(function() {
+		j = $(this).val();
+		priceCapa2 = getPriceCapa(2,j);
+		bool = checkCapas();
+		if (bool){
+			$("#bt5Disable").hide();
+			$("#bt5").show();
+		}else{
+			$("#bt5Disable").show();
+			$("#bt5").hide();
+		}
+	});
+	
+	$('#selectCapa3').change(function() {
+		j = $(this).val();
+		priceCapa3 = getPriceCapa(3,j);
+		bool = checkCapas();
+		if (bool){
+			$("#bt5Disable").hide();
+			$("#bt5").show();
+		}else{
+			$("#bt5Disable").show();
+			$("#bt5").hide();
+		}
+		
+	});
+	
+	function checkCapas(){
+		capa1 = $('#selectCapa1').val();
+		capa2 = $('#selectCapa2').val();
+		capa3 = $('#selectCapa3').val();
+		bool = true;
+		if (capas == 1){
+			if (capa1 == "0") 
+				bool = false;
+		}
+		else if (capas == 2) {
+			if (capa1 == "0") 
+				bool = false;
+			if (capa2 == "0")
+				bool = false;
+		}else{
+			if (capa1 == "0") 
+				bool = false;
+			if (capa2 == "0")
+				bool = false;
+			if (capa3 == "0")
+				bool = false;
+		}
+		return bool;
+		
+	}
 	
 });

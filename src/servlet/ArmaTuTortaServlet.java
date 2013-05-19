@@ -133,10 +133,18 @@ public class ArmaTuTortaServlet extends HttpServlet {
 		String tamInt = multipart.getParameter("2");
 		String saborInt = multipart.getParameter("3");
 		String capasInt = multipart.getParameter("4");
-		String[] rellenoInt = multipart.getParameterValues("5");
+		String capa1 = "", capa2 = "" , capa3 = "";
+		if (Integer.valueOf(capasInt) >= 1)
+			capa1 = multipart.getParameter("capa1");
+		if (Integer.valueOf(capasInt) >= 2)
+			capa2  = multipart.getParameter("capa2");
+		if (Integer.valueOf(capasInt) == 3)
+			capa3 = multipart.getParameter("capa3");
+		
+		
 		String cubiertaInt = multipart.getParameter("6");
 		String forma, tamano, sabor, capas,  cubierta;
-		final String[] relleno = new String[rellenoInt.length];
+		final String[] relleno = new String[Integer.valueOf(capasInt)];
 		String precio = multipart.getParameter("priceCake");
 		
 		@SuppressWarnings("unchecked")
@@ -146,10 +154,13 @@ public class ArmaTuTortaServlet extends HttpServlet {
 		sabor = hashMap.get("3"+saborInt);
 		capas = hashMap.get("4"+capasInt);
 		cubierta = hashMap.get("6"+cubiertaInt);
-		for (int i = 0 ; i < rellenoInt.length; i++){
-			relleno[i] = hashMap.get("5"+ rellenoInt[i]);
-		}
-		
+		if (!capa1.equals(""))
+			relleno[0] = hashMap.get("5"+ capa1);
+		if (!capa2.equals(""))
+			relleno[1] = hashMap.get("5"+ capa2);
+		if (!capa3.equals(""))
+			relleno[2] = hashMap.get("5"+ capa3);
+	
 		OrderCake orderCake = new OrderCake();
 		orderCake.setForma(forma);
 		orderCake.setSabor(sabor);
@@ -186,6 +197,7 @@ public class ArmaTuTortaServlet extends HttpServlet {
 		String precio = request.getParameter("priceCake");
 		String fecha = request.getParameter("txtFecha");
 		String clientId =  request.getParameter("clientId");
+		String nombreImagen = request.getParameter("nombreImagen");
 		
 		String error = "";
 		
@@ -227,6 +239,8 @@ public class ArmaTuTortaServlet extends HttpServlet {
 		item = new OrderItem();
 		item.setPrice(hashMapPrice.get(cubierta));
 		item.setStepOptionId(hashMapId.get(cubierta));
+		if (cubierta.contains("Fondant con la imagen"))
+			item.setNombreImg(nombreImagen);
 		orderItems.add(item);
 		
 		
@@ -254,7 +268,6 @@ public class ArmaTuTortaServlet extends HttpServlet {
 			
 			final Long rowsUpdated  = (Long) CommandExecutor.getInstance().executeDatabaseCommand(new command.CreateOrder(order, orderItems));	
 			
-			String nombreImagen = request.getParameter("nombreImagen");
 			
 			boolean attach = false;
 			if (nombreImagen != "")
@@ -265,7 +278,7 @@ public class ArmaTuTortaServlet extends HttpServlet {
 			final String[] datos = {forma, tam, sabor, capas, cubierta, precio, nombreImagen, fecha};
 			new Thread(new Runnable() {
 			    public void run() {
-		    		SendEmail.sendEmailOrderCake(propertiesFile, String.valueOf(rowsUpdated), attachment, "contrato", datos, relle, client);
+		    		SendEmail.sendEmailOrderCake(propertiesFile, String.valueOf(rowsUpdated), attachment, "ventas", datos, relle, client);
 						
 			    }
 			}).start();

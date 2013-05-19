@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 import command.CommandExecutor;
@@ -90,8 +91,10 @@ public class ClientAccountServlet extends HttpServlet {
 			}
 		
 			Integer userId = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.EditClient(client));
-			System.out.println("aqui " + userId + "/" + client.getId());
 			if(userId > 0){
+				HttpSession session = request.getSession();
+				session.removeAttribute("client");
+				session.setAttribute("client", client);
 				request.setAttribute("editClient", "successUser");
 				rd = getServletContext().getRequestDispatcher("/editClientMessage.jsp");			
 				rd.forward(request, response);

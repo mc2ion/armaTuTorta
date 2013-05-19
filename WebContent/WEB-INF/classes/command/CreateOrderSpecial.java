@@ -36,8 +36,6 @@ public class CreateOrderSpecial implements DatabaseCommand {
 		
 		int rowsUpdated = sta.executeUpdate();
 		
-		System.out.println(" salio con valor " + rowsUpdated );
-
 		if (rowsUpdated == 1){
 			
 			PreparedStatement getLastInsertId = conn.prepareStatement("SELECT LAST_INSERT_ID()");  

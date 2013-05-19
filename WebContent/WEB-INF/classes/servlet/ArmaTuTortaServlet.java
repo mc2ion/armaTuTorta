@@ -59,7 +59,7 @@ public class ArmaTuTortaServlet extends HttpServlet {
 			if(user != null){
 				// perform list user operations
 				Integer typeId = Integer.valueOf(request.getParameter("typeId"));
-				System.out.println("typeId" + typeId);
+				
 				@SuppressWarnings("unchecked")
 				ArrayList<ListOrder_Step> list = (ArrayList<ListOrder_Step>)CommandExecutor.getInstance().executeDatabaseCommand(new command.ListPasos(typeId));
 				
@@ -163,7 +163,7 @@ public class ArmaTuTortaServlet extends HttpServlet {
 			File imageFile = multipart.getFile("txtImage");
 			String image = imageFile.getName();
 			String dir = dirPath;
-			System.out.println("dir " +dir);
+			
 			int pointIndex = image.indexOf(".");
 			String extension = image.substring(pointIndex);
 			String name = image.substring(0,pointIndex);
@@ -265,7 +265,7 @@ public class ArmaTuTortaServlet extends HttpServlet {
 			final String[] datos = {forma, tam, sabor, capas, cubierta, precio, nombreImagen, fecha};
 			new Thread(new Runnable() {
 			    public void run() {
-		    		SendEmail.sendEmailOrderCake(propertiesFile, String.valueOf(rowsUpdated), attachment, "contrato", datos, relle, client);
+		    		SendEmail.sendEmailOrderCake(propertiesFile, String.valueOf(rowsUpdated), attachment, "ventas", datos, relle, client);
 						
 			    }
 			}).start();

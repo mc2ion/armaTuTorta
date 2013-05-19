@@ -74,51 +74,65 @@
 				if (type.equals("1")){
 			%>
 			<div id="datosVerif">
-			<jsp:useBean id="pedido" type="domain.OrderCake" scope="request" />  
+			<jsp:useBean id="pedido" type="domain.OrderCupcake" scope="request" />  
 
-			<form action="/armaTuTorta/ArmaTuTortaServlet?typeId=1&pr=2" method="post" id="confirm">
+			<form action="/armaTuTorta/CupcakesServlet?typeId=1&pr=2" method="post" id="confirm">
 				<input type="hidden" name="clientId" id="clientId" value="<%= client.getId() %>">
-				<input type="hidden" name="forma" id="forma" value="<%= pedido.getForma() %>">
-				<input type="hidden" name="tam"  id="tam" value="<%= pedido.getTamano() %>">
+				<input type="hidden" name="tamano" id="tamano" value="<%= pedido.getTamano() %>">
+				<input type="hidden" name="cantidad"  id="cantidad" value="<%= pedido.getCantidad() %>">
 				<input type="hidden" name="sabor"  id="sabor" value="<%= pedido.getSabor() %>">
-				<input type="hidden" name="capas" id="capas" value="<%= pedido.getCapas() %>">
+				<input type="hidden" name="cubierta" id="cubierta" value="<%= pedido.getCubiertas() %>">
 				<%
-					for (int j= 0; j < pedido.getRelleno().length; j++){
+					if (pedido.getColor() != null){
+						for (int j= 0; j < pedido.getColor().length; j++){
 				%>
-					<input type="hidden" name="relleno" value="<%= pedido.getRelleno()[j] %>">
+					<input type="hidden" name="color" value="<%= pedido.getColor()[j] %>">
 				<%
+						}
 					}
 				%>	
-				<input type="hidden" name="cubierta" id="cubierta" value="<%= pedido.getCubiertas() %>">
-				<input type="hidden" name="priceCake" id="priceCake" value="<%= pedido.getPrecio() %>">
-				<input type="hidden" name="nombreImagen" id="nombreImagen" value="<%= pedido.getNombreImagen()==null ? "" : pedido.getNombreImagen() %>">
+				<input type="hidden" name="decoracion" id="decoracion" value="<%= pedido.getDecoracion() %>">
+				<input type="hidden" name="priceCupcake" id="priceCupcake" value="<%= pedido.getPrecio() %>">
+				<input type="hidden" name="cantDocenas" id="cantDocenas" value="<%= pedido.getCantidadDocenas() %>">
+				<input type="hidden" name="txtCalcomania" id="txtCalcomania" value="<%= pedido.getCalcomania() ==null ? "" : pedido.getCalcomania() %>">
 
 				<div class="bienv">
 					<span class="bienv-title">Verifica los datos de tu pedido.</span><br><br>
-					Por favor ingrese la fecha de entrega para la cual desea su pedido: <input type="text" id="datepicker" name="txtFecha" />
+				  	Por favor ingrese la fecha de entrega para la cual desea su pedido: <input type="text" id="datepicker" name="txtFecha" />
 			  		<span class="error" id="errorDate">Disculpe, debe introducir una fecha de entrega válida</span><br><br>
-		
 					<div id="pedido">
 						<%
-							String rell = "";
-							String[] relleno = pedido.getRelleno();
-					         for (int i = 0; i< relleno.length; i++){
-					        	 if (i == relleno.length - 1)
-					        		 rell += "y " + relleno[i] ;
-					        	 else
-					        		 rell += relleno[i] + ", " ;
-					         }
+						String colores = "";
+						if (pedido.getColor() != null){
+								String[] color = pedido.getColor();
+								for (int i = 0; i< color.length; i++){
+									 if (i == color.length - 1)
+										 if (color.length > 1)
+					        			 	colores += "y " + color[i] ;
+										 else
+											 colores = color[i] ;
+					        	 	else
+					        			 colores += color[i] + ", " ;
+					         	}
+						}
 			        	 %>
-						<strong>Producto pedido:</strong> Torta <br>
-			    		<strong>Forma:</strong>  <%= pedido.getForma() %><br>
-			    		<strong>Tama&ntilde;o:</strong> <%= pedido.getTamano() %><br>
-			     		<strong>Sabor del ponqu&eacute;:</strong> <%= pedido.getSabor() %><br>
-			     		<strong>Cantidad de capas:</strong>  <%= pedido.getCapas() %><br>
-			     		<strong>Sabores de capas:</strong>  <%= rell %><br>
-			     		<strong>Sabores de cubierta:</strong>   <%= pedido.getCubiertas() %><br>
+						<strong>Producto pedido:</strong> Cupcakes <br>
+			    		<strong>Tama&ntilde;o:</strong> <%= pedido.getTamano() %>.<br>
+			    		<% if (pedido.getCantidad().contains("docena en caja")){ %>
+			     			<strong>Cantidad:</strong>  1 Docena en caja para regalar.<br>
+			     			<strong>Texto de la Calmon&iacute;a:</strong>  <%= pedido.getCalcomania() %>.<br>
+			     		<% }else{%>
+			     			<strong>Cantidad:</strong>  <%= pedido.getCantidadDocenas() %> Docenas.<br>
+			     		<% }%>
+			    		<strong>Sabor de los cupcakes:</strong> <%= pedido.getSabor() %>.<br>
+			     		<strong>Cubiertas:</strong>  <%= pedido.getCubiertas() %>.<br>
+			     		<% if (!colores.equals("")) { %>
+			     		<strong>Colores:</strong>  <%= colores %><br>
+			     		<% } %>
+			     		<strong>Decoraci&oacute;n:</strong><%= pedido.getDecoracion() %>.<br>
 					</div>
-					<div class="total"> Total: <%= pedido.getPrecio() %><br></div><br>
-     		   </div>
+					<div class="total"> Total: <%= pedido.getPrecio() %>.<br></div><br>
+			   </div>
 			   <div class="dt-buttonInline">
 					<input type="button" name="sbmtButton" class="buttonInline" value="Cancelar"  />
 					<input type="submit" name="sbmtButton" class="buttonInline" value="Ordenar"  />

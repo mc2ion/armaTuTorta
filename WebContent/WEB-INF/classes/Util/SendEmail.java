@@ -28,11 +28,12 @@ public class SendEmail  extends Thread  {
 		  String to = email;
 		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String password =  propertiesFile.getProperty(pref + "EmailPasswordFrom");
-				
+		  final String port = propertiesFile.getProperty(pref + "EmailPort");
 		  Properties properties = System.getProperties();
 		  properties.setProperty("mail.smtp.host", propertiesFile.getProperty(pref + "EmailServer") );
-		  properties.setProperty("mail.smtp.port", "587");
+		  properties.setProperty("mail.smtp.port", port);
 		  properties.setProperty("mail.smtp.starttls.enable", "true");
+		  properties.put("mail.transport.protocol", "smtps");
 		  properties.put("mail.smtp.auth", "true");
 		  properties.put("mail.debug", "true");
 		  
@@ -78,15 +79,15 @@ public class SendEmail  extends Thread  {
 	
 	public static void sendEmailPassword(Properties propertiesFile, String email, String name, String newPassword, boolean attach, String pref) {
 		
-		
-		
 		  String to = email;
 		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String password =  propertiesFile.getProperty(pref + "EmailPasswordFrom");
-				
+		  final String port = propertiesFile.getProperty(pref + "EmailPort");
+			 	
 		  Properties properties = System.getProperties();
 		  properties.setProperty("mail.smtp.host", propertiesFile.getProperty(pref + "EmailServer") );
-		  properties.setProperty("mail.smtp.port", "587");
+		  properties.setProperty("mail.smtp.port", port);
+		  properties.put("mail.transport.protocol", "smtp");
 		  properties.setProperty("mail.smtp.starttls.enable", "true");
 		  properties.put("mail.smtp.auth", "true");
 		  
@@ -133,10 +134,12 @@ public class SendEmail  extends Thread  {
 		  String to = propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String password =  propertiesFile.getProperty(pref + "EmailPasswordFrom");
-				
+		  final String port = propertiesFile.getProperty(pref + "EmailPort");
+			 
 		  Properties properties = System.getProperties();
 		  properties.setProperty("mail.smtp.host", propertiesFile.getProperty(pref + "EmailServer") );
-		  properties.setProperty("mail.smtp.port", "587");
+		  properties.setProperty("mail.smtp.port", port);
+		  properties.put("mail.transport.protocol", "smtps");
 		  properties.setProperty("mail.smtp.starttls.enable", "true");
 		  properties.put("mail.smtp.auth", "true");
 		  
@@ -184,10 +187,11 @@ public class SendEmail  extends Thread  {
 		  String to = email;
 		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String password =  propertiesFile.getProperty(pref + "EmailPasswordFrom");
-				
+		  final String port = propertiesFile.getProperty(pref + "EmailPort");
+			 
 		  Properties properties = System.getProperties();
 		  properties.setProperty("mail.smtp.host", propertiesFile.getProperty(pref + "EmailServer") );
-		  properties.setProperty("mail.smtp.port", "587");
+		  properties.setProperty("mail.smtp.port", port);
 		  properties.setProperty("mail.smtp.starttls.enable", "true");
 		  properties.put("mail.smtp.auth", "true");
 		  
@@ -237,15 +241,14 @@ public class SendEmail  extends Thread  {
 	public static void sendEmailOrderCake(Properties propertiesFile, String numPedido, boolean attach, String pref,
 			String[] datos, String[] relleno, Client client) {
 		
-	
-		
 		  String to = propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String password =  propertiesFile.getProperty(pref + "EmailPasswordFrom");
-				
+		  final String port = propertiesFile.getProperty(pref + "EmailPort");
+			 
 		  Properties properties = System.getProperties();
 		  properties.setProperty("mail.smtp.host", propertiesFile.getProperty(pref + "EmailServer") );
-		  properties.setProperty("mail.smtp.port", "587");
+		  properties.setProperty("mail.smtp.port", port);
 		  properties.setProperty("mail.smtp.starttls.enable", "true");
 		  properties.put("mail.smtp.auth", "true");
 		  
@@ -341,10 +344,11 @@ public class SendEmail  extends Thread  {
 		  String to = propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String password =  propertiesFile.getProperty(pref + "EmailPasswordFrom");
-				
+		  final String port = propertiesFile.getProperty(pref + "EmailPort");
+			 
 		  Properties properties = System.getProperties();
 		  properties.setProperty("mail.smtp.host", propertiesFile.getProperty(pref + "EmailServer") );
-		  properties.setProperty("mail.smtp.port", "587");
+		  properties.setProperty("mail.smtp.port", port);
 		  properties.setProperty("mail.smtp.starttls.enable", "true");
 		  properties.put("mail.smtp.auth", "true");
 		  
@@ -428,10 +432,11 @@ public class SendEmail  extends Thread  {
 		  String to = propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
 		  final String password =  propertiesFile.getProperty(pref + "EmailPasswordFrom");
-				
+		  final String port = propertiesFile.getProperty(pref + "EmailPort");
+			 
 		  Properties properties = System.getProperties();
 		  properties.setProperty("mail.smtp.host", propertiesFile.getProperty(pref + "EmailServer") );
-		  properties.setProperty("mail.smtp.port", "587");
+		  properties.setProperty("mail.smtp.port", port);
 		  properties.setProperty("mail.smtp.starttls.enable", "true");
 		  properties.put("mail.smtp.auth", "true");
 		  

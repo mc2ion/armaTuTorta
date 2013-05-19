@@ -45,7 +45,7 @@ public class PasswordGeneratorServlet extends HttpServlet {
 		String prevPage = (String) request.getSession().getAttribute("prevPage");
 		if (prevPage == null)
 			prevPage = "index.jsp";
-		System.out.println("pagina previa" + prevPage);
+		
 		try{
 			Integer userId = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.RestoreClientPassword(email, encryptPassword));
 			if(userId > 0){
@@ -60,11 +60,11 @@ public class PasswordGeneratorServlet extends HttpServlet {
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						SendEmail.sendEmailPassword(propertiesFile, email, name, password, false, "contrato");
-						System.out.println("Se envio correctamente " + password);
+						SendEmail.sendEmailPassword(propertiesFile, email, name, password, false, "soporte");
+						
 				    }
 				}).start();
-				
+				request.setAttribute("error", "");
 				rd = getServletContext().getRequestDispatcher("/passwordMessage.jsp");			
 				rd.forward(request, response);
 			}
@@ -74,7 +74,10 @@ public class PasswordGeneratorServlet extends HttpServlet {
 				rd.forward(request, response);
 			}
 		} catch (Exception e) {
-			System.out.println("No se creo");
+			System.out.println("Ocurrio un error al generar una contrasena nueva");
+			request.setAttribute("error", "error");
+			rd = getServletContext().getRequestDispatcher("/passwordMessage.jsp");			
+			rd.forward(request, response);
 		}		
 
 		

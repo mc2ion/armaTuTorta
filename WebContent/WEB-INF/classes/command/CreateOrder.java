@@ -46,8 +46,6 @@ public class CreateOrder implements DatabaseCommand {
 		
 		int rowsUpdated = sta.executeUpdate();
 		
-		System.out.println(" salio con valor " + rowsUpdated );
-
 		if (rowsUpdated == 1){
 			
 			PreparedStatement getLastInsertId = conn.prepareStatement("SELECT LAST_INSERT_ID()");  
@@ -55,7 +53,6 @@ public class CreateOrder implements DatabaseCommand {
 			
 			if (rs.next()){
 				lastIdInserted = rs.getLong("last_insert_id()"); 
-				System.out.println("lastId " + lastIdInserted);
 				for (int i = 0; i < orderItems.size(); i++){
 					OrderItem item = orderItems.get(i);
 					sta = conn.prepareStatement("INSERT INTO ORDER_ITEM (ORDER_ID, STEP_OPTION_ID, PRICE)" +

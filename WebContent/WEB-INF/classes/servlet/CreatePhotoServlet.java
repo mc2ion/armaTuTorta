@@ -98,7 +98,7 @@ public class CreatePhotoServlet extends HttpServlet {
 			photo.setId(rowsUpdated);
 			
 			String dir = propertiesFile.getProperty("albumsDirectory") + propertiesFile.getProperty("fileSeparator") + Album.getDirectory(albumId);
-			System.out.println("dir " +dir);
+			
 			int pointIndex = image.indexOf(".");
 			String extension = image.substring(pointIndex);
 

@@ -1,34 +1,45 @@
 $(document).ready(function(){
 	$("a[rel*=leanModal]").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
 	
+	var priceTotal = 0;
+	var priceCant = 0;
+	var priceTotalAux = 0;
 	var sabor = "";
 	var unPonque = true;
 	var unPonqueAux = true;
 	var unaCubierta = true;
 	var coloresSurtidos = false;
 	var cubiertaEscogida = "";
-	var variasDocenas = false;
+	var cantCapas = 1;
+	
 
 	/* Cambio de las secciones y la imagen del paso asociado*/
 	$("#bt1").click(function(){
 		$(".block").hide();
 		$(".block-2").show();
+		setPriceTotal();
 		mostrarPaso2();
+		
 	});
   
 	 $("#bt2").click(function(){
 		$(".block-2").hide();
 		$(".block-3").show();
+		setPriceTotal();
 		mostrarPaso3();
+		
 	});
 	  
 	$("#bt3").click(function(){
 		$(".block-3").hide();
 		$(".block-4").show();
+		setPriceTotal();
 		mostrarPaso4();
+		
 	});
   
 	$("#bt4").click(function(){
+		setPriceTotal();
 		var value = $("input:radio[name=4]:checked").val();
 		if (value == '1'){
 			$(".block-4").hide();
@@ -48,6 +59,7 @@ $(document).ready(function(){
 	$("#bt5").click(function(){
 		$(".block-5").hide();
 		$(".block-6").show();
+		setPriceTotal();
 		mostrarPaso6();
 	});
 	
@@ -60,17 +72,38 @@ $(document).ready(function(){
 	$(".rdB1").click(function(){
 		$("#bt1Disable").hide();
 		$("#bt1").show();
+		var j = $(this).val();
+		getPrice(1,j);
+
 	});
 
 	/* Click en cualquier radio button del paso 2*/
 	$(".rdB2").click(function(){
-		$("#bt2Disable").hide();
-		$("#bt2").show();
 		value = $(this).val();
-		if (value == 2){
-			variasDocenas = true;
+		/* Retornar a cero el valor de la cantidad en el select*/
+		if (value == 1){
+			$("#cantCupcakes").val('1');
+			$("#bt2Disable").show();
+			$("#bt2").hide();
+		}else{
+			$("#bt2Disable").hide();
+			$("#bt2").show();
 		}
+		
+		getPrice(2,value);
 			
+	});
+	
+	$('#txtCalcomania').keyup(function() {
+		value = $('input[id=txtCalcomania]').val();
+		if( value == ""){
+			$("#bt2Disable").show();
+			$("#bt2").hide();
+		}else{
+			$("#bt2Disable").hide();
+			$("#bt2").show();
+		}
+		
 	});
 	
 	
@@ -78,20 +111,29 @@ $(document).ready(function(){
 	$(".rdB3").click(function(){
 		$("#bt3Disable").hide();
 		$("#bt3").show();
+		value = $(this).val();
+		getPrice(3,value);
 		mostrarImgPonque(this);
+		
+		
 	});
 	
 	/* Click en cualquier radio button del paso 4*/
 	$(".rdB4").click(function(){
 		$("#bt4Disable").hide();
 		$("#bt4").show();
+		value = $(this).val();
+		getPrice(4,value);
 		mostrarImgCubierta(this);
+		
 	});
 	
 	
 	$(".rdB5").click(function(){
 		$("#bt5Disable").hide();
 		$("#bt5").show();
+		value = $(this).val();
+		getPrice(5,value);
 		mostrarImgColor(this);
 	});
 	
@@ -100,6 +142,8 @@ $(document).ready(function(){
 	$(".rdB6").click(function(){
 		$("#bt6Disable").hide();
 		$("#bt6").show();
+		value = $(this).val();
+		getPrice(6,value);
 		mostrarImgDecoracion(this);
 	});
   
@@ -251,21 +295,7 @@ $(document).ready(function(){
 		var color = "";
 		var checked = $(element).is(':checked');
 		coloresSurtidos = false;
-		
 
-		
-		/*Bloquear los otros checkbox si se escoge "surtidos" */
-		if (value == 9){
-			/* Si se esta seleccionado se bloquean*/
-			if (checked){
-				$("input:checkbox[id != surt]").attr("disabled",true);
-				$("input:checkbox[id != surt]").attr('checked', false);
-			}
-			/* Si se esta deseleccionando se vuelven a habilitar todos los checkbox */
-			else{
-				$("input:checkbox").removeAttr("disabled");
-			}
-		}
 
 		/* Cubierta de mantequilla */
 		if (valueC == 1){
@@ -296,7 +326,7 @@ $(document).ready(function(){
 			/*Si se escogen colores surtidos se verifica si ya habian  3 ponques dibujados*/
 			else if (value == 9){
 				coloresSurtidos = true;
-				/* Se verifica si se est√° seleccionando o deseleccionando la opcion*/
+				/* Se verifica si se est· seleccionando o deseleccionando la opcion*/
 				if (checked){
 					/* Solo se pintan los 3 colores diferentes*/
 					if (!unPonqueAux || !unPonque){
@@ -373,7 +403,7 @@ $(document).ready(function(){
 				color = "./images/cupcakes/glaseado_blanco.png";
 			else if (value == 9){
 				coloresSurtidos = true;
-				/* Se verifica si se est√° seleccionando o deseleccionando la opcion*/
+				/* Se verifica si se est· seleccionando o deseleccionando la opcion*/
 				if (checked){
 					/* Solo se pintan los 3 colores diferentes*/
 					if (!unPonqueAux || !unPonque){
@@ -790,4 +820,42 @@ $(document).ready(function(){
 	
 	/* -- Fin funciones para echar para atras -- */
 
+	/* Obtiene el precio del elemento seleccionado y lo suma al total */
+	function getPrice(i,j){
+		var priceAux = priceTotal;
+		var selectIdAux = '.price-int' + i+j;
+		var price = $(selectIdAux).text();
+		priceCapas = cantCapas*(Number(price));
+		alert(priceAux + "Precio de capas" + priceCapas + "capas" + cantCapas);
+		priceAux =  priceAux + Number(priceCapas);
+		var priceText = priceAux + '.00';
+		$('.price').text(priceText);
+		priceTotalAux = priceAux;
+		if (i == 2)
+			priceCant = price;
+	}
+	
+	function setPriceTotal(){
+		priceTotal = priceTotalAux;
+		
+	}
+	
+	$('#cantCupcakes').change(function() {
+		val = $('#cantCupcakes').val();
+		priceTemp = (Number(val) * Number(priceCant));
+		var priceAux = priceTotal;
+		priceAux = priceAux + priceTemp;
+		var priceText = priceAux + '.00';
+		$('.price').text(priceText);
+		priceTotalAux = priceAux;
+		cantCapas = val;
+	});
+	
+	/* Funcion que setea el valor del precio antes de hacer submit al formulario */
+	$('#target').submit(function() {
+		var priceText = priceTotalAux + '.00';
+		$("#priceCake").val(priceText);
+		return true;
+	});
+	
 });
