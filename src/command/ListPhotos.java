@@ -21,7 +21,7 @@ public class ListPhotos implements DatabaseCommand {
 		
 		// List photos of an album in the database		
 		ArrayList<Photo> list = new ArrayList<Photo>();
-		PreparedStatement sta = conn.prepareStatement("SELECT P.ID, P.ALBUM_ID, P.NAME, P.IMAGE, P.IS_ACTIVE, P.IS_NEW FROM PHOTO P WHERE P.ALBUM_ID = ? AND P.IS_DELETED=0");
+		PreparedStatement sta = conn.prepareStatement("SELECT P.ID, P.ALBUM_ID, P.NAME, P.IMAGE, P.IS_ACTIVE, P.IS_NEW FROM photo P WHERE P.ALBUM_ID = ? AND P.IS_DELETED=0");
 		sta.setInt(1, this.albumId);
 		ResultSet rs = sta.executeQuery();
 		

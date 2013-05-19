@@ -17,7 +17,7 @@ public class EditAlbum implements DatabaseCommand {
 	@Override
 	public Object executeDatabaseOperation(Connection conn) throws SQLException {
 
-		PreparedStatement sta = conn.prepareStatement("UPDATE ALBUM SET NAME = ?, IMAGE = ?, IS_ACTIVE = ?, IS_NEW = ? WHERE ID = ?");
+		PreparedStatement sta = conn.prepareStatement("UPDATE album SET NAME = ?, IMAGE = ?, IS_ACTIVE = ?, IS_NEW = ? WHERE ID = ?");
 		
 		sta.setString(1, album.getName());
 		sta.setString(2, album.getImage());
@@ -29,5 +29,5 @@ public class EditAlbum implements DatabaseCommand {
 		
 		return new Integer(rows_updated);
 	}
-
+	
 }

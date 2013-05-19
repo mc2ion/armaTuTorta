@@ -22,7 +22,7 @@ public class UserExists implements DatabaseCommand {
 		
 		User u = null;
 		PreparedStatement sta = conn.prepareStatement("SELECT ID, FIRST_NAME, LAST_NAME, USER_NAME, PASSWORD " +
-				"FROM USER WHERE USER_NAME = ? AND PASSWORD = ?");
+				"FROM user WHERE USER_NAME = ? AND PASSWORD = ?");
 		sta.setString(1, this.name);
 		sta.setString(2, this.encryptPassword);
 		ResultSet rs = sta.executeQuery();

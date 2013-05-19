@@ -21,7 +21,7 @@ public class ListStepOptions implements DatabaseCommand {
 		
 		// List options of a step order in the database		
 		ArrayList<StepOption> list = new ArrayList<StepOption>();
-		PreparedStatement sta = conn.prepareStatement("SELECT SO.ID, SO.ORDER_STEP_ID, SO.NAME, SO.POSITION, SO.PRICE, SO.IS_UNAVAILABLE FROM STEP_OPTION SO WHERE SO.ORDER_STEP_ID = ? AND SO.IS_DELETED=0");
+		PreparedStatement sta = conn.prepareStatement("SELECT SO.ID, SO.ORDER_STEP_ID, SO.NAME, SO.POSITION, SO.PRICE, SO.IS_UNAVAILABLE FROM step_option SO WHERE SO.ORDER_STEP_ID = ? AND SO.IS_DELETED=0");
 		sta.setInt(1, this.stepId);
 		ResultSet rs = sta.executeQuery();
 		

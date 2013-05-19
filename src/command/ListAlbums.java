@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import domain.Album;
 
 public class ListAlbums implements DatabaseCommand {
+	
+	public ListAlbums(){
+		
+	}
 
 	@Override
 	public Object executeDatabaseOperation(Connection conn) throws SQLException {
@@ -16,7 +20,7 @@ public class ListAlbums implements DatabaseCommand {
 		
 		ArrayList<Album> list = new ArrayList<Album>();
 		Statement sta = conn.createStatement();
-		ResultSet rs = sta.executeQuery("SELECT A.ID, A.NAME, A.IMAGE, A.IS_ACTIVE, A.IS_NEW FROM ALBUM A WHERE A.IS_DELETED=0");
+		ResultSet rs = sta.executeQuery("SELECT A.ID, A.NAME, A.IMAGE, A.IS_ACTIVE, A.IS_NEW FROM album A WHERE A.IS_DELETED=0");
 		while(rs.next()) {
 			Album album = new Album();
 			album.setId(rs.getInt(1));

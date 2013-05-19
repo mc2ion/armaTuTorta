@@ -92,19 +92,22 @@ public class CreateStepOptionServlet extends HttpServlet {
 			if(rowsUpdated != -1){
 				request.setAttribute("info", "La opción fue creada exitosamente.");
 				request.setAttribute("error", "");
-				rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);			
+				//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);		
+				rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);		
 				rd.forward(request, response);
 			} else {
 				request.setAttribute("info", "");
 				request.setAttribute("error", "Ocurrió un error durante la creación de la opción. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-				rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);	
+				//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);	
+				rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);		
 
 				rd.forward(request, response);
 			}
 		}catch (Exception e) {
 			request.setAttribute("info", "");
 			request.setAttribute("error", "Ocurrió un error durante la creación de la opción. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-			rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);	
+			//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);	
+			rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);		
 
 			rd.forward(request, response);
 		}

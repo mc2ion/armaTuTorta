@@ -20,7 +20,7 @@ public class SelectOrderStep implements DatabaseCommand {
 		// select an order step in the database
 
 		OrderStep step = new OrderStep();
-		PreparedStatement sta = conn.prepareStatement("SELECT OS.ID, OS.ORDER_TYPE_ID, OS.NAME, OS.POSITION, OS.IS_MULTIPLE_CHOICE FROM ORDER_STEP OS WHERE OS.ID = ? ");
+		PreparedStatement sta = conn.prepareStatement("SELECT OS.ID, OS.ORDER_TYPE_ID, OS.NAME, OS.POSITION, OS.IS_MULTIPLE_CHOICE FROM order_step OS WHERE OS.ID = ? ");
 		sta.setLong(1, this.stepId);
 		ResultSet rs = sta.executeQuery();
 		
