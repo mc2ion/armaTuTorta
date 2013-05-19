@@ -39,13 +39,13 @@ public class ClientAccountServlet extends HttpServlet {
 		try{
 			Client client = (Client) CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectClient(id));
 			if (client != null){
-				System.out.println("consiguio");
 				request.setAttribute("clientInfo", client);
-				rd = getServletContext().getRequestDispatcher("/editClientAccount.jsp");			
+				rd = getServletContext().getRequestDispatcher("/editClientAccount.jsp");	
 				rd.forward(request, response);
 			} 
 		} catch (Exception e) {
-			System.out.println("No se creo");
+			rd = getServletContext().getRequestDispatcher("/index.jsp");			
+			rd.forward(request, response);
 		}		
 	}
 
@@ -65,8 +65,10 @@ public class ClientAccountServlet extends HttpServlet {
 			String phoneMovNumber  = request.getParameter("txtMovPhone");
 			String address = request.getParameter("txtDir");
 			String typePers = request.getParameter("typePers");
-		
+			String clientId = request.getParameter("clientId");
+			
 			Client client = new Client();
+			client.setId(Long.valueOf(clientId));
 			client.setFirstName(firstName);
 			client.setLastName(lastName);
 			client.setIdentityCard(identityCardId+identityCardNum);
@@ -88,13 +90,16 @@ public class ClientAccountServlet extends HttpServlet {
 			}
 		
 			Integer userId = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.EditClient(client));
-
+			System.out.println("aqui " + userId + "/" + client.getId());
 			if(userId > 0){
-				rd = getServletContext().getRequestDispatcher("/registroBienv.jsp");			
+				request.setAttribute("editClient", "successUser");
+				rd = getServletContext().getRequestDispatcher("/editClientMessage.jsp");			
 				rd.forward(request, response);
 			} 
 		} catch (Exception e) {
-			System.out.println("No se creo");
+			request.setAttribute("editClient", "errorUser");
+			rd = getServletContext().getRequestDispatcher("/editClientMessage.jsp");			
+			rd.forward(request, response);
 		}
 	}
 }

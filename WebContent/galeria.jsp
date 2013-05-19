@@ -9,16 +9,6 @@
 	<link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/style.css" />
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
-	<!--[if IE 8]>
-		<link rel="stylesheet" type="text/css" href="css/ie8.css" />
-	<![endif]-->
-	<!--[if IE 7]>
-		<link rel="stylesheet" type="text/css" href="css/ie7.css" />
-	<![endif]-->
-	<!--[if IE 6]>
-		<link rel="stylesheet" type="text/css" href="css/ie6.css" />
-	<![endif]-->
-	
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
 	<script type="text/javascript" charset="utf-8">
@@ -57,7 +47,7 @@
 		<jsp:useBean id="albums" type="java.util.ArrayList<domain.Album>" scope="request"/>  	
         		
 		<div class="home">
-			<div class="title"> Productos </div>
+			<div class="titleGallery"> Productos </div>
 			<div class="section-img">
 				<div >
 					<ul>

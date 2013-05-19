@@ -8,7 +8,10 @@
 	<title>Arma Tu Torta</title>
 	<link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/demos.css" />
+	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/ui.theme.css" />
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/style.css" />
+	
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<!--[if IE 8]>
 		<link rel="stylesheet" type="text/css" href="css/ie8.css" />
@@ -23,7 +26,13 @@
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/dulcesTortas.js"></script>
-	
+	<script type="text/javascript" src="/armaTuTorta/js/ui.core.js"></script>
+	<script type="text/javascript" src="/armaTuTorta/js/ui.datepicker.js"></script>
+	<script> 
+	$(function() {
+		$("#datepicker").datepicker({minDate: +1});
+	});
+	</script> 
 </head>
 <body>
 <%
@@ -31,6 +40,8 @@
 	session.setAttribute("prevPage", "DulcesTortasServlet?typeId=3");
 	Client client = (Client) infoPage.getAttribute("client");
 	HashMap<String, String> hashMap = new HashMap<String, String>();
+	HashMap<String, Double> hashMapPrice = new HashMap<String, Double>();
+	HashMap<String, Long> hashMapId = new HashMap<String, Long>();
 %>
 <div class="wrapper">
 	<div id="header">
@@ -53,7 +64,7 @@
 		</div>
 	</div>
 	<div id="content">
-		<form id="formDulcesTortas" action="DulcesTortasServlet" method="post">
+		<form id="formDulcesTortas" action="DulcesTortasServlet" method="post" id="confirm">
 		<input type="hidden" id="priceDulcCake" name="priceDulcCake" value = "0">
 	
 		<div class="home">
@@ -61,15 +72,20 @@
 				<div class="title"> &iexcl; Deleitate con nuestras m&aacute;s sabrosas tortas! </div>
 				<jsp:useBean id="options" type="java.util.ArrayList<domain.StepOption>" scope="request"/>  	
         		<% if (client != null){ %>
-				<div class="subtitle">Es muy f&aacute;cil, escoge las tortas que desees ordenar, escoge la cantidad que desees de cada una y haz click en "Ordenar"</div>
+				<div class="subtitle">Es muy f&aacute;cil, escoge  las tortas que desees, para cuando las quieres, escoge la cantidad que desees de cada una y haz click en "Ordenar"</div>
+				<div class="date"> 
+					¿Para cu&aacute;ndo desea su pedido?: <input type="text" autocomplete="off" id="datepicker" name="txtFecha" size="8" />
+					<span class="error" id="errorDate">Disculpe, debe introducir una fecha de entrega válida</span>
+				</div>
 				<div class="cakes">
-					
 					<table style="border:none;">
 						<%
 							for(int i= 1; i<= options.size(); i++) { 	
 								int aux = i -1;
 								domain.StepOption o = options.get(aux);
 								hashMap.put(i +"", o.getName());
+								hashMapPrice.put(o.getName(), o.getPrice());
+								hashMapId.put(o.getName(), o.getId());
 						%>
 						<tr height="28">
 							<td width="220px"> 
@@ -90,8 +106,11 @@
 						</tr>
 						<% }
 						session.setAttribute("hashMapDulcesTortas", hashMap);
+						session.setAttribute("hashMapPriceDulcesTortas", hashMapPrice);
+						session.setAttribute("hashMapIdDulcesTortas", hashMapId);
 						%>
 					</table>
+					<br>
 					<div class="dt-button" style="display: none">
 						<input type="submit" name="sbmtButton" class="button" value="Ordenar"  />
 					</div> 
@@ -99,7 +118,6 @@
 						<input type="button" name="sbmtButton" class="buttonDisable" value="Ordenar"  />
 					</div> 
 					<div class="subtotal-section"> Sub-total: Bs. <span class="price" id="priceTotal"> 0,00</span> </div><br>
-					
 				</div>	
 				<% }else{ %>
 					<br>

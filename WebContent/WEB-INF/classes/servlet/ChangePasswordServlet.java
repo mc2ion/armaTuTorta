@@ -8,12 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 
 import command.CommandExecutor;
-import domain.Client;
-
 /**
  * Servlet implementation class RegisterServlet
  */
@@ -41,25 +38,27 @@ public class ChangePasswordServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.print("post" );
 		final String email = request.getParameter("email");
 		final String newPass = request.getParameter("txtNewPass");
+		final String oldPassword = request.getParameter("txtOldPass");
+		
 		final String encryptPassword = UserLoginServlet.getEncryptPassword(newPass);
-		HttpSession infoPage = request.getSession();
-		Client client = (Client) infoPage.getAttribute("clientAux");
-		System.out.println("email " + email);
 		RequestDispatcher rd;	
 		try{
-			Integer userId = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.RestoreClientPassword(email, encryptPassword));
+			Integer userId = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.ChangeClientPassword(email, encryptPassword, oldPassword));
 			if(userId > 0){
-				request.setAttribute("message", "exitoso");
-				request.setAttribute("clientInfo", client);
-				rd = getServletContext().getRequestDispatcher("/editClientAccount.jsp");	
-				infoPage.removeAttribute("clientAux");
+				request.setAttribute("editClient", "successPass");
+				rd = getServletContext().getRequestDispatcher("/editClientMessage.jsp");			
+				rd.forward(request, response);
+			}else{
+				request.setAttribute("editClient", "errorPass");
+				rd = getServletContext().getRequestDispatcher("/editClientMessage.jsp");			
 				rd.forward(request, response);
 			}
 		} catch (Exception e) {
-			System.out.println("No se creo");
+			request.setAttribute("editClient", "errorPass");
+			rd = getServletContext().getRequestDispatcher("/editClientMessage.jsp");			
+			rd.forward(request, response);
 		}		
 
 	}

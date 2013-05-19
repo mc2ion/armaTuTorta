@@ -10,6 +10,7 @@ public class OrderCake {
 	private String[] relleno;
 	private String cubierta;
 	private String precio;
+	private String nombreImagen;
 	
 	public void setId(long id) {
 		this.id = id;
@@ -75,6 +76,15 @@ public class OrderCake {
 	
 	public String getPrecio(){
 		return precio;
+	}
+	
+	
+	public void setNombreImagen(String nombreImg){
+		this.nombreImagen = nombreImg;
+	}
+	
+	public String getNombreImagen(){
+		return nombreImagen;
 	}
 	
 }

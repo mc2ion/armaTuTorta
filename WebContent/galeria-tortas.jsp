@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Arma Tu Torta</title>
 	<link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
@@ -14,8 +14,11 @@
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleImage.css" />
 	<link rel="stylesheet" type="text/css" href="css/styleCar.css" />
 	<link rel="stylesheet" type="text/css" href="css/gridNavigation.css" />
+	
+
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
-	<script type="text/javascript" src="/armaTuTorta/js/jquery-1.3.2.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
 	<script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -33,21 +36,21 @@
 			modal: true
 	});
 	</script>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-		<script type="text/javascript" src="js/jquery.gridnav.js"></script>
-		<script type="text/javascript">
-			$(function() {
-				$('#tj_container').gridnav({
-					type	: {
-						mode		: 'sequpdown', 	// use def | fade | seqfade | updown | sequpdown | showhide | disperse | rows
-						speed		: 500,			// for fade, seqfade, updown, sequpdown, showhide, disperse, rows
-						easing		: '',			// for fade, seqfade, updown, sequpdown, showhide, disperse, rows	
-						factor		: 100,			// for seqfade, sequpdown, rows
-						reverse		: ''			// for sequpdown
-					}
-				});
+	
+	<script type="text/javascript" src="js/jquery.gridnav.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			$('#tj_container').gridnav({
+				type	: {
+					mode		: 'sequpdown', 	// use def | fade | seqfade | updown | sequpdown | showhide | disperse | rows
+					speed		: 500,			// for fade, seqfade, updown, sequpdown, showhide, disperse, rows
+					easing		: '',			// for fade, seqfade, updown, sequpdown, showhide, disperse, rows	
+					factor		: 100,			// for seqfade, sequpdown, rows
+					reverse		: ''			// for sequpdown
+				}
 			});
-		</script>
+		});
+	</script>
 	
 </head>
 <body>

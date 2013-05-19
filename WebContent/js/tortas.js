@@ -1,9 +1,11 @@
 $(document).ready(function() {
 	var priceTotal = 0;
 	var priceTotalAux = 0;
+	var capas = 0;
 	
 	$("a[rel*=leanModal]").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
 
+	/* Click en Siguiente Paso 1*/
 	$("#bt1").click(function(){
 		$(".block").hide();
 		$(".block-2").show();
@@ -11,6 +13,7 @@ $(document).ready(function() {
 		setPriceTotal();
 	});
   
+  	/* Click en Siguiente Paso 2*/
 	$("#bt2").click(function(){
 		$(".block-2").hide();
 		$(".block-3").show();
@@ -18,6 +21,7 @@ $(document).ready(function() {
 		setPriceTotal();
 	});
   
+  	/* Click en Siguiente Paso 3*/
 	$("#bt3").click(function(){
 		$(".block-3").hide();
 		$(".block-4").show();
@@ -25,10 +29,11 @@ $(document).ready(function() {
 		setPriceTotal();
 	});
   
+  	/* Click en Siguiente Paso 4*/
 	$("#bt4").click(function(){
-		var value = $("input:radio[name=4]:checked").val();
+		name  = getName(4,capas);
 		setPriceTotal();
-		if (value == '-'){
+		if (name.toLowerCase().indexOf("sin") >= 0){
 			$(".block-4").hide();
 			$(".block-6").show();
 			mostrarPaso6_block5();
@@ -39,7 +44,8 @@ $(document).ready(function() {
 		}	
 		
 	});
-  
+	
+  	/* Click en Siguiente Paso 5*/
 	$("#bt5").click(function(){
 		$(".block-5").hide();
 		$(".block-6").show();
@@ -47,89 +53,63 @@ $(document).ready(function() {
 		setPriceTotal();
 	});
   
+   	/* Click en alguna opcion del Paso 1*/
 	$(".rdB1").click(function(){
 		$("#bt1Disable").hide();
 		$("#bt1").show();
 		var j = $(this).val();
 		getPrice(1,j);
-	});
 	
-	function getPrice(i,j){
-		var priceAux = priceTotal;
-		var selectIdAux = '.price-int' + i+j;
-		var price = $(selectIdAux).text();
-		priceAux = priceAux + Number(price);
-		var priceText = priceAux + '.00';
-		$('.price').text(priceText);
-		priceTotalAux = priceAux;
-		
-	}
-	
-	function deletePrice(i,j){
-		var priceAux = priceTotal;
-		var priceText = priceAux + '.00';
-		$('.price').text(priceText);
-		priceTotalAux = priceAux;
-		
-	}
-	
-	function setPriceTotal(){
-		priceTotal = priceTotalAux;
-		
-	}
-	
-	$('#target').submit(function() {
-	  var priceText = priceTotalAux + '.00';
-	  $("#priceCake").val(priceText);
-	  return true;
 	});
 	
 	
-	
+	/* Click en alguna opcion del Paso 2*/
 	$(".rdB2").click(function(){
 		$("#bt2Disable").hide();
 		$("#bt2").show();
 		var j = $(this).val();
 		getPrice(2,j);
+	
 	});
   
+  /* Click en alguna opcion del Paso 3*/
    $(".rdB3").click(function(){
-	$("#bt3Disable").hide();
-	$("#bt3").show();
-	var j = $(this).val();
-	getPrice(3,j);
-	var value = $("input:radio[name=3]:checked").val();
-	$("#pasoImgCubierta").show();
-	if (value == 1)
-		$("#pasoImgSabor").attr('src',"./images/tortas/ponque_chocolate.png");
-	else if (value == 2)
-		$("#pasoImgSabor").attr('src',"./images/tortas/ponque_vainilla.png");
-	else if (value == 3)
-		$("#pasoImgSabor").attr('src',"./images/tortas/ponque_almendras.png");
-	else if (value == 4)
-		$("#pasoImgSabor").attr('src',"./images/tortas/ponque_marmoleada.png");
-	else if (value == 5)
-		$("#pasoImgSabor").attr('src',"./images/tortas/ponque_zanahoria.png");
-	else if (value == 6)
-		$("#pasoImgSabor").attr('src',"./images/tortas/ponque_naranja.png");
-	else if (value == 7)
-		$("#pasoImgSabor").attr('src',"./images/tortas/ponque_chocolateFudge.png");
-	$("#pasoImgSabor").show();
-	
-	
-  });
+		$("#bt3Disable").hide();
+		$("#bt3").show();
+		var j = $(this).val();
+		getPrice(3,j);
+		name  = getName(3,j);
+		$("#pasoImgCubierta").show();
+		if (name.toLowerCase().indexOf("choco") >= 0)
+			$("#pasoImgSabor").attr('src',"./images/tortas/ponque_chocolate.png");
+		else if (name.toLowerCase().indexOf("vaini") >= 0)
+			$("#pasoImgSabor").attr('src',"./images/tortas/ponque_vainilla.png");
+		else if (name.toLowerCase().indexOf("bizcocho de almendras") >= 0)
+			$("#pasoImgSabor").attr('src',"./images/tortas/ponque_almendras.png");
+		else if (name.toLowerCase().indexOf("marmo") >= 0)
+			$("#pasoImgSabor").attr('src',"./images/tortas/ponque_marmoleada.png");
+		else if (name.toLowerCase().indexOf("zana") >= 0)
+			$("#pasoImgSabor").attr('src',"./images/tortas/ponque_zanahoria.png");
+		else if (name.toLowerCase().indexOf("naranja") >= 0)
+			$("#pasoImgSabor").attr('src',"./images/tortas/ponque_naranja.png");
+		else if (name.toLowerCase().indexOf("fudge") >= 0)
+			$("#pasoImgSabor").attr('src',"./images/tortas/ponque_chocolateFudge.png");
+		$("#pasoImgSabor").show();
+	});
   
+  /* Click en alguna opcion del Paso 4*/
   $(".rdB4").click(function(){
 	$("#bt4Disable").hide();
 	$("#bt4").show();
 	var j = $(this).val();
 	getPrice(4,j);
-	var value = $("input:radio[name=4]:checked").val();
-	if (value == 1)
+	name  = getName(4,j);
+	capas = j;
+	if (name.toLowerCase().indexOf("1") >= 0)
 		$("#pasoImgCapas").attr('src',"./images/tortas/1_capa_general.png");
-	else if (value == 2)
+	else if (name.toLowerCase().indexOf("2") >= 0)
 		$("#pasoImgCapas").attr('src',"./images/tortas/2_capa_general.png");
-	else if (value == 3)
+	else if (name.toLowerCase().indexOf("3") >= 0)
 		$("#pasoImgCapas").attr('src',"./images/tortas/3_capa_general.png");
 	else{
 		$("#pasoImgCapas").hide();
@@ -140,66 +120,74 @@ $(document).ready(function() {
 	mostrarPaso4();
   });
   
-  $(".rdB5").click(function(){
-	$("#bt5Disable").hide();
-	$("#bt5").show();
-	var j = $(this).val();
-	var checked = $(this).is(':checked');
-	if (checked)
-		getPrice(5,j);
-	else
-		deletePrice(5,j);
-	mostrarSaborCapa(this);
-	
-  });
+  /* Click en alguna opcion del Paso 5*/
+	$(".rdB5").click(function(){
+		$("#bt5Disable").hide();
+		$("#bt5").show();
+		var j = $(this).val();
+		var checked = $(this).is(':checked');
+		if (checked)
+			getPrice(5,j);
+		else
+			deletePrice(5,j);
+		mostrarSaborCapa(this, j);
+		
+	});
   
-  $(".rdB6").click(function(){
-	$("#bt6Disable").hide();
-	$("#bt6").show();
-	var j = $(this).val();
-	getPrice(6,j);
-	mostrarSaborCubierta(this);
-	
-  });
+	/* Click en alguna opcion del Paso 6*/
+	$(".rdB6").click(function(){
+		var j = $(this).val();
+		name = getName(6,j);
+		if (name.toLowerCase().indexOf("imagen") < 0 && name.toLowerCase().indexOf("foto") < 0){
+			$("#bt6Disable").hide();
+			$("#txtImage").hide();
+			$("#bt6").show();
+		}else{
+			$("#txtImage").show();
+		}
+		getPrice(6,j);
+		mostrarSaborCubierta(this);
+	});
   
-	function mostrarSaborCapa(element){
-		var value = $(element).val();
+	function mostrarSaborCapa(element, j){
 		var checked = $(element).is(':checked');
+		name  = getName(5,j);
 		var valueCapas = $("input:radio[name=4]:checked").val();
 		if (checked){
-			if (value == 1){
-				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_capas_chocolate.png");
-			}
-			else if (value == 2){
+			if (name.toLowerCase().indexOf("arequipe") >= 0){
 				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_capas_arequipe.png");
 			}
-			else if (value == 3){
+			else if (name.toLowerCase().indexOf("nutella") >= 0){
 				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_capas_nutella.png");
 			}
-			else if (value == 4){
+			else if (name.toLowerCase().indexOf("chantilly con melocotones") >= 0){
 				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_capas_chanti_melocoton.png");
 			}
-			else if (value == 5){
+			else if (name.toLowerCase().indexOf("chantilly con fresas") >= 0){
 				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_capas_chanti_fresa.png");
 			}
-			else if (value == 6){
+			else if (name.toLowerCase().indexOf("oreo") >= 0){
 				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_crema_oreo.png");
 			}
-			else if (value == 7){
+			else if (name.toLowerCase().indexOf("almendras") >= 0){
 				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_almendras.png");
 			}
-			else if (value == 8){
-				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_chispas_chocolate.png");
-			}
-			else if (value == 9){
+			else if (name.toLowerCase().indexOf("cerezas y chispas de chocolate ") >= 0){
 				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_crema_cereza_chocolate.png");
 			}
+			else if (name.toLowerCase().indexOf("chispas de chocolate") >= 0){
+				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_chispas_chocolate.png");
+			}
+			else if (name.toLowerCase().indexOf("choco") >= 0){
+				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_capas_chocolate.png");
+			}
+			
 		}else{
 			$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_capa_general.png");
 		}
   }
   
-  function mostrarSaborCubierta(element){
+	function mostrarSaborCubierta(element){
 		var value = $(element).val();
 		if (value == 1){
 			$("#pasoImgCubierta").attr('src',"./images/tortas/chocolate.png");
@@ -227,75 +215,13 @@ $(document).ready(function() {
 		}
 		
   }
+	/* Funcion que permite seleccionar tanto sabores de capas, como numero de capas se haya seleccionado */
+	$("input:checkbox[name=5]").click(function() {
+		var value = $("input:radio[name=4]:checked").val();
+		var bol = $("input:checkbox:checked").length >= value;     
+		$("input:checkbox").not(":checked").attr("disabled",bol);
+	});
   
-  $("input:checkbox").click(function() {
-	var value = $("input:radio[name=4]:checked").val();
-	var bol = $("input:checkbox:checked").length >= value;     
-	$("input:checkbox").not(":checked").attr("disabled",bol);
-  });
-  
-  
-  /* Funciones q permiten echar para atras */
-  
-  $("#backLink1").click(function(event) {
-		mostrarPaso1();
-		$(".block").show();
-		$(".block-2").hide();
-		$(".rdB2").attr('checked', false);
-		$("#bt2Disable").show();
-		$("#bt2").hide();
-   });
-   
-   $("#backLink2").click(function(event) {
-		mostrarPaso2();
-		eliminarTorta();
-		$(".block-2").show();
-		$(".block-3").hide();
-		$(".rdB3").attr('checked', false);
-		$("#bt3Disable").show();
-		$("#bt3").hide();
-   });
-   
-   $("#backLink3").click(function(event) {
-		mostrarPaso3();
-		eliminarCapa();
-		$(".block-3").show();
-		$(".block-4").hide();
-		$(".rdB4").attr('checked', false);
-		$("#bt4Disable").show();
-		$("#bt4").hide();
-   });
-   
-   $("#backLink4").click(function(event) {
-		mostrarPaso4();
-		$(".block-5").hide();
-		$(".block-4").show();
-		$(".rdB5").removeAttr('disabled');
-		$(".rdB5").attr('checked', false);
-		$("#bt5Disable").show();
-		$("#bt5").hide();
-		eliminarRelleno();
-	
-   });
-   
-   $("#backLink5").click(function(event) {
-		var valueCubierta = $("input:radio[name=4]:checked").val();
-		eliminarCubierta();
-		if (valueCubierta == "-"){
-			mostrarPaso4_block5();
-			$(".block-4").show();
-			$(".block-6").hide();
-		}else{
-			mostrarPaso5();
-			$(".block-5").show();
-			$(".block-6").hide();
-		}
-		$(".rdB6").attr('checked', false);
-		$("#bt6Disable").show();
-		$("#bt6").hide();
-		
-   });
-   /* ---------------------------------*/
    
    /* Imagenes pasos */
 	function mostrarPaso1(){
@@ -350,4 +276,95 @@ $(document).ready(function() {
 		$("#pasoImgCubierta").attr('src',"./images/tortas/capa_general.png");
 	}
    
+   /* Funcion para reiniciar el formulario */
+   $(".buttonR").click(function(){
+		priceTotal = 0;
+		priceTotalAux = 0;
+		var priceText = priceTotal + '.00';
+		$('.price').text(priceText);
+		$(".block").show();
+		$(".block-2").hide();
+		$(".block-3").hide();
+		$(".block-4").hide();
+		$(".block-5").hide();
+		$(".block-6").hide();
+		$("#bt1Disable").show();
+		$("#bt1").hide();
+		$("#bt2Disable").show();
+		$("#bt2").hide();
+		$("#bt3Disable").show();
+		$("#bt3").hide();
+		$("#bt4Disable").show();
+		$("#bt4").hide();
+		$("#bt5Disable").show();
+		$("#bt5").hide();
+		$("#bt6Disable").show();
+		$("#bt6").hide();
+		$("input:radio").removeAttr("checked");
+		$("input:checkbox").removeAttr("checked");
+		$("input:checkbox").attr("disabled",false);
+		eliminarTorta();
+		eliminarRelleno();
+		eliminarCubierta();
+		eliminarCapa();
+		mostrarPaso1();
+		$('#target').each(function(){
+			this.reset();
+		});
+		
+	});
+   
+   
+   /* Funcion que permite saber si el usuario escogio una foto y asi desactivar 
+   el boton de siguiente */
+   $("#txtImage").change(function (){ 
+		$("#bt6Disable").hide();
+		$("#bt6").show();
+	}); 
+
+	
+	/* Obtiene el precio del elemento seleccionado y lo suma al total */
+	function getPrice(i,j){
+		var priceAux = priceTotal;
+		var selectIdAux = '.price-int' + i+j;
+		var price = $(selectIdAux).text();
+		priceAux = priceAux + Number(price);
+		var priceText = priceAux + '.00';
+		$('.price').text(priceText);
+		priceTotalAux = priceAux;
+		if (i == 5)
+			setPriceTotal();
+		
+	}
+	
+	/* Obtiene el precio del elemento seleccionado y lo elimina del total */
+	function deletePrice(i,j){
+		var priceAux = priceTotal;
+		var selectIdAux = '.price-int' + i+j;
+		var price = $(selectIdAux).text();
+		priceAux = priceAux - Number(price);
+		var priceText = priceAux + '.00';
+		$('.price').text(priceText);
+		priceTotalAux = priceAux;
+		setPriceTotal();
+	}
+	
+	/* Obtiene el nombre del elemento seleccionad */
+	function getName(i,j){
+		var selectIdAux = '#name' + i+j;
+		return $(selectIdAux).text();
+	}
+	
+	function setPriceTotal(){
+		priceTotal = priceTotalAux;
+		
+	}
+	
+	/* Funcion que setea el valor del precio antes de hacer submit al formulario */
+	$('#target').submit(function() {
+		var priceText = priceTotalAux + '.00';
+		$("#priceCake").val(priceText);
+		return true;
+	});
+	
 });

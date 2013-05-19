@@ -1,8 +1,5 @@
-<%@page import="domain.Client"%>
-<%@page import="java.util.Arrays"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
+<%@page import="domain.Client"%>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -10,6 +7,8 @@
 	<link href='http://fonts.googleapis.com/css?family=Handlee' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/demos.css" />
+	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/ui.theme.css" />
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<!--[if IE 8]>
 		<link rel="stylesheet" type="text/css" href="css/ie8.css" />
@@ -24,21 +23,16 @@
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
 	
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
-	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-	  <script>
-	  $(function() {
-		$.datepicker.setDefaults($.datepicker.regional['es']);
-		$('#datepicker').datepicker({
-			buttonText: "Seleccione una fecha",
-			dateFormat:'dd/mm/yy',
-			changeMonth: true,
-		    changeYear: true,
+	<script type="text/javascript" src="/armaTuTorta/js/ui.core.js"></script>
+	<script type="text/javascript" src="/armaTuTorta/js/ui.datepicker.js"></script>
+	<script> 
+	$(function() {
+		$("#datepicker").datepicker({
 			minDate: +2
 		});
-	  });
-	  </script>
+	});
+	</script> 
+
 	
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function() {
@@ -81,7 +75,7 @@
 			%>
 			<div id="datosVerif">
 			<jsp:useBean id="pedido" type="domain.OrderCake" scope="request" />  
-					
+
 			<form action="/armaTuTorta/ArmaTuTortaServlet?typeId=1&pr=2" method="post" id="confirm">
 				<input type="hidden" name="clientId" id="clientId" value="<%= client.getId() %>">
 				<input type="hidden" name="forma" id="forma" value="<%= pedido.getForma() %>">
@@ -98,7 +92,7 @@
 				<input type="hidden" name="cubierta" id="cubierta" value="<%= pedido.getCubiertas() %>">
 				<input type="hidden" name="priceCake" id="priceCake" value="<%= pedido.getPrecio() %>">
 				<input type="hidden" name="nombreImagen" id="nombreImagen" value="<%= pedido.getNombreImagen()==null ? "" : pedido.getNombreImagen() %>">
-			
+
 				<div class="bienv">
 					<span class="bienv-title">Verifica los datos de tu pedido.</span><br><br>
 					<div id="pedido">
@@ -132,6 +126,8 @@
 			</div>
 			<% 
 				}else{
+					String error = (String) request.getAttribute("error");
+					if (error.equals("")){
 			%>
 			<div id="datosVerif" >
 				<div class="bienv">
@@ -139,17 +135,27 @@
 						Hemos recibido su pedido, en los pr&oacute;ximos d&iacute;as lo
 						estaremos contactando para confirmar su compra y coordinar el env&iacute;o. 
 						<br><br>
-						
+
 						Cualquier duda o inquietud lo invitamos a comunicarse con nosotros. <a href="/armaTuTorta/ContactServlet"  class="readmore">Aqu&iacute;</a> 
 						podr&aacute; encontrar nuestros datos.
-						
+
 						<br><br>
-						
+
 						&iexcl;Hasta pronto!
-						
+
 			   </div>
 			</div>
-			<% 
+			 <% }else{ %>
+			   <div class="bienv">
+					<span class="bienv-title">&iexcl; Le pedimos mil disculpas!.</span><br><br>
+						Ha ocurrido un error al intentar procesar su solicitud. Lo invitamos a que intente m&aacute;s tarde. 
+						En caso de que el error persista puede comunicarse con nuestro equipo de soporte, bien sea
+						llam&aacute;ndonos directamente o mand&aacute;ndonos un correo. <a href="/armaTuTorta/ContactServlet"  class="readmore">Aqu&iacute;</a> 
+						podr&aacute; encontrar nuestros datos.
+
+						<br><br>
+			   </div>
+			    <% } 
 				}
 			%>
 		</div>

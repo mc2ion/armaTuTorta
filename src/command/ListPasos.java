@@ -34,7 +34,6 @@ public class ListPasos implements DatabaseCommand {
 		
 		while(rs.next()) {
 			
-			System.out.println("entro ");
 			OrderStep order = new OrderStep();
 			
 				
@@ -56,7 +55,6 @@ public class ListPasos implements DatabaseCommand {
 				List<StepOption> steps = new LinkedList<StepOption>();
 				ListOrder_Step orderSteps = new ListOrder_Step();
 				while(rs2.next()) {
-					System.out.println(" a " + rs2.getLong(1) + " " + rs2.getString(3));
 					StepOption option = new StepOption();
 					option.setId(rs2.getLong(1));
 					option.setOrderStepId(rs2.getLong(2));

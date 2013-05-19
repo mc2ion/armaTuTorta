@@ -30,7 +30,6 @@ public class ChangePasswordServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.print("Get" );
 		doPost(request, response);
 	}
 
@@ -39,13 +38,14 @@ public class ChangePasswordServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		final String email = request.getParameter("email");
-		final String newPass = request.getParameter("txtNewPass");
-		final String oldPassword = request.getParameter("txtOldPass");
+		String newPass = request.getParameter("txtNewPass");
+		String oldPassword = request.getParameter("txtOldPass");
 		
 		final String encryptPassword = UserLoginServlet.getEncryptPassword(newPass);
+		final String oldEncryptPassword = UserLoginServlet.getEncryptPassword(oldPassword);
 		RequestDispatcher rd;	
 		try{
-			Integer userId = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.ChangeClientPassword(email, encryptPassword, oldPassword));
+			Integer userId = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.ChangeClientPassword(email, encryptPassword, oldEncryptPassword));
 			if(userId > 0){
 				request.setAttribute("editClient", "successPass");
 				rd = getServletContext().getRequestDispatcher("/editClientMessage.jsp");			

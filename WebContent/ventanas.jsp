@@ -3,7 +3,7 @@
 <div id="signup" style="display: none;">
 	<div id="signup-ct">
 		<div id="signup-header">
-			<h1>Iniciar Sesi&oacute;n</h1>
+			<span class="titleVent">Iniciar Sesi&oacute;n</span>
 			<p>Ingresa tus datos:</p>
 			<a class="modal_close" href="#"></a>
 		</div>
@@ -20,11 +20,11 @@
 			  <div class="missing-info"></div>
 			  <div class="txt-fld">
 				<label for="name">Email:</label>
-				<input type="text" name="txtNameLogin" id="txtNameLogin" maxlength="50" class="good_input" onkeydown="show();" onmousedown="show()" onBlur="show();" />
+				<input type="text" name="txtNameLogin" id="txtNameLogin" maxlength="50" class="good_input" oninput="show();" onkeydown="show();" onmousedown="show()"  onBlur="show();" />
 			  </div>
 			  <div class="txt-fld-pass">
 				<label for="password">Contrase&ntilde;a</label>
-				<input type="password" name="txtPasswordLogin" id="txtPasswordLogin" maxlength="50" onkeydown="show();" onmousedown="show()" onBlur="show();"  /> <br>
+				<input type="password" name="txtPasswordLogin" id="txtPasswordLogin" maxlength="50" oninput="show();" onkeydown="show();" onmousedown="show()" onBlur="show();"  /> <br>
 				<div >
 				  <a href="#" style="margin-top: 5px; text-decoration:none;" onClick="forgotPass();">&iquest;Olvidaste tu contrase&ntilde;a?</a>
 				</div>
@@ -48,7 +48,7 @@
 				%> 
 		 	 <div class="txt-fld">
 				<label for="name">Email:</label>
-				<input type="text" name="email" id="email" maxlength="50" class="good_input" onkeydown="showAux();" onmousedown="showAux()" onBlur="showAux();" />
+				<input type="text" name="email" id="email" maxlength="50" class="good_input" oninput="showAux();" onkeydown="showAux();" onmousedown="showAux()" onBlur="showAux();" />
 			  </div>
 			  
 			  
