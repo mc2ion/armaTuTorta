@@ -61,13 +61,15 @@ public class DeleteStepOptionServlet extends HttpServlet {
 					
 					request.setAttribute("info", "La opción fue eliminada exitosamente.");
 					request.setAttribute("error", "");
-					rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);			
+					//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);		
+					rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);		
 
 					rd.forward(request, response);
 				} else {
 					request.setAttribute("info", "");
 					request.setAttribute("error", "Ocurrió un error durante la eliminación de la opción. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-					rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);	
+					//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);		
+					rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);		
 
 					rd.forward(request, response);
 				}
@@ -79,7 +81,8 @@ public class DeleteStepOptionServlet extends HttpServlet {
 		} catch (Exception e) {			
 			request.setAttribute("info", "");
 			request.setAttribute("error", "Ocurrió un error durante la eliminación de la opción. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-			rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);			
+			//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);		
+			rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);				
 
 			rd.forward(request, response);
 		}

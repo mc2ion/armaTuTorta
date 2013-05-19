@@ -70,6 +70,7 @@ public class CreatePhotoServlet extends HttpServlet {
 		RequestDispatcher rd;
 		Properties propertiesFile = new Properties();
 		propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+		//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 		MultipartRequest multipart = new MultipartRequest(request, propertiesFile.getProperty("albumsDirectory"), 5*1024*1024, new DefaultFileRenamePolicy());
 		Integer albumId = Integer.valueOf(multipart.getParameter("txtAlbumId"));
 		
@@ -113,18 +114,21 @@ public class CreatePhotoServlet extends HttpServlet {
 			if(rowsUpdated == 1){
 				request.setAttribute("info", "La foto fue creada exitosamente.");
 				request.setAttribute("error", "");
+				//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);	
 				rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);			
 				rd.forward(request, response);
 			} else {
 				request.setAttribute("info", "");
 				request.setAttribute("error", "Ocurrió un error durante la creación de la foto. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-				rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);			
+				//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);		
+				rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);		
 
 				rd.forward(request, response);
 			}
 		}catch (Exception e) {
 			request.setAttribute("info", "");
 			request.setAttribute("error", "Ocurrió un error durante la creación de la foto. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
+			//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);			
 			rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);			
 
 			rd.forward(request, response);

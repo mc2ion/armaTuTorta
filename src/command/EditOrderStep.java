@@ -21,20 +21,20 @@ public class EditOrderStep implements DatabaseCommand {
 		int rowsUpdated;
 		
 		if (step.getOldPosition() > step.getPosition()) {
-			sta = conn.prepareStatement("UPDATE ORDER_STEP SET POSITION=POSITION+1 WHERE ORDER_TYPE_ID = ? AND POSITION >= ? AND POSITION < ?");
+			sta = conn.prepareStatement("UPDATE order_step SET POSITION=POSITION+1 WHERE ORDER_TYPE_ID = ? AND POSITION >= ? AND POSITION < ?");
 			sta.setLong(1, step.getOrderTypeId());
 			sta.setInt(2, step.getPosition());
 			sta.setInt(3, step.getOldPosition());
 			rowsUpdated = sta.executeUpdate();
 		} else if (step.getOldPosition() < step.getPosition()) {
-			sta = conn.prepareStatement("UPDATE ORDER_STEP SET POSITION=POSITION-1 WHERE ORDER_TYPE_ID = ? AND POSITION > ? AND POSITION <= ?");
+			sta = conn.prepareStatement("UPDATE order_step SET POSITION=POSITION-1 WHERE ORDER_TYPE_ID = ? AND POSITION > ? AND POSITION <= ?");
 			sta.setLong(1, step.getOrderTypeId());
 			sta.setInt(2, step.getOldPosition());
 			sta.setInt(3, step.getPosition());
 			rowsUpdated = sta.executeUpdate();
 		}
 				
-		sta = conn.prepareStatement("UPDATE ORDER_STEP SET NAME = ?, POSITION = ?, IS_MULTIPLE_CHOICE = ? WHERE ID = ?");
+		sta = conn.prepareStatement("UPDATE order_step SET NAME = ?, POSITION = ?, IS_MULTIPLE_CHOICE = ? WHERE ID = ?");
 		sta.setString(1, step.getName());
 		sta.setInt(2, step.getPosition());
 		sta.setInt(3, step.isMultipleChoice());

@@ -14,7 +14,7 @@ public class DeletePhoto implements DatabaseCommand {
 
 	@Override
 	public Object executeDatabaseOperation(Connection conn) throws SQLException {
-		PreparedStatement sta = conn.prepareStatement("UPDATE PHOTO SET IS_DELETED=1, DELETED_DATE = NOW() WHERE ID = ?");
+		PreparedStatement sta = conn.prepareStatement("UPDATE photo SET IS_DELETED=1, DELETED_DATE = NOW() WHERE ID = ?");
 		sta.setLong(1, this.id);
 		int rowsUpdated = sta.executeUpdate();
 		

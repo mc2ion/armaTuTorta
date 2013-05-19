@@ -21,7 +21,7 @@ public class ListOrderSteps implements DatabaseCommand {
 		
 		// List steps of an order type in the database		
 		ArrayList<OrderStep> list = new ArrayList<OrderStep>();
-		PreparedStatement sta = conn.prepareStatement("SELECT OS.ID, OS.ORDER_TYPE_ID, OS.NAME, OS.POSITION, OS.IS_MULTIPLE_CHOICE FROM ORDER_STEP OS WHERE OS.ORDER_TYPE_ID = ? AND OS.IS_DELETED=0");
+		PreparedStatement sta = conn.prepareStatement("SELECT OS.ID, OS.ORDER_TYPE_ID, OS.NAME, OS.POSITION, OS.IS_MULTIPLE_CHOICE FROM order_step OS WHERE OS.ORDER_TYPE_ID = ? AND OS.IS_DELETED=0");
 		sta.setInt(1, this.typeId);
 		ResultSet rs = sta.executeQuery();
 		

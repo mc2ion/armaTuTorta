@@ -18,7 +18,7 @@ public class SelectNextOption implements DatabaseCommand {
 		
 		// Selects the next step
 		Integer position = 1;
-		PreparedStatement sta = conn.prepareStatement("SELECT MAX(POSITION)+1 FROM STEP_OPTION WHERE ORDER_STEP_ID = ? AND IS_DELETED = 0");
+		PreparedStatement sta = conn.prepareStatement("SELECT MAX(POSITION)+1 FROM step_option WHERE ORDER_STEP_ID = ? AND IS_DELETED = 0");
 		
 		sta.setLong(1, this.stepId);
 		

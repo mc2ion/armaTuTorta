@@ -19,7 +19,7 @@ public class CreateAlbum implements DatabaseCommand {
 	public Object executeDatabaseOperation(Connection conn) throws SQLException {
 		
 		int lastIdInserted = -1;
-		PreparedStatement sta = conn.prepareStatement("INSERT INTO ALBUM (NAME, IMAGE, IS_ACTIVE, IS_NEW) VALUES (?, ?, ?, ?)");
+		PreparedStatement sta = conn.prepareStatement("INSERT INTO album (NAME, IMAGE, IS_ACTIVE, IS_NEW) VALUES (?, ?, ?, ?)");
 		
 		sta.setString(1, album.getName());
 		sta.setString(2, album.getImage());
@@ -43,5 +43,4 @@ public class CreateAlbum implements DatabaseCommand {
 		
 		return new Integer(lastIdInserted);
 	}
-
 }

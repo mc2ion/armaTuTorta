@@ -20,7 +20,7 @@ public class SelectPhoto implements DatabaseCommand {
 		// select an album in the database
 
 		Photo photo = new Photo();
-		PreparedStatement sta = conn.prepareStatement("SELECT P.ID, P.ALBUM_ID, P.NAME, P.IMAGE, P.IS_ACTIVE, P.IS_NEW FROM PHOTO P WHERE P.ID = ? ");
+		PreparedStatement sta = conn.prepareStatement("SELECT P.ID, P.ALBUM_ID, P.NAME, P.IMAGE, P.IS_ACTIVE, P.IS_NEW FROM photo P WHERE P.ID = ? ");
 		sta.setLong(1, this.photoId);
 		ResultSet rs = sta.executeQuery();
 		

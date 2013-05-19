@@ -3,14 +3,16 @@ package command;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import javax.naming.InitialContext;
+//import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
+
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
 public class CommandExecutor {
 
 	private static CommandExecutor myOnlyInstance = null;
-	private DataSource ds = null;
+	private MysqlDataSource ds = null;
 	
 	// accessor method for the singleton
 	public static CommandExecutor getInstance() throws NamingException {
@@ -29,8 +31,21 @@ public class CommandExecutor {
 	public DataSource getDataSource() throws NamingException {
 		
 		if (ds == null) {			
-			InitialContext ctx = new InitialContext();
-			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/armatutorta");			
+			/*InitialContext ctx = new InitialContext();
+			ds = (DataSource) ctx.lookup("java:comp/env/jdbc/armatutorta");		*/	
+			//String url = "jdbc:mysql:localhost:3306,localhost:3310/armatutorta";
+			ds = new com.mysql.jdbc.jdbc2.optional.MysqlDataSource();
+			/*ds.setServerName("localhost");
+			ds.setPortNumber(3306);
+			ds.setDatabaseName("armatuto_prueba");
+			ds.setUser("armatuto_root");
+			ds.setPassword("administrator");*/
+			
+			ds.setServerName("localhost");
+			ds.setPortNumber(3306);
+			ds.setDatabaseName("armatutorta");
+			ds.setUser("root");
+			ds.setPassword("administrator");
 		}
 		
 		return ds;

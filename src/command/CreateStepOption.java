@@ -18,13 +18,13 @@ public class CreateStepOption implements DatabaseCommand {
 	@Override
 	public Object executeDatabaseOperation(Connection conn) throws SQLException {
 
-		PreparedStatement sta = conn.prepareStatement("UPDATE STEP_OPTION SET POSITION=POSITION+1 WHERE ORDER_STEP_ID = ? AND POSITION >= ?");
+		PreparedStatement sta = conn.prepareStatement("UPDATE step_option SET POSITION=POSITION+1 WHERE ORDER_STEP_ID = ? AND POSITION >= ?");
 		sta.setLong(1, option.getOrderStepId());
 		sta.setInt(2, option.getPosition());
 		int rowsUpdated = sta.executeUpdate();
 
 		int lastIdInserted = -1;
-		sta = conn.prepareStatement("INSERT INTO STEP_OPTION (ORDER_STEP_ID, NAME, POSITION, PRICE, IS_UNAVAILABLE) VALUES (?, ?, ?, ?, ?)");
+		sta = conn.prepareStatement("INSERT INTO step_option (ORDER_STEP_ID, NAME, POSITION, PRICE, IS_UNAVAILABLE) VALUES (?, ?, ?, ?, ?)");
 		
 		sta.setLong(1, option.getOrderStepId());
 		sta.setString(2, option.getName());

@@ -20,7 +20,7 @@ public class SelectOrderType implements DatabaseCommand {
 		// select an order type in the database
 
 		OrderType orderType = new OrderType();
-		PreparedStatement sta = conn.prepareStatement("SELECT OT.ID, OT.NAME FROM ORDER_TYPE OT WHERE OT.ID = ? ");
+		PreparedStatement sta = conn.prepareStatement("SELECT OT.ID, OT.NAME FROM order_type OT WHERE OT.ID = ? ");
 		sta.setLong(1, this.typeId);
 		ResultSet rs = sta.executeQuery();
 		

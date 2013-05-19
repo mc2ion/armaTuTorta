@@ -86,19 +86,22 @@ public class CreateOrderStepServlet extends HttpServlet {
 			if(rowsUpdated != -1){
 				request.setAttribute("info", "EL paso fue creado exitosamente.");
 				request.setAttribute("error", "");
-				rd = getServletContext().getRequestDispatcher("/ListOrderStepsServlet?typeId="+typeId);			
+				//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListOrderStepsServlet?typeId="+typeId);	
+				rd = getServletContext().getRequestDispatcher("/ListOrderStepsServlet?typeId="+typeId);				
 				rd.forward(request, response);
 			} else {
 				request.setAttribute("info", "");
 				request.setAttribute("error", "Ocurrió un error durante la creación del paso. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-				rd = getServletContext().getRequestDispatcher("/ListOrderStepsServlet?typeId="+typeId);			
+				//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListOrderStepsServlet?typeId="+typeId);
+				rd = getServletContext().getRequestDispatcher("/ListOrderStepsServlet?typeId="+typeId);						
 
 				rd.forward(request, response);
 			}
 		}catch (Exception e) {
 			request.setAttribute("info", "");
 			request.setAttribute("error", "Ocurrió un error durante la creación del paso. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-			rd = getServletContext().getRequestDispatcher("/ListOrderStepsServlet?typeId="+typeId);			
+			//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListOrderStepsServlet?typeId="+typeId);	
+			rd = getServletContext().getRequestDispatcher("/ListOrderStepsServlet?typeId="+typeId);					
 
 			rd.forward(request, response);
 		}

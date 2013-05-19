@@ -76,6 +76,7 @@ public class EditAlbumServlet extends HttpServlet {
 		RequestDispatcher rd;
 		Properties propertiesFile = new Properties();
 		propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+		//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 		MultipartRequest multipart = new MultipartRequest(request, propertiesFile.getProperty("albumsDirectory"), 5*1024*1024, new DefaultFileRenamePolicy());
 				
 		try{

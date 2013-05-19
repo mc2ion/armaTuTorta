@@ -20,20 +20,20 @@ public class EditStepOption implements DatabaseCommand {
 		int rowsUpdated;
 		
 		if (option.getOldPosition() > option.getPosition()) {
-			sta = conn.prepareStatement("UPDATE STEP_OPTION SET POSITION=POSITION+1 WHERE ORDER_STEP_ID = ? AND POSITION >= ? AND POSITION < ?");
+			sta = conn.prepareStatement("UPDATE step_option SET POSITION=POSITION+1 WHERE ORDER_STEP_ID = ? AND POSITION >= ? AND POSITION < ?");
 			sta.setLong(1, option.getOrderStepId());
 			sta.setInt(2, option.getPosition());
 			sta.setInt(3, option.getOldPosition());
 			rowsUpdated = sta.executeUpdate();
 		} else if (option.getOldPosition() < option.getPosition()) {
-			sta = conn.prepareStatement("UPDATE STEP_OPTION SET POSITION=POSITION-1 WHERE ORDER_STEP_ID = ? AND POSITION > ? AND POSITION <= ?");
+			sta = conn.prepareStatement("UPDATE step_option SET POSITION=POSITION-1 WHERE ORDER_STEP_ID = ? AND POSITION > ? AND POSITION <= ?");
 			sta.setLong(1, option.getOrderStepId());
 			sta.setInt(2, option.getOldPosition());
 			sta.setInt(3, option.getPosition());
 			rowsUpdated = sta.executeUpdate();
 		}
 				
-		sta = conn.prepareStatement("UPDATE STEP_OPTION SET NAME = ?, POSITION = ?, PRICE = ?, IS_UNAVAILABLE = ? WHERE ID = ?");
+		sta = conn.prepareStatement("UPDATE step_option SET NAME = ?, POSITION = ?, PRICE = ?, IS_UNAVAILABLE = ? WHERE ID = ?");
 		sta.setString(1, option.getName());
 		sta.setInt(2, option.getPosition());
 		sta.setDouble(3, option.getPrice());

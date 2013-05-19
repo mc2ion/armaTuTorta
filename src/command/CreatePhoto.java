@@ -19,7 +19,7 @@ public class CreatePhoto implements DatabaseCommand {
 	public Object executeDatabaseOperation(Connection conn) throws SQLException {
 		
 		int lastIdInserted = -1;
-		PreparedStatement sta = conn.prepareStatement("INSERT INTO PHOTO (ALBUM_ID, NAME, IMAGE, IS_ACTIVE, IS_NEW) VALUES (?, ?, ?, ?, ?)");
+		PreparedStatement sta = conn.prepareStatement("INSERT INTO photo (ALBUM_ID, NAME, IMAGE, IS_ACTIVE, IS_NEW) VALUES (?, ?, ?, ?, ?)");
 		
 		sta.setLong(1, photo.getAlbumId());
 		sta.setString(2, photo.getName());

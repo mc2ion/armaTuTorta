@@ -20,7 +20,7 @@ public class SelectAlbum implements DatabaseCommand {
 		// select an album in the database
 
 		Album album = new Album();
-		PreparedStatement sta = conn.prepareStatement("SELECT A.ID, A.NAME, A.IMAGE, A.IS_ACTIVE, A.IS_NEW FROM ALBUM A WHERE A.ID = ? ");
+		PreparedStatement sta = conn.prepareStatement("SELECT A.ID, A.NAME, A.IMAGE, A.IS_ACTIVE, A.IS_NEW FROM album A WHERE A.ID = ? ");
 		sta.setLong(1, this.albumId);
 		ResultSet rs = sta.executeQuery();
 		

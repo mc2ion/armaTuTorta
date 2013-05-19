@@ -65,6 +65,7 @@ public class DeleteAlbumServlet extends HttpServlet {
 				Integer rowsUpdated = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.DeleteAlbum(albumId));
 				Properties propertiesFile = new Properties();
 				propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+				//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 				
 				if(rowsUpdated == 1){
 					String dir = propertiesFile.getProperty("albumsDirectory") + propertiesFile.getProperty("fileSeparator") + Album.getDirectory(albumId);
