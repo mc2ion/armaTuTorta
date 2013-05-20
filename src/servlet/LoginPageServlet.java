@@ -18,7 +18,6 @@ import command.CommandExecutor;
 
 import domain.Client;
 import domain.StepOption;
-import domain.User;
 
 import sun.misc.BASE64Encoder;
 
@@ -51,14 +50,14 @@ public class LoginPageServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession(true);
-		User user = (User) session.getAttribute("user");
+		Client user = (Client) session.getAttribute("client");
 		RequestDispatcher rd;
 		   
 		if(user != null){
-			rd = getServletContext().getRequestDispatcher("/admin/mainMenu.jsp");			
+			rd = getServletContext().getRequestDispatcher("/index.jsp");			
 			rd.forward(request, response);
 		} else {
-			rd = getServletContext().getRequestDispatcher("/admin/index.jsp");			
+			rd = getServletContext().getRequestDispatcher("/index.jsp");			
 			rd.forward(request, response);
 		}
 	}

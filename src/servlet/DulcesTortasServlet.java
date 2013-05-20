@@ -97,16 +97,17 @@ public class DulcesTortasServlet extends HttpServlet {
 				String price = request.getParameter("priceDulcCake");
 				String date = request.getParameter("txtFecha");
 				final String[] cantProd = new String[productos.length];
+				final String[] cantInt = new String[productos.length];
 				
 				for (int i = 0 ; i < productos.length ; i++){
-					String cantidad = request.getParameter("selDulcesTortas" + productos[i]);
-					cantProd[i] = cantidad + " " + hashMap.get(productos[i]);
+					cantInt[i] = request.getParameter("selDulcesTortas" + productos[i]);
+					cantProd[i] = cantInt[i] + " " + hashMap.get(productos[i]);
 				}
 				
 					
 				final Properties propertiesFile = new Properties();
-				propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
-				
+				//propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+				propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 				/* Establezco los valores de las cosas pedidas */
 				List<OrderItem> orderItems = new LinkedList<OrderItem>();
 				
@@ -117,6 +118,7 @@ public class DulcesTortasServlet extends HttpServlet {
 					String productName = hashMap.get(productos[i]);
 					item.setPrice(hashMapPrice.get(productName));
 					item.setStepOptionId(hashMapId.get(productName));
+					item.setCantDocenas(cantInt[i]);
 					orderItems.add(item);
 				}
 				

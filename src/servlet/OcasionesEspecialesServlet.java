@@ -63,7 +63,8 @@ public class OcasionesEspecialesServlet extends HttpServlet {
 		}else{
 			
 			final Properties propertiesFile = new Properties();
-			propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+			//propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+			propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 			String dirPath = propertiesFile.getProperty("pedidosOcasionesEspecialesDirectory");
 		
 			MultipartRequest multipart = new MultipartRequest(request, dirPath,

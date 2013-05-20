@@ -1221,7 +1221,6 @@ function validatePassRptNew(element){
 }
 
 function validateReg(){
-	var empresa = $("input:radio[name=typePers]:checked").val();
 	var name = document.getElementById("txtName");
 	var lastName = document.getElementById("txtLastName");
 	var cedula = document.getElementById("txtCed");
@@ -1235,9 +1234,6 @@ function validateReg(){
 	if (validateTypePerson(type)!= true)
 		bool = false;
 	
-	if (empresa == null)
-		bool = false;	
-
 	if (validateName(name, '1') != true)
 		bool = false;
 

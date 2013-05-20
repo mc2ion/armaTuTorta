@@ -56,7 +56,7 @@ public class SendEmail  extends Thread  {
 		                                  new InternetAddress(to));
 	
 		         // Set Subject: header field
-		         message.setSubject("Registro en la Página Web de ArmaTuTorta ");
+		         message.setSubject("Registro en la Página Web de ArmaTuTorta ", "ISO-8859-1");
 	
 		         // Send the actual HTML message, as big as you like
 		         String messa = "Hola," + name + "<br><br>" +
@@ -109,7 +109,7 @@ public class SendEmail  extends Thread  {
 		                                  new InternetAddress(to));
 
 		         // Set Subject: header field
-		         message.setSubject("Recuperación de Contraseña");
+		         message.setSubject("Recuperación de Contraseña", "ISO-8859-1");
 
 		         // Send the actual HTML message, as big as you like
 		         String messa = "<div style='color: gray;'>Hola, " + name + ".<br>" +
@@ -161,7 +161,7 @@ public class SendEmail  extends Thread  {
 		                                  new InternetAddress(to));
 
 		         // Set Subject: header field
-		         message.setSubject("Tienes un nuevo comentario o mensaje");
+		         message.setSubject("Tienes un nuevo comentario o mensaje", "ISO-8859-1");
 
 		         // Send the actual HTML message, as big as you like
 		         String messa = "<div style='color: #8904B1;'>Hola, has recibido un nuevo comentario a través de " +
@@ -213,7 +213,7 @@ public class SendEmail  extends Thread  {
 		                                  new InternetAddress(to));
 
 		         // Set Subject: header field
-		         message.setSubject("Copia de mensaje envíado a Arma Tu Torta");
+		         message.setSubject("Copia de mensaje envíado a Arma Tu Torta", "ISO-8859-1");
 
 		         // Send the actual HTML message, as big as you like
 		         String messa = "<div style='color: #8904B1;'>Hola, " + name + ", <br><br>"
@@ -271,7 +271,7 @@ public class SendEmail  extends Thread  {
 		                                  new InternetAddress(to));
 	
 		         // Set Subject: header field
-		         message.setSubject("Tienes un nuevo pedido de tortas. Orden N°" + numPedido);
+		         message.setSubject("Tienes un nuevo pedido de tortas. Orden N°" + numPedido, "ISO-8859-1");
 	
 		         String rell = "";
 		         for (int i = 0; i< relleno.length; i++){
@@ -371,7 +371,7 @@ public class SendEmail  extends Thread  {
 		                                  new InternetAddress(to));
 	
 		         // Set Subject: header field
-		         message.setSubject("Tienes una nueva solicitud de presupuesto: No." + numPedido);
+		         message.setSubject("Tienes una nueva solicitud de presupuesto: No." + numPedido, "ISO-8859-1");
 	
     	         // Send the actual HTML message, as big as you like
 		         String messa = "Has recibido una nueva solicitud de presupuesto. <br><br>" +
@@ -459,7 +459,7 @@ public class SendEmail  extends Thread  {
 		                                  new InternetAddress(to));
 	
 		         // Set Subject: header field
-		         message.setSubject("Tienes un nuevo pedido de cupcakes. Orden N°" + numPedido);
+		         message.setSubject("Tienes un nuevo pedido de cupcakes. Orden N°" + numPedido, "ISO-8859-1");
 	
 		         String rell = "";
 		         if (color != null){
@@ -563,7 +563,7 @@ public class SendEmail  extends Thread  {
 		                                  new InternetAddress(to));
 	
 		         // Set Subject: header field
-		         message.setSubject("Tienes una nueva compra de dulces tortas: No." + numPedido);
+		         message.setSubject("Tienes una nueva compra de dulces tortas: No." + numPedido, "ISO-8859-1");
 	
 		         // Send the actual HTML message, as big as you like
 		         String messa = "Has recibido una nueva compra de dulces tortas. <br><br>" +

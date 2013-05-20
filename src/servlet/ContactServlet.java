@@ -59,13 +59,15 @@ public class ContactServlet extends HttpServlet {
 					", message: " + message);
 			
 			
-			if (txtCheck.equals("1")){
+			if (txtCheck != null){
 				new Thread(new Runnable() {
 				    public void run() {
 				    	Properties propertiesFile = new Properties();
-						String context = getServletContext().getInitParameter("properties");
+						//String context = getServletContext().getInitParameter("properties");
 						try {
-							propertiesFile.load(new FileInputStream(context));
+							//propertiesFile.load(new FileInputStream(context));
+							propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
+							
 						} catch (FileNotFoundException e) {
 							e.printStackTrace();
 						} catch (IOException e) {
@@ -77,9 +79,10 @@ public class ContactServlet extends HttpServlet {
 				new Thread(new Runnable() {
 				    public void run() {
 				    	Properties propertiesFile = new Properties();
-						String context = getServletContext().getInitParameter("properties");
+						//String context = getServletContext().getInitParameter("properties");
 						try {
-							propertiesFile.load(new FileInputStream(context));
+							//propertiesFile.load(new FileInputStream(context));
+							propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 						} catch (FileNotFoundException e) {
 							e.printStackTrace();
 						} catch (IOException e) {
@@ -93,9 +96,10 @@ public class ContactServlet extends HttpServlet {
 				new Thread(new Runnable() {
 				    public void run() {
 				    	Properties propertiesFile = new Properties();
-						String context = getServletContext().getInitParameter("properties");
+						//String context = getServletContext().getInitParameter("properties");
 						try {
-							propertiesFile.load(new FileInputStream(context));
+							//propertiesFile.load(new FileInputStream(context));
+							propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 						} catch (FileNotFoundException e) {
 							e.printStackTrace();
 						} catch (IOException e) {
