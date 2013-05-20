@@ -20,7 +20,7 @@
            		<li class="menuitem"><a href="ListAlbumsServlet">Ver Álbumes</a></li>
            		<li class="menuitem"><a href="CreateAlbumServlet">Agregar Álbum</a></li>
             </ul>
-			<div class="menuitemPass"><a href="admin/index.jsp">Cambiar Contraseña</a></div>
+			<div class="menuitemPass"><a href="EditUserPasswordServlet">Cambiar Contraseña</a></div>
         	<div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
 	 	</div>        
     	<div id="leftmenu">
