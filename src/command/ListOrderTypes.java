@@ -15,7 +15,7 @@ public class ListOrderTypes implements DatabaseCommand {
 		// select order types in the database
 
 		ArrayList<OrderType> list = new ArrayList<OrderType>();
-		PreparedStatement sta = conn.prepareStatement("SELECT OT.ID, OT.NAME FROM ORDER_TYPE OT ");
+		PreparedStatement sta = conn.prepareStatement("SELECT OT.ID, OT.NAME FROM order_type OT ");
 		ResultSet rs = sta.executeQuery();
 		
 		while(rs.next()) {

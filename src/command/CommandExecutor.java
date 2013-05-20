@@ -45,7 +45,7 @@ public class CommandExecutor {
 			ds.setPortNumber(3306);
 			ds.setDatabaseName("armatutorta");
 			ds.setUser("root");
-			ds.setPassword("administrator");
+			ds.setPassword("123456");
 		}
 		
 		return ds;

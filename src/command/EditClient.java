@@ -17,7 +17,7 @@ public class EditClient implements DatabaseCommand {
 	@Override
 	public Object executeDatabaseOperation(Connection conn) throws SQLException {
 
-		PreparedStatement sta = conn.prepareStatement("UPDATE CLIENT " +
+		PreparedStatement sta = conn.prepareStatement("UPDATE client " +
 				" SET IDENTITY_CARD = ?, FIRST_NAME = ? , LAST_NAME= ? , EMAIL= ? , ADDRESS= ? , PHONE= ? , " +
 				" OTHER_PHONE= ? , IS_SHIPPING_ADDRESS= ? , SHIPPING_ADDRESS= ? , IS_COMPANY= ? " +
 				" WHERE ID = ?");

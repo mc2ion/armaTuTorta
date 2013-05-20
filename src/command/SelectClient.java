@@ -18,7 +18,7 @@ public class SelectClient implements DatabaseCommand {
 	public Object executeDatabaseOperation(Connection conn) throws SQLException {
 
 		PreparedStatement sta = conn.prepareStatement("SELECT IDENTITY_CARD, FIRST_NAME, LAST_NAME, EMAIL, ADDRESS," +
-				" PHONE, OTHER_PHONE, IS_SHIPPING_ADDRESS, SHIPPING_ADDRESS, IS_COMPANY FROM CLIENT" +
+				" PHONE, OTHER_PHONE, IS_SHIPPING_ADDRESS, SHIPPING_ADDRESS, IS_COMPANY FROM client" +
 				" WHERE ID = ?");
 		
 		sta.setLong(1, this.id);

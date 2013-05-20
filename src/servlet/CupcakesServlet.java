@@ -130,8 +130,11 @@ public class CupcakesServlet extends HttpServlet {
 		String[] colorInt = request.getParameterValues("5");
 		String decorInt = request.getParameter("6");
 		String precio = request.getParameter("priceCake");
-		String cantidadDocenas = request.getParameter("cantCupcakes");
-		String txtCalcomania =  request.getParameter("txtCalcomania");
+		String cantidadDocenas = null, txtCalcomania = null;
+		if (cantInt.equals("1"))
+			cantidadDocenas = request.getParameter("cantCupcakes");
+		else 
+			txtCalcomania =  request.getParameter("txtCalcomania");
 		String tamano, cantidad, sabor, cubierta, decoracion;
 		String[] color = null;
 		if (colorInt != null)

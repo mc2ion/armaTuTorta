@@ -22,7 +22,7 @@ public class ListDulcesTortas implements DatabaseCommand {
 		// List options of a step order in the database		
 		ArrayList<StepOption> list = new ArrayList<StepOption>();
 		PreparedStatement sta = conn.prepareStatement("SELECT OS.ID " +
-				"FROM ORDER_STEP OS WHERE OS.ORDER_TYPE_ID = ? AND OS.IS_DELETED=0");
+				"FROM order_step OS WHERE OS.ORDER_TYPE_ID = ? AND OS.IS_DELETED=0");
 		sta.setInt(1, this.typeId);
 		long stepId = -1;
 		ResultSet rs = sta.executeQuery();
@@ -35,7 +35,7 @@ public class ListDulcesTortas implements DatabaseCommand {
 				"SO.NAME, " +
 				"SO.POSITION, " +
 				"SO.PRICE " +
-				"FROM STEP_OPTION SO WHERE SO.ORDER_STEP_ID = ? AND SO.IS_DELETED=0 AND IS_UNAVAILABLE=0" +
+				"FROM step_option SO WHERE SO.ORDER_STEP_ID = ? AND SO.IS_DELETED=0 AND IS_UNAVAILABLE=0" +
 				" ORDER BY SO.POSITION ASC");
 			sta.setLong(1, stepId);
 			rs = sta.executeQuery();

@@ -26,7 +26,7 @@ public class ListPasos implements DatabaseCommand {
 		// List options of a step order in the database		
 		/* Obtengo los pasos primeros */
 		PreparedStatement sta = conn.prepareStatement("SELECT OS.ID, OS.NAME, OS.IS_MULTIPLE_CHOICE, OS.POSITION " +
-				"FROM ORDER_STEP OS WHERE OS.ORDER_TYPE_ID = ? AND OS.IS_DELETED=0 ORDER BY OS.POSITION ASC");
+				"FROM order_step OS WHERE OS.ORDER_TYPE_ID = ? AND OS.IS_DELETED=0 ORDER BY OS.POSITION ASC");
 		sta.setInt(1, this.typeId);
 		long stepId = -1;
 		ResultSet rs = sta.executeQuery();
@@ -48,7 +48,7 @@ public class ListPasos implements DatabaseCommand {
 					"SO.NAME, " +
 					"SO.POSITION, " +
 					"SO.PRICE " +
-					"FROM STEP_OPTION SO WHERE SO.ORDER_STEP_ID = ? AND SO.IS_DELETED=0 AND IS_UNAVAILABLE=0" +
+					"FROM step_option SO WHERE SO.ORDER_STEP_ID = ? AND SO.IS_DELETED=0 AND IS_UNAVAILABLE=0" +
 					" ORDER BY SO.POSITION ASC");
 				sta.setLong(1, stepId);
 				ResultSet rs2 = sta.executeQuery();

@@ -19,7 +19,7 @@ public class RestoreClientPassword implements DatabaseCommand {
 	@Override
 	public Object executeDatabaseOperation(Connection conn) throws SQLException {
 
-		PreparedStatement sta = conn.prepareStatement("UPDATE CLIENT SET PASSWORD = ? WHERE EMAIL = ?");
+		PreparedStatement sta = conn.prepareStatement("UPDATE client SET PASSWORD = ? WHERE EMAIL = ?");
 		
 		sta.setString(1,  newPassword);
 		sta.setString(2,  email);

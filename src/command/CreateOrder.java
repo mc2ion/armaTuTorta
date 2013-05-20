@@ -55,7 +55,7 @@ public class CreateOrder implements DatabaseCommand {
 				lastIdInserted = rs.getLong("last_insert_id()"); 
 				for (int i = 0; i < orderItems.size(); i++){
 					OrderItem item = orderItems.get(i);
-					sta = conn.prepareStatement("INSERT INTO ORDER_ITEM (ORDER_ID, STEP_OPTION_ID, PRICE, ADDITIONAL_INFO)" +
+					sta = conn.prepareStatement("INSERT INTO order_item (ORDER_ID, STEP_OPTION_ID, PRICE, ADDITIONAL_INFO)" +
 							" VALUES (?, ?, ?, ?)");
 					sta.setLong(1, lastIdInserted);
 					sta.setLong(2, item.getStepOptionId());

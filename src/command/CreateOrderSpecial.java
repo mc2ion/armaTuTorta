@@ -23,7 +23,7 @@ public class CreateOrderSpecial implements DatabaseCommand {
 	@Override
 	public Object executeDatabaseOperation(Connection conn) throws SQLException {
 		
-		PreparedStatement sta = conn.prepareStatement("INSERT INTO ESTIMATION (CLIENT_ID, SPECIAL_OCCASION, PRODUCTS, GUESTS_NUMBER, IMAGE, DESCRIPTION)"
+		PreparedStatement sta = conn.prepareStatement("INSERT INTO estimation (CLIENT_ID, SPECIAL_OCCASION, PRODUCTS, GUESTS_NUMBER, IMAGE, DESCRIPTION)"
 				 +" VALUES (?, ?, ?, ?, ?, ?)");
 		sta.setLong(1, estimation.getClientId());
 		sta.setString(2, estimation.getSpecialOccasion());

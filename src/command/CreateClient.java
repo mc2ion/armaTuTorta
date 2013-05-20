@@ -20,7 +20,7 @@ public class CreateClient implements DatabaseCommand {
 
 		int lastIdInserted = -1;
 		
-		PreparedStatement sta = conn.prepareStatement("SELECT ID FROM CLIENT WHERE EMAIL = ?");
+		PreparedStatement sta = conn.prepareStatement("SELECT ID FROM client WHERE EMAIL = ?");
 		sta.setString(1, client.getEmail());
 		ResultSet rs = sta.executeQuery();
 		if (rs.next()){
@@ -28,7 +28,7 @@ public class CreateClient implements DatabaseCommand {
 			lastIdInserted = -2;
 			
 		} else {
-			sta = conn.prepareStatement("INSERT INTO CLIENT" +
+			sta = conn.prepareStatement("INSERT INTO client" +
 				" (IDENTITY_CARD, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, ADDRESS, PHONE, OTHER_PHONE, IS_SHIPPING_ADDRESS, SHIPPING_ADDRESS, IS_COMPANY) " +
 				"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 

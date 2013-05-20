@@ -22,7 +22,7 @@ public class CustomerExists implements DatabaseCommand {
 		
 		Client c = null;
 		PreparedStatement sta = conn.prepareStatement("SELECT ID, FIRST_NAME, LAST_NAME, EMAIL, PASSWORD " +
-				"FROM CLIENT WHERE EMAIL = ? AND PASSWORD = ?");
+				"FROM client WHERE EMAIL = ? AND PASSWORD = ?");
 		sta.setString(1, this.email);
 		sta.setString(2, this.encryptPassword);
 		ResultSet rs = sta.executeQuery();

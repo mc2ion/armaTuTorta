@@ -13,8 +13,6 @@ public class FilesName  {
 	private static HashMap<String, String[]> fileNamesCakes = new HashMap<String, String[]>();
 	private static HashMap<String, String[]> fileNamesSpecialsCakes = new HashMap<String, String[]>();
 	private static String CUPCAKES = "cupcakes";
-	private static String CAKES = "cakes";
-	private static String SPECIALS = "specialsCakes";
 	
 	public static void cleanCupcakesCache(){
 		fileNamesCupcakes.clear();
@@ -35,8 +33,7 @@ public class FilesName  {
 		
 		String[] filesName;
 		if (fileNamesCupcakes.get(CUPCAKES) == null){
-			String path = request.getSession().getServletContext().getRealPath("/");
-			path = path + "images\\galeria_inicio";
+			String path = "\\home\\armatuto\\public_html\\images\\galeria_inicio";
 			
 			File folder = new File(path);
 			File[] listOfFiles = folder.listFiles();
@@ -53,53 +50,5 @@ public class FilesName  {
 	    return filesName;
 
 	}
-	
-	public static String[] getFilesNamesCakes(HttpServletRequest request) {
-		
-		String[] filesName;
-		if (fileNamesCakes.get(CAKES) == null){
-			String path = request.getSession().getServletContext().getRealPath("/");
-			path = path + "images\\galeria_tortas";
-			
-			File folder = new File(path);
-			File[] listOfFiles = folder.listFiles();
-			filesName = new String[listOfFiles.length]; ;
-			for (int i = 0; i < listOfFiles.length; i++) {
-			      if (listOfFiles[i].isFile()) {
-			    	  filesName[i] = listOfFiles[i].getName();
-			      } 
-		    }
-			fileNamesCakes.put(CAKES, filesName);
-		}else{
-			filesName = (String[]) fileNamesCakes.get(CAKES);
-		}
-	    return filesName;
-
-	}
-		
-	
-	public static String[] getFilesNamesSpecialsCakes(HttpServletRequest request) {
-		
-		String[] filesName;
-		if (fileNamesSpecialsCakes.get(SPECIALS) == null){
-			String path = request.getSession().getServletContext().getRealPath("/");
-			path = path + "images\\galeria_ocasionesEsp";
-			
-			File folder = new File(path);
-			File[] listOfFiles = folder.listFiles();
-			filesName = new String[listOfFiles.length]; ;
-			for (int i = 0; i < listOfFiles.length; i++) {
-			      if (listOfFiles[i].isFile()) {
-			    	  filesName[i] = listOfFiles[i].getName();
-			      } 
-		    }
-			fileNamesSpecialsCakes.put(SPECIALS, filesName);
-		}else{
-			filesName = (String[]) fileNamesSpecialsCakes.get(SPECIALS);
-		}
-	    return filesName;
-
-	}
-		
 	
 }

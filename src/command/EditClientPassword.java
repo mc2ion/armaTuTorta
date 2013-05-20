@@ -22,14 +22,14 @@ public class EditClientPassword implements DatabaseCommand {
 		
 		int rowsUpdated = 0;
 		
-		PreparedStatement sta = conn.prepareStatement("SELECT PASSWORD FROM CLIENT WHERE ID = ?");
+		PreparedStatement sta = conn.prepareStatement("SELECT PASSWORD FROM client WHERE ID = ?");
 		sta.setLong(1, client.getId());
 		ResultSet rs = sta.executeQuery();
 		
 		while(rs.next()) {
 			String oldPass = rs.getString(1);
 			if (oldPass.equals(oldPassword)){
-				sta = conn.prepareStatement("UPDATE CLIENT SET PASSWORD = ? WHERE ID = ?");
+				sta = conn.prepareStatement("UPDATE client SET PASSWORD = ? WHERE ID = ?");
 				sta.setString(1, client.getPassword());
 				sta.setLong(2, client.getId());
 				rowsUpdated = sta.executeUpdate();
