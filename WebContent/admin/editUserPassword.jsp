@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleAdmin.css" />
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
-	<title>Editar Cliente</title>	
+	<title>Modificar Contraseña</title>	
 </head>
 <body>
 	<div id="container">
@@ -15,11 +15,7 @@
         	<img alt="logo" src="/armaTuTorta/images/loguito5.png"/>
         </div>           
         <div id="menu">
-        	<div class="menuitemHome"><a href="UserLoginServlet">Home</a></div>	
-	  		<ul>
-           		<li class="menuitem"><a href="ListClientsServlet">Ver Clientes</a></li>
-           		<li class="menuitem"><a href="CreateClientServlet?clientId=<%= request.getAttribute("clientId") %>">Agregar Cliente</a></li>
-            </ul>
+        	<div class="menuitemHome"><a href="UserLoginServlet">Home</a></div>
 			<div class="menuitemPass"><a href="EditUserPasswordServlet">Cambiar Contraseña</a></div>
         	<div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
 	 	</div>        
@@ -31,20 +27,27 @@
             <div id="leftmenu_bottom"></div>
         </div>  
 		<div id="content">
-        		<h2>Modificar contraseña del cliente:</h2>
-	        	<p>&nbsp;</p>
-           		<p>&nbsp;</p>
+        		<h2>Modificar mi contraseña:</h2>
            		<%
-					String error = (String) request.getAttribute("error");
-					if (error != null){
-					%>
-						<p class="error-msg"><%= error %></p>      
-					<%
+        			String info = (String)request.getAttribute("info");
+        			String error = (String)request.getAttribute("error");
+        			
+					if(info!=null && !info.equalsIgnoreCase("")){
+				%>	
+				<p>&nbsp;</p> 
+				<p class="info-msg"><%= info %></p> 
+				<%	
 					}
-					%>	
+					if(error!=null && !error.equalsIgnoreCase("")){
+				%>	
+           		<p>&nbsp;</p>    
+				<p class="error-msg"><%= error %></p>      
+           		<%	
+					}
+				%>	
 				<br>
-				<form action="/armaTuTorta/EditClientPasswordServlet" onsubmit="return validatePassword(this)" method="post">
-				<input type="hidden" name="txtClientId" value="<%= request.getAttribute("clientId") %>" />				
+				<form action="/armaTuTorta/EditUserPasswordServlet" onsubmit="return validatePassword(this)" method="post">
+				<input type="hidden" name="txtUserId" value="<%= request.getAttribute("userId") %>" />				
 				<fieldset>
 						<label for="oldPassword">Contraseña anterior:</label>
 						<input type="password" name="txtOldPassword" id="txtOldPassword" maxlength="50"  /><br><br>

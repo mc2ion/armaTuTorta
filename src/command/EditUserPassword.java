@@ -5,15 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import domain.Client;
+import domain.User;
 
-public class EditClientPassword implements DatabaseCommand {
-	
-	private Client client;
+public class EditUserPassword implements DatabaseCommand {
+
+	private User user;
 	private String oldPassword;
 
-	public EditClientPassword(Client client, String oldPassword) {
-		this.client = client;
+	public EditUserPassword(User user, String oldPassword) {
+		this.user = user;
 		this.oldPassword = oldPassword;
 	}
 
@@ -22,16 +22,18 @@ public class EditClientPassword implements DatabaseCommand {
 		
 		int rowsUpdated = 0;
 		
-		PreparedStatement sta = conn.prepareStatement("SELECT PASSWORD FROM client WHERE ID = ?");
-		sta.setLong(1, client.getId());
+		PreparedStatement sta = conn.prepareStatement("SELECT PASSWORD FROM user WHERE ID = ?");
+		sta.setLong(1, user.getId());
 		ResultSet rs = sta.executeQuery();
 		
 		while(rs.next()) {
+			
 			String oldPass = rs.getString(1);
+			
 			if (oldPass.equals(oldPassword)){
-				sta = conn.prepareStatement("UPDATE client SET PASSWORD = ? WHERE ID = ?");
-				sta.setString(1, client.getPassword());
-				sta.setLong(2, client.getId());
+				sta = conn.prepareStatement("UPDATE user SET PASSWORD = ? WHERE ID = ?");
+				sta.setString(1, user.getPassword());
+				sta.setLong(2, user.getId());
 				rowsUpdated = sta.executeUpdate();
 			}
 			else {
@@ -42,5 +44,4 @@ public class EditClientPassword implements DatabaseCommand {
 		sta.close();
 		return new Integer(rowsUpdated);
 	}
-
 }
