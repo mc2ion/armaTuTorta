@@ -60,11 +60,11 @@ public class CreateOrder implements DatabaseCommand {
 					sta.setLong(1, lastIdInserted);
 					sta.setLong(2, item.getStepOptionId());
 					sta.setDouble(3,item.getPrice());
-					if (item.getNombreImg() != null)
+					if (item.getNombreImg() != null || !item.getNombreImg().equals(""))
 						sta.setString(4,item.getNombreImg());
-					else if(item.getCantDocenas() != null)
+					else if(item.getCantDocenas() != null || !item.getNombreImg().equals(""))
 						sta.setString(4,item.getCantDocenas());
-					else if (item.getTxtCalcomania() != null)
+					else if (item.getTxtCalcomania() != null || !item.getNombreImg().equals(""))
 						sta.setString(4,item.getTxtCalcomania());
 					else
 						sta.setString(4,null);
