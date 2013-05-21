@@ -18,17 +18,24 @@
        
 		<div id="contentLogin">
 				<form name="userForm" action="/armaTuTorta/UserLoginServlet" onsubmit="return validateLogin(this)" method="post">
-					<%
-						String error = (String) request.getAttribute("error");
-					
-						if (error != null){
-					%>
-										<div style="color:red; font-weight:bold;">
-											<%= error %>
-										</div>
-					<%
-						}
-					%>		
+				<%
+        			String info = (String)request.getAttribute("info");
+        			String error = (String)request.getAttribute("error");
+        			
+					if(info!=null && !info.equalsIgnoreCase("")){
+				%>	
+				<p>&nbsp;</p> 
+				<p class="info-msg"><%= info %></p> 
+				<%	
+					}
+					if(error!=null && !error.equalsIgnoreCase("")){
+				%>	
+           		<p>&nbsp;</p>    
+				<p class="error-msg"><%= error %></p>      
+           		<%	
+					}
+				%>		
+					<br>		
 					<fieldset>
 						<label for="name">Nombre de usuario:</label>
 						<input type="text" name="txtName" id="txtName" maxlength="50" /> <br><br>
@@ -43,7 +50,7 @@
 					</div>
 				</form>
 				<div>
-					<a href="#" style="margin-top: 5px; text-decoration:none;" onClick="forgotPass();">&iquest;Olvidaste tu contrase&ntilde;a?</a>
+					<a href="forgotUserPassword.jsp" style="margin-top: 5px; text-decoration:none;" onClick="forgotPass();">&iquest;Olvidaste tu contrase&ntilde;a?</a>
 				</div>
 			</div>
             <div id="footer"></div>

@@ -74,7 +74,58 @@ public class SendEmail  extends Thread  {
 			   ex.printStackTrace();
 		   }
 	}
+	
+	public static void sendEmailPassword(Properties propertiesFile, String email, String name, String userName, String newPassword, boolean attach, String pref) {
 		
+		String to = email;
+		final String user= propertiesFile.getProperty(pref + "EmailCountFrom");
+		final String password =  propertiesFile.getProperty(pref + "EmailPasswordFrom");
+		final String port = propertiesFile.getProperty(pref + "EmailPort");
+			 	
+		Properties properties = System.getProperties();
+		properties.setProperty("mail.smtp.host", propertiesFile.getProperty(pref + "EmailServer") );
+		properties.setProperty("mail.smtp.port", port);
+		properties.put("mail.transport.protocol", "smtp");
+		properties.setProperty("mail.smtp.starttls.enable", "true");
+		properties.put("mail.smtp.auth", "true");
+		  
+		Session session = Session.getDefaultInstance(properties,
+			new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(user,password);
+				}
+		  	});
+		   
+		try{
+			// Create a default MimeMessage object.
+			MimeMessage message = new MimeMessage(session);
+
+		 	// Set From: header field of the header.
+			message.setFrom(new InternetAddress(user));
+
+			// Set To: header field of the header.
+			message.addRecipient(Message.RecipientType.TO,
+		                                  new InternetAddress(to));
+
+			// Set Subject: header field
+			message.setSubject("Recuperación de Contraseña", "ISO-8859-1");
+
+			// Send the actual HTML message, as big as you like
+		 	String messa = "<div style='color: gray;'>Hola, " + name + ".<br>" +
+		    	"A continuación encontrarás la información para acceder a tu cuenta: <br><br>"
+		    	+ "Tu usuario es: " + userName + "<br>"+
+		     	"Tu nueva contrase&ntilde;a es:" + newPassword +"<br><br>"+
+		    	"Atentamente, equipo de apoyo de Arma Tu Torta.</div>";
+
+		 	message.setContent(messa,"text/html" );
+
+			// Send message
+			Transport.send(message);
+			
+		}catch (MessagingException ex) {
+			ex.printStackTrace();
+		}
+	}		
 	
 	public static void sendEmailPassword(Properties propertiesFile, String email, String name, String newPassword, boolean attach, String pref) {
 		
