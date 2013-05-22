@@ -18,6 +18,7 @@
         	<div class="menuitemHome"><a href="UserLoginServlet">Home</a></div>	
 	  		<ul>
            		<li class="menuitem"><a href="ListOrderStepsServlet?typeId=<%= request.getAttribute("typeId") %>">Ver Pasos</a></li>
+           		<li class="menuitem"><a href="CreateOrderStepServlet?typeId=<%= request.getAttribute("typeId") %>">Agregar Paso</a></li>
             </ul>
 			<div class="menuitemPass"><a href="EditUserPasswordServlet">Cambiar Contraseña</a></div>
         	<div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
@@ -40,7 +41,7 @@
 				<input type="hidden" name="txtCurrentPosition" value="<%= stepInfo.getPosition() %>" />
 				<fieldset>
 					<label for="name">Paso:</label>
-					<input type="number" min="1" name="txtPosition" id="txtPosition" maxlength="3" size="3" value="<%= stepInfo.getPosition() %>" disabled /> <br><br>
+					<input type="number" min="1" name="txtPosition" id="txtPosition" maxlength="3" size="3" value="<%= stepInfo.getPosition() %>" /> <br><br>
 					<label for="name">Nombre:</label>
 					<textarea name="txtName" id="txtName" rows="4" cols="50"><%= stepInfo.getName() %></textarea> <br><br>
 					<%

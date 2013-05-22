@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Util.FilesName;
+
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -69,8 +71,8 @@ public class CreatePhotoServlet extends HttpServlet {
 		
 		RequestDispatcher rd;
 		Properties propertiesFile = new Properties();
-		propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
-		//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
+		//propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+		propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 		MultipartRequest multipart = new MultipartRequest(request, propertiesFile.getProperty("albumsDirectory"), 5*1024*1024, new DefaultFileRenamePolicy());
 		Integer albumId = Integer.valueOf(multipart.getParameter("txtAlbumId"));
 		
@@ -102,8 +104,9 @@ public class CreatePhotoServlet extends HttpServlet {
 			
 			int pointIndex = image.indexOf(".");
 			String extension = image.substring(pointIndex);
-
-			image = photo.getId() + "_" + photo.getName().toLowerCase().replace(" ", "_") + extension;
+			String fileName = FilesName.remove(photo.getName());
+			
+			image = photo.getId() + "_" + fileName.toLowerCase().replace(" ", "_") + extension;
 
 			File destination = new File(dir + propertiesFile.getProperty("fileSeparator") + image);
 				
@@ -114,22 +117,22 @@ public class CreatePhotoServlet extends HttpServlet {
 			if(rowsUpdated == 1){
 				request.setAttribute("info", "La foto fue creada exitosamente.");
 				request.setAttribute("error", "");
-				//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);	
-				rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);			
+				rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);	
+				//rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);			
 				rd.forward(request, response);
 			} else {
 				request.setAttribute("info", "");
 				request.setAttribute("error", "Ocurrió un error durante la creación de la foto. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-				//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);		
-				rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);		
+				rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);		
+				//rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);		
 
 				rd.forward(request, response);
 			}
 		}catch (Exception e) {
 			request.setAttribute("info", "");
 			request.setAttribute("error", "Ocurrió un error durante la creación de la foto. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-			//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);			
-			rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);			
+			rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);			
+			//rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);			
 
 			rd.forward(request, response);
 		}
