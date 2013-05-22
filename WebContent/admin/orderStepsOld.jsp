@@ -43,6 +43,27 @@
 		} );
 	} );
 </script>
+<script type="text/javascript">
+	var idStep;
+	var idOrderType;
+			
+	$(function() {
+		$('a[rel*=leanModal]').leanModal({ top : 200, closeButton: ".close_x" });		
+	});
+	
+	function loadVars(var0, var1, var2) {
+		idStep = var0;
+		idOrderType = var1;
+		$('.step').text(var2);
+		
+	};
+	
+	function setV(f){
+		f.elements['stepId'].value = idStep;
+		f.elements['orderTypeId'].value = idOrderType;
+		return true;
+	}
+</script>
 </head>
 <body>
 	<div id="container">
@@ -51,6 +72,9 @@
         </div>         
         <div id="menu">
 			<div class="menuitemHome" ><a href="UserLoginServlet">Home</a></div>	
+	    	<ul>
+            	<li class="menuitem"><a href="CreateOrderStepServlet?typeId=<%= typeInfo.getId() %>">Agregar Paso</a></li>
+            </ul>
 			<div class="menuitemPass"><a href="EditUserPasswordServlet">Cambiar Contraseña</a></div>
 			<div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
         </div>        
@@ -114,6 +138,9 @@
 										</a> 
 										<a href="/armaTuTorta/EditOrderStepServlet?stepId=<%= s.getId() %>&typeId=<%= s.getOrderTypeId() %>" style="color: transparent" >
 											<img alt="logo" src="/armaTuTorta/images/edit.png"  height="16" width="16" />
+										</a> 
+										<a id="go" rel="leanModal" href="#deleteStep" style="color: #f7941e; font-weight: bold;" onclick="return loadVars(<%= s.getId()%>, <%= s.getOrderTypeId()%>, '<%= s.getPosition()%>' )" >
+										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" />
 										</a><br>
 										</p>
 									</td>
@@ -132,6 +159,24 @@
 			%>
 		</div>
  	</div>
+	
+	<div id="deleteStep">
+		<div id="signup-ct">
+			<h3 id="see_id" class="sprited" > Eliminar Paso</h3>
+			<br><br>
+			<span>¿Está seguro que desea eliminar el paso <span class="step"></span>? </span> <br><br>
+			<div id="signup-header">
+				<a class="close_x" id="close_x"  href="#"></a>
+			</div>
+			<form action="/armaTuTorta/DeleteOrderStepServlet" method="post"  onsubmit="return setV(this)">
+				<input type="hidden" id="stepId" class="good_input" name="stepId"  value=""/>
+				<input type="hidden" id="orderTypeId" class="good_input" name="orderTypeId"  value=""/>
+				<div class="btn-fld">
+					<input type="submit"  class="buttonPopUpDelete"  name="sbmtButton" value="Aceptar"  />
+				</div>
+		 </form>
+		</div>
+	</div>
 	
 
 </body>

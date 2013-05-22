@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Util.FilesName;
+
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -65,8 +67,8 @@ public class CreateAlbumServlet extends HttpServlet {
 		
 		RequestDispatcher rd;	
 		Properties propertiesFile = new Properties();			
-		propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
-		//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
+		//propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+		propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 		MultipartRequest multipart = new MultipartRequest(request, propertiesFile.getProperty("albumsDirectory"), 5*1024*1024, new DefaultFileRenamePolicy());
 		
 		try{			
@@ -99,7 +101,8 @@ public class CreateAlbumServlet extends HttpServlet {
 			int pointIndex = image.indexOf(".");
 			String extension = image.substring(pointIndex);
 
-			image = album.getId() + "_" + album.getName().toLowerCase().replace(" ", "_") + "_cover" + extension;
+			String fileName = FilesName.remove(album.getName());
+			image = album.getId() + "_" + fileName.toLowerCase().replace(" ", "_") + "_cover" + extension;
 			
 			File destination = new File(dir + propertiesFile.getProperty("fileSeparator") + image);
 				
