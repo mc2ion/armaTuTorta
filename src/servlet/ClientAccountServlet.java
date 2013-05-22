@@ -34,7 +34,6 @@ public class ClientAccountServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		Long id = Long.valueOf(request.getParameter("id"));
 		RequestDispatcher rd;
 		try{
@@ -57,15 +56,25 @@ public class ClientAccountServlet extends HttpServlet {
 		RequestDispatcher rd;
 
 		try{
+			
+			String typePers = request.getParameter("typePers");
 			final String firstName = request.getParameter("txtName");
-			final String lastName = request.getParameter("txtLastName");
+			final String lastName;
+			if (typePers.equals("0"))
+				lastName = request.getParameter("txtLastName");
+			else 
+				lastName = "";
 			String identityCardNum = request.getParameter("txtCed");
+			identityCardNum = identityCardNum.replace("-", "");
 			String identityCardId = request.getParameter("txtCedId");
 			final String email = request.getParameter("txtEmail");
 			String phoneNumber  = request.getParameter("txtPhone");
 			String phoneMovNumber  = request.getParameter("txtMovPhone");
 			String address = request.getParameter("txtDir");
-			String typePers = request.getParameter("typePers");
+			
+			System.out.println("Client " + typePers + "/" + firstName + "/" + lastName + "/" + identityCardId + "/" + identityCardNum+ "/" + email
+					+  "/" + phoneMovNumber + "/" + phoneNumber + "/" + address);
+			
 			String clientId = request.getParameter("clientId");
 			
 			Client client = new Client();
@@ -81,12 +90,12 @@ public class ClientAccountServlet extends HttpServlet {
 			String checkbox = request.getParameter("checkDir");
 			
 			if (checkbox != ""){
-				String addressEnv = request.getParameter("txtDirEnv");
-				client.setShippingAddress(addressEnv);
+				client.setShippingAddress("");
 				client.setShippingAddress(1);
 				
 			}else{
-				client.setShippingAddress(address);
+				String addressEnv = request.getParameter("txtDirEnv");
+				client.setShippingAddress(addressEnv);
 				client.setShippingAddress(0);
 			}
 		

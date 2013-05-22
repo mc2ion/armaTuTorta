@@ -34,7 +34,7 @@ public class ListDulcesTortas implements DatabaseCommand {
 				"SO.ORDER_STEP_ID, " +
 				"SO.NAME, " +
 				"SO.POSITION, " +
-				"SO.PRICE " +
+				"SO.PRICE,  SO.DESCRIPTION,  SO.IMAGE " +
 				"FROM step_option SO WHERE SO.ORDER_STEP_ID = ? AND SO.IS_DELETED=0 AND IS_UNAVAILABLE=0" +
 				" ORDER BY SO.POSITION ASC");
 			sta.setLong(1, stepId);
@@ -47,6 +47,8 @@ public class ListDulcesTortas implements DatabaseCommand {
 				option.setName(rs.getString(3));
 				option.setPosition(rs.getInt(4));
 				option.setPrice(rs.getDouble(5));
+				option.setDescription(rs.getString(6));
+				option.setImage(rs.getString(7));
 				list.add(option);
 			}
 		}

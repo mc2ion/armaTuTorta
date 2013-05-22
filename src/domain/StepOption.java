@@ -9,6 +9,8 @@ public class StepOption {
 	private int oldPosition;
 	private double price;
 	private int isUnavailable;
+	private String description;
+	private String image;
 	
 	public void setId(long id) {
 		this.id = id;
@@ -64,6 +66,22 @@ public class StepOption {
 
 	public int getOldPosition() {
 		return oldPosition;
+	}
+	
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+	
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getImage() {
+		return image;
 	}
 	
 	

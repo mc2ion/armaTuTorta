@@ -61,7 +61,6 @@ public class OcasionesEspecialesServlet extends HttpServlet {
 			rd = getServletContext().getRequestDispatcher("/HomePageServlet");
 			rd.forward(request, response);
 		}else{
-			
 			final Properties propertiesFile = new Properties();
 			//propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
 			propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
@@ -69,8 +68,6 @@ public class OcasionesEspecialesServlet extends HttpServlet {
 		
 			MultipartRequest multipart = new MultipartRequest(request, dirPath,
 						5*1024*1024, new DefaultFileRenamePolicy());
-			
-			
 			try{			
 				String name = multipart.getParameter("txtName");
 				String torta = multipart.getParameter("eventoT");
@@ -94,9 +91,13 @@ public class OcasionesEspecialesServlet extends HttpServlet {
 				int pointIndex = image.indexOf(".");
 				String extension = image.substring(pointIndex);
 				String nameImg = image.substring(0,pointIndex);
-				image = nameImg.toLowerCase().replace(" ", "_") + "_" + clientAux.getLastName().trim() + "_" + fecha + extension;
-				File destination = new File(dir + image);
-				imageFile.renameTo(destination);
+				System.out.println("tamano" + nameImg.length());
+				if (nameImg.length() > 10)
+					nameImg = nameImg.substring(0, 10);
+
+				image = nameImg.toLowerCase().replace(" ", "_") + "_" + clientAux.getLastName().trim() + extension;
+				File file = new File(dir + image);
+				imageFile.renameTo(file);
 				
 				
 				/* Establezco la estimacion solicitada por el cliente */
@@ -156,6 +157,8 @@ public class OcasionesEspecialesServlet extends HttpServlet {
 				rd.forward(request, response);
 			
 			}catch (Exception e) {
+				e.getStackTrace();
+				e.getCause();
 				request.setAttribute("error", "error");
 				rd = getServletContext().getRequestDispatcher("/ocaEspConfirmation.jsp");			
 				rd.forward(request, response);

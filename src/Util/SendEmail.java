@@ -339,7 +339,7 @@ public class SendEmail  extends Thread  {
 		    		" Producto pedido: Torta<br>" +
 		    		" Forma: " + datos[0] + "<br>" +
 		     		" Tama&ntilde;o: " + datos[1]  + "<br>" +
-		     		" Sabor del ponqu&eacute; " + datos[2]  + "<br>" +
+		     		" Sabor del ponqu&eacute: " + datos[2]  + "<br>" +
 		     		" Cantidad de capas: " + datos[3]  + "<br>" +
 		     		" Sabores de capas: " + rell + "<br>" +
 		     		" Sabores de cubierta: " + datos[4] + ".<br><br>" +
@@ -352,7 +352,11 @@ public class SendEmail  extends Thread  {
 		     		" Tel&eacute;fono: " + client.getPhone() + "<br>";
 		         	if (client.getOtherPhone() != null && !client.getOtherPhone().equals(""))
 		         		messa += "Otro Tel&eacute;fono: " + client.getOtherPhone() + "<br>";
-		         	messa += "Dirección de Envío: " + client.getShippingAddress() + ".<br><br>";
+		         	if (client.isShippingAddress() == 1)
+		         		messa += "Dirección de Envío: " + client.getAddress() + ".<br><br>";
+		         	else
+		         		messa += "Dirección de Envío: " + client.getShippingAddress() + ".<br><br>";
+		         	
 		         	if (attach)
 		         		messa += "Adjunto encontrar&aacute;s la imagen que el usuario quiere usar para la cubierta de la torta.";
 		         
@@ -434,13 +438,17 @@ public class SendEmail  extends Thread  {
 		     		" Fecha de Entrega: " + datos[3] + ".<br><br>" +
 		     		
 		     		" <strong>Datos del comprador:</strong> <br><br> " +
-		     		" Nombre :" + client.getFirstName() + " " + client.getLastName() +  "<br>" +
-		     		" Correo Electr&oacute;nico :" + client.getEmail() + "<br>" +
-		     		" Tel&eacute;fono :" + client.getPhone() + ".<br><br>"; 
-	               	if (client.getOtherPhone() != null)
+		     		" Nombre: " + client.getFirstName() + " " + client.getLastName() +  "<br>" +
+		     		" Correo Electr&oacute;nico: " + client.getEmail() + "<br>" +
+		     		" Tel&eacute;fono: " + client.getPhone() + ".<br><br>"; 
+	               	if (!client.getOtherPhone().equals(""))
 	               		messa += "Otro Tel&eacute;fono: " + client.getOtherPhone() + "<br>";
-		         	messa += "Dirección de Envío: " + client.getShippingAddress() + ".<br><br>";
-		         	if (attach)
+	            	if (client.isShippingAddress() == 1)
+		         		messa += "Dirección de Envío: " + client.getAddress() + ".<br><br>";
+		         	else
+		         		messa += "Dirección de Envío: " + client.getShippingAddress() + ".<br><br>";
+		         	
+	            	if (attach)
 		     			messa += "Anexo encontrar&aacute;s la imagen de referencia que mand&oacute; el usuario.";
 		         
 		         MimeBodyPart mbp1 = new MimeBodyPart();
@@ -527,8 +535,8 @@ public class SendEmail  extends Thread  {
 		    		"<strong> Datos del pedido.</strong><br><br>" +
 		    		" Producto pedido: Cupcakes<br>" +
 		    		" Tama&ntilde;o: " + datos[0] + "<br>";
-		         	if (datos[6] != null)
-		         		messa += " Cantidad: " + datos[6] + "" + datos[1]  + "<br>";
+		         	if (!datos[1].contains("regalar"))
+		         		messa += " Cantidad: " + datos[6] + " Docenas"  + "<br>";
 		         	else{
 		         		messa += " Cantidad: " + datos[1]  + "<br>";
     					messa += " Texto de la Calcoman&iacute;a: " + datos[5] + "<br>";
@@ -547,8 +555,12 @@ public class SendEmail  extends Thread  {
 		     		" Tel&eacute;fono: " + client.getPhone() + "<br>";
 		         	if (client.getOtherPhone() != null && !client.getOtherPhone().equals(""))
 		         		messa += "Otro Tel&eacute;fono: " + client.getOtherPhone() + "<br>";
-		         	messa += "Dirección de Envío: " + client.getShippingAddress() + ".<br><br>";
-		          
+		        	
+		         	if (client.isShippingAddress() == 1)
+		         		messa += "Dirección de Envío: " + client.getAddress() + ".<br><br>";
+		         	else
+		         		messa += "Dirección de Envío: " + client.getShippingAddress() + ".<br><br>";
+		         	
 		         MimeBodyPart mbp1 = new MimeBodyPart();
 		         mbp1.setText(messa);
 		         mbp1.setContent(messa, "text/html");
@@ -628,12 +640,17 @@ public class SendEmail  extends Thread  {
 		         	messa += "<br> Fecha de Entrega: " + datos[0] + ".<br>" +
 		         			" Total: Bs." + datos[1] + ".<br><br>" +
 		     		" <strong>Datos del comprador:</strong> <br><br> " +
-		     		" Nombre :" + client.getFirstName() + " " + client.getLastName() +  "<br>" +
+		     		" Nombre: " + client.getFirstName() + " " + client.getLastName() +  "<br>" +
 		     		" Correo Electr&oacute;nico: " + client.getEmail() + "<br>" +
 		     		" Tel&eacute;fono: " + client.getPhone() + ".<br>"; 
 	               	if (client.getOtherPhone() != null && !client.getOtherPhone().equals(""))
 	               		messa += "Otro Tel&eacute;fono: " + client.getOtherPhone() + "<br>";
-		         	messa += "Dirección de Envío: " + client.getShippingAddress() + ".<br><br>";
+
+	               	if (client.isShippingAddress() == 1)
+		         		messa += "Dirección de Envío: " + client.getAddress() + ".<br><br>";
+		         	else
+		         		messa += "Dirección de Envío: " + client.getShippingAddress() + ".<br><br>";
+		         	
 		        
 		         	MimeBodyPart mbp1 = new MimeBodyPart();
 		         	

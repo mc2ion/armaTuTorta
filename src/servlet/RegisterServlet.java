@@ -49,19 +49,26 @@ public class RegisterServlet extends HttpServlet {
 		RequestDispatcher rd;
 
 		try{
+			String typePers = request.getParameter("typePers");
 			final String firstName = request.getParameter("txtName");
-			final String lastName = request.getParameter("txtLastName");
+			String lastName;
+			if (typePers.equals("0"))
+				lastName = request.getParameter("txtLastName");
+			else 
+				lastName = "";
 			String identityCardNum = request.getParameter("txtCed");
 			String identityCardId = request.getParameter("txtCedId");
+			identityCardNum = identityCardNum.replace("-", "");
 			final String email = request.getParameter("txtEmail");
 			final String password =request.getParameter("txtPass");
 			String encryptPassword = UserLoginServlet.getEncryptPassword(password);
 			String phoneNumber  = request.getParameter("txtPhone");
 			String phoneMovNumber  = request.getParameter("txtMovPhone");
 			String address = request.getParameter("txtDir");
-			String typePers = request.getParameter("typePers");
 			
-			
+			System.out.println("Client " + typePers + "/" + firstName + "/" + lastName + "/" + identityCardId + "/" + identityCardNum+ "/" + email
+					+ "/" + password + "/" + phoneMovNumber + "/" + phoneNumber + "/" + address);
+		
 			Client client = new Client();
 			client.setFirstName(firstName);
 			client.setLastName(lastName);
@@ -75,31 +82,33 @@ public class RegisterServlet extends HttpServlet {
 			String checkbox = request.getParameter("checkDir");
 			
 			if (checkbox != ""){
-				String addressEnv = request.getParameter("txtDirEnv");
-				client.setShippingAddress(addressEnv);
+				client.setShippingAddress("");
 				client.setShippingAddress(1);
 				
 			}else{
-				client.setShippingAddress(address);
+				String addressEnv = request.getParameter("txtDirEnv");
+				client.setShippingAddress(addressEnv);
 				client.setShippingAddress(0);
 			}
 		
 			Integer userId = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.CreateClient(client));
 
+			final String lastN = lastName;
+			
 			if(userId > 0){
 				new Thread(new Runnable() {
 				    public void run() {
 				    	Properties propertiesFile = new Properties();
-						//String context = getServletContext().getInitParameter("properties");
+						String context = getServletContext().getInitParameter("properties");
 						try {
-							//propertiesFile.load(new FileInputStream(context));
-							propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
+							propertiesFile.load(new FileInputStream(context));
+							//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 						} catch (FileNotFoundException e) {
 							e.printStackTrace();
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						SendEmail.sendEmail(propertiesFile, email, firstName + " " + lastName, password, false, "soporte");
+						SendEmail.sendEmail(propertiesFile, email, firstName + " " + lastN, password, false, "soporte");
 				    }
 				}).start();
 				request.setAttribute("emailExist", "");

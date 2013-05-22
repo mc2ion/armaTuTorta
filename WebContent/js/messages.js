@@ -1004,9 +1004,7 @@ function SiguienteAuxC(){
 function SiguienteAux(){
 	if (validateRegAux() == true){
 		$(".block1").hide();
-		$("#infPers").attr('class', 'separator');
 		$(".block2").show();
-		$("#infEnv").attr('class', 'separator-current');
 	}
 	
 }
@@ -1076,24 +1074,44 @@ function validateName(element, i){
 
 
 function validateCedIdnt(element){
-	var cedRegex = /^[0-9]+(([\.][0-9])?[0-9]*)*$/;
 	if (element.value != ""){
-		if (element.value.match(cedRegex)){
-			element.style.background = 'url("/armaTuTorta/images/check.png") no-repeat scroll 220px 5px #FFFFFF';
-			$('#errorCed').hide();
-			return true;
-		}
-		else{
-			element.style.background = 'none no-repeat scroll 220px 5px #FFFFFF';
-			$('#errorCed').show();
-			return false;
-		};
+		element.style.background = 'url("/armaTuTorta/images/check.png") no-repeat scroll 220px 5px #FFFFFF';
+		$('#errorCed').hide();
+		return true;
 	}else{
 			element.style.background = 'none no-repeat scroll 220px 5px #FFFFFF';
 			$('#errorCed').show();
 			return false;
 	};
+}
+
+
+function validateField(element){
+	var type = $('input[name=typePers]:checked').val();
+	if (type == null){
+		validateCedIdnt(element);
+	}
+	else{
+		if (type == 0){
+			validateCedIdnt(element);
+		}else{
+			validateRif(element);
+		}
+	}
 	
+
+}
+
+function validateRif(element){
+	if (element.value != ""){
+		element.style.background = 'url("/armaTuTorta/images/check.png") no-repeat scroll 220px 5px #FFFFFF';
+		$('#errorRif').hide();
+		return true;
+	}else{
+		element.style.background = 'none no-repeat scroll 220px 5px #FFFFFF';
+		$('#errorRif').show();
+		return false;
+	};
 }
 
 function validatePass(element){
@@ -1229,30 +1247,48 @@ function validateReg(){
 	var passRpt = document.getElementById("txtRptPass");
 	var type = $('input[name=typePers]:checked').val();
 	
-	var bool = true;
-	
 	if (validateTypePerson(type)!= true)
-		bool = false;
+		return false;
 	
-	if (validateName(name, '1') != true)
-		bool = false;
+	if (type == null || type == 0){
+		
+		if (validateName(name, '1') != true)
+			return false;
 
-	if (validateName(lastName, '2') != true)
-		bool = false;
+		if (validateName(lastName, '2') != true)
+			return false;
 
-	if (validateCedIdnt(cedula) != true)
-		bool = false;
-	
-	if (validateEmail(email) != true)
-		bool = false;
+		if (validateCedIdnt(cedula) != true)
+			return false;
+		
+		if (validateEmail(email) != true)
+			return false;
 
-	if (validatePass(pass)!= true)
-		bool = false;
-	
-	if (validateRptPass(passRpt)!= true)
-		bool = false;
-	
-	return bool;
+		if (validatePass(pass)!= true)
+			return false;
+		
+		if (validateRptPass(passRpt)!= true)
+			return false;
+		
+		return true;
+	}else{
+		if (validateName(name, '1') != true)
+			return false;
+			
+		if (validateRif(cedula) != true)
+			return false;
+			
+		if (validateEmail(email) != true)
+			return false;
+
+		if (validatePass(pass)!= true)
+			return false;
+		
+		if (validateRptPass(passRpt)!= true)
+			return false;
+		
+		return true;
+	}
 }
 
 
@@ -1261,22 +1297,35 @@ function validateRegAux(){
 	var lastName = document.getElementById("txtLastName");
 	var cedula = document.getElementById("txtCed");
 	var email = document.getElementById("txtEmail");
+	var type = $('input[name=typePers]:checked').val();
 	
-	var bool = true;
+	if (type == null || type == 0){
+		
+		if (validateName(name, '1') != true)
+			return false;
 
-	if (validateName(name, '1') != true)
-		bool = false;
+		if (validateName(lastName, '2') != true)
+			return false;
 
-	if (validateName(lastName, '2') != true)
-		bool = false;
-
-	if (validateCedIdnt(cedula) != true)
-		bool = false;
-	
-	if (validateEmail(email) != true)
-		bool = false;
-
-	return bool;
+		if (validateCedIdnt(cedula) != true)
+			return false;
+		
+		if (validateEmail(email) != true)
+			return false;
+		
+		return true;
+	}else{
+		if (validateName(name, '1') != true)
+			return false;
+			
+		if (validateRif(cedula) != true)
+			return false;
+			
+		if (validateEmail(email) != true)
+			return false;
+		
+		return true;
+	}
 }
 
 

@@ -112,9 +112,14 @@ $(document).ready(function() {
 	}
 	
 	$('#formDulcesTortas').submit(function() {
-		  var priceText = Number($("#priceTotal").text());
-		  alert(priceText);
-		  $("#priceDulcCake").val(priceText);
-		  return true;
-		});
+	  var fecha = $("#datepicker").val();
+	  if (fecha == ""){
+	  	$("#errorDate").show();
+	  	return false;
+	  }
+	  $("#errorDate").hide();
+	  var priceText = Number($("#priceTotal").text());
+	  $("#priceDulcCake").val(priceText);
+	  return true;
+	});
 });

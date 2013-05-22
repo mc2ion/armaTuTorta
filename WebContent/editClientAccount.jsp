@@ -13,7 +13,8 @@
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
-	
+	<script type="text/javascript" src="/armaTuTorta/js/registro.js"></script>
+
 </head>
 <body>
 <%
@@ -79,43 +80,64 @@
 									<div style="float: right; margin-right: 45px; margin-top: -25px;">
 										<input type="radio" name="typePers" value="0" checked="checked"> Persona Natural
 										<input type="radio" name="typePers" value="1" >  Persona Jur&iacute;dica 
-									</div><br> 
+									</div>
+									<span class="error" id="errorType" style="float:right; margin-right:50px;">Disculpe, debe indicar si es persona jur&iacute;dica o natural</span>
+									<br> 
 								<% }else{ %>
 									<div style="float: right; margin-right: 45px; margin-top: -25px;">
 										<input type="radio" name="typePers" value="0" > Persona Natural
 										<input type="radio" name="typePers" value="1" checked="checked" >  Persona Jur&iacute;dica 
-									</div><br> 
+									</div>
+									<span class="error" id="errorType" style="float:right; margin-right:50px;">Disculpe, debe indicar si es persona jur&iacute;dica o natural</span>
+									<br> 
 								<% } %>
-								<label for="name">Nombres:</label>
+								<label for="name"  id="name">Nombres:</label>
 								<input type="text" name="txtName" id="txtName" size="35" maxlength="100" 
-								oninput="validateName(this, '1');"	onBlur="validateName(this, '1');" value="<%= clientInfo.getFirstName() %>" /> 
+								onBlur="validateName(this, '1');" value="<%= clientInfo.getFirstName() %>" /> 
 								<span class="error" id="errorName">Disculpe, debe introducir un nombre v&aacute;lido</span>
 								<br>
-								<label for="name">Apellidos:</label>
-								<input type="text" name="txtLastName" id="txtLastName" size="35"  maxlength="50" 
-								oninput="validateName(this, '2');" onBlur="validateName(this, '2');" value="<%= clientInfo.getLastName() %>"/> 
-								<span class="error" id="errorLastName">Disculpe, debe introducir un apellido v&aacute;lido</span>
-								<br>
-								<label for="name">C&eacute;dula:</label>
+								<% String div="display:none";
+									if (clientInfo.isCompany() == 0){ 
+										div="";
+									}
+								%>
+								<div id="apellido" style="<%= div %>" >
+									<label for="name">Apellidos:</label>
+									<input type="text" name="txtLastName" id="txtLastName" size="35"  maxlength="50"  
+									onBlur="validateName(this, '2');" value="<%= clientInfo.getLastName() %>"/> 
+									<span class="error" id="errorLastName">Disculpe, debe introducir un apellido v&aacute;lido</span><br>
+								</div>
+								<% if (clientInfo.isCompany() == 0){ %>
+									<label for="name" id="cedIden">C&eacute;dula:</label>
+								<% }else{ %>
+								<label for="name" id="cedIden">RIF:</label>
+								<% } %>
 								<% 
 									String[] ced = clientInfo.getIdentityCard().split("-");
 									String pref = ced[0];
 									String cedN = ced[1];
 									
 								%>
-								<select name="txtCedId" id="txtCedId">
-									<option value="V-">V</option>
-									<option value="E-">E</option>
-								</select>
+								<% if (clientInfo.isCompany() == 0){ %>
+									<select name="txtCedId" id="txtCedId">
+										<option value="V-">V</option>
+										<option value="E-">E</option>
+									</select>
+								<% }else{ %>
+									<select name="txtCedId" id="txtCedId">
+										<option value="J-">J</option>
+										<option value="G-">G</option>
+									</select>
+								<% } %>
 								<input type="text" name="txtCed" id="txtCed" size="28" maxlength="50"  
-								oninput="validateCedIdnt(this);" onBlur="validateCedIdnt(this);"
+								onBlur="validateCedIdnt(this);"
 								style="display: inline;" value="<%=  cedN %>" /><br>
 								 
 								<span class="error" id="errorCed">Disculpe, debe introducir un n&uacute;mero de c&eacute;dula v&aacute;lido</span>
 								<br>
 								<label for="name">Email:</label>
 								<input type="text" name="txtEmail" id="txtEmail" size="35" maxlength="50" 
-								oninput="validateEmail(this);" onBlur="validateEmail(this);" value="<%= clientInfo.getEmail() %>" /> 
+								 onBlur="validateEmail(this);" value="<%= clientInfo.getEmail() %>" /> 
 								<span class="error" id="errorEmail" >Disculpe, debe introducir un correo electr&oacute;nico v&aacute;lido</span>
 								<br>
 							</fieldset>
@@ -146,13 +168,13 @@
 								
 									<label for="name">Tel&eacute;fono M&oacute;vil:</label>
 									<input type="text" name="txtMovPhone" id="txtMovPhone" size="35" maxlength="100"
-									oninput="validatePhone(this, '2');"  onBlur="validatePhone(this, '2');"  value="<%= clientInfo.getOtherPhone() %>" />
+									onBlur="validatePhone(this, '2');"  value="<%= clientInfo.getOtherPhone() %>" />
 									<span class="error" id="errorMovPhone" >Debe introducir un telef&oacute;no v&aacute;lido (C&oacute;d. Operador + N&uacute;mero)</span>									
 								</div>
 
 								<br>
 								<label for="name">Direcci&oacute;n:</label>
-								<textarea rows="4" cols="28" style="resize: none;" oninput="validateDir(this, '1');"
+								<textarea rows="4" cols="28" style="resize: none;" 
 								 onBlur="validateDir(this, '1');" id="dir" 
 								name="txtDir"><%= clientInfo.getAddress()%></textarea><br>
 								<span class="error" id="errorDir" >Disculpe, debe introducir direcci&oacute;n v&aacute;lida</span>
@@ -171,7 +193,7 @@
 									<div class="otherDir" <%= style %>>
 											<label for="name">Direcci&oacute;n de Env&iacute;o:</label>
 											<textarea rows="4" cols="28" style="resize: none;" 
-											oninput="validateDir(this, '2');" onBlur="validateDir(this, '2');" id="dirEnv" name="txtDirEnv"><%= clientInfo.getShippingAddress() %></textarea><br>
+											onBlur="validateDir(this, '2');" id="dirEnv" name="txtDirEnv"><%= clientInfo.getShippingAddress() %></textarea><br>
 											<span class="error" id="errorDirEnv" >Disculpe, debe introducir direcci&oacute;n de env&iacute;o v&aacute;lida</span>
 									</div>
 								</fieldset>
@@ -192,12 +214,12 @@
 								<fieldset>
 									<label for="name">Contrase&ntilde;a Anterior:</label>
 									<input type="password" name="txtOldPass" id="txtOldPass" size="35" maxlength="100" 
-									oninput="validatePassAux(this);" onBlur="validatePassAux(this);" />
+									onBlur="validatePassAux(this);" />
 									<span class="error" id="errorPassOld" >Debe introducir su contraseña anterior </span>
 									<br>
 									<label for="name">Contraseña nueva:</label>
 									<input type="password" name="txtNewPass" id="txtNewPass" size="35" maxlength="100" 
-									oninput="validatePassNew(this);" onBlur="validatePassNew(this);" />
+									 onBlur="validatePassNew(this);" />
 									<span class="error" id="errorPassNew" >Disculpe, debe introducir una nueva contraseña</span>
 									<br>
 								

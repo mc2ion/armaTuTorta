@@ -55,19 +55,26 @@ public class CreateOrder implements DatabaseCommand {
 				lastIdInserted = rs.getLong("last_insert_id()"); 
 				for (int i = 0; i < orderItems.size(); i++){
 					OrderItem item = orderItems.get(i);
+					String docenas = item.getCantDocenas();
+					String calcomania = item.getTxtCalcomania();
+					String nombreImg = item.getNombreImg();
 					sta = conn.prepareStatement("INSERT INTO order_item (ORDER_ID, STEP_OPTION_ID, PRICE, ADDITIONAL_INFO)" +
 							" VALUES (?, ?, ?, ?)");
 					sta.setLong(1, lastIdInserted);
 					sta.setLong(2, item.getStepOptionId());
 					sta.setDouble(3,item.getPrice());
-					if (item.getNombreImg() != null || !item.getNombreImg().equals(""))
+					System.out.println("texto de la calcomania" + (calcomania != null));
+					if (nombreImg != null){
 						sta.setString(4,item.getNombreImg());
-					else if(item.getCantDocenas() != null || !item.getNombreImg().equals(""))
+					}
+					else if(docenas != null){
 						sta.setString(4,item.getCantDocenas());
-					else if (item.getTxtCalcomania() != null || !item.getNombreImg().equals(""))
+					}
+					else if (calcomania != null){
 						sta.setString(4,item.getTxtCalcomania());
+					}
 					else
-						sta.setString(4,null);
+						sta.setString(4,"");
 					sta.executeUpdate();
 				}
 				

@@ -203,15 +203,17 @@ public class CupcakesServlet extends HttpServlet {
 		OrderItem item = new OrderItem();
 		item.setPrice(hashMapPrice.get(tamano));
 		item.setStepOptionId(hashMapId.get(tamano));
+		item.setCantDocenas(null);
+		item.setTxtCalcomania(null);
 		orderItems.add(item);
 		
 		/* Cantidad */
 		item = new OrderItem();
 		item.setPrice(hashMapPrice.get(cantidad));
 		item.setStepOptionId(hashMapId.get(cantidad));
-		if (!cantDocenas.equals(""))
+		if (!cantidad.contains("regalar"))
 			item.setCantDocenas(cantDocenas);
-		else if (!txtCalcomania.equals(""))
+		else
 			item.setTxtCalcomania(txtCalcomania);
 		orderItems.add(item);
 		
@@ -219,18 +221,24 @@ public class CupcakesServlet extends HttpServlet {
 		item = new OrderItem();
 		item.setPrice(hashMapPrice.get(sabor));
 		item.setStepOptionId(hashMapId.get(sabor));
+		item.setCantDocenas(null);
+		item.setTxtCalcomania(null);
 		orderItems.add(item);
 		
 		/* Cubierta */ 
 		item = new OrderItem();
 		item.setPrice(hashMapPrice.get(cubierta));
 		item.setStepOptionId(hashMapId.get(cubierta));
+		item.setCantDocenas(null);
+		item.setTxtCalcomania(null);
 		orderItems.add(item);
 		
 		/* Decoracion */
 		item = new OrderItem();
 		item.setPrice(hashMapPrice.get(decoracion));
 		item.setStepOptionId(hashMapId.get(decoracion));
+		item.setCantDocenas(null);
+		item.setTxtCalcomania(null);
 		orderItems.add(item);
 		
 		/* Color */
@@ -239,6 +247,8 @@ public class CupcakesServlet extends HttpServlet {
 				item = new OrderItem();
 				item.setPrice(hashMapPrice.get(color[i]));
 				item.setStepOptionId(hashMapId.get(color[i]));
+				item.setCantDocenas(null);
+				item.setTxtCalcomania(null);
 				orderItems.add(item);
 			}
 		}
@@ -257,8 +267,6 @@ public class CupcakesServlet extends HttpServlet {
 			
 			
 			final Long rowsUpdated  = (Long) CommandExecutor.getInstance().executeDatabaseCommand(new command.CreateOrder(order, orderItems));	
-			
-			System.out.println("rowU " + rowsUpdated);
 			
 			final String[] datos = {tamano, cantidad, sabor, cubierta, decoracion, txtCalcomania, cantDocenas, precio, fecha};
 			new Thread(new Runnable() {
