@@ -86,10 +86,14 @@
 								hashMap.put(i +"", o.getName());
 								hashMapPrice.put(o.getName(), o.getPrice());
 								hashMapId.put(o.getName(), o.getId());
+								String description = o.getDescription();
+								String imgDescription = "";
+								if (description != null && !description.equals(""))
+									imgDescription = "<img  id=\"imgDulcesTortas\" src=\"./images/question.png\" title=\"" +  description  + "\"/>";
 						%>
 						<tr height="28">
 							<td width="220px"> 
-								<input type="checkbox" name="dulcesTortas" class="dulcesTortasCheck" value="<%= i %>" > <%= o.getName() %></td>
+								<input type="checkbox" name="dulcesTortas" class="dulcesTortasCheck" value="<%= i %>" > <%= o.getName() %> <%= imgDescription %></td>
 							<td width="100px">Bs.<span class="price-int<%= i %>"> <%= o.getPrice() %></span> </td>
 							<td>
 								<div class="sel<%= i %>" style="display:none">

@@ -133,12 +133,17 @@
 								<% for(int j= 1; j<= actualOptions.size(); j++) {
 									int aux2 = j - 1;
 									StepOption step = actualOptions.get(aux2);
+									String description = step.getDescription();
+									String imgDescription = "";
+									if (description != null && !description.equals(""))
+										imgDescription = "<img  id=\"imgFudge\" src=\"./images/question.png\" title=\"" +  description  + "\"/>";
+									String imagen = step.getImage();
 									hashMap.put(i + "" +j, step.getName());
 									hashMapPrice.put(step.getName(), step.getPrice());
 									hashMapId.put(step.getName(), step.getId());
 								
 								%>
-							<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" ><span id="name<%= i+ "" +j%>">  <%= step.getName()%></span> <br>
+							<input  class="rdB<%= i %>" onClick="prueba('<%= imagen %>','<%= i %>', '<%= step.getId() %>', this);" type="<%= type %>" name="<%= i %>" value="<%= j %>" ><span id="name<%= i+ "" +j%>">  <%= step.getName()%><%= imgDescription %></span> <br>
 							<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 							<% }
 							%>
@@ -158,6 +163,8 @@
 								<% for(int j= 1; j<= actualOptions.size(); j++) {
 									int aux2 = j - 1;
 									StepOption step = actualOptions.get(aux2);
+									String imagen = step.getImage();
+									
 									hashMap.put(i + "" +j, step.getName());
 									hashMapPrice.put(step.getName(), step.getPrice());
 									hashMapId.put(step.getName(), step.getId());
@@ -176,7 +183,7 @@
 									}
 								%>
 										<div class="<%= div %>">
-											<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%></span>
+											<input  class="rdB<%= i %>"  type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%></span>
 											<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 											<% if (regalo){  %>
 											<div id="calcomania" style="display:none;">
@@ -225,19 +232,24 @@
 								<% for(int j= 1; j<= actualOptions.size(); j++) {
 									int aux2 = j - 1;
 									StepOption step = actualOptions.get(aux2);
+									String description = step.getDescription();
+									String imgDescription = "";
+									if (description != null && !description.equals(""))
+										imgDescription = "<img  id=\"imgFudge\" src=\"./images/question.png\" title=\"" +  description  + "\"/>";
+									String imagen = step.getImage();
 									hashMap.put(i + "" +j, step.getName());
 									hashMapPrice.put(step.getName(), step.getPrice());
 									hashMapId.put(step.getName(), step.getId());
 									if (actualOptions.size() > 4){
 								%>
 										<div class="options-steps-left">
-											<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" ><span id="name<%= i+ "" +j%>">  <%= step.getName()%></span> <br>
+											<input  class="rdB<%= i %>" onClick="prueba('<%= imagen %>','<%= i %>','<%= step.getId() %>', this );" type="<%= type %>" name="<%= i %>" value="<%= j %>" ><span id="name<%= i+ "" +j%>">  <%= step.getName()%><%= imgDescription %></span> <br>
 											<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 										</div>	
 								<%
 									}else{
 								%>
-									<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" ><span id="name<%= i+ "" +j%>">  <%= step.getName()%></span> <br>
+									<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" ><span id="name<%= i+ "" +j%>">  <%= step.getName()%><%= imgDescription %></span> <br>
 									<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 								
 								<% 

@@ -73,6 +73,7 @@ public class ArmaTuTortaServlet extends HttpServlet {
 			}
 			
 		} catch (Exception e) {
+			System.out.println("Error " + e.getMessage() + e.getStackTrace());
 			request.setAttribute("options", new ArrayList<StepOption>());
 			RequestDispatcher rd = getServletContext().getRequestDispatcher("/creaTuTorta.jsp");
 			rd.forward(request, response);

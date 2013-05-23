@@ -4,12 +4,7 @@ $(document).ready(function(){
 	var priceTotal = 0;
 	var priceCant = 0;
 	var priceTotalAux = 0;
-	var sabor = "";
-	var unPonque = true;
-	var unPonqueAux = true;
-	var unaCubierta = true;
-	var coloresSurtidos = false;
-	var cubiertaEscogida = "";
+	
 	var cantCapas = 1;
 	
 
@@ -116,7 +111,7 @@ $(document).ready(function(){
 		$("#bt3").show();
 		value = $(this).val();
 		getPrice(3,value);
-		mostrarImgPonque(this);
+		//mostrarImgPonque(this);
 		
 		
 	});
@@ -127,7 +122,6 @@ $(document).ready(function(){
 		$("#bt4").show();
 		value = $(this).val();
 		getPrice(4,value);
-		mostrarImgCubierta(this);
 		
 	});
 	
@@ -137,7 +131,7 @@ $(document).ready(function(){
 		$("#bt5").show();
 		value = $(this).val();
 		getPrice(5,value);
-		mostrarImgColor(this);
+		//mostrarImgColor(this);
 	});
 	
 	
@@ -147,468 +141,16 @@ $(document).ready(function(){
 		$("#bt6").show();
 		value = $(this).val();
 		getPrice(6,value);
-		mostrarImgDecoracion(this);
+		//mostrarImgDecoracion(this);
 	});
   
 	/* -----------------------------------*/
 	
-	function mostrarImgPonque(element){
-		if($(element).attr('type') !='radio'){
-			var checked = $(element).is(':checked');
-			if (!checked){
-				sabor = "../images/cupcakes/ponque_general.png";
-				unPonque = true;
-				$("#pasoImgSabor").attr('src', sabor);
-				$("#pasoImgSabor").show();
-				$("#pasoImgSabor1").hide();
-				$("#pasoImgSabor2").hide();
-				$("#pasoImgSabor3").hide();
-				return;
-			}
-		}
-		var value = $(element).val();
-		if (value == 1)
-			sabor = "../images/cupcakes/ponque_chocolate.png";
-		else if (value == 2)
-			sabor = "../images/cupcakes/ponque_vainilla.png";
-		else if (value == 3)
-			sabor = "../images/cupcakes/ponque_vainilla_chispas.png";
-		else if (value == 4)
-			sabor = "../images/cupcakes/ponque_zanahoria.png";
-		else if (value == 5)
-			sabor = "../images/cupcakes/ponque_limon.png";
-		else if (value == 6)
-			sabor = "../images/cupcakes/ponque_red.png";
-		else if (value == 7)
-			sabor = "../images/cupcakes/ponque_chocolate_fuge.png";
-		else if (value == 8){
-			unPonque = false;
-			$("#pasoImgSabor1").attr('src',"../images/cupcakes/ponque_red.png");
-			$("#pasoImgSabor2").attr('src',"../images/cupcakes/ponque_vainilla.png");
-			$("#pasoImgSabor3").attr('src',"../images/cupcakes/ponque_chocolate.png");
-			$("#pasoImgSabor1").show();
-			$("#pasoImgSabor2").show();
-			$("#pasoImgSabor3").show();
-			
-			$("#pasoImgSabor").hide();
-			return;
-		}
-		unPonque = true;
-		$("#pasoImgSabor").attr('src', sabor);
-		$("#pasoImgSabor").show();
-		$("#pasoImgSabor1").hide();
-		$("#pasoImgSabor2").hide();
-		$("#pasoImgSabor3").hide();
-	}
-	
-	function mostrarImgCubierta(element){
-	
-		unaCubierta = true;
-		unPonqueAux = true;
-	
-		/* Cubierta escogida */
-		var value = $(element).val();
-		cubiertaEscogida = value;
-		var cubierta = "";
-		$("#pasoImgBase").attr('src',"../images/paso_cupcakes_4.png");
-		if (value == 1){
-			cubierta = "../images/cupcakes/crema_mantequilla_general.png";
-		}
-		else if (value == 2){
-			cubierta = "../images/cupcakes/glaseado_general.png";
-		}
-		else if (value == 3){
-			$("#pasoImgBase").attr('src',"../images/paso_cupcakes_4_block5.png");
-			cubierta = "../images/cupcakes/crema_chocolate.png";
-		}
-		else if (value == 4){
-			$("#pasoImgBase").attr('src',"../images/paso_cupcakes_4_block5.png");
-			cubierta = "../images/cupcakes/crema_queso_crema.png";
-		}
-		else if (value == 5){
-			$("#pasoImgBase").attr('src',"../images/paso_cupcakes_4_block5.png");
-			cubierta = "../images/cupcakes/crema_limon.png";
-		}
-		else if (value == 6){
-			unaCubierta = false;
-			$("#pasoImgBase").attr('src',"../images/paso_cupcakes_4_block5.png");
-			/* Si ya habia pintado 3 ponques, solo pinto las cubiertas*/
-			if (!unPonque){
-				$("#pasoImgCubierta1").attr('src',"../images/cupcakes/crema_limon.png");
-				$("#pasoImgCubierta2").attr('src',"../images/cupcakes/crema_chocolate.png");
-				$("#pasoImgCubierta3").attr('src',"../images/cupcakes/glaseado_general.png");
-				$("#pasoImgCubierta1").show();
-				$("#pasoImgCubierta2").show();
-				$("#pasoImgCubierta3").show();
-				$("#pasoImgCubierta").hide();
-				return;
-			}
-			/* Sino, debo pintar las 3 cubiertas y los 3 ponques*/
-			else{
-				unPonqueAux = false;
-				$("#pasoImgCubierta1").attr('src',"../images/cupcakes/crema_limon.png");
-				$("#pasoImgCubierta2").attr('src',"../images/cupcakes/crema_chocolate.png");
-				$("#pasoImgCubierta3").attr('src',"../images/cupcakes/glaseado_general.png");
-				$("#pasoImgCubierta1").show();
-				$("#pasoImgCubierta2").show();
-				$("#pasoImgCubierta3").show();
-				
-				$("#pasoImgSabor1").attr('src',sabor);
-				$("#pasoImgSabor2").attr('src',sabor);
-				$("#pasoImgSabor3").attr('src',sabor);
-				$("#pasoImgSabor1").show();
-				$("#pasoImgSabor2").show();
-				$("#pasoImgSabor3").show();
-			
-				$("#pasoImgSabor").hide();
-				$("#pasoImgCubierta").hide();
-				return;
-			}
-		}
-
-				
-		if (unPonque){
-			$("#pasoImgCubierta").attr('src',cubierta);
-			$("#pasoImgSabor1").hide();
-			$("#pasoImgSabor2").hide();
-			$("#pasoImgSabor3").hide();
-			$("#pasoImgCubierta1").hide();
-			$("#pasoImgCubierta2").hide();
-			$("#pasoImgCubierta3").hide();
-			
-			$("#pasoImgSabor").show();
-			$("#pasoImgCubierta").show();
-		}else{
-			$("#pasoImgCubierta1").attr('src',cubierta);
-			$("#pasoImgCubierta2").attr('src',cubierta);
-			$("#pasoImgCubierta3").attr('src',cubierta);
-			$("#pasoImgCubierta1").show();
-			$("#pasoImgCubierta2").show();
-			$("#pasoImgCubierta3").show();
-			
-			$("#pasoImgCubierta").hide();
-		}
-	}
 	
 	
-	function mostrarImgColor(element){
-		var valueC = cubiertaEscogida;
-		var value = $(element).val();
-		var color = "";
-		var checked = $(element).is(':checked');
-		coloresSurtidos = false;
-
-
-		/* Cubierta de mantequilla */
-		if (valueC == 1){
-			/* Color escogido */
-			if (value == 1){
-				color = "../images/cupcakes/crema_mantequilla_azul.png";
-			}
-			else if (value == 2){
-				color = "../images/cupcakes/crema_mantequilla_verde.png";
-			}
-			else if (value == 3){
-				color = "../images/cupcakes/crema_mantequilla_rosado.png";
-			}
-			else if (value == 4){
-				color = "../images/cupcakes/crema_mantequilla_morado.png";
-			}
-			else if (value == 5){
-				color = "../images/cupcakes/crema_mantequilla_rojo.png";
-			}
-			else if (value == 6){
-				color = "../images/cupcakes/crema_mantequilla_fucsia.png";
-			}
-			else if (value == 7){
-				color = "../images/cupcakes/crema_mantequilla_amarillo.png";
-			}
-			else if (value == 8)
-				color = "../images/cupcakes/crema_mantequilla_blanco.png";
-			/*Si se escogen colores surtidos se verifica si ya habian  3 ponques dibujados*/
-			else if (value == 9){
-				coloresSurtidos = true;
-				/* Se verifica si se está seleccionando o deseleccionando la opcion*/
-				if (checked){
-					/* Solo se pintan los 3 colores diferentes*/
-					if (!unPonqueAux || !unPonque){
-						$("#pasoImgColor1").attr('src',"../images/cupcakes/crema_mantequilla_morado.png");
-						$("#pasoImgColor2").attr('src',"../images/cupcakes/crema_mantequilla_amarillo.png");
-						$("#pasoImgColor3").attr('src',"../images/cupcakes/crema_mantequilla_verde.png");
-						$("#pasoImgColor1").show();
-						$("#pasoImgColor2").show();
-						$("#pasoImgColor3").show();
-						$("#pasoImgColor").hide();
-						$("#pasoImgSabor").hide();
-						$("#pasoImgCubierta").hide();
-						return;
-					}
-					/* Se debe pintar los 3 ponques y las 3 cubiertas de colores variados */
-					else{	
-						$("#pasoImgColor1").attr('src',"../images/cupcakes/crema_mantequilla_morado.png");
-						$("#pasoImgColor2").attr('src',"../images/cupcakes/crema_mantequilla_amarillo.png");
-						$("#pasoImgColor3").attr('src',"../images/cupcakes/crema_mantequilla_verde.png");
-						$("#pasoImgColor1").show();
-						$("#pasoImgColor2").show();
-						$("#pasoImgColor3").show();
-						$("#pasoImgColor").hide();
-						
-						$("#pasoImgSabor1").attr('src',sabor);
-						$("#pasoImgSabor2").attr('src',sabor);
-						$("#pasoImgSabor3").attr('src',sabor);
-						$("#pasoImgSabor1").show();
-						$("#pasoImgSabor2").show();
-						$("#pasoImgSabor3").show();
-						
-						$("#pasoImgSabor").hide();
-						$("#pasoImgCubierta").hide();
-						return;
-					}
-				}else{
-					/* Verifico si antes habia 1 ponque o 3*/
-					if (!unPonqueAux || !unPonque){
-						/* Eliminio los colores surtidos*/
-						$("#pasoImgColor1").hide();
-						$("#pasoImgColor2").hide();
-						$("#pasoImgColor3").hide();
-					}else{
-						/* Elimino los colores surtidos, los 3 ponques. Muestro uno solo y una sola cobertura*/
-						$("#pasoImgColor1").hide();
-						$("#pasoImgColor2").hide();
-						$("#pasoImgColor3").hide();
-						
-						$("#pasoImgSabor1").hide();
-						$("#pasoImgSabor2").hide();
-						$("#pasoImgSabor3").hide();
-						
-						$("#pasoImgSabor").show();
-						$("#pasoImgCubierta").show();
-					}
-				}
-			}
-		}else{
-			if (value == 1)
-				color = "../images/cupcakes/glaseado_azul.png";
-			else if (value == 2)
-				color =  "../images/cupcakes/glaseado_verde.png";
-			else if (value == 3)
-				color = "../images/cupcakes/glaseado_rosado.png";
-			else if (value == 4)
-				color = "../images/cupcakes/glaseado_morado.png";
-			else if (value == 5)
-				color = "../images/cupcakes/glaseado_rojo.png";
-			else if (value == 6)
-				color = "../images/cupcakes/glaseado_fucsia.png";
-			else if (value == 7)
-				color = "../images/cupcakes/glaseado_amarillo.png";
-			else if (value == 8)
-				color = "../images/cupcakes/glaseado_blanco.png";
-			else if (value == 9){
-				coloresSurtidos = true;
-				/* Se verifica si se está seleccionando o deseleccionando la opcion*/
-				if (checked){
-					/* Solo se pintan los 3 colores diferentes*/
-					if (!unPonqueAux || !unPonque){
-						$("#pasoImgColor1").attr('src',"../images/cupcakes/glaseado_morado.png");
-						$("#pasoImgColor2").attr('src',"../images/cupcakes/glaseado_amarillo.png");
-						$("#pasoImgColor3").attr('src',"../images/cupcakes/glaseado_blanco.png");
-						$("#pasoImgColor1").show();
-						$("#pasoImgColor2").show();
-						$("#pasoImgColor3").show();
-						$("#pasoImgColor").hide();
-						$("#pasoImgSabor").hide();
-						$("#pasoImgCubierta").hide();
-						return;
-					}
-					/* Se debe pintar los 3 ponques y las 3 cubiertas de colores variados */
-					else{	
-						$("#pasoImgColor1").attr('src',"../images/cupcakes/glaseado_morado.png");
-						$("#pasoImgColor2").attr('src',"../images/cupcakes/glaseado_amarillo.png");
-						$("#pasoImgColor3").attr('src',"../images/cupcakes/glaseado_blanco.png");
-						$("#pasoImgColor1").show();
-						$("#pasoImgColor2").show();
-						$("#pasoImgColor3").show();
-						$("#pasoImgColor").hide();
-						
-						$("#pasoImgSabor1").attr('src',sabor);
-						$("#pasoImgSabor2").attr('src',sabor);
-						$("#pasoImgSabor3").attr('src',sabor);
-						$("#pasoImgSabor1").show();
-						$("#pasoImgSabor2").show();
-						$("#pasoImgSabor3").show();
-						
-						$("#pasoImgSabor").hide();
-						$("#pasoImgCubierta").hide();
-						return;
-					}
-				}else{
-					/* Verifico si antes habia 1 ponque o 3*/
-					if (!unPonqueAux || !unPonque){
-						/* Eliminio los colores surtidos*/
-						$("#pasoImgColor1").hide();
-						$("#pasoImgColor2").hide();
-						$("#pasoImgColor3").hide();
-					}else{
-						/* Elimino los colores surtidos, los 3 ponques. Muestro uno solo y una sola cobertura*/
-						$("#pasoImgColor1").hide();
-						$("#pasoImgColor2").hide();
-						$("#pasoImgColor3").hide();
-						
-						$("#pasoImgSabor1").hide();
-						$("#pasoImgSabor2").hide();
-						$("#pasoImgSabor3").hide();
-						
-						$("#pasoImgSabor").show();
-						$("#pasoImgCubierta").show();
-					}
-				}
-
-			}
-		}
-
-		/* Para pintar los colores verifico si habian 3 ponques o uno, para pintar la cantidad correcta de capas */
-		if (!unPonqueAux || !unPonque){
-			if (checked){
-				$("#pasoImgColor1").attr('src',color);
-				$("#pasoImgColor2").attr('src',color);
-				$("#pasoImgColor3").attr('src',color);
-				$("#pasoImgColor1").show();
-				$("#pasoImgColor2").show();
-				$("#pasoImgColor3").show();
-				$("#pasoImgColor").hide();
-				mostrarSabores();
-			}
-			else{
-				eliminarColoresVarios();
-				mostrarCubiertas();
-				mostrarPonques();
-			}
-		}else{
-			if (checked){
-				$("#pasoImgColor").attr('src',color);
-				$("#pasoImgColor").show();
-				$("#pasoImgSabor").show();
-			}else{
-				$("#pasoImgColor").hide();
-				mostrarPonque();
-				mostrarCubierta();
-			}
-
-		}
-	}
+	
 
 	
-	function mostrarImgDecoracion(){
-		/* Obtengo el valor de la cubierta escogida */
-		var valueCubierta = $("input:radio[name=4]:checked").val();
-		/* Valor de la decoracion escogida*/
-		var value = $("input:radio[name=6]:checked").val();
-		
-		if (value == 1){
-			/* Verifico cual cubierta se escogio para mostrar la imagen correspondiente de la decoracion */
-			if (valueCubierta == 1 || valueCubierta == 3 ){
-				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_chocolate.png");
-			}
-			else if (valueCubierta == 2){
-				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_chocolate_glaseado.png");
-			}
-			else if (valueCubierta == 4 || valueCubierta == 5){
-				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_chocolate_crema_limon.png");
-			}
-			else if (valueCubierta == 5){
-				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_chocolate_crema_limon.png");
-			}
-			else if (valueCubierta == 6)
-			{
-				decoracionSurt = true;
-				$("#pasoImgDecoracion1").attr('src',"../images/cupcakes/chispas_chocolate_crema_limon.png");
-				$("#pasoImgDecoracion2").attr('src',"../images/cupcakes/chispas_chocolate.png");
-				$("#pasoImgDecoracion3").attr('src',"../images/cupcakes/chispas_chocolate_glaseado.png");
-				$("#pasoImgDecoracion1").show();
-				$("#pasoImgDecoracion2").show();
-				$("#pasoImgDecoracion3").show();
-				$("#pasoImgDecoracion").hide();
-				return;
-			}
-		}
-		else if (value == 2){
-			if (valueCubierta == 1)
-				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_chocolate_blanco.png");
-			else if (valueCubierta == 2)
-				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_chocolate_blanco_glaseado.png");
-			else if (valueCubierta == 3)
-				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_chocolate_blanco.png");
-			else if (valueCubierta == 4)
-				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_chocolate_blanco_limon.png");
-			else if (valueCubierta == 5)
-				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_chocolate_blanco_limon.png");
-			else if (valueCubierta == 6)
-			{
-				decoracionSurt = true;
-				$("#pasoImgDecoracion1").attr('src',"../images/cupcakes/chispas_chocolate_blanco_limon.png");
-				$("#pasoImgDecoracion2").attr('src',"../images/cupcakes/chispas_chocolate_blanco.png");
-				$("#pasoImgDecoracion3").attr('src',"../images/cupcakes/chispas_chocolate_blanco_glaseado.png");
-				$("#pasoImgDecoracion1").show();
-				$("#pasoImgDecoracion2").show();
-				$("#pasoImgDecoracion3").show();
-				$("#pasoImgDecoracion").hide();
-				return;
-			}
-		}
-		else if (value == 3){
-			if (valueCubierta == 1)
-				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_colores.png");
-			else if (valueCubierta == 2)
-				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_colores_glaseado.png");
-			else if (valueCubierta == 3)
-				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_colores.png");
-			else if (valueCubierta == 4)
-				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_colores_limon.png");
-			else if (valueCubierta == 5)
-				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_colores_limon.png");
-			else if (valueCubierta == 6){
-				decoracionSurt = true;
-				$("#pasoImgDecoracion1").attr('src',"../images/cupcakes/chispas_colores_limon.png");
-				$("#pasoImgDecoracion2").attr('src',"../images/cupcakes/chispas_colores.png");
-				$("#pasoImgDecoracion3").attr('src',"../images/cupcakes/chispas_colores_glaseado.png");
-				$("#pasoImgDecoracion1").show();
-				$("#pasoImgDecoracion2").show();
-				$("#pasoImgDecoracion3").show();
-				$("#pasoImgDecoracion").hide();
-				return;
-			}
-		}
-		else if (value == 4)	{
-			if (valueCubierta == 1)
-				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_surtidas.png");
-			else if (valueCubierta == 2)
-				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_surtidas_glaseado.png");
-			else if (valueCubierta == 3)
-				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_surtidas.png");
-			else if (valueCubierta == 4)
-				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_surtidas_limon.png");
-			else if (valueCubierta == 5)
-				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_surtidas_limon.png");
-			else if (valueCubierta == 6){
-				decoracionSurt = true;
-				$("#pasoImgDecoracion1").attr('src',"../images/cupcakes/chispas_surtidas_limon.png");
-				$("#pasoImgDecoracion2").attr('src',"../images/cupcakes/chispas_surtidas.png");
-				$("#pasoImgDecoracion3").attr('src',"../images/cupcakes/chispas_surtidas_glaseado.png");
-				$("#pasoImgDecoracion1").show();
-				$("#pasoImgDecoracion2").show();
-				$("#pasoImgDecoracion3").show();
-				$("#pasoImgDecoracion").hide();
-				return;
-			}
-		}
-		else if (value == 5){
-			$("#pasoImgDecoracion").hide();
-			return;
-		}
-		decoracionSurt = false;
-		$("#pasoImgDecoracion").show();
-		eliminarDecoraciones();
-	}
 	
 	/* Funciones auxiliares */
 
@@ -690,31 +232,31 @@ $(document).ready(function(){
 	
 	/* Imagenes pasos */
 	function mostrarPaso1(){
-		$("#pasoImgBase").attr('src',"../images/paso_cupcakes.png");
+		$("#pasoImgBase").attr('src',"./images/paso_cupcakes.png");
 	}
 	
 	function mostrarPaso2(){
-		$("#pasoImgBase").attr('src',"../images/paso_cupcakes_2.png");
+		$("#pasoImgBase").attr('src',"./images/paso_cupcakes_2.png");
 	}
 	
 	function mostrarPaso3(){
-		$("#pasoImgBase").attr('src',"../images/paso_cupcakes_3.png");
+		$("#pasoImgBase").attr('src',"./images/paso_cupcakes_3.png");
 	}
 	
 	function mostrarPaso4(){
-		$("#pasoImgBase").attr('src',"../images/paso_cupcakes_4.png");
+		$("#pasoImgBase").attr('src',"./images/paso_cupcakes_4.png");
 	}
 	
 	function mostrarPaso4_block5(){
-		$("#pasoImgBase").attr('src',"../images/paso_cupcakes_4_block5.png");
+		$("#pasoImgBase").attr('src',"./images/paso_cupcakes_4_block5.png");
 	}
 	
 	function mostrarPaso5(){
-		$("#pasoImgBase").attr('src',"../images/paso_cupcakes_5.png");
+		$("#pasoImgBase").attr('src',"./images/paso_cupcakes_5.png");
 	}
 	
 	function mostrarPaso6(){
-		$("#pasoImgBase").attr('src',"../images/paso_cupcakes_6.png");
+		$("#pasoImgBase").attr('src',"./images/paso_cupcakes_6.png");
 	}
 	/* -- Fin funciones de images pasos -- */
   
@@ -916,3 +458,388 @@ $(document).ready(function(){
 	
 	
 });
+
+var sabor = "";
+var unPonque = true;
+var unPonqueAux = true;
+var unaCubierta = true;
+var coloresSurtidos = false;
+var cubiertaEscogida = "";
+
+function prueba(texto, i, id, element){
+	
+	if (i == 3)
+		mostrarImgPonque(texto, id);
+	else if (i == 4)
+		mostrarImgCubierta(texto, id);
+	else if (i == 5)
+		mostrarImgColor(texto, id, element);
+	else if (i == 6)
+		mostrarImgDecoracion(texto, id);
+	
+}
+
+function mostrarImgPonque(imagen, id){
+		if (id != "54")
+			sabor = "./images/cupcakes/" + imagen;
+		else{
+			unPonque = false;
+			$("#pasoImgSabor1").attr('src',"./images/cupcakes/ponque_red.png");
+			$("#pasoImgSabor2").attr('src',"./images/cupcakes/ponque_vainilla.png");
+			$("#pasoImgSabor3").attr('src',"./images/cupcakes/ponque_chocolate.png");
+			$("#pasoImgSabor1").show();
+			$("#pasoImgSabor2").show();
+			$("#pasoImgSabor3").show();
+			
+			$("#pasoImgSabor").hide();
+			return;
+		}
+		unPonque = true;
+		$("#pasoImgSabor").attr('src', sabor);
+		$("#pasoImgSabor").show();
+		$("#pasoImgSabor1").hide();
+		$("#pasoImgSabor2").hide();
+		$("#pasoImgSabor3").hide();
+}
+
+
+function mostrarImgCubierta(imagen, id){
+	
+		unaCubierta = true;
+		unPonqueAux = true;
+	
+		/* Cubierta escogida */
+		//var value = $(element).val();
+		cubiertaEscogida = id;
+		var cubierta = "";
+		$("#pasoImgBase").attr('src',"./images/paso_cupcakes_4.png");
+		cubierta = "./images/cupcakes/" + imagen;
+		
+		if (id == "57" || id == "58"|| id == "59")
+			$("#pasoImgBase").attr('src',"./images/paso_cupcakes_4_block5.png");
+		
+		if (id == "60"){
+			unaCubierta = false;
+			$("#pasoImgBase").attr('src',"./images/paso_cupcakes_4_block5.png");
+			/* Si ya habia pintado 3 ponques, solo pinto las cubiertas*/
+			if (!unPonque){
+				$("#pasoImgCubierta1").attr('src',"./images/cupcakes/crema_limon.png");
+				$("#pasoImgCubierta2").attr('src',"./images/cupcakes/crema_chocolate.png");
+				$("#pasoImgCubierta3").attr('src',"./images/cupcakes/glaseado_general.png");
+				$("#pasoImgCubierta1").show();
+				$("#pasoImgCubierta2").show();
+				$("#pasoImgCubierta3").show();
+				$("#pasoImgCubierta").hide();
+				return;
+			}
+			/* Sino, debo pintar las 3 cubiertas y los 3 ponques*/
+			else{
+				unPonqueAux = false;
+				$("#pasoImgCubierta1").attr('src',"./images/cupcakes/crema_limon.png");
+				$("#pasoImgCubierta2").attr('src',"./images/cupcakes/crema_chocolate.png");
+				$("#pasoImgCubierta3").attr('src',"./images/cupcakes/glaseado_general.png");
+				$("#pasoImgCubierta1").show();
+				$("#pasoImgCubierta2").show();
+				$("#pasoImgCubierta3").show();
+				
+				$("#pasoImgSabor1").attr('src',sabor);
+				$("#pasoImgSabor2").attr('src',sabor);
+				$("#pasoImgSabor3").attr('src',sabor);
+				$("#pasoImgSabor1").show();
+				$("#pasoImgSabor2").show();
+				$("#pasoImgSabor3").show();
+			
+				$("#pasoImgSabor").hide();
+				$("#pasoImgCubierta").hide();
+				return;
+			}
+		}
+
+				
+		if (unPonque){
+			$("#pasoImgCubierta").attr('src',cubierta);
+			$("#pasoImgSabor1").hide();
+			$("#pasoImgSabor2").hide();
+			$("#pasoImgSabor3").hide();
+			$("#pasoImgCubierta1").hide();
+			$("#pasoImgCubierta2").hide();
+			$("#pasoImgCubierta3").hide();
+			
+			$("#pasoImgSabor").show();
+			$("#pasoImgCubierta").show();
+		}else{
+			$("#pasoImgCubierta1").attr('src',cubierta);
+			$("#pasoImgCubierta2").attr('src',cubierta);
+			$("#pasoImgCubierta3").attr('src',cubierta);
+			$("#pasoImgCubierta1").show();
+			$("#pasoImgCubierta2").show();
+			$("#pasoImgCubierta3").show();
+			
+			$("#pasoImgCubierta").hide();
+		}
+	}
+	
+	function mostrarImgColor(imagen, id, element){
+		var valueC = cubiertaEscogida;
+		var value = id;
+		var color = "";
+		var checked = $(element).is(':checked');
+		
+		
+		coloresSurtidos = false;
+
+		var preColor = "";
+		if (valueC == "55"){
+			preColor = "./images/cupcakes/crema_mantequilla_";
+		}
+		else if (valueC == "56"){
+			preColor = "./images/cupcakes/glaseado_";
+			
+		}
+		
+		if (value == "69"){
+				coloresSurtidos = true;
+				/* Se verifica si se está seleccionando o deseleccionando la opcion*/
+				if (checked){
+					/* Solo se pintan los 3 colores diferentes*/
+					if (!unPonqueAux || !unPonque){
+						$("#pasoImgColor1").attr('src',preColor + "morado.png");
+						$("#pasoImgColor2").attr('src',preColor +"amarillo.png");
+						$("#pasoImgColor3").attr('src',preColor + "blanco.png");
+						$("#pasoImgColor1").show();
+						$("#pasoImgColor2").show();
+						$("#pasoImgColor3").show();
+						$("#pasoImgColor").hide();
+						$("#pasoImgSabor").hide();
+						$("#pasoImgCubierta").hide();
+						return;
+					}
+					/* Se debe pintar los 3 ponques y las 3 cubiertas de colores variados */
+					else{	
+						$("#pasoImgColor1").attr('src',preColor + "morado.png");
+						$("#pasoImgColor2").attr('src',preColor +"amarillo.png");
+						$("#pasoImgColor3").attr('src',preColor + "blanco.png");
+						$("#pasoImgColor1").show();
+						$("#pasoImgColor2").show();
+						$("#pasoImgColor3").show();
+						$("#pasoImgColor").hide();
+						
+						$("#pasoImgSabor1").attr('src',sabor);
+						$("#pasoImgSabor2").attr('src',sabor);
+						$("#pasoImgSabor3").attr('src',sabor);
+						$("#pasoImgSabor1").show();
+						$("#pasoImgSabor2").show();
+						$("#pasoImgSabor3").show();
+						
+						$("#pasoImgSabor").hide();
+						$("#pasoImgCubierta").hide();
+						return;
+					}
+				}else{
+					/* Verifico si antes habia 1 ponque o 3*/
+					if (!unPonqueAux || !unPonque){
+						/* Eliminio los colores surtidos*/
+						$("#pasoImgColor1").hide();
+						$("#pasoImgColor2").hide();
+						$("#pasoImgColor3").hide();
+						return;
+					}else{
+						/* Elimino los colores surtidos, los 3 ponques. Muestro uno solo y una sola cobertura*/
+						$("#pasoImgColor1").hide();
+						$("#pasoImgColor2").hide();
+						$("#pasoImgColor3").hide();
+						
+						$("#pasoImgSabor1").hide();
+						$("#pasoImgSabor2").hide();
+						$("#pasoImgSabor3").hide();
+						
+						$("#pasoImgSabor").show();
+						$("#pasoImgCubierta").show();
+						return;
+					}
+				}
+			
+			
+			}else{
+				color = preColor + imagen;
+				
+			}
+
+		/* Para pintar los colores verifico si habian 3 ponques o uno, para pintar la cantidad correcta de capas */
+		if (!unPonqueAux || !unPonque){
+			if (checked){
+				$("#pasoImgColor1").attr('src',color);
+				$("#pasoImgColor2").attr('src',color);
+				$("#pasoImgColor3").attr('src',color);
+				$("#pasoImgColor1").show();
+				$("#pasoImgColor2").show();
+				$("#pasoImgColor3").show();
+				$("#pasoImgColor").hide();
+				mostrarSabores();
+			}
+			else{
+				eliminarColoresVarios();
+				mostrarCubiertas();
+				mostrarPonques();
+			}
+		}else{
+			if (checked){
+				$("#pasoImgColor").attr('src',color);
+				$("#pasoImgColor").show();
+				$("#pasoImgSabor").show();
+			}else{
+				$("#pasoImgColor").hide();
+				mostrarPonque();
+				mostrarCubierta();
+			}
+
+		}
+	
+	}
+	
+	function mostrarImgDecoracion(imagen, id){
+		/* Obtengo el valor de la cubierta escogida */
+		var valueCubierta = cubiertaEscogida;
+		/* Valor de la decoracion escogida*/
+		var value = id;
+		var decoracion = "";
+		
+		/* Verifico cual cubierta se escogio para mostrar la imagen correspondiente de la decoracion */
+		if (valueCubierta == "55" || valueCubierta == "57"){
+			decoracion = "./images/cupcakes/chispas_";
+			//$("#pasoImgDecoracion").attr('src',"./images/cupcakes/chispas_" + imagen);
+		}
+		else if (valueCubierta == "56"){
+			decoracion = "./images/cupcakes/chispas_glaseado_";
+			//$("#pasoImgDecoracion").attr('src',"./images/cupcakes/chispas_glaseado_" + imagen);
+		}
+		else if (valueCubierta == "58" || valueCubierta == "59"){
+			decoracion = "./images/cupcakes/chispas_limon_";
+		//	$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_limon_" + imagen);
+		}
+		else if (valueCubierta == "60")
+		{
+			if (value != 74){
+				decoracionSurt = true;
+				$("#pasoImgDecoracion1").attr('src',"./images/cupcakes/chispas_limon_" + imagen);
+				$("#pasoImgDecoracion2").attr('src',"./images/cupcakes/chispas_" + imagen);
+				$("#pasoImgDecoracion3").attr('src',"./images/cupcakes/chispas_glaseado_" + imagen);
+				$("#pasoImgDecoracion1").show();
+				$("#pasoImgDecoracion2").show();
+				$("#pasoImgDecoracion3").show();
+				$("#pasoImgDecoracion").hide();
+				return;
+			}else{
+				$("#pasoImgDecoracion").hide();
+				$("#pasoImgDecoracion1").hide();
+				$("#pasoImgDecoracion2").hide();
+				$("#pasoImgDecoracion3").hide();
+				
+				return;
+			}
+		}
+		
+		if (value == "74"){
+			
+			$("#pasoImgDecoracion").hide();
+			$("#pasoImgDecoracion1").hide();
+			$("#pasoImgDecoracion2").hide();
+			$("#pasoImgDecoracion3").hide();
+			
+			return;
+		}
+		
+		if (!unPonque){
+				$("#pasoImgDecoracion1").attr('src', decoracion);
+				$("#pasoImgDecoracion2").attr('src', decoracion);
+				$("#pasoImgDecoracion3").attr('src', decoracion);
+				$("#pasoImgDecoracion1").show();
+				$("#pasoImgDecoracion2").show();
+				$("#pasoImgDecoracion3").show();
+				$("#pasoImgDecoracion").hide();
+				return;
+		}else{
+			$("#pasoImgDecoracion").attr('src', decoracion);
+			$("#pasoImgDecoracion").show();
+			eliminarDecoraciones();
+
+		}
+		decoracionSurt = false;
+		
+		
+		/*}
+		else if (value == 2){
+			if (valueCubierta == 1)
+				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_chocolate_blanco.png");
+			else if (valueCubierta == 2)
+				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_chocolate_blanco_glaseado.png");
+			else if (valueCubierta == 3)
+				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_chocolate_blanco.png");
+			else if (valueCubierta == 4)
+				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_chocolate_blanco_limon.png");
+			else if (valueCubierta == 5)
+				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_chocolate_blanco_limon.png");
+			else if (valueCubierta == 6)
+			{
+				decoracionSurt = true;
+				$("#pasoImgDecoracion1").attr('src',"../images/cupcakes/chispas_chocolate_blanco_limon.png");
+				$("#pasoImgDecoracion2").attr('src',"../images/cupcakes/chispas_chocolate_blanco.png");
+				$("#pasoImgDecoracion3").attr('src',"../images/cupcakes/chispas_chocolate_blanco_glaseado.png");
+				$("#pasoImgDecoracion1").show();
+				$("#pasoImgDecoracion2").show();
+				$("#pasoImgDecoracion3").show();
+				$("#pasoImgDecoracion").hide();
+				return;
+			}
+		}
+		else if (value == 3){
+			if (valueCubierta == 1)
+				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_colores.png");
+			else if (valueCubierta == 2)
+				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_colores_glaseado.png");
+			else if (valueCubierta == 3)
+				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_colores.png");
+			else if (valueCubierta == 4)
+				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_colores_limon.png");
+			else if (valueCubierta == 5)
+				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_colores_limon.png");
+			else if (valueCubierta == 6){
+				decoracionSurt = true;
+				$("#pasoImgDecoracion1").attr('src',"../images/cupcakes/chispas_colores_limon.png");
+				$("#pasoImgDecoracion2").attr('src',"../images/cupcakes/chispas_colores.png");
+				$("#pasoImgDecoracion3").attr('src',"../images/cupcakes/chispas_colores_glaseado.png");
+				$("#pasoImgDecoracion1").show();
+				$("#pasoImgDecoracion2").show();
+				$("#pasoImgDecoracion3").show();
+				$("#pasoImgDecoracion").hide();
+				return;
+			}
+		}
+		else if (value == 4)	{
+			if (valueCubierta == 1)
+				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_surtidas.png");
+			else if (valueCubierta == 2)
+				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_surtidas_glaseado.png");
+			else if (valueCubierta == 3)
+				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_surtidas.png");
+			else if (valueCubierta == 4)
+				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_surtidas_limon.png");
+			else if (valueCubierta == 5)
+				$("#pasoImgDecoracion").attr('src',"../images/cupcakes/chispas_surtidas_limon.png");
+			else if (valueCubierta == 6){
+				decoracionSurt = true;
+				$("#pasoImgDecoracion1").attr('src',"../images/cupcakes/chispas_surtidas_limon.png");
+				$("#pasoImgDecoracion2").attr('src',"../images/cupcakes/chispas_surtidas.png");
+				$("#pasoImgDecoracion3").attr('src',"../images/cupcakes/chispas_surtidas_glaseado.png");
+				$("#pasoImgDecoracion1").show();
+				$("#pasoImgDecoracion2").show();
+				$("#pasoImgDecoracion3").show();
+				$("#pasoImgDecoracion").hide();
+				return;
+			}
+		}*/
+		
+	}
+	
+
+	

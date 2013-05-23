@@ -35,23 +35,21 @@ public class ListPasos implements DatabaseCommand {
 		while(rs.next()) {
 			
 			OrderStep order = new OrderStep();
-			
-				
 			stepId = rs.getLong(1);
 			order.setName(rs.getString(2));
 			order.setMultipleChoice(rs.getInt(3));
 			order.setPosition(rs.getInt(4));
 			if (typeId != -1){
 				/* Obtengo las opciones de esos pasos */
-				sta = conn.prepareStatement("SELECT SO.ID, " +
+				PreparedStatement staInt = conn.prepareStatement("SELECT SO.ID, " +
 					"SO.ORDER_STEP_ID, " +
-					"SO.NAME, " +
-					"SO.POSITION, " +
-					"SO.PRICE, SO.DESCRIPTION, SO.IMAGE " +
+					"SO.NAME, SO.DESCRIPTION, " +
+					"SO.POSITION, SO.IMAGE, " +
+					"SO.PRICE " +
 					"FROM step_option SO WHERE SO.ORDER_STEP_ID = ? AND SO.IS_DELETED=0 AND IS_UNAVAILABLE=0" +
 					" ORDER BY SO.POSITION ASC");
-				sta.setLong(1, stepId);
-				ResultSet rs2 = sta.executeQuery();
+				staInt.setLong(1, stepId);
+				ResultSet rs2 = staInt.executeQuery();
 				List<StepOption> steps = new LinkedList<StepOption>();
 				ListOrder_Step orderSteps = new ListOrder_Step();
 				while(rs2.next()) {
@@ -59,15 +57,17 @@ public class ListPasos implements DatabaseCommand {
 					option.setId(rs2.getLong(1));
 					option.setOrderStepId(rs2.getLong(2));
 					option.setName(rs2.getString(3));
-					option.setPosition(rs2.getInt(4));
-					option.setPrice(rs2.getDouble(5));
-					option.setDescription(rs.getString(6));
-					option.setImage(rs.getString(7));
+					option.setDescription(rs2.getString(4));
+					option.setPosition(rs2.getInt(5));
+					option.setImage(rs2.getString(6));
+					option.setPrice(rs2.getDouble(7));
 					steps.add(option);
 				}
 				orderSteps.setOrder(order);
 				orderSteps.setStep(steps);
 				listOrder.add(orderSteps);
+				staInt.close();
+				rs2.close();
 			}
 		}
 		rs.close();

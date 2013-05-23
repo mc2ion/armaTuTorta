@@ -91,6 +91,7 @@
 								String type = "radio";
 								if (isMultChoice == 1)
 									type = "checkbox";
+								
 							
 					%>
 					<% if ( i == 1) { %>
@@ -100,12 +101,18 @@
 								<% for(int j= 1; j<= actualOptions.size(); j++) {
 									int aux2 = j - 1;
 									StepOption step = actualOptions.get(aux2);
+									String description = step.getDescription();
+									System.out.println("description" + description);
+									String imgDescription = "";
+									if (description != null && !description.equals(""))
+										imgDescription = "<img  id=\"imgFudge\" src=\"./images/question.png\" title=\"" +  description  + "\"/>";
+									
 									hashMap.put(i + "" +j, step.getName());
 									hashMapPrice.put(step.getName(), step.getPrice());
 									hashMapId.put(step.getName(), step.getId());
 								%>
 							
-							<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%> </span> <br>
+							<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%><%= imgDescription %></span> <br>
 							<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 							<% }
 							%>
@@ -132,6 +139,7 @@
 									<% for(int j= 1; j<= actualOptions.size(); j++) {
 										int aux2 = j - 1;
 										StepOption step = actualOptions.get(aux2);
+										
 										hashMap.put(i + "" +j, step.getName());
 										hashMapPrice.put(step.getName(), step.getPrice());
 										hashMapId.put(step.getName(), step.getId());
@@ -213,26 +221,27 @@
 									hashMapPrice.put(step.getName(), step.getPrice());
 									hashMapId.put(step.getName(), step.getId());
 										
-									if (actualOptions.size() > 4){
-										String img = "<img  id=\"imgFudge\" src=\"./images/question.png\" title=\"Deliciosa y esponjosa torta de chocolate oscuro, no podrás parar de comerla!\"  />";
-										if (!step.getName().startsWith("Chocolate fudge,")){
-											img = "";
-										}
+									String description = step.getDescription();
+									String imgDescription = "";
+									if (description != null && !description.equals(""))
+										imgDescription = "<img  id=\"imgFudge\" src=\"./images/question.png\" title=\"" +  description  + "\"/>";
 									
+									if (actualOptions.size() > 4){
+											
 										
 								%>
 									<%
 										if (!step.getName().contains("imagen")){
 									%>
 										<div class="options-steps-left">
-											<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%><%= img  %> </span> <br>
+											<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%><%= imgDescription  %> </span> <br>
 											<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 										</div>	
 									<%
 										}else{
 									%>
 										<div class="options-steps-especial">
-											<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%><%= img  %> </span>
+											<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%><%= imgDescription  %> </span>
 											<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 											<input type="file" accept='image/*' name="txtImage" id="txtImage" maxlength="25" lang="es"  style="display:none;"/>  <br>
 										</div>
