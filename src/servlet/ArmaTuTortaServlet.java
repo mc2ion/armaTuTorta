@@ -100,9 +100,9 @@ public class ArmaTuTortaServlet extends HttpServlet {
 				rd.forward(request, response);
 			}else{
 				Properties propertiesFile = new Properties();
-				propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
+				//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 				
-				//propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+				propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
 				OrderCake orderCake = new OrderCake();
 				String error = "";
 				if  (type.equals("1")){
@@ -173,7 +173,10 @@ public class ArmaTuTortaServlet extends HttpServlet {
 		orderCake.setRelleno(relleno);
 		orderCake.setPrecio(precio);
 	
-		if (cubierta.contains("Fondant con la imagen")){	
+		@SuppressWarnings("unchecked")
+		HashMap<String, Long> hashMapId = (HashMap<String, Long>) infoPage.getAttribute("hashMapId");
+	
+		if (hashMapId.get(cubierta) == 42){	
 			File imageFile = multipart.getFile("txtImage");
 			String image = imageFile.getName();
 			String dir = dirPath;
@@ -181,9 +184,14 @@ public class ArmaTuTortaServlet extends HttpServlet {
 			int pointIndex = image.indexOf(".");
 			String extension = image.substring(pointIndex);
 			String name = image.substring(0,pointIndex);
-			image = name.toLowerCase().replace(" ", "_") + "_" + client.getLastName() + extension;
+			if (name.length() > 10)
+				name = name.substring(0, 10);
+			
+			name = name.toLowerCase().replace(" ", "_") ;
+			image = name.toLowerCase().replace("\\", "_") + "_" + client.getFirstName().trim() + extension;
 			File destination = new File(dir + image);
 			imageFile.renameTo(destination);
+			
 			orderCake.setNombreImagen(dir + image);
 		}
 		
@@ -201,6 +209,7 @@ public class ArmaTuTortaServlet extends HttpServlet {
 		String fecha = request.getParameter("txtFecha");
 		String clientId =  request.getParameter("clientId");
 		String nombreImagen = request.getParameter("nombreImagen");
+		System.out.println(nombreImagen);
 		
 		String error = "";
 		
@@ -242,8 +251,11 @@ public class ArmaTuTortaServlet extends HttpServlet {
 		item = new OrderItem();
 		item.setPrice(hashMapPrice.get(cubierta));
 		item.setStepOptionId(hashMapId.get(cubierta));
-		if (cubierta.contains("Fondant con la imagen"))
-			item.setNombreImg(nombreImagen);
+		if (hashMapId.get(cubierta) == 42){
+			int index = nombreImagen.lastIndexOf("\\") + 1;
+			String nombreImagenAux = nombreImagen.substring(index);
+			item.setNombreImg(nombreImagenAux);
+		}
 		orderItems.add(item);
 		
 		

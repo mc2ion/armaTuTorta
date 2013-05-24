@@ -63,7 +63,7 @@
 					para poder ingresar a tu cuenta. <br><br>
 					Una vez que hayas ingresado a nuestra sistema, podr&aacute;s cambiar esta contrase&ntilde;a f&aacute;cilmente, 
 					si as&iacute; lo deseeas, ingresando
-					a: <strong>Mi cuenta</strong> y haciendo click en la opci&oacute;n  </strong>Cambiar contrase&ntilde;a</strong>.
+					a: <strong>Mi cuenta</strong> y haciendo click en la opci&oacute;n  <strong>Cambiar contrase&ntilde;a</strong>.
 					 
 					<br><br>
 					¡Muchas gracias por elegirnos!. 

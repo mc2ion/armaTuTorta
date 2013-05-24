@@ -95,7 +95,7 @@
 
 				<div class="bienv">
 					<span class="bienv-title">Verifica los datos de tu pedido.</span><br><br>
-					Por favor ingrese la fecha de entrega para la cual desea su pedido: <input type="text" id="datepicker" name="txtFecha" />
+					Por favor ingrese la fecha de entrega para la cual desea su pedido: <input type="text" readonly="readonly" id="datepicker" name="txtFecha" />
 			  		<span class="error" id="errorDate">Disculpe, debe introducir una fecha de entrega válida</span><br><br>
 		
 					<div id="pedido">

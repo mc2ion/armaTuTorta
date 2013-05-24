@@ -70,7 +70,7 @@
 						</div>
 						<div style="float:left; width: 340px;">
 							<label for="name" style="width:28%">Fecho del evento:</label>
-							<input type="text" id="datepicker" name="txtFecha" /> 
+							<input type="text" readonly="readonly" id="datepicker" name="txtFecha" /> 
 						</div>
 						<br><br>
 						<label for="name">Cu&eacute;ntanos m&aacute;s acerca de tu idea:</label>

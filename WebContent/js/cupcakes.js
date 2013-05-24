@@ -4,8 +4,8 @@ $(document).ready(function(){
 	var priceTotal = 0;
 	var priceCant = 0;
 	var priceTotalAux = 0;
-	
 	var cantCapas = 1;
+	
 	
 
 	/* Cambio de las secciones y la imagen del paso asociado*/
@@ -465,6 +465,10 @@ var unPonqueAux = true;
 var unaCubierta = true;
 var coloresSurtidos = false;
 var cubiertaEscogida = "";
+var color1 = "";
+var color2 = "";
+var color3 = "";
+	
 
 function prueba(texto, i, id, element){
 	
@@ -603,9 +607,9 @@ function mostrarImgCubierta(imagen, id){
 				if (checked){
 					/* Solo se pintan los 3 colores diferentes*/
 					if (!unPonqueAux || !unPonque){
-						$("#pasoImgColor1").attr('src',preColor + "morado.png");
-						$("#pasoImgColor2").attr('src',preColor +"amarillo.png");
-						$("#pasoImgColor3").attr('src',preColor + "blanco.png");
+						$("#pasoImgColor1").attr('src',preColor + color1);
+						$("#pasoImgColor2").attr('src',preColor + color2);
+						$("#pasoImgColor3").attr('src',preColor + color3);
 						$("#pasoImgColor1").show();
 						$("#pasoImgColor2").show();
 						$("#pasoImgColor3").show();
@@ -616,9 +620,9 @@ function mostrarImgCubierta(imagen, id){
 					}
 					/* Se debe pintar los 3 ponques y las 3 cubiertas de colores variados */
 					else{	
-						$("#pasoImgColor1").attr('src',preColor + "morado.png");
-						$("#pasoImgColor2").attr('src',preColor +"amarillo.png");
-						$("#pasoImgColor3").attr('src',preColor + "blanco.png");
+						$("#pasoImgColor1").attr('src',preColor + color1);
+						$("#pasoImgColor2").attr('src',preColor + color2);
+						$("#pasoImgColor3").attr('src',preColor + color3);
 						$("#pasoImgColor1").show();
 						$("#pasoImgColor2").show();
 						$("#pasoImgColor3").show();
@@ -633,6 +637,7 @@ function mostrarImgCubierta(imagen, id){
 						
 						$("#pasoImgSabor").hide();
 						$("#pasoImgCubierta").hide();
+						
 						return;
 					}
 				}else{
@@ -703,10 +708,11 @@ function mostrarImgCubierta(imagen, id){
 		/* Valor de la decoracion escogida*/
 		var value = id;
 		var decoracion = "";
+		alert(valueCubierta + " " + unPonque);
 		
 		/* Verifico cual cubierta se escogio para mostrar la imagen correspondiente de la decoracion */
 		if (valueCubierta == "55" || valueCubierta == "57"){
-			decoracion = "./images/cupcakes/chispas_";
+			decoracion = "./images/cupcakes/55_";
 			//$("#pasoImgDecoracion").attr('src',"./images/cupcakes/chispas_" + imagen);
 		}
 		else if (valueCubierta == "56"){
@@ -750,16 +756,26 @@ function mostrarImgCubierta(imagen, id){
 		}
 		
 		if (!unPonque){
-				$("#pasoImgDecoracion1").attr('src', decoracion);
-				$("#pasoImgDecoracion2").attr('src', decoracion);
-				$("#pasoImgDecoracion3").attr('src', decoracion);
+				$("#pasoImgDecoracion1").attr('src', decoracion + imagen);
+				$("#pasoImgDecoracion2").attr('src', decoracion + imagen);
+				$("#pasoImgDecoracion3").attr('src', decoracion + imagen);
 				$("#pasoImgDecoracion1").show();
 				$("#pasoImgDecoracion2").show();
 				$("#pasoImgDecoracion3").show();
 				$("#pasoImgDecoracion").hide();
 				return;
-		}else{
-			$("#pasoImgDecoracion").attr('src', decoracion);
+		}else if (coloresSurtidos){
+			$("#pasoImgDecoracion1").attr('src', decoracion + imagen);
+			$("#pasoImgDecoracion2").attr('src', decoracion + imagen);
+			$("#pasoImgDecoracion3").attr('src', decoracion + imagen);
+			$("#pasoImgDecoracion1").show();
+			$("#pasoImgDecoracion2").show();
+			$("#pasoImgDecoracion3").show();
+			$("#pasoImgDecoracion").hide();
+			return;
+		}
+		else{
+			$("#pasoImgDecoracion").attr('src', decoracion + imagen);
 			$("#pasoImgDecoracion").show();
 			eliminarDecoraciones();
 
@@ -839,6 +855,12 @@ function mostrarImgCubierta(imagen, id){
 			}
 		}*/
 		
+	}
+	
+	function setColor(colorImg1, colorImg2, colorImg3){
+		color1 = colorImg1;
+		color2 = colorImg2;
+		color3 = colorImg3;
 	}
 	
 

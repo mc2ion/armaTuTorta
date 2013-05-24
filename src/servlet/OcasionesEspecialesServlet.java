@@ -95,7 +95,7 @@ public class OcasionesEspecialesServlet extends HttpServlet {
 				if (nameImg.length() > 10)
 					nameImg = nameImg.substring(0, 10);
 
-				image = nameImg.toLowerCase().replace(" ", "_") + "_" + clientAux.getLastName().trim() + extension;
+				image = nameImg.toLowerCase().replace(" ", "_") + "_" + clientAux.getFirstName().trim() + extension;
 				File file = new File(dir + image);
 				imageFile.renameTo(file);
 				

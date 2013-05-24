@@ -106,13 +106,13 @@
 									String imgDescription = "";
 									if (description != null && !description.equals(""))
 										imgDescription = "<img  id=\"imgFudge\" src=\"./images/question.png\" title=\"" +  description  + "\"/>";
-									
+									String imagen = step.getImage();
 									hashMap.put(i + "" +j, step.getName());
 									hashMapPrice.put(step.getName(), step.getPrice());
 									hashMapId.put(step.getName(), step.getId());
 								%>
 							
-							<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%><%= imgDescription %></span> <br>
+							<input  class="rdB<%= i %>" onClick="prueba('<%= imagen %>','<%= i %>', '<%= step.getId() %>', this);" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%><%= imgDescription %></span> <br>
 							<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 							<% }
 							%>
@@ -139,7 +139,7 @@
 									<% for(int j= 1; j<= actualOptions.size(); j++) {
 										int aux2 = j - 1;
 										StepOption step = actualOptions.get(aux2);
-										
+										String imagen = step.getImage();
 										hashMap.put(i + "" +j, step.getName());
 										hashMapPrice.put(step.getName(), step.getPrice());
 										hashMapId.put(step.getName(), step.getId());
@@ -220,7 +220,7 @@
 									hashMap.put(i + "" +j, step.getName());
 									hashMapPrice.put(step.getName(), step.getPrice());
 									hashMapId.put(step.getName(), step.getId());
-										
+									String imagen = step.getImage();	
 									String description = step.getDescription();
 									String imgDescription = "";
 									if (description != null && !description.equals(""))
@@ -234,14 +234,14 @@
 										if (!step.getName().contains("imagen")){
 									%>
 										<div class="options-steps-left">
-											<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%><%= imgDescription  %> </span> <br>
+											<input  class="rdB<%= i %>" onClick="prueba('<%= imagen %>','<%= i %>', '<%= step.getId() %>', this);" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%><%= imgDescription  %> </span> <br>
 											<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 										</div>	
 									<%
 										}else{
 									%>
 										<div class="options-steps-especial">
-											<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%><%= imgDescription  %> </span>
+											<input  class="rdB<%= i %>"  onClick="prueba('<%= imagen %>','<%= i %>', '<%= step.getId() %>', this);" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%><%= imgDescription  %> </span>
 											<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 											<input type="file" accept='image/*' name="txtImage" id="txtImage" maxlength="25" lang="es"  style="display:none;"/>  <br>
 										</div>
@@ -253,7 +253,7 @@
 								<%
 									}else{
 								%>
-									<input  class="rdB<%= i %>" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%> </span> <br>
+									<input  class="rdB<%= i %>" onClick="prueba('<%= imagen %>','<%= i %>', '<%= step.getId() %>', this);" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%> </span> <br>
 									<span style="display:none;" class="price-int<%= i %><%= j %>"> <%= step.getPrice() %></span>
 								
 								<% 

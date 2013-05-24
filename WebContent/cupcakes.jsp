@@ -114,8 +114,8 @@
 				<% if (client != null){ %>
 					<form id="target" action="/armaTuTorta/CupcakesServlet?typeId=2&pr=1" method="post" onSubmit="return setPrice()">
 					<input type="hidden" id="priceCake"  name="priceCake" value="0">
-			
 					<%
+							String [] color = new String[3];
 							for(int i= 1; i<= options.size(); i++) { 	
 								int aux = i -1;
 								ListOrder_Step listO = options.get(aux);
@@ -125,6 +125,7 @@
 								String type = "radio";
 								if (isMultChoice == 1)
 									type = "checkbox";
+								
 					%>
 					<% if ( i == 1) { %>
 					<div class="block">
@@ -237,6 +238,10 @@
 									if (description != null && !description.equals(""))
 										imgDescription = "<img  id=\"imgFudge\" src=\"./images/question.png\" title=\"" +  description  + "\"/>";
 									String imagen = step.getImage();
+									if (i == 5){
+										if (aux2 < 3)
+											color[aux2] = imagen;
+									}
 									hashMap.put(i + "" +j, step.getName());
 									hashMapPrice.put(step.getName(), step.getPrice());
 									hashMapId.put(step.getName(), step.getId());
@@ -274,8 +279,13 @@
 					</div>
 				<% 
 					}
-				 }
-				 session.setAttribute("hashMapCup", hashMap);
+				}
+				%>
+				<script>
+					setColor('<%= color[0] %>','<%= color[1] %>','<%= color[2] %>' );
+				</script>
+				<% 
+				session.setAttribute("hashMapCup", hashMap);
 				 session.setAttribute("hashMapPriceCup", hashMapPrice);
 				 session.setAttribute("hashMapIdCup", hashMapId);
 				%>

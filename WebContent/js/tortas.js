@@ -92,22 +92,7 @@ $(document).ready(function() {
 		var j = $(this).val();
 		getPrice(3,j);
 		name  = getName(3,j);
-		$("#pasoImgCubierta").show();
-		if (name.toLowerCase().indexOf("choco") >= 0)
-			$("#pasoImgSabor").attr('src',"../images/tortas/ponque_chocolate.png");
-		else if (name.toLowerCase().indexOf("vaini") >= 0)
-			$("#pasoImgSabor").attr('src',"../images/tortas/ponque_vainilla.png");
-		else if (name.toLowerCase().indexOf("bizcocho de almendras") >= 0)
-			$("#pasoImgSabor").attr('src',"../images/tortas/ponque_almendras.png");
-		else if (name.toLowerCase().indexOf("marmo") >= 0)
-			$("#pasoImgSabor").attr('src',"../images/tortas/ponque_marmoleada.png");
-		else if (name.toLowerCase().indexOf("zana") >= 0)
-			$("#pasoImgSabor").attr('src',"../images/tortas/ponque_zanahoria.png");
-		else if (name.toLowerCase().indexOf("naranja") >= 0)
-			$("#pasoImgSabor").attr('src',"../images/tortas/ponque_naranja.png");
-		else if (name.toLowerCase().indexOf("fudge") >= 0)
-			$("#pasoImgSabor").attr('src',"../images/tortas/ponque_chocolateFudge.png");
-		$("#pasoImgSabor").show();
+		
 	});
   
   /* Click en alguna opcion del Paso 4*/
@@ -118,18 +103,6 @@ $(document).ready(function() {
 	getPrice(4,j);
 	name  = getName(4,j);
 	capas = j;
-	if (name.toLowerCase().indexOf("1") >= 0)
-		$("#pasoImgCapas").attr('src',"../images/tortas/1_capa_general.png");
-	else if (name.toLowerCase().indexOf("2") >= 0)
-		$("#pasoImgCapas").attr('src',"../images/tortas/2_capa_general.png");
-	else if (name.toLowerCase().indexOf("3") >= 0)
-		$("#pasoImgCapas").attr('src',"../images/tortas/3_capa_general.png");
-	else{
-		$("#pasoImgCapas").hide();
-		mostrarPaso4_block5();
-		return;
-	}
-	$("#pasoImgCapas").show();
 	mostrarPaso4();
   });
   
@@ -151,15 +124,8 @@ $(document).ready(function() {
 	$(".rdB6").click(function(){
 		var j = $(this).val();
 		name = getName(6,j);
-		if (name.toLowerCase().indexOf("imagen") < 0 && name.toLowerCase().indexOf("foto") < 0){
-			$("#bt6Disable").hide();
-			$("#txtImage").hide();
-			$("#bt6").show();
-		}else{
-			$("#txtImage").show();
-		}
 		getPrice(6,j);
-		mostrarSaborCubierta(this);
+		//mostrarSaborCubierta(this);
 	});
   
 	function mostrarSaborCapa(element, j){
@@ -168,66 +134,38 @@ $(document).ready(function() {
 		var valueCapas = $("input:radio[name=4]:checked").val();
 		if (checked){
 			if (name.toLowerCase().indexOf("arequipe") >= 0){
-				$("#pasoImgCapas").attr('src',"../images/tortas/"+ valueCapas +"_capas_arequipe.png");
+				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_capas_arequipe.png");
 			}
 			else if (name.toLowerCase().indexOf("nutella") >= 0){
-				$("#pasoImgCapas").attr('src',"../images/tortas/"+ valueCapas +"_capas_nutella.png");
+				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_capas_nutella.png");
 			}
 			else if (name.toLowerCase().indexOf("chantilly con melocotones") >= 0){
-				$("#pasoImgCapas").attr('src',"../images/tortas/"+ valueCapas +"_capas_chanti_melocoton.png");
+				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_capas_chanti_melocoton.png");
 			}
 			else if (name.toLowerCase().indexOf("chantilly con fresas") >= 0){
-				$("#pasoImgCapas").attr('src',"../images/tortas/"+ valueCapas +"_capas_chanti_fresa.png");
+				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_capas_chanti_fresa.png");
 			}
 			else if (name.toLowerCase().indexOf("oreo") >= 0){
-				$("#pasoImgCapas").attr('src',"../images/tortas/"+ valueCapas +"_crema_oreo.png");
+				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_crema_oreo.png");
 			}
 			else if (name.toLowerCase().indexOf("almendras") >= 0){
-				$("#pasoImgCapas").attr('src',"../images/tortas/"+ valueCapas +"_almendras.png");
+				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_almendras.png");
 			}
 			else if (name.toLowerCase().indexOf("cerezas y chispas de chocolate ") >= 0){
-				$("#pasoImgCapas").attr('src',"../images/tortas/"+ valueCapas +"_crema_cereza_chocolate.png");
+				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_crema_cereza_chocolate.png");
 			}
 			else if (name.toLowerCase().indexOf("chispas de chocolate") >= 0){
-				$("#pasoImgCapas").attr('src',"../images/tortas/"+ valueCapas +"_chispas_chocolate.png");
+				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_chispas_chocolate.png");
 			}
 			else if (name.toLowerCase().indexOf("choco") >= 0){
-				$("#pasoImgCapas").attr('src',"../images/tortas/"+ valueCapas +"_capas_chocolate.png");
+				$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_capas_chocolate.png");
 			}
 			
 		}else{
-			$("#pasoImgCapas").attr('src',"../images/tortas/"+ valueCapas +"_capa_general.png");
+			$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_capa_general.png");
 		}
   }
   
-	function mostrarSaborCubierta(element){
-		var value = $(element).val();
-		if (value == 1){
-			$("#pasoImgCubierta").attr('src',"../images/tortas/chocolate.png");
-		}
-		else if (value == 2){
-			$("#pasoImgCubierta").attr('src',"../images/tortas/arequipe.png");
-		}
-		else if (value == 3){
-			$("#pasoImgCubierta").attr('src',"../images/tortas/chantilli_fresa_2.png");
-		}
-		else if (value == 4){
-			$("#pasoImgCubierta").attr('src',"../images/tortas/chantilli_melocoton.png");
-		}
-		else if (value == 5){
-			$("#pasoImgCubierta").attr('src',"../images/tortas/crema_chantilly.png");
-		}
-		else if (value == 6){
-			$("#pasoImgCubierta").attr('src',"../images/tortas/almendras.png");
-		}
-		else if (value == 7){
-			$("#pasoImgCubierta").attr('src',"../images/tortas/crema_oreo.png");
-		}
-		else if (value == 8){
-			$("#pasoImgCubierta").attr('src',"../images/tortas/chocolate.png");
-		}
-		
-  }
 	/* Funcion que permite seleccionar tanto sabores de capas, como numero de capas se haya seleccionado */
 	$("input:checkbox[name=5]").click(function() {
 		var value = $("input:radio[name=4]:checked").val();
@@ -238,35 +176,35 @@ $(document).ready(function() {
    
    /* Imagenes pasos */
 	function mostrarPaso1(){
-		$("#pasoImgBase").attr('src',"../images/paso_torta.png");
+		$("#pasoImgBase").attr('src',"./images/paso_torta.png");
 	}
 	
 	function mostrarPaso2(){
-		$("#pasoImgBase").attr('src',"../images/paso_torta_2.png");
+		$("#pasoImgBase").attr('src',"./images/paso_torta_2.png");
 	}
 	
 	function mostrarPaso3(){
-		$("#pasoImgBase").attr('src',"../images/paso_torta_3.png");
+		$("#pasoImgBase").attr('src',"./images/paso_torta_3.png");
 	}
 	
 	function mostrarPaso4(){
-		$("#pasoImgBase").attr('src',"../images/paso_torta_4.png");
+		$("#pasoImgBase").attr('src',"./images/paso_torta_4.png");
 	}
 	
 	function mostrarPaso4_block5(){
-		$("#pasoImgBase").attr('src',"../images/paso_torta_4_block5.png");
+		$("#pasoImgBase").attr('src',"./images/paso_torta_4_block5.png");
 	}
 	
 	function mostrarPaso5(){
-		$("#pasoImgBase").attr('src',"../images/paso_torta_5.png");
+		$("#pasoImgBase").attr('src',"./images/paso_torta_5.png");
 	}
 	
 	function mostrarPaso6(){
-		$("#pasoImgBase").attr('src',"../images/paso_torta_6.png");
+		$("#pasoImgBase").attr('src',"./images/paso_torta_6.png");
 	}
 	
 	function mostrarPaso6_block5(){
-		$("#pasoImgBase").attr('src',"../images/paso_torta_6_block5.png");
+		$("#pasoImgBase").attr('src',"./images/paso_torta_6_block5.png");
 	}
 	/* -- Fin funciones de images pasos -- */
   
@@ -282,11 +220,11 @@ $(document).ready(function() {
 	
 	function eliminarRelleno(){
 		var valueCapas = $("input:radio[name=4]:checked").val();
-		$("#pasoImgCapas").attr('src',"../images/tortas/"+ valueCapas +"_capa_general.png");
+		$("#pasoImgCapas").attr('src',"./images/tortas/"+ valueCapas +"_capa_general.png");
 	}
 	
 	function eliminarCubierta(){
-		$("#pasoImgCubierta").attr('src',"../images/tortas/capa_general.png");
+		$("#pasoImgCubierta").attr('src',"./images/tortas/capa_general.png");
 	}
    
    /* Funcion para reiniciar el formulario */
@@ -475,3 +413,54 @@ $(document).ready(function() {
 	}
 	
 });
+
+
+
+
+function prueba(texto, i, id, element){
+		alert(i +" " +id);
+		if (i == 3)
+			mostrarPonque(texto);
+		else if (i ==4)
+			mostrarCapas(texto, id);
+		else if (i == 5)
+			alert("buen");
+		else if (i == 6)
+			mostrarSaborCubierta(texto, id);
+		
+}
+
+function mostrarPonque(imagen){
+	$("#pasoImgCubierta").show();
+	$("#pasoImgSabor").attr('src',"./images/tortas/" + imagen);
+	$("#pasoImgSabor").show();
+}
+
+function mostrarCapas(imagen, id){
+	if (id != 25)
+		$("#pasoImgCapas").attr('src',"./images/tortas/" + imagen);
+	else{
+		$("#pasoImgCapas").hide();
+		mostrarPaso4_block5();
+		return;
+	}
+	$("#pasoImgCapas").show();
+}
+
+
+function mostrarSaborCubierta(imagen, id){
+	
+	if (id != 42){
+			$("#bt6Disable").hide();
+			$("#txtImage").hide();
+			$("#bt6").show();
+			$("#pasoImgCubierta").attr('src',"./images/tortas/" + imagen);
+			return;
+	}else if (id == 42){ 
+		$("#txtImage").show();
+	}
+	
+	
+	
+	
+  }
