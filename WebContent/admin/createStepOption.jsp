@@ -42,8 +42,12 @@
 						<input type="number" min="1" name="txtPosition" id="txtPosition" maxlength="3" size="3" value="<%= request.getAttribute("position") %>" /> <br><br>
 						<label for="name">Nombre:</label>
 						<textarea name="txtName" id="txtName" rows="2" cols="50"></textarea> <br><br>
+						<label for="name">Descripción:</label>
+						<textarea name="txtDescription" id="txtDescription" rows="2" cols="50"></textarea> <br><br>
 						<label for="name">Precio:</label>
 						<input type="text" name="txtPrice" id="txtPrice" maxlength="5" size="5" /> <br><br>
+						<label for="image">Imagen Asociada:</label>
+						<input type="file" name="txtImage" id="txtImage" maxlength="50" lang="es" /> <br><br>
 						<input type="checkbox" name="txtIsUnavailable" class="check" id="txtIsUnavailable" maxlength="50" size="40" value="isUnavailable" />&nbsp; 
 							&nbsp;&nbsp; Está Agotado<br><br>
 						
