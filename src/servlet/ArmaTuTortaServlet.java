@@ -100,9 +100,9 @@ public class ArmaTuTortaServlet extends HttpServlet {
 				rd.forward(request, response);
 			}else{
 				Properties propertiesFile = new Properties();
-				//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
+				propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 				
-				propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+				//propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
 				OrderCake orderCake = new OrderCake();
 				String error = "";
 				if  (type.equals("1")){
@@ -137,17 +137,17 @@ public class ArmaTuTortaServlet extends HttpServlet {
 		String saborInt = multipart.getParameter("3");
 		String capasInt = multipart.getParameter("4");
 		String capa1 = "", capa2 = "" , capa3 = "";
-		if (Integer.valueOf(capasInt) >= 1)
+		if (Integer.valueOf(capasInt) >= 1 && Integer.valueOf(capasInt) != 4)
 			capa1 = multipart.getParameter("capa1");
-		if (Integer.valueOf(capasInt) >= 2)
+		if (Integer.valueOf(capasInt) >= 2 && Integer.valueOf(capasInt) != 4)
 			capa2  = multipart.getParameter("capa2");
-		if (Integer.valueOf(capasInt) == 3)
+		if (Integer.valueOf(capasInt) == 3 && Integer.valueOf(capasInt) != 4)
 			capa3 = multipart.getParameter("capa3");
 		
 		
 		String cubiertaInt = multipart.getParameter("6");
 		String forma, tamano, sabor, capas,  cubierta;
-		final String[] relleno = new String[Integer.valueOf(capasInt)];
+		
 		String precio = multipart.getParameter("priceCake");
 		
 		@SuppressWarnings("unchecked")
@@ -157,6 +157,12 @@ public class ArmaTuTortaServlet extends HttpServlet {
 		sabor = hashMap.get("3"+saborInt);
 		capas = hashMap.get("4"+capasInt);
 		cubierta = hashMap.get("6"+cubiertaInt);
+		String[] rellenoAux = null;
+		if (!capasInt.equals("4"))
+			rellenoAux = new String[Integer.valueOf(capasInt)];
+		
+		final String[] relleno = rellenoAux;
+		
 		if (!capa1.equals(""))
 			relleno[0] = hashMap.get("5"+ capa1);
 		if (!capa2.equals(""))
@@ -252,7 +258,9 @@ public class ArmaTuTortaServlet extends HttpServlet {
 		item.setPrice(hashMapPrice.get(cubierta));
 		item.setStepOptionId(hashMapId.get(cubierta));
 		if (hashMapId.get(cubierta) == 42){
-			int index = nombreImagen.lastIndexOf("\\") + 1;
+			// Para que funcione local descomentar esta linea y comentar la otra
+			//int index = nombreImagen.lastIndexOf("\\") + 1;
+			int index = nombreImagen.lastIndexOf("/") + 1;
 			String nombreImagenAux = nombreImagen.substring(index);
 			item.setNombreImg(nombreImagenAux);
 		}
@@ -260,11 +268,13 @@ public class ArmaTuTortaServlet extends HttpServlet {
 		
 		
 		/* Relleno */
-		for (int i = 0; i < relleno.length; i++){
-			item = new OrderItem();
-			item.setPrice(hashMapPrice.get(relleno[i]));
-			item.setStepOptionId(hashMapId.get(relleno[i]));
-			orderItems.add(item);
+		if (relleno != null){
+			for (int i = 0; i < relleno.length; i++){
+				item = new OrderItem();
+				item.setPrice(hashMapPrice.get(relleno[i]));
+				item.setStepOptionId(hashMapId.get(relleno[i]));
+				orderItems.add(item);
+			}
 		}
 		
 		

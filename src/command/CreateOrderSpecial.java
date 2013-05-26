@@ -43,34 +43,37 @@ public class CreateOrderSpecial implements DatabaseCommand {
 			
 			if (rs.next()){
 				lastIdInserted = rs.getLong("last_insert_id()"); 
-
-				sta = conn.prepareStatement("INSERT INTO `order` (`CLIENT_ID`, `ORDER_TYPE_ID`, `ORDER_DATE`, `TOTAL`, `DELIVERY_DATE`, `IS_PENDING`, `ESTIMATION_ID`) " +
+				
+				PreparedStatement staInt = conn.prepareStatement("INSERT INTO `order` (`CLIENT_ID`, `ORDER_TYPE_ID`, `ORDER_DATE`, `TOTAL`, `DELIVERY_DATE`, `IS_PENDING`, `ESTIMATION_ID`) " +
 						"VALUES (?, ?, DATE(CURDATE()), ?,?, ?, ?)");
-				sta.setLong(1, order.getClientId());
-				sta.setLong(2, order.getOrderTypeId());
-				sta.setDouble(3, order.getTotal());
+				staInt.setLong(1, order.getClientId());
+				staInt.setLong(2, order.getOrderTypeId());
+				staInt.setDouble(3, order.getTotal());
 				
 				java.sql.Date dte = null;
 				try{
-					SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy"); 
-					java.util.Date dt = formatter.parse(order.getDeliveryDate());
-					dte = new java.sql.Date(dt.getTime());
+					if (!order.getDeliveryDate().equals("")){
+						SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy"); 
+						java.util.Date dt = formatter.parse(order.getDeliveryDate());
+						dte = new java.sql.Date(dt.getTime());
+						staInt.setDate(4, dte);
+					}else
+						staInt.setDate(4, null);
 				}catch(Exception e){
 					e.printStackTrace();	
 				}	
 				
-				sta.setDate(4, dte);
-				sta.setInt(5, order.getIsPending());
-				sta.setLong(6, lastIdInserted);
+				staInt.setInt(5, order.getIsPending());
+				staInt.setLong(6, lastIdInserted);
+				staInt.executeUpdate();
 				
-				sta.executeUpdate();
 			}
 			
 			getLastInsertId.close();
 		}
 		
 		sta.close();
-		
+	
 		return new Long(lastIdInserted);
 	}
 

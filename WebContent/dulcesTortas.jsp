@@ -75,7 +75,7 @@
 				<div class="subtitle">Es muy f&aacute;cil, escoge  las tortas que desees, para cuando las quieres, escoge la cantidad que desees de cada una y haz click en "Ordenar"</div>
 				<div class="date"> 
 					¿Para cu&aacute;ndo desea su pedido?: <input type="text" readonly="readonly" autocomplete="off" id="datepicker" name="txtFecha" size="8" />
-					<span class="error" id="errorDate">Disculpe, debe introducir una fecha de entrega válida</span>
+					<br><span class="error" id="errorDate">Disculpe, debe introducir una fecha de entrega válida</span>
 				</div>
 				<div class="cakes">
 					<table style="border:none;">

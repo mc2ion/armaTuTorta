@@ -10,6 +10,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/style.css" />
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.js"></script>
+	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
 	<script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -61,19 +62,24 @@
 						<% if (mensajeExitoso != null){ %>
 							<span style="color:red;"> <%= mensajeExitoso %></span>
 						<% } %>
-						<form name="contactForm" action="/armaTuTorta/ContactServlet" method="post" >
+						<form name="contactForm" action="/armaTuTorta/ContactServlet" method="post" onsubmit="return contact();"  >
 						<fieldset>
 								<label for="name">Nombre (*):</label>
-								<input type="text" name="txtName" id="txtName" size="35" maxlength="100" /> <br>
+								<input type="text" name="txtName" id="txtName" size="35" maxlength="100" />
+								<span class="error" id="errorName" style="float:right; margin-right:50px;">Disculpe, debe ingresar su nombre.</span>
+								 <br>
 								<label for="name">Email (*):</label>
-								<input type="text" name="txtEmail" id="txtEmail" size="35"  maxlength="50" /> <br>
+								<input type="text" name="txtEmail" id="txtEmail" size="35"  maxlength="50" />
+								<span class="error" id="errorEmail" style="float:right; margin-right:50px;">Disculpe, debe ingresar un correo válido.</span> <br>
 								<label for="name">Tel&eacute;fono:</label>
 								<input type="text" name="txtPhone" id="txtPhone" size="35" maxlength="50" /> <br>
 								<label for="name">Mensaje (*):</label>
-								<textarea name="txtMsg" rows="4" cols="28" style="resize: none;"></textarea>
+								<textarea name="txtMsg"  id="txtMsg" rows="4" cols="28" style="resize: none;"></textarea>
+								
 								<div class="txtCheck">
 									<input type="checkbox" name="txtCheck"  value="1"> Enviar copia de este mensaje a mi correo <br>
 								</div>
+								<span class="error" id="errorMensaje" style="float:right; margin-right:50px;">Disculpe, debe algún comentario o mensaje.</span>
 							</fieldset>
 							<div class="cont-button">
 								<input type="submit" name="sbmtButton" class="button" value="Enviar"  />

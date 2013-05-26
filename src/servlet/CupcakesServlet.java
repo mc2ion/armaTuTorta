@@ -95,8 +95,8 @@ public class CupcakesServlet extends HttpServlet {
 				rd.forward(request, response);
 			}else{
 				Properties propertiesFile = new Properties();
-				propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
-				//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
+				//propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+				propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 				OrderCupcake orderCupcake = new OrderCupcake();
 				String error = "";
 				if  (type.equals("1")){

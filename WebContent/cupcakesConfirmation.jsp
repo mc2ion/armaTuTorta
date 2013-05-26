@@ -116,7 +116,7 @@
 					         	}
 						}
 			        	 %>
-						<strong>Producto pedido:</strong> Cupcakes <br>
+						<strong>Producto pedido:</strong> Cupcakes. <br>
 			    		<strong>Tama&ntilde;o:</strong> <%= pedido.getTamano() %>.<br>
 			    		<% if (pedido.getCantidad().contains("docena en caja")){ %>
 			     			<strong>Cantidad:</strong>  1 Docena en caja para regalar.<br>
@@ -124,17 +124,17 @@
 			     		<% }else{%>
 			     			<strong>Cantidad:</strong>  <%= pedido.getCantidadDocenas() %> Docenas.<br>
 			     		<% }%>
-			    		<strong>Sabor de los cupcakes:</strong> <%= pedido.getSabor() %>.<br>
-			     		<strong>Cubiertas:</strong>  <%= pedido.getCubiertas() %>.<br>
+			    		<strong>Sabor(es) de los cupcakes:</strong> <%= pedido.getSabor() %>.<br>
+			     		<strong>Cubierta(s):</strong>  <%= pedido.getCubiertas() %>.<br>
 			     		<% if (!colores.equals("")) { %>
-			     		<strong>Colores:</strong>  <%= colores %><br>
+			     		<strong>Color(es):</strong>  <%= colores %><br>
 			     		<% } %>
 			     		<strong>Decoraci&oacute;n:</strong><%= pedido.getDecoracion() %>.<br>
 					</div>
 					<div class="total"> Total: <%= pedido.getPrecio() %>.<br></div><br>
 			   </div>
 			   <div class="dt-buttonInline">
-					<input type="button" name="sbmtButton" class="buttonInline" value="Cancelar"  />
+					<input type="button" name="sbmtButton" class="buttonInline" value="Cancelar" onclick="location.href='http://www.armatutorta.com/servlet/servlet.CupcakesServlet?typeId=2';"  />
 					<input type="submit" name="sbmtButton" class="buttonInline" value="Ordenar"  />
 				</div> 
 			</form>

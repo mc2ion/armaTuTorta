@@ -215,13 +215,15 @@ public class SendEmail  extends Thread  {
 		         message.setSubject("Tienes un nuevo comentario o mensaje", "ISO-8859-1");
 
 		         // Send the actual HTML message, as big as you like
-		         String messa = "<div style='color: #8904B1;'>Hola, has recibido un nuevo comentario a través de " +
+		         String messa = "<div style='color: #222222;'>Hola, has recibido un nuevo comentario a través de " +
 		         		"la p&aacute;gina web de Arma Tu Torta.<br><br>" +
 		        		 "A continuación encontrarás los datos de la persona que escribi&oacute; y su mensaje: <br><br>"
 		        		 + "<strong>Nombre: </strong>" + name + "<br>"
-		        		 + "<strong>Email:</strong> " + email + "<br>"
-		        		 + "<strong>Tel&efono:</strong> " + phone + "<br>"
-		        		 + "<strong>Mensaje:</strong> " + msg + "<br>";
+		        		 + "<strong>Email:</strong> " + email + "<br>";
+		         		if (phone != "")
+		        		 messa += "<strong>Tel&eacute;fono:</strong> " + phone + "<br>";
+		         		
+		         		messa += "<strong>Mensaje:</strong> " + msg + "<br>";
 		         message.setContent(messa,"text/html" );
 
 		         // Send message
@@ -267,12 +269,12 @@ public class SendEmail  extends Thread  {
 		         message.setSubject("Copia de mensaje envíado a Arma Tu Torta", "ISO-8859-1");
 
 		         // Send the actual HTML message, as big as you like
-		         String messa = "<div style='color: #8904B1;'>Hola, " + name + ", <br><br>"
+		         String messa = "<div style='color: #222222;'>Hola, " + name + ", <br><br>"
 		        		 + "A continuación encontrarás una copia del mensaje que nos enviaste " +
 		        		 " Arma Tu Torta <br><br>"
 		        		 + "<strong> Nombre:</strong>  " + name + "<br>"
 		        		 + "<strong> Email:</strong> " + email + "<br>"
-		        		 + "<strong> Tel&efono:</strong> " + phone + "<br>"
+		        		 + "<strong> Tel&eacute;fono:</strong> " + phone + "<br>"
 		        		 + "<strong> Mensaje:</strong> " + msg + "<br><br>" +
         		 		"Gracias por escribirnos, te responderemos en la brevedad posible.<br><br>" +
         		 		"Atentamente, Equipo de Apoyo de Arma Tu Torta.";
@@ -325,11 +327,13 @@ public class SendEmail  extends Thread  {
 		         message.setSubject("Tienes un nuevo pedido de tortas. Orden N°" + numPedido, "ISO-8859-1");
 	
 		         String rell = "";
-		         for (int i = 0; i< relleno.length; i++){
-		        	 if (i == relleno.length - 1)
-		        		 rell += relleno[i] ;
-		        	 else
-		        		 rell += relleno[i] + "," ;
+		         if (relleno != null){
+			         for (int i = 0; i< relleno.length; i++){
+			        	 if (i == relleno.length - 1)
+			        		 rell += relleno[i] ;
+			        	 else
+			        		 rell += relleno[i] + "," ;
+			         }
 		         }
 		         
 		        
@@ -339,10 +343,12 @@ public class SendEmail  extends Thread  {
 		    		" Producto pedido: Torta<br>" +
 		    		" Forma: " + datos[0] + "<br>" +
 		     		" Tama&ntilde;o: " + datos[1]  + "<br>" +
-		     		" Sabor del ponqu&eacute: " + datos[2]  + "<br>" +
-		     		" Cantidad de capas: " + datos[3]  + "<br>" +
-		     		" Sabores de capas: " + rell + "<br>" +
-		     		" Sabores de cubierta: " + datos[4] + ".<br><br>" +
+		     		" Sabor del ponqu&eacute;: " + datos[2]  + "<br>" +
+		     		" Cantidad de capas: " + datos[3]  + "<br>" ;
+		         	if (relleno != null)
+		         		messa += " Sabores de capas: " + rell + "<br>" ;
+		         	
+		         	messa += " Sabores de cubierta: " + datos[4] + ".<br><br>" +
 		     		" Precio: Bs." + datos[5] + ".<br><br>" +
 		     		" Fecha de Entrega: " + datos[7] + ".<br><br>" +
 		     		

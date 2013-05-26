@@ -4,6 +4,7 @@ margin: 0;
 html, body {
 height: 100%;
 }
+
 .wrapper {
 min-height: 100%;
 height: auto !important;
@@ -37,7 +38,7 @@ p a {
 /**************************** header ************************/
 #header {
 	background: #f5f5f5 url(../images/bg-body-corto1.png) repeat-x center top;
-	height: 259px;
+	height: 245px;
 }
 
 .pestana{
@@ -148,7 +149,7 @@ p a {
 }
 
 #header div div {
-	height: 120px;
+	height: 110px;
 	overflow: hidden;
 	position: relative;
 }
@@ -268,7 +269,7 @@ p a {
 	margin: -90px auto;
 	overflow: hidden;
 	padding: 0;
-	min-height: 440px;
+	height: 460px;
 	font-size: 20px;
 }
 
@@ -1691,7 +1692,7 @@ div.social a {
 }
 
 .modal_close {
-    background: url("/armaTuTorta/images/close_icon.png") repeat scroll 0 0 transparent;
+    background: url("../images/close_icon.png") repeat scroll 0 0 transparent;
     display: block;
     height: 24px;
     position: absolute;
@@ -2037,7 +2038,11 @@ h2{
 }
 
 .bannerTorta img{
-	margin-top: 30px;
+	margin-top: 50px;
+}
+
+.banner img{
+	margin-top: 10px;
 }
 
 .date{
@@ -2065,4 +2070,8 @@ h2{
 	margin-bottom: 8px;
 	margin-left: 150px;
 	margin-bottom: 8px;
+}
+
+.formReg{
+	margin-top: -35px;
 }

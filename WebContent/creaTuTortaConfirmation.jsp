@@ -83,10 +83,12 @@
 				<input type="hidden" name="sabor"  id="sabor" value="<%= pedido.getSabor() %>">
 				<input type="hidden" name="capas" id="capas" value="<%= pedido.getCapas() %>">
 				<%
-					for (int j= 0; j < pedido.getRelleno().length; j++){
+					if (pedido.getRelleno() != null){
+						for (int j= 0; j < pedido.getRelleno().length; j++){
 				%>
 					<input type="hidden" name="relleno" value="<%= pedido.getRelleno()[j] %>">
 				<%
+						}
 					}
 				%>	
 				<input type="hidden" name="cubierta" id="cubierta" value="<%= pedido.getCubiertas() %>">
@@ -102,25 +104,32 @@
 						<%
 							String rell = "";
 							String[] relleno = pedido.getRelleno();
-					         for (int i = 0; i< relleno.length; i++){
-					        	 if (i == relleno.length - 1)
-					        		 rell += "y " + relleno[i] ;
-					        	 else
-					        		 rell += relleno[i] + ", " ;
-					         }
+							if (relleno != null){
+							     for (int i = 0; i< relleno.length; i++){
+						        	 if (relleno.length != 1){
+							        	 if (i == relleno.length - 1)
+							        		 rell += "y " + relleno[i] ;
+							        	 else
+							        		 rell += relleno[i] + ", " ;
+						        	 }else
+						        		 rell += relleno[i] ;
+						         }
+							}
 			        	 %>
-						<strong>Producto pedido:</strong> Torta <br>
-			    		<strong>Forma:</strong>  <%= pedido.getForma() %><br>
-			    		<strong>Tama&ntilde;o:</strong> <%= pedido.getTamano() %><br>
-			     		<strong>Sabor del ponqu&eacute;:</strong> <%= pedido.getSabor() %><br>
-			     		<strong>Cantidad de capas:</strong>  <%= pedido.getCapas() %><br>
-			     		<strong>Sabores de capas:</strong>  <%= rell %><br>
-			     		<strong>Sabores de cubierta:</strong>   <%= pedido.getCubiertas() %><br>
+						<strong>Producto pedido:</strong> Torta. <br>
+			    		<strong>Forma:</strong>  <%= pedido.getForma() %>.<br>
+			    		<strong>Tama&ntilde;o:</strong> <%= pedido.getTamano() %>.<br>
+			     		<strong>Sabor del ponqu&eacute;:</strong> <%= pedido.getSabor() %>.<br>
+			     		<strong>Cantidad de capas:</strong>  <%= pedido.getCapas() %>.<br>
+			     		<% if (pedido.getRelleno() != null){ %>
+			     			<strong>Sabor(es) de capa(s):</strong>  <%= rell %>.<br>
+			     		<% } %>
+			     		<strong>Sabor de la cubierta:</strong>   <%= pedido.getCubiertas() %>.<br>
 					</div>
 					<div class="total"> Total: <%= pedido.getPrecio() %><br></div><br>
      		   </div>
 			   <div class="dt-buttonInline">
-					<input type="button" name="sbmtButton" class="buttonInline" value="Cancelar"  />
+					<input type="button" name="sbmtButton" class="buttonInline" value="Cancelar" onclick="location.href='http://www.armatutorta.com/servlet/servlet.ArmaTuTortaServlet?typeId=1';"  />
 					<input type="submit" name="sbmtButton" class="buttonInline" value="Ordenar"  />
 				</div> 
 			</form>

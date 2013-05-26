@@ -418,13 +418,10 @@ $(document).ready(function() {
 
 
 function prueba(texto, i, id, element){
-		alert(i +" " +id);
 		if (i == 3)
 			mostrarPonque(texto);
 		else if (i ==4)
 			mostrarCapas(texto, id);
-		else if (i == 5)
-			alert("buen");
 		else if (i == 6)
 			mostrarSaborCubierta(texto, id);
 		
@@ -460,7 +457,5 @@ function mostrarSaborCubierta(imagen, id){
 		$("#txtImage").show();
 	}
 	
-	
-	
-	
   }
+ 

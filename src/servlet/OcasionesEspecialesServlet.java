@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -61,13 +60,15 @@ public class OcasionesEspecialesServlet extends HttpServlet {
 			rd = getServletContext().getRequestDispatcher("/HomePageServlet");
 			rd.forward(request, response);
 		}else{
+			
 			final Properties propertiesFile = new Properties();
 			//propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
-			propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
-			String dirPath = propertiesFile.getProperty("pedidosOcasionesEspecialesDirectory");
-		
+			//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
+			//String dirPath = propertiesFile.getProperty("pedidosOcasionesEspecialesDirectory");
+			String dirPath = "C:\\Program Files (x86)\\Apache Software Foundation\\Tomcat 7.0\\webapps\\armaTuTorta\\files\\pedidosOcasionesEspeciales\\";
 			MultipartRequest multipart = new MultipartRequest(request, dirPath,
 						5*1024*1024, new DefaultFileRenamePolicy());
+			
 			try{			
 				String name = multipart.getParameter("txtName");
 				String torta = multipart.getParameter("eventoT");
@@ -77,36 +78,46 @@ public class OcasionesEspecialesServlet extends HttpServlet {
 				String idea = multipart.getParameter("idea");
 				String fecha = multipart.getParameter("txtFecha");
 				
+				/* Establezco la estimacion solicitada por el cliente */
+				Estimation estimation = new Estimation();
+				estimation.setClientId(clientAux.getId());
+				estimation.setSpecialOccasion(name);
+				
+				if (invitados == null || invitados.equals(""))
+					invitados = "0";
+				estimation.setGuestsNumber(Integer.valueOf(invitados));
+				estimation.setDescription(idea);
+				
+				
 				File imageFile = multipart.getFile("txtImage");
 				String image = "";
 				boolean attach = false;
 				if (imageFile != null){
 					image = imageFile.getName();
-					attach = true;		
+					attach = true;	
+					
+					/* Creación del archivo para enviarlo por correo*/	
+					String dir = dirPath;
+					int pointIndex = image.indexOf(".");
+					String extension = image.substring(pointIndex);
+					String nameImg = image.substring(0,pointIndex);
+					if (nameImg.length() > 10)
+						nameImg = nameImg.substring(0, 10);
+
+					image = nameImg.toLowerCase().replace(" ", "_") + "_" + clientAux.getFirstName().trim() + extension;
+					File file = new File(dir + image);
+					imageFile.renameTo(file);
+					
+					// Para que funcione local descomentar esta linea y comentar la otra
+					//int index = nombreImagen.lastIndexOf("\\") + 1;
+					
+					int index = image.lastIndexOf("/") + 1;
+					String nombreImagenAux = image.substring(index);
+					estimation.setImage(nombreImagenAux);
 				
 				}
 				
-				/* Creación del archivo para enviarlo por correo*/	
-				String dir = dirPath;
-				int pointIndex = image.indexOf(".");
-				String extension = image.substring(pointIndex);
-				String nameImg = image.substring(0,pointIndex);
-				System.out.println("tamano" + nameImg.length());
-				if (nameImg.length() > 10)
-					nameImg = nameImg.substring(0, 10);
-
-				image = nameImg.toLowerCase().replace(" ", "_") + "_" + clientAux.getFirstName().trim() + extension;
-				File file = new File(dir + image);
-				imageFile.renameTo(file);
 				
-				
-				/* Establezco la estimacion solicitada por el cliente */
-				Estimation estimation = new Estimation();
-				estimation.setClientId(clientAux.getId());
-				estimation.setSpecialOccasion(name);
-				estimation.setGuestsNumber(Integer.valueOf(invitados));
-				estimation.setDescription(idea);
-				estimation.setImage(image);
 				
 				String products = "";
 				if (torta != null)
@@ -137,16 +148,17 @@ public class OcasionesEspecialesServlet extends HttpServlet {
 				
 				/* Guardo en bd la ocasion */
 				final Long rowsUpdated  = (Long) CommandExecutor.getInstance().executeDatabaseCommand(new command.CreateOrderSpecial(order, estimation));	
-				
+				System.out.println("aqui45");
 				final boolean attachment = attach;
 	
 				/* Obtengo todos datos del cliente para ser enviados por correo*/
 				final Client client = (Client) CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectClient(Long.valueOf(clientAux.getId())));
 				
-				final String[] datos = {name, invitados,  idea, fecha, dir + image};
+				final String[] datos = {name, invitados,  idea, fecha, dirPath + image};
 				
 				new Thread(new Runnable() {
 				    public void run() {
+				    	
 			    		SendEmail.sendEmailOrderOcEsp(propertiesFile, String.valueOf(rowsUpdated), attachment, "ventas", datos, productos, client);
 						
 				    }
@@ -158,7 +170,6 @@ public class OcasionesEspecialesServlet extends HttpServlet {
 			
 			}catch (Exception e) {
 				e.getStackTrace();
-				e.getCause();
 				request.setAttribute("error", "error");
 				rd = getServletContext().getRequestDispatcher("/ocaEspConfirmation.jsp");			
 				rd.forward(request, response);

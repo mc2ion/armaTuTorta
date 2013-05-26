@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Util.SendEmail;
 
@@ -38,7 +39,12 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd;
-		rd = getServletContext().getRequestDispatcher("/registro.jsp");			
+		HttpSession infoPage = request.getSession();
+		final Client client = (Client) infoPage.getAttribute("client");
+		if (client == null)
+			rd = getServletContext().getRequestDispatcher("/registro.jsp");	
+		else
+			rd = getServletContext().getRequestDispatcher("/index.jsp");	
 		rd.forward(request, response);
 	}
 
@@ -81,7 +87,7 @@ public class RegisterServlet extends HttpServlet {
 			client.setCompany(Integer.valueOf(typePers));
 			String checkbox = request.getParameter("checkDir");
 			
-			if (checkbox != ""){
+			if (checkbox != null){
 				client.setShippingAddress("");
 				client.setShippingAddress(1);
 				
@@ -99,10 +105,10 @@ public class RegisterServlet extends HttpServlet {
 				new Thread(new Runnable() {
 				    public void run() {
 				    	Properties propertiesFile = new Properties();
-						String context = getServletContext().getInitParameter("properties");
+						//String context = getServletContext().getInitParameter("properties");
 						try {
-							propertiesFile.load(new FileInputStream(context));
-							//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
+							//propertiesFile.load(new FileInputStream(context));
+							propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 						} catch (FileNotFoundException e) {
 							e.printStackTrace();
 						} catch (IOException e) {
