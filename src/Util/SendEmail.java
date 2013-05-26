@@ -440,8 +440,7 @@ public class SendEmail  extends Thread  {
 		    		" Productos pedidos: " + productos + "<br>" +
 		    		" Ocasi&oacute;n: " + datos[0] + "<br>" +
 		     		" N&uacute;mero aproximado de invitados: " + datos[1]  + "<br>" +
-		     		" Informaci&oacute;n sobre la idea del usuario: " + datos[2]  + "<br>" +
-		     		" Fecha de Entrega: " + datos[3] + ".<br><br>" +
+		     		" Informaci&oacute;n sobre la idea del usuario: " + datos[2]  + "<br><br>"+
 		     		
 		     		" <strong>Datos del comprador:</strong> <br><br> " +
 		     		" Nombre: " + client.getFirstName() + " " + client.getLastName() +  "<br>" +

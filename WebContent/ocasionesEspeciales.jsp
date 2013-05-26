@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/style.css" />
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.js"></script>
+	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
 	<script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -65,7 +66,7 @@
 			</div>
 			<% if (client != null){ %>
 			<div class="coments-ocEsp">
-				<form name="ocasEspForm" action="/armaTuTorta/OcasionesEspecialesServlet" method="post" enctype="multipart/form-data" >
+				<form name="ocasEspForm" action="/armaTuTorta/OcasionesEspecialesServlet" method="post" enctype="multipart/form-data" onsubmit="return ocaEsp();" >
 					<fieldset>
 						<label for="name">¿Cu&aacute;l es tu ocasi&oacute;n especial?:</label>
 						<input type="text" name="txtName" id="txtName" size="25" maxlength="50" />
@@ -78,17 +79,9 @@
 						<span class="error" id="errorProducto">Por favor, seleccione al menos uno producto.</span><br><br>
 						<label for="name">¿Tienes un dise&ntilde;o en mente? C&aacute;rgalo aqu&iacute;:</label>
 						<input type="file" name="txtImage" id="txtImage" maxlength="50" lang="es" /> <br><br><br>
-						<div style="float:left; width: 340px;">
-							<label for="name"  style="width:59%">N&uacute;mero apr&oacute;ximado de invitados:</label>
-							<input type="text" name="txtInv" id="txtInv" size="10" maxlength="50" /> <br>
-							<span class="error" id="errorInv">Escoja un valor.</span><br>
-						</div>
-						<div style="float:left; width: 340px;">
-							<label for="name" style="width:28%">Fecho del evento:</label>
-							<input type="text" readonly="readonly" id="datepicker" name="txtFecha" /> <br>
-							<span class="error" id="errorFecha">Por favor, introduzca la fecha tentativa de su evento.</span><br>
-						</div>
-						<br><br>
+						<label for="name"  >N&uacute;mero apr&oacute;ximado de invitados:</label>
+						<input type="text" name="txtInv" id="txtInv" size="15" maxlength="50" /> <br>
+						<span class="error" id="errorInv">Por favor, ingrese un número estimado de invitados</span><br>
 						<label for="name">Cu&eacute;ntanos m&aacute;s acerca de tu idea:</label>
 						<textarea name="idea" style="resize: none;"></textarea> <br>
 					</fieldset>

@@ -21,7 +21,6 @@ import command.CommandExecutor;
 
 import domain.Client;
 import domain.Estimation;
-import domain.Order;
 
 /**
  * Servlet implementation class ListStepOptionsServlet
@@ -58,13 +57,13 @@ public class OcasionesEspecialesServlet extends HttpServlet {
 		RequestDispatcher rd;	
 			
 		if (clientAux == null){
-			rd = getServletContext().getRequestDispatcher("/HomePageServlet");
+			rd = getServletContext().getRequestDispatcher("/servlet/servlet.HomePageServlet");
 			rd.forward(request, response);
 		}else{
 			
 			final Properties propertiesFile = new Properties();
-			propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
-			//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
+			//propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+			propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 			String dirPath = propertiesFile.getProperty("pedidosOcasionesEspecialesDirectory");
 			//String dirPath = "C:\\Program Files (x86)\\Apache Software Foundation\\Tomcat 7.0\\webapps\\armaTuTorta\\files\\pedidosOcasionesEspeciales\\";
 			MultipartRequest multipart = new MultipartRequest(request, dirPath,
@@ -139,16 +138,8 @@ public class OcasionesEspecialesServlet extends HttpServlet {
 				estimation.setProducts(products);
 				
 				
-				/* Creo la orden asociada */
-				Order order = new Order();
-				order.setClientId(clientAux.getId());
-				order.setDeliveryDate(fecha);
-				order.setOrderTypeId(4);
-				order.setTotal(0);
-				order.setIsPending(1);
-				
 				/* Guardo en bd la ocasion */
-				final Long rowsUpdated  = (Long) CommandExecutor.getInstance().executeDatabaseCommand(new command.CreateOrderSpecial(order, estimation));	
+				final Long rowsUpdated  = (Long) CommandExecutor.getInstance().executeDatabaseCommand(new command.CreateOrderSpecial(estimation));	
 				System.out.println("aqui45");
 				final boolean attachment = attach;
 	

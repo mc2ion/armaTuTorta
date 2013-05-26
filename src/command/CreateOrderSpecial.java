@@ -4,19 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 
 
 import domain.Estimation;
-import domain.Order;
 
 public class CreateOrderSpecial implements DatabaseCommand {
 	
-	private Order order;
 	private Estimation estimation;
 
-	public CreateOrderSpecial(Order order,  Estimation estimation) {
-		this.order = order;
+	public CreateOrderSpecial(Estimation estimation) {
 		this.estimation = estimation;
 	}
 
@@ -42,33 +38,9 @@ public class CreateOrderSpecial implements DatabaseCommand {
 			ResultSet rs = getLastInsertId.executeQuery();
 			
 			if (rs.next()){
-				lastIdInserted = rs.getLong("last_insert_id()"); 
-				
-				PreparedStatement staInt = conn.prepareStatement("INSERT INTO `order` (`CLIENT_ID`, `ORDER_TYPE_ID`, `ORDER_DATE`, `TOTAL`, `DELIVERY_DATE`, `IS_PENDING`, `ESTIMATION_ID`) " +
-						"VALUES (?, ?, DATE(CURDATE()), ?,?, ?, ?)");
-				staInt.setLong(1, order.getClientId());
-				staInt.setLong(2, order.getOrderTypeId());
-				staInt.setDouble(3, order.getTotal());
-				
-				java.sql.Date dte = null;
-				try{
-					if (!order.getDeliveryDate().equals("")){
-						SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy"); 
-						java.util.Date dt = formatter.parse(order.getDeliveryDate());
-						dte = new java.sql.Date(dt.getTime());
-						staInt.setDate(4, dte);
-					}else
-						staInt.setDate(4, null);
-				}catch(Exception e){
-					e.printStackTrace();	
-				}	
-				
-				staInt.setInt(5, order.getIsPending());
-				staInt.setLong(6, lastIdInserted);
-				staInt.executeUpdate();
-				
+				lastIdInserted = rs.getInt("last_insert_id()"); 
 			}
-			
+				
 			getLastInsertId.close();
 		}
 		
