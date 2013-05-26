@@ -71,6 +71,7 @@ public class CreateStepOptionServlet extends HttpServlet {
 		
 		try{
 			String name = request.getParameter("txtName");
+			String description = request.getParameter("txtDescription");
 			Integer position = Integer.valueOf(request.getParameter("txtPosition"));
 			Double price = Double.valueOf(request.getParameter("txtPrice"));
 			int isUnavailable = 0;
@@ -81,6 +82,7 @@ public class CreateStepOptionServlet extends HttpServlet {
 			StepOption option = new StepOption();
 			option.setOrderStepId(stepId);
 			option.setName(name);
+			option.setDescription(description);
 			option.setPosition(position);
 			option.setPrice(price);
 			option.setUnavailable(isUnavailable);
