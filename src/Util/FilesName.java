@@ -12,7 +12,8 @@ public class FilesName  {
 		
 		String[] filesName = null;
 		//String path = "/home/armatuto/public_html/images/galeria_inicio";
-		String path = "C:\\Program Files (x86)\\Apache Software Foundation\\Tomcat 7.0\\webapps\\armaTuTorta\\images\\galeria_inicio";
+		//String path = "C:\\Program Files (x86)\\Apache Software Foundation\\Tomcat 7.0\\webapps\\armaTuTorta\\images\\galeria_inicio";
+		String path = "C:\\Program Files\\apache-tomcat-7.0.12\\webapps\\armaTuTorta\\images\\galeria_inicio";
 		File folder = new File(path);
 		File[] listOfFiles = folder.listFiles();
 		if (listOfFiles.length > 0){

@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -62,10 +63,10 @@ public class OcasionesEspecialesServlet extends HttpServlet {
 		}else{
 			
 			final Properties propertiesFile = new Properties();
-			//propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+			propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
 			//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
-			//String dirPath = propertiesFile.getProperty("pedidosOcasionesEspecialesDirectory");
-			String dirPath = "C:\\Program Files (x86)\\Apache Software Foundation\\Tomcat 7.0\\webapps\\armaTuTorta\\files\\pedidosOcasionesEspeciales\\";
+			String dirPath = propertiesFile.getProperty("pedidosOcasionesEspecialesDirectory");
+			//String dirPath = "C:\\Program Files (x86)\\Apache Software Foundation\\Tomcat 7.0\\webapps\\armaTuTorta\\files\\pedidosOcasionesEspeciales\\";
 			MultipartRequest multipart = new MultipartRequest(request, dirPath,
 						5*1024*1024, new DefaultFileRenamePolicy());
 			

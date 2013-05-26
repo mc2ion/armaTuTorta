@@ -72,9 +72,9 @@
 					<%= estimationInfo.getClient().getIdentityCard() %><br>
 					<%= estimationInfo.getClient().getFirstName() + " " + estimationInfo.getClient().getLastName() %><br>					
 					<label for="name"><span id="idCard">Correo Electrónico:</span></label><%= estimationInfo.getClient().getEmail() %><br>
-					<label for="name"><span id="idCard">Teléfono:</span></label><%= estimationInfo.getClient().getPhone() + (estimationInfo.getClient().getOtherPhone()==null)?"":" / "+estimationInfo.getClient().getOtherPhone() %><br>
-					<label for="name"><span id="idCard">Dirección:</span></label><%= estimationInfo.getClient().getAddress() %><br>
-					<label for="name"><span id="idCard">Dirección Envío:</span></label><%= (estimationInfo.getClient().getShippingAddress()==null)?"(Igual a la anterior)":estimationInfo.getClient().getShippingAddress() %><br><br>
+					<label for="name"><span id="idCard">Teléfono:</span></label><%= (estimationInfo.getClient().getOtherPhone()==null || estimationInfo.getClient().getOtherPhone().equalsIgnoreCase(""))? estimationInfo.getClient().getPhone(): estimationInfo.getClient().getPhone() + " / "+estimationInfo.getClient().getOtherPhone() %><br>
+					<label for="name"><span id="idCard">Dirección:</span></label><%= estimationInfo.getClient().getAddress() %><br> 
+					<label for="name"><span id="idCard">Dirección Envío:</span></label><%= (estimationInfo.getClient().getShippingAddress()==null || estimationInfo.getClient().getShippingAddress().equalsIgnoreCase(""))?"(Igual a la anterior)":estimationInfo.getClient().getShippingAddress() %><br><br>
 				</fieldset>
 				<h3>Datos Solicitud:</h3>
 				<fieldset>
