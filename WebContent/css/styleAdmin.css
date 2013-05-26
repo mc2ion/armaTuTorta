@@ -1256,7 +1256,7 @@ div.box {
 		
 	}
 
-	#deleteStep, #deleteAlbum,  #deletePhoto, #deleteClient, #deleteOption, #deleteClientOrder{
+	#deleteStep, #deleteAlbum,  #deletePhoto, #deleteClient, #deleteOption, #deleteClientOrder, #deleteEstimation {
 		position: absolute;
 		text-align: center;
 		width: 295px;

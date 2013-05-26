@@ -9,6 +9,9 @@ public class Estimation {
 	private int guests_number;
 	private String image;
 	private String description;
+	private Client client;
+	private String applicationDate;
+	
 	
 	public void setId(long id) {
 		this.id = id;
@@ -64,6 +67,22 @@ public class Estimation {
 
 	public String getDescription() {
 		return description;
+	}
+
+	public void setApplicationDate(String applicationDate) {
+		this.applicationDate = applicationDate;
+	}
+
+	public String getApplicationDate() {
+		return applicationDate;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public Client getClient() {
+		return client;
 	}
 
 }
