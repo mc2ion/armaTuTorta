@@ -68,7 +68,7 @@
 				</div>
 				<div class="registration">
 					<span class="regis-title">Registro </span><br>
-					<form name="regForm" action="/armaTuTorta/RegisterServlet" method="post" onsubmit="return validateRegCont();" >
+					<form class="formReg" name="regForm" action="/armaTuTorta/RegisterServlet" method="post" onsubmit="return validateRegCont();" >
 						<div class="block1" >
 							<fieldset>
 								<div class="radioPersonas">
@@ -119,7 +119,7 @@
 						</div>
 						
 						<div class="block2" style="display:none" >
-							<fieldset>
+							<br><br><fieldset>
 								<label for="name">Telef&oacute;no Local:</label>
 								<input type="text" name="txtPhone" id="txtPhone" size="35" maxlength="100"
 								 onBlur="validatePhone(this, '1');" />

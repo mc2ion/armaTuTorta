@@ -89,7 +89,8 @@ public class ClientAccountServlet extends HttpServlet {
 			client.setCompany(Integer.valueOf(typePers));
 			String checkbox = request.getParameter("checkDir");
 			
-			if (checkbox != ""){
+		
+			if (checkbox != null){
 				client.setShippingAddress("");
 				client.setShippingAddress(1);
 				

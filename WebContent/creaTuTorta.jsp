@@ -56,15 +56,17 @@
 				<div>
 					<ul>
 						<li>
-							<img id="pasoImgBase" src="./images/paso_torta.png" alt="Image"  />
-							<img id="pasoImgSabor" src="" width="160" height="170" alt="Image" 
-								style="position: absolute;top:287px; left: 291px; display:none;"  />
-							<img id="pasoImgCapas" src="" width="160" height="170" alt="Image" 
-								style="position: absolute; top:287px; left: 291px; display:none;"  />
-							<img id="pasoImgRelleno" src="" width="160" height="170" alt="Image"
-							style="position: absolute;top:287px; left: 291px;  display: none;"/>
-							<img id="pasoImgCubierta" src="./images/tortas/capa_general.png" width="160" height="170" alt="Image" 
-								style="position: absolute; top:287px; left: 291px;  display:none;" />
+							<div style="position: relative; left: -10px; top: -10px; background-color: black;">
+								<img id="pasoImgBase" src="./images/paso_torta.png" alt="Image"  style="position: relative; top: 0; left: 0;" />
+								<img id="pasoImgSabor" src="" width="160" height="170" alt="Image" 
+									style="position: absolute;top:70px; left: 45px; display:none;"  />
+								<img id="pasoImgCapas" src="" width="160" height="170" alt="Image" 
+								style="position: absolute; top:70px; left: 45px; display:none;"  />
+								<img id="pasoImgRelleno" src="" width="160" height="170" alt="Image"
+								style="position: absolute;top:70px; left: 45px;  display: none;"/>
+								<img id="pasoImgCubierta" src="./images/tortas/capa_general.png" width="160" height="170" alt="Image" 
+									style="position: absolute; top:70px; left: 45px;  display:none;" />
+							</div>	
 						</li>
 					</ul>
 				</div>	

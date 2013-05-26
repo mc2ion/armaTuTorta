@@ -56,47 +56,49 @@
 				<div>
 					<ul>
 						<li>
-							<img id="pasoImgBase" src="./images/paso_cupcakes.png" />
-							<!-- Sabores ponqué -->	
-							<img id="pasoImgSabor" src="" width="120" height="183" alt="Image" 
-								style="position: absolute; top:275px; left: 310px; display:none;"  />
-							<!-- Sabores ponqué surtidos -->	
-							<img id="pasoImgSabor1" src="" width="90" height="143" alt="Image" 
-								style="position: absolute; top:275px; left: 255px; display:none;"  />
-							<img id="pasoImgSabor2" src="" width="90" height="143" alt="Image" 
-								style="position: absolute; top:275px; left: 405px;display:none; "  />
-							<img id="pasoImgSabor3" src="" width="120" height="183" alt="Image" 
-								style="position: absolute; top:275px; left: 315px;display:none; "  />
-							<!-- Cubiertas -->
-							<img id="pasoImgCubierta" src="" width="120" height="183" alt="Image" 
-								style="position: absolute; top:275px; left: 310px; display:none;"  />
-							<!-- Cubiertas Surtidas -->
-							<img id="pasoImgCubierta1" src="" width="90" height="143" alt="Image" 
-								style="position: absolute; top:275px; left: 255px; display:none;"  />
-							<img id="pasoImgCubierta2" src="" width="90" height="143" alt="Image" 
-								style="position: absolute; top:275px; left: 405px; display:none;"  />
-							<img id="pasoImgCubierta3" src="" width="120" height="183" alt="Image" 
-								style="position: absolute; top:275px; left: 315px; display:none;"  />
-							<!-- Colores Cubiertas -->
-							<img id="pasoImgColor" src=""width="120" height="183"alt="Image"
-							style="position: absolute; top:275px; left: 310px;  display: none;"/>
-							<!-- Colores Cubiertas Surtidas -->
-							<img id="pasoImgColor1" src=""width="90" height="143"alt="Image"
-							style="position: absolute; top:275px; left: 255px;  display: none;"/>
-							<img id="pasoImgColor2" src=""width="90" height="143"alt="Image"
-							style="position: absolute; top:275px; left: 405px;  display: none;"/>
-							<img id="pasoImgColor3" src=""width="120" height="183"alt="Image"
-							style="position: absolute; top:275px; left: 315px;  display: none;"/>
-							<!-- Decoracion -->							
-							<img id="pasoImgDecoracion" src="" width="120" height="183" alt="Image" 
-								style="position: absolute; top:275px; left: 310px; display:none;" />
-							<!-- Decoracion surtida -->							
-							<img id="pasoImgDecoracion1" src="" width="90" height="143" alt="Image" 
-								style="position: absolute; top:275px; left: 255px; display:none;" />
-							<img id="pasoImgDecoracion2" src="" width="90" height="143" alt="Image" 
-								style="position: absolute; top:275px; left: 405px; display:none;" />
-							<img id="pasoImgDecoracion3" src="" width="120" height="183" alt="Image" 
-								style="position: absolute; top:275px; left: 315px; display:none;" />
+							<div style="position: relative; left: -10px; top: -10px; background-color: black;">
+								<img id="pasoImgBase" src="./images/paso_cupcakes.png" />
+								<!-- Sabores ponqué -->	
+								<img id="pasoImgSabor" src="" width="120" height="183" alt="Image" 
+									style="position: absolute; top:55px; left: 65px; display:none;"  />
+								<!-- Sabores ponqué surtidos -->	
+								<img id="pasoImgSabor1" src="" width="90" height="143" alt="Image" 
+									style="position: absolute; top:55px; left: 5px; display:none;"  />
+								<img id="pasoImgSabor2" src="" width="90" height="143" alt="Image" 
+									style="position: absolute; top:55px; left: 145px;display:none; "  />
+								<img id="pasoImgSabor3" src="" width="120" height="183" alt="Image" 
+									style="position: absolute; top:55px; left: 65px;display:none; "  />
+								<!-- Cubiertas -->
+								<img id="pasoImgCubierta" src="" width="120" height="183" alt="Image" 
+									style="position: absolute; top:55px; left: 65px; display:none;"  />
+								<!-- Cubiertas Surtidas -->
+								<img id="pasoImgCubierta1" src="" width="90" height="143" alt="Image" 
+									style="position: absolute; top:55px; left: 5px; display:none;"  />
+								<img id="pasoImgCubierta2" src="" width="90" height="143" alt="Image" 
+									style="position: absolute; top:55px; left: 145px; display:none;"  />
+								<img id="pasoImgCubierta3" src="" width="120" height="183" alt="Image" 
+									style="position: absolute; top:55px; left: 65px; display:none;"  />
+								<!-- Colores Cubiertas -->
+								<img id="pasoImgColor" src=""width="120" height="183"alt="Image"
+								style="position: absolute; top:55px; left: 65px;  display: none;"/>
+								<!-- Colores Cubiertas Surtidas -->
+								<img id="pasoImgColor1" src=""width="90" height="143"alt="Image"
+								style="position: absolute; top:55px; left: 5px;  display: none;"/>
+								<img id="pasoImgColor2" src=""width="90" height="143"alt="Image"
+								style="position: absolute; top:55px; left: 145px;  display: none;"/>
+								<img id="pasoImgColor3" src=""width="120" height="183"alt="Image"
+								style="position: absolute; top:55px; left: 65px;  display: none;"/>
+								<!-- Decoracion -->							
+								<img id="pasoImgDecoracion" src="" width="120" height="183" alt="Image" 
+									style="position: absolute; top:55px; left: 65px; display:none;" />
+								<!-- Decoracion surtida -->							
+								<img id="pasoImgDecoracion1" src="" width="90" height="143" alt="Image" 
+									style="position: absolute; top:55px; left: 5px; display:none;" />
+								<img id="pasoImgDecoracion2" src="" width="90" height="143" alt="Image" 
+									style="position: absolute; top:55px; left: 145px; display:none;" />
+								<img id="pasoImgDecoracion3" src="" width="120" height="183" alt="Image" 
+								style="position: absolute; top:55px; left: 65px; display:none;" />
+							</div>	
 						</li>
 					</ul>
 				</div>	
@@ -116,6 +118,9 @@
 					<input type="hidden" id="priceCake"  name="priceCake" value="0">
 					<%
 							String [] color = new String[3];
+							String [] saborP = new String[3];
+							String [] sabor  = new String[3];
+							String [] id  = new String[3];
 							for(int i= 1; i<= options.size(); i++) { 	
 								int aux = i -1;
 								ListOrder_Step listO = options.get(aux);
@@ -239,8 +244,20 @@
 										imgDescription = "<img  id=\"imgFudge\" src=\"./images/question.png\" title=\"" +  description  + "\"/>";
 									String imagen = step.getImage();
 									if (i == 5){
-										if (aux2 < 3)
+										if (aux2 < 3){
 											color[aux2] = imagen;
+											
+										}
+									}else if (i == 3){
+										if (aux2 < 3){
+											saborP[aux2] = imagen;
+											
+										}	
+									}else if (i == 4){
+										if (aux2 < 3){
+											sabor[aux2] = imagen;
+											id[aux2]= String.valueOf(step.getId());
+										}	
 									}
 									hashMap.put(i + "" +j, step.getName());
 									hashMapPrice.put(step.getName(), step.getPrice());
@@ -283,6 +300,8 @@
 				%>
 				<script>
 					setColor('<%= color[0] %>','<%= color[1] %>','<%= color[2] %>' );
+					setSabor('<%= sabor[0] %>','<%= sabor[1] %>','<%= sabor[2] %>' );
+					setSaborP('<%= saborP[0] %>','<%= saborP[1] %>','<%= saborP[2] %>', '<%= id[0] %>', '<%= id[1] %>', '<%= id[2] %>' );
 				</script>
 				<% 
 				session.setAttribute("hashMapCup", hashMap);

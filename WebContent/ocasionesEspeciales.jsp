@@ -17,6 +17,18 @@
 	});
 	</script>
 	
+	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/demos.css" />
+	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/ui.theme.css" />
+	<script type="text/javascript" src="/armaTuTorta/js/ui.core.js"></script>
+	<script type="text/javascript" src="/armaTuTorta/js/ui.datepicker.js"></script>
+	<script> 
+	$(function() {
+		$("#datepicker").datepicker({
+			minDate: +2
+		});
+	});
+	</script> 
+	
 </head>
 <body>
 <%
@@ -57,20 +69,24 @@
 					<fieldset>
 						<label for="name">¿Cu&aacute;l es tu ocasi&oacute;n especial?:</label>
 						<input type="text" name="txtName" id="txtName" size="25" maxlength="50" />
+						<span class="error" id="errorName">Por favor, introduzca su ocasión especial.</span>
 						<div style="font-size: 10px; font-family: Arial;">Ejemplo: boda, bautizo, entre otros. </div><br>
 						<label for="name" style="height:60px;">¿Cu&aacute;les de nuestros productos deseas ordenar?:</label>
-						<input type="checkbox" name="eventoT" value="1">Torta<br>
-						<input type="checkbox" name="eventoC" value="2">Cupcakes <br>
-						<input type="checkbox" name="eventoG" value="3">Gelatina <br><br>
+						<input type="checkbox" name="eventoT" id="eventoT" value="1">Torta<br>
+						<input type="checkbox" name="eventoC" id="eventoC" value="2">Cupcakes <br>
+						<input type="checkbox" name="eventoG" id="eventoG" value="3">Gelatina 
+						<span class="error" id="errorProducto">Por favor, seleccione al menos uno producto.</span><br><br>
 						<label for="name">¿Tienes un dise&ntilde;o en mente? C&aacute;rgalo aqu&iacute;:</label>
 						<input type="file" name="txtImage" id="txtImage" maxlength="50" lang="es" /> <br><br><br>
 						<div style="float:left; width: 340px;">
 							<label for="name"  style="width:59%">N&uacute;mero apr&oacute;ximado de invitados:</label>
-							<input type="text" name="txtInv" id="txtInv" size="10" maxlength="50" /> 
+							<input type="text" name="txtInv" id="txtInv" size="10" maxlength="50" /> <br>
+							<span class="error" id="errorInv">Escoja un valor.</span><br>
 						</div>
 						<div style="float:left; width: 340px;">
 							<label for="name" style="width:28%">Fecho del evento:</label>
-							<input type="text" readonly="readonly" id="datepicker" name="txtFecha" /> 
+							<input type="text" readonly="readonly" id="datepicker" name="txtFecha" /> <br>
+							<span class="error" id="errorFecha">Por favor, introduzca la fecha tentativa de su evento.</span><br>
 						</div>
 						<br><br>
 						<label for="name">Cu&eacute;ntanos m&aacute;s acerca de tu idea:</label>
