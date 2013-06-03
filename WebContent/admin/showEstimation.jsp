@@ -40,6 +40,33 @@
 			}
 		}
 	</script>
+	<script language="javascript">
+	/*****************************************************************************
+	Pop-up ajustada a foto. Script creado por Tunait!
+	Si quieres usar este script en tu sitio eres libre de hacerlo con la condición de que permanezcan intactas estas líneas, osea, los créditos.
+	No autorizo a publicar y ofrecer el código en sitios de script sin previa autorización
+	Si quieres publicarlo, por favor, contacta conmigo.
+	http://javascript.tunait.com/
+	tunait@yahoo.com 
+	******************************************************************************/
+	
+	var titulopordefecto = "Imagen Referencia"; //Si no se especifica un título al llamar a la función colocará el que se especifique aquí
+	var ventana;
+	var cont=0;
+	
+	function afoto(cual,titulo){
+		if(cont==1){ventana.close();ventana=null;}
+		if(titulo==null){titulo=titulopordefecto;}
+		ventana=window.open('','ventana','resizable=yes,scrollbars=no');
+		ventana.document.write('<html><head><title>' + titulo + '</title></head><body style="overflow:hidden" marginwidth="0" marginheight="0" topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" scroll="no" onUnload="opener.cont=0"><img src="' + cual + '" onLoad="opener.redimensionar(this.width, this.height)">');
+		ventana.document.close();
+		cont++;
+	}
+	function redimensionar(ancho, alto){
+		ventana.resizeTo(ancho+12,alto+28);
+		ventana.moveTo((screen.width-ancho)/2,(screen.height-alto)/2); //centra la ventana. Eliminar si no se quiere centrar el popup
+	}
+	</script>
 </head>
 <body>
 	<div id="container">
@@ -63,30 +90,43 @@
         </div>  
 		<div id="content">
         		<h2>Detalle Presupuesto:</h2>
-	        	<p>&nbsp;</p>
-           		<p>&nbsp;</p>
+        		<p>&nbsp;</p> 
 				<jsp:useBean id="estimationInfo" type="domain.Estimation" scope="request"/> 
 				<input type="hidden" name="txtEstimationId" value="<%= request.getAttribute("estimationId") %>" />
 				<h3>Datos Cliente:</h3>
 				<fieldset>
-					<%= estimationInfo.getClient().getIdentityCard() %><br>
-					<%= estimationInfo.getClient().getFirstName() + " " + estimationInfo.getClient().getLastName() %><br>					
-					<label for="name"><span id="idCard">Correo Electrónico:</span></label><%= estimationInfo.getClient().getEmail() %><br>
-					<label for="name"><span id="idCard">Teléfono:</span></label><%= (estimationInfo.getClient().getOtherPhone()==null || estimationInfo.getClient().getOtherPhone().equalsIgnoreCase(""))? estimationInfo.getClient().getPhone(): estimationInfo.getClient().getPhone() + " / "+estimationInfo.getClient().getOtherPhone() %><br>
-					<label for="name"><span id="idCard">Dirección:</span></label><%= estimationInfo.getClient().getAddress() %><br> 
-					<label for="name"><span id="idCard">Dirección Envío:</span></label><%= (estimationInfo.getClient().getShippingAddress()==null || estimationInfo.getClient().getShippingAddress().equalsIgnoreCase(""))?"(Igual a la anterior)":estimationInfo.getClient().getShippingAddress() %><br><br>
+					<label for="name" class="etiq"><span id="idCard"><%= estimationInfo.getClient().getIdentityCard() %></span></label><br>
+					<label for="name" class="etiq"><span id="idCard"><%= estimationInfo.getClient().getFirstName() + " " + estimationInfo.getClient().getLastName() %></span></label><br>					
+					<label for="name" class="etiq"><span id="idCard">Correo Electrónico: </span></label><%= estimationInfo.getClient().getEmail() %><br>
+					<label for="name" class="etiq"><span id="idCard">Teléfono: </span></label><%= (estimationInfo.getClient().getOtherPhone()==null || estimationInfo.getClient().getOtherPhone().equalsIgnoreCase(""))? estimationInfo.getClient().getPhone(): estimationInfo.getClient().getPhone() + " / "+estimationInfo.getClient().getOtherPhone() %><br>
+					<label for="name" class="etiq"><span id="idCard">Dirección: </span></label><%= estimationInfo.getClient().getAddress() %><br> 
+					<label for="name" class="etiq"><span id="idCard">Dirección Envío: </span></label><%= (estimationInfo.getClient().getShippingAddress()==null || estimationInfo.getClient().getShippingAddress().equalsIgnoreCase(""))?"(Igual a la anterior)":estimationInfo.getClient().getShippingAddress() %><br>
 				</fieldset>
 				<h3>Datos Solicitud:</h3>
 				<fieldset>
-				Ocasión Especial: <%= estimationInfo.getSpecialOccasion() %><br>
-				Productos Deseados: <%= estimationInfo.getProducts() %><br>
-				Número Invitados: <%= estimationInfo.getGuestsNumber() %><br>
-				Detalles Adicionales: <%= estimationInfo.getDescription() %><br>
-				Imagen de Referencia: <img alt="ref" src="<%= "/armaTuTorta/files/pedidosOcasionesEspeciales/" + estimationInfo.getImage() %>"/>
+				<label for="name" class="etiq"><span id="idCard">Ocasión Especial: </span></label><%= estimationInfo.getSpecialOccasion() %><br>
+				<label for="name" class="etiq"><span id="idCard">Productos Deseados: </span></label><%= estimationInfo.getProducts() %><br>
+				<label for="name" class="etiq"><span id="idCard">Número Invitados: </span></label><%= estimationInfo.getGuestsNumber() %><br>
+				<label for="name" class="etiq"><span id="idCard">Detalles Adicionales: </span></label>"<%= estimationInfo.getDescription() %>"<br><br>	
+				<%
+				if(estimationInfo.getImage()!=null && !estimationInfo.getImage().equalsIgnoreCase("")){
+				%>
+				<a class="seeImage" href= "<%= "/armaTuTorta/files/pedidosOcasionesEspeciales/" + estimationInfo.getImage() %>" onclick="afoto('<%= "/armaTuTorta/files/pedidosOcasionesEspeciales/" + estimationInfo.getImage() %>','Imagen Referencia');return false" > Ver Imagen de Referencia </a>
+				<%
+				}
+				%>
 				</fieldset>
 				<div style="text-align:center">
-						<input type="button" class="button" value="Volver"  onClick="javascript:history.back();"/>
-						<input type="submit"  class="button"  name="sbmtButton" value="Editar" style="margin-left:20px;" />
+					<form action="/armaTuTorta/PrintEstimationServlet?estimationId=<%= estimationInfo.getId() %>"  method="post">
+						<div id="botonP">
+							<input type="submit"  class="button"  name="sbmtButton" value="Imprimir" style="margin-left:30%;" />
+						</div>
+					</form>
+					<form>
+						<div id="botonV" style="position:relative; margin-left: 400px; top: -22px;">
+							<input type="button" class="button" value="Volver"  onClick="javascript:history.back();" />						
+						</div>	
+					</form>
 				</div>	
 		    <div id="footer"></div>
 		</div>

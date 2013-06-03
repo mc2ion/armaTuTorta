@@ -77,6 +77,7 @@ public class EditStepOptionServlet extends HttpServlet {
 		try{
 			Long optionId = Long.valueOf(request.getParameter("txtOptionId"));
 			String name = request.getParameter("txtName");
+			String description = request.getParameter("txtDescription");
 			Integer oldPosition = Integer.valueOf(request.getParameter("txtCurrentPosition"));
 			Integer position = Integer.valueOf(request.getParameter("txtPosition"));
 			Double price = Double.valueOf(request.getParameter("txtPrice"));
@@ -90,6 +91,7 @@ public class EditStepOptionServlet extends HttpServlet {
 			option.setId(optionId);
 			option.setOrderStepId(stepId);
 			option.setName(name);
+			option.setDescription(description);
 			option.setPrice(price);
 			option.setPosition(position);
 			option.setOldPosition(oldPosition);

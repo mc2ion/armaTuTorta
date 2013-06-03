@@ -43,7 +43,7 @@
 						<label for="name">Nombre:</label>
 						<textarea name="txtName" id="txtName" rows="2" cols="50"></textarea> <br><br>
 						<label for="name">Descripción:</label>
-						<textarea name="txtDescription" id="txtDescription" rows="2" cols="50"></textarea> <br><br>
+						<textarea name="txtDescription" id="txtDescription" rows="3" cols="50"></textarea> <br><br>
 						<label for="name">Precio:</label>
 						<input type="text" name="txtPrice" id="txtPrice" maxlength="5" size="5" /> <br><br>
 						<label for="image">Imagen Asociada:</label>

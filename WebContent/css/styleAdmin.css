@@ -704,6 +704,18 @@ a, a:visited, a:hover {
 	color: #000;
 }
 
+.etiq {
+	margin: 0 auto 0 auto;
+	text-align:left;
+	font-weight: bold;	
+}
+
+.seeImage {
+text-decoration: none;
+color: #0098b6;
+font-weight: bold;
+}
+
 /* Cambie esto */
 .question {
 	width: 1350px;
@@ -1256,7 +1268,7 @@ div.box {
 		
 	}
 
-	#deleteStep, #deleteAlbum,  #deletePhoto, #deleteClient, #deleteOption, #deleteClientOrder, #deleteEstimation {
+	#deleteStep, #deleteAlbum,  #deletePhoto, #deleteClient, #deleteOption, #deleteOrder, #deleteClientOrder, #deleteEstimation {
 		position: absolute;
 		text-align: center;
 		width: 295px;

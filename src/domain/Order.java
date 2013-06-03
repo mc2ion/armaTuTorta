@@ -11,6 +11,8 @@ public class Order {
 	private int isPending;
 	private String orderTypeName;
 	private String clientName;
+	private String additionalInfo;
+	private Long estimationId;
 	
 	public void setId(long id) {
 		this.id = id;
@@ -87,5 +89,21 @@ public class Order {
 
 	public String getClientName() {
 		return clientName;
+	}
+
+	public void setAdditionalInfo(String additionalInfo) {
+		this.additionalInfo = additionalInfo;
+	}
+
+	public String getAdditionalInfo() {
+		return additionalInfo;
+	}
+
+	public void setEstimationId(Long estimationId) {
+		this.estimationId = estimationId;
+	}
+
+	public Long getEstimationId() {
+		return estimationId;
 	}
 }

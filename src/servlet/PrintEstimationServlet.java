@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,10 +15,10 @@ import domain.Estimation;
 import domain.User;
 
 /**
- * Servlet implementation class ListEstimationsServlet
+ * Servlet implementation class PrintEstimationServlet
  */
-@WebServlet(description = "servlet to list estimations", urlPatterns = { "/ListEstimationsServlet" })
-public class ListEstimationsServlet extends HttpServlet {
+@WebServlet(description = "servlet to print estimation", urlPatterns = { "/PrintEstimationServlet" })
+public class PrintEstimationServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -35,7 +34,7 @@ public class ListEstimationsServlet extends HttpServlet {
 	/**
      * @see HttpServlet#HttpServlet()
      */
-    public ListEstimationsServlet() {
+    public PrintEstimationServlet() {
         super();
     }
     
@@ -43,26 +42,27 @@ public class ListEstimationsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
     	try {
-			HttpSession session = request.getSession();
-			User user = (User)session.getAttribute("user");
-			
+    		HttpSession session = request.getSession(true);
+			User user = (User) session.getAttribute("user");
+			RequestDispatcher rd;
+			   
 			if(user != null){
-				// perform list orders operations
-				String info = (String)request.getAttribute("info")!=null?(String)request.getAttribute("info"):"";
-				String error = (String)request.getAttribute("error")!=null?(String)request.getAttribute("error"):"";
-				@SuppressWarnings("unchecked")
-				ArrayList<Estimation> list = (ArrayList<Estimation>)CommandExecutor.getInstance().executeDatabaseCommand(new command.ListEstimations());
-				request.setAttribute("estimations", list);
-				request.setAttribute("info", info);
-				request.setAttribute("error", error);
-				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/estimations.jsp");
-				rd.forward(request, response);
+				Long estimationId = Long.valueOf(request.getParameter("estimationId"));
+				Estimation estimationInfo = (Estimation)CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectEstimation(estimationId));
+				
+				request.setAttribute("estimationInfo", estimationInfo);				
+				request.setAttribute("estimationId", estimationId);
+				
+				rd = getServletContext().getRequestDispatcher("/admin/printEstimation.jsp");			
+
+				rd.forward(request, response);			
 			} else {
-				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/index.jsp");
+				rd = getServletContext().getRequestDispatcher("/admin/index.jsp");			
+
 				rd.forward(request, response);
-			}
-			
+			}			
 		} catch (Exception e) {
 			throw new ServletException(e);
 		}

@@ -44,20 +44,23 @@
 	} );
 </script>
 <script type="text/javascript">
-	var idClientOrder;
+	var idOrder;
+	var idClient;
 			
 	$(function() {
 		$('a[rel*=leanModal]').leanModal({ top : 200, closeButton: ".close_x" });		
 	});
 	
-	function loadVars(var1, var2) {
-		idClientOrder = var1;
-		$('.clientorder').text(var2);
+	function loadVars(var1, var3, var2) {
+		idOrder = var1;
+		idClient = var3;
+		$('.order').text(var2);
 		
 	};
 	
 	function setV(f){
-		f.elements['clientOrderId'].value = idClientOrder;
+		f.elements['orderId'].value = idOrder;
+		f.elements['clientId'].value = idClient;
 		return true;
 	}
 </script>
@@ -71,7 +74,6 @@
 			<div class="menuitemHome" ><a href="UserLoginServlet">Home</a></div>	
 	    	<ul>
             	<li class="menuitem"><a href="ListClientsServlet">Ver Clientes</a></li>
-            	<li class="menuitem"><a href="CreateClientOrderServlet?clientId=<%= request.getAttribute("clientId") %>">Armar Pedido</a></li>
             </ul>
 			<div class="menuitemPass"><a href="EditUserPasswordServlet">Cambiar Contraseña</a></div>
 			<div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
@@ -133,17 +135,23 @@
 									<td><%= (o.getIsPending()==1)?"Pendiente":"Entregado" %></td>
 									<td><%= o.getDeliveryDate() %></td>
 									<td>
-										<a href="/armaTuTorta/ShowClientOrderServlet?orderId=<%= o.getId() %>" style="color: transparent" >
+										<a href="/armaTuTorta/ShowClientOrderServlet?orderId=<%= o.getId() %>&clientId=<%= o.getClientId() %>" style="color: transparent" >
 											<img alt="logo" src="/armaTuTorta/images/detail.png"  height="16" width="16" />
 										</a> 
-										<a href="/armaTuTorta/PrintClientOrderServlet?orderId=<%= o.getId() %>" style="color: transparent" >
+										<a href="/armaTuTorta/PrintClientOrderServlet?orderId=<%= o.getId() %>&clientId=<%= o.getClientId() %>" style="color: transparent" >
 											<img alt="logo" src="/armaTuTorta/images/print.png"  height="16" width="16" />
+										</a>
+										<% if(o.getIsPending()==1){ %>
+										<a href="/armaTuTorta/CompleteClientOrderServlet?orderId=<%= o.getId() %>&clientId=<%= o.getClientId() %>" style="color: transparent" >
+											<img alt="logo" src="/armaTuTorta/images/pending.png"  height="16" width="16" />
 										</a> 
-										<a href="/armaTuTorta/EditClientOrderServlet?orderId=<%= o.getId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/edit.png"  height="16" width="16" />
-										</a> 
+										<% } else { %>
+										<a href="#" style="color: transparent" >
+											<img alt="logo" src="/armaTuTorta/images/solved.png"  height="16" width="16" />
+										</a>
+										<% } %> 
 										<a id="go" rel="leanModal" href="#deleteClientOrder" style="color: #f7941e; font-weight: bold;" 
-										onclick="return loadVars(<%= o.getId()%>,'<%= o.getId()%>' )" >
+										onclick="return loadVars(<%= o.getId()%>,<%= o.getClientId()%>,'<%= o.getId()%>' )" >
 										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" />
 										</a>
 									</td>
@@ -167,12 +175,13 @@
 		<div id="signup-ct">
 			<h3 id="see_id" class="sprited" > Eliminar Pedido</h3>
 			<br><br>
-			<span>¿Está seguro que desea eliminar el pedido número <span class="clientorder"></span>? </span> <br><br>
+			<span>¿Está seguro que desea eliminar el pedido número <span class="order"></span>? </span> <br><br>
 			<div id="signup-header">
 				<a class="close_x" id="close_x"  href="#"></a>
 			</div>
 			<form action="/armaTuTorta/DeleteClientOrderServlet" method="post"  onsubmit="return setV(this)">
-				<input type="hidden" id="clientOrderId" class="good_input" name="clientOrderId"  value=""/>
+				<input type="hidden" id="orderId" class="good_input" name="orderId"  value=""/>
+				<input type="hidden" id="clientId" class="good_input" name="clientId"  value=""/>
 				<div class="btn-fld">
 					<input type="submit"  class="buttonPopUpDelete"  name="sbmtButton" value="Aceptar"  />
 				</div>

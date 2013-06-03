@@ -45,20 +45,20 @@
 	} );
 </script>
 <script type="text/javascript">
-	var idClientOrder;
+	var idOrder;
 			
 	$(function() {
 		$('a[rel*=leanModal]').leanModal({ top : 200, closeButton: ".close_x" });		
 	});
 	
 	function loadVars(var1, var2) {
-		idClientOrder = var1;
-		$('.clientorder').text(var2);
+		idOrder = var1;
+		$('.order').text(var2);
 		
 	};
 	
 	function setV(f){
-		f.elements['clientOrderId'].value = idClientOrder;
+		f.elements['orderId'].value = idOrder;
 		return true;
 	}
 </script>
@@ -69,10 +69,7 @@
         	<img alt="logo" src="/armaTuTorta/images/loguito5.png"/>
         </div>         
         <div id="menu">
-			<div class="menuitemHome" ><a href="UserLoginServlet">Home</a></div>	
-	    	<ul>
-            	<li class="menuitem"><a href="CreateOrderServlet">Armar Pedido</a></li>
-            </ul>
+			<div class="menuitemHome" ><a href="UserLoginServlet">Home</a></div>
 			<div class="menuitemPass"><a href="EditUserPasswordServlet">Cambiar Contraseña</a></div>
 			<div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
         </div>        
@@ -141,10 +138,16 @@
 										<a href="/armaTuTorta/PrintClientOrderServlet?orderId=<%= o.getId() %>" style="color: transparent" >
 											<img alt="logo" src="/armaTuTorta/images/print.png"  height="16" width="16" />
 										</a> 
-										<a href="/armaTuTorta/EditClientOrderServlet?orderId=<%= o.getId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/edit.png"  height="16" width="16" />
+										<% if(o.getIsPending()==1){ %>
+										<a href="/armaTuTorta/CompleteOrderServlet?orderId=<%= o.getId() %>" style="color: transparent" >
+											<img alt="logo" src="/armaTuTorta/images/pending.png"  height="16" width="16" />
 										</a> 
-										<a id="go" rel="leanModal" href="#deleteClientOrder" style="color: #f7941e; font-weight: bold;" 
+										<% } else { %>
+										<a href="#" style="color: transparent" >
+											<img alt="logo" src="/armaTuTorta/images/solved.png"  height="16" width="16" />
+										</a>
+										<% } %>
+										<a id="go" rel="leanModal" href="#deleteOrder" style="color: #f7941e; font-weight: bold;" 
 										onclick="return loadVars(<%= o.getId()%>,'<%= o.getId()%>' )" >
 										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" />
 										</a>
@@ -165,16 +168,16 @@
 		</div>
  	</div>
 	
-	<div id="deleteClientOrder">
+	<div id="deleteOrder">
 		<div id="signup-ct">
 			<h3 id="see_id" class="sprited" > Eliminar Pedido</h3>
 			<br><br>
-			<span>¿Está seguro que desea eliminar el pedido número <span class="clientorder"></span>? </span> <br><br>
+			<span>¿Está seguro que desea eliminar el pedido número <span class="order"></span>? </span> <br><br>
 			<div id="signup-header">
 				<a class="close_x" id="close_x"  href="#"></a>
 			</div>
-			<form action="/armaTuTorta/DeleteClientOrderServlet" method="post"  onsubmit="return setV(this)">
-				<input type="hidden" id="clientOrderId" class="good_input" name="clientOrderId"  value=""/>
+			<form action="/armaTuTorta/DeleteOrderServlet" method="post"  onsubmit="return setV(this)">
+				<input type="hidden" id="orderId" class="good_input" name="orderId"  value=""/>
 				<div class="btn-fld">
 					<input type="submit"  class="buttonPopUpDelete"  name="sbmtButton" value="Aceptar"  />
 				</div>

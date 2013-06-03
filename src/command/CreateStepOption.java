@@ -24,13 +24,14 @@ public class CreateStepOption implements DatabaseCommand {
 		int rowsUpdated = sta.executeUpdate();
 
 		int lastIdInserted = -1;
-		sta = conn.prepareStatement("INSERT INTO step_option (ORDER_STEP_ID, NAME, POSITION, PRICE, IS_UNAVAILABLE) VALUES (?, ?, ?, ?, ?)");
+		sta = conn.prepareStatement("INSERT INTO step_option (ORDER_STEP_ID, NAME, DESCRIPTION, POSITION, PRICE, IS_UNAVAILABLE) VALUES (?, ?, ?, ?, ?, ?)");
 		
 		sta.setLong(1, option.getOrderStepId());
 		sta.setString(2, option.getName());
-		sta.setInt(3, option.getPosition());
-		sta.setDouble(4, option.getPrice());
-		sta.setInt(5, option.isUnavailable());
+		sta.setString(3, option.getDescription());
+		sta.setInt(4, option.getPosition());
+		sta.setDouble(5, option.getPrice());
+		sta.setInt(6, option.isUnavailable());
 		rowsUpdated = sta.executeUpdate();
 
 		if (rowsUpdated == 1){
