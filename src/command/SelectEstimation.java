@@ -21,7 +21,7 @@ public class SelectEstimation implements DatabaseCommand {
 		
 		PreparedStatement sta = conn.prepareStatement("SELECT E.ID, E.CLIENT_ID, E.SPECIAL_OCCASION, E.PRODUCTS, E.GUESTS_NUMBER, E.IMAGE, " +
 				"E.DESCRIPTION, DATE_FORMAT(E.APPLICATION_DATE, '%d/%m/%Y'), C.FIRST_NAME, C.LAST_NAME, C.IDENTITY_CARD, C.EMAIL, C.ADDRESS, " +
-				"C.PHONE, C.OTHER_PHONE, C.SHIPPING_ADDRESS FROM `estimation` E, CLIENT C WHERE E.ID=? AND E.CLIENT_ID = C.ID");
+				"C.PHONE, C.OTHER_PHONE, C.SHIPPING_ADDRESS FROM `estimation` E, client C WHERE E.ID=? AND E.CLIENT_ID = C.ID");
 		
 		sta.setLong(1, this.id);
 					

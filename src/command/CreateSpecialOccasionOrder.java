@@ -26,8 +26,8 @@ public class CreateSpecialOccasionOrder implements DatabaseCommand {
 		int rowsUpdated = sta.executeUpdate();
 		
 		if(rowsUpdated == 1){
-			sta = conn.prepareStatement("INSERT INTO `order` (`CLIENT_ID`, `ORDER_TYPE_ID`, `ORDER_DATE`, `TOTAL`, `DELIVERY_DATE`, `IS_PENDING`, `ESTIMATION_ID`) " +
-			"VALUES (?, ?, DATE(CURDATE()), ?,?, ?, ?)");
+			sta = conn.prepareStatement("INSERT INTO `order` (`CLIENT_ID`, `ORDER_TYPE_ID`, `ORDER_DATE`, `TOTAL`, `DELIVERY_DATE`, `IS_PENDING`, `ESTIMATION_ID`, ADDITIONAL_INFO) " +
+			"VALUES (?, ?, DATE(CURDATE()), ?,?, ?, ?, ?)");
 
 			sta.setLong(1, order.getClientId());
 			sta.setLong(2, order.getOrderTypeId());
@@ -45,6 +45,7 @@ public class CreateSpecialOccasionOrder implements DatabaseCommand {
 			sta.setDate(4, dte);
 			sta.setInt(5, order.getIsPending());
 			sta.setLong(6, order.getEstimationId());
+			sta.setString(7, order.getAdditionalInfo());
 
 			rowsUpdated = sta.executeUpdate();
 			

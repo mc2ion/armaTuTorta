@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.List;
+
 public class Order {
 	
 	private long id;
@@ -13,6 +15,8 @@ public class Order {
 	private String clientName;
 	private String additionalInfo;
 	private Long estimationId;
+	private List<Item> items;
+	private Estimation estimation;
 	
 	public void setId(long id) {
 		this.id = id;
@@ -105,5 +109,21 @@ public class Order {
 
 	public Long getEstimationId() {
 		return estimationId;
+	}
+
+	public void setItems(List<Item> items) {
+		this.items = items;
+	}
+
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setEstimation(Estimation estimation) {
+		this.estimation = estimation;
+	}
+
+	public Estimation getEstimation() {
+		return estimation;
 	}
 }

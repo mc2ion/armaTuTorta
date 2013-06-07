@@ -1,3 +1,27 @@
+
+#sweetTable {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+#sweetTable th {
+	text-align: left;
+	padding-top: 5px;
+	padding-bottom: 4px;
+	background-color: #006c92;
+	color: #fff;
+}
+
+#totalTr td {
+	background-color: #1EB1DD;	
+	font-weight: bold;
+}
+
+#sweetTable td, #sweetTable th {
+	border: 1px solid #006c92;
+	padding: 3px 7px 2px 7px;
+}
+
 /* A Free Design by Bryant Smith (bryantsmith.com) */
 
 body {
