@@ -135,14 +135,13 @@
 									<td><%= (a.isNew()==1)?"Si":"No" %></td>
 									<td><p>
 										<a href="/armaTuTorta/ListPhotosServlet?albumId=<%= a.getId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/photos.png"  height="16" width="16" />
+											<img alt="logo" src="/armaTuTorta/images/photos.png"  height="16" width="16" title="Ver Fotos" />
 										</a> 
 										<a href="/armaTuTorta/EditAlbumServlet?albumId=<%= a.getId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/edit.png"  height="16" width="16" />
+											<img alt="logo" src="/armaTuTorta/images/edit.png"  height="16" width="16" title="Editar Álbum" />
 										</a> 
-										<a id="go" rel="leanModal" href="#deleteAlbum" style="color: #f7941e; font-weight: bold;" 
-										onclick="return loadVars(<%= a.getId()%>,'<%= a.getName()%>' )" >
-										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" />
+										<a id="go" rel="leanModal" href="#deleteAlbum" style="color: #f7941e; font-weight: bold;" onclick="return loadVars(<%= a.getId()%>,'<%= a.getName()%>' )" >
+										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" title="Eliminar Álbum" />
 										</a><br>
 										</p>
 									</td>

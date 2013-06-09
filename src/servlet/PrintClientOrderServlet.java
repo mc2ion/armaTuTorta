@@ -19,10 +19,10 @@ import domain.Order;
 import domain.User;
 
 /**
- * Servlet implementation class ShowClientOrderServlet
+ * Servlet implementation class PrintClientOrderServlet
  */
-@WebServlet(description = "servlet to show client order", urlPatterns = { "/ShowClientOrderServlet" })
-public class ShowClientOrderServlet extends HttpServlet {
+@WebServlet(description = "servlet to print client order", urlPatterns = { "/PrintClientOrderServlet" })
+public class PrintClientOrderServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -38,7 +38,7 @@ public class ShowClientOrderServlet extends HttpServlet {
 	/**
      * @see HttpServlet#HttpServlet()
      */
-    public ShowClientOrderServlet() {
+    public PrintClientOrderServlet() {
         super();
     }
     
@@ -75,7 +75,7 @@ public class ShowClientOrderServlet extends HttpServlet {
 				request.setAttribute("orderId", orderId);			
 				request.setAttribute("clientId", clientId);
 				
-				rd = getServletContext().getRequestDispatcher("/admin/showClientOrder.jsp");			
+				rd = getServletContext().getRequestDispatcher("/admin/printClientOrder.jsp");			
 
 				rd.forward(request, response);			
 			} else {

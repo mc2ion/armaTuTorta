@@ -50,8 +50,6 @@
 						<textarea name="txtDescription" id="txtDescription" rows="2" cols="50"><%= (optionInfo.getDescription()!=null)?optionInfo.getDescription():"" %></textarea> <br><br>
 						<label for="name">Precio:</label>
 						<input type="text" name="txtPrice" id="txtPrice" maxlength="5" size="5" value="<%= optionInfo.getPrice() %>" /> <br><br>
-						<label for="image">Imagen Asociada:</label>
-						<input type="file" name="txtImage" id="txtImage" maxlength="50" lang="es" /> <br><br>
 						<%
 						if (optionInfo.isUnavailable() == 1){
 						%>

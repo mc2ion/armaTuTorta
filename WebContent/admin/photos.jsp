@@ -138,10 +138,10 @@
 									<td><%= (p.isNew()==1)?"Si":"No" %></td>
 									<td><p> 
 										<a href="/armaTuTorta/EditPhotoServlet?photoId=<%= p.getId() %>&albumId=<%= p.getAlbumId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/edit.png"  height="16" width="16" />
+											<img alt="logo" src="/armaTuTorta/images/edit.png"  height="16" width="16" title="Editar Foto" />
 										</a> 
 										<a id="go" rel="leanModal" href="#deletePhoto" style="color: #f7941e; font-weight: bold;" onclick="return loadVars(<%= p.getAlbumId()%>, <%= p.getId()%>,'<%= p.getName()%>' )" >
-										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" />
+										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" title="Eliminar Foto" />
 										</a><br>
 										</p>
 									</td>

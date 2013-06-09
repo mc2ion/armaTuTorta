@@ -132,24 +132,24 @@
 									<td><%= (o.getIsPending()==1)?"Pendiente":"Entregado" %></td>
 									<td><%= o.getDeliveryDate() %></td>
 									<td>
-										<a href="/armaTuTorta/ShowClientOrderServlet?orderId=<%= o.getId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/detail.png"  height="16" width="16" />
+										<a href="/armaTuTorta/ShowOrderServlet?orderId=<%= o.getId() %>" style="color: transparent" >
+											<img alt="logo" src="/armaTuTorta/images/detail.png"  height="16" width="16" title="Ver Detalle" />
 										</a> 
-										<a href="/armaTuTorta/PrintClientOrderServlet?orderId=<%= o.getId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/print.png"  height="16" width="16" />
+										<a href="/armaTuTorta/PrintOrderServlet?orderId=<%= o.getId() %>" style="color: transparent" >
+											<img alt="logo" src="/armaTuTorta/images/print.png"  height="16" width="16" title="Imprimir" />
 										</a> 
 										<% if(o.getIsPending()==1){ %>
 										<a href="/armaTuTorta/CompleteOrderServlet?orderId=<%= o.getId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/pending.png"  height="16" width="16" />
+											<img alt="logo" src="/armaTuTorta/images/pending.png"  height="16" width="16" title="Marcar como Listo" />
 										</a> 
 										<% } else { %>
 										<a href="#" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/solved.png"  height="16" width="16" />
+											<img alt="logo" src="/armaTuTorta/images/solved.png"  height="16" width="16" title="Listo" />
 										</a>
 										<% } %>
 										<a id="go" rel="leanModal" href="#deleteOrder" style="color: #f7941e; font-weight: bold;" 
 										onclick="return loadVars(<%= o.getId()%>,'<%= o.getId()%>' )" >
-										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" />
+										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" title="Eliminar Pedido" />
 										</a>
 									</td>
 								</tr>

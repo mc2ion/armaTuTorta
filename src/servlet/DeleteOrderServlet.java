@@ -1,6 +1,9 @@
 package servlet;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Properties;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +15,9 @@ import javax.servlet.http.HttpSession;
 
 import command.CommandExecutor;
 
+import domain.Estimation;
+import domain.Order;
+import domain.OrderItem;
 import domain.User;
 
 /**
@@ -52,8 +58,31 @@ public class DeleteOrderServlet extends HttpServlet {
 				// perform delete order step
 				Long orderId = Long.valueOf(request.getParameter("orderId"));
 				Integer rowsUpdated = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.DeleteOrder(orderId));
-				
+				Properties propertiesFile = new Properties();
+				propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties")));
+
 				if(rowsUpdated == 1){
+					
+					Order order = (Order) CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectOrder(orderId));
+					
+					if(order.getEstimationId() != null){
+						Estimation estimation = (Estimation) CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectEstimation(order.getEstimationId()));						
+						rowsUpdated = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.DeleteEstimation(order.getEstimationId()));
+
+						if(rowsUpdated == 1 && estimation.getImage()!=null){
+							String dir = propertiesFile.getProperty("pedidosOcasionesEspecialesDirectory") + estimation.getImage();
+							File file = new File(dir);
+							file.delete();							
+						}
+					}	
+					
+					OrderItem item = (OrderItem) CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectOrderItem(orderId, (long) 42));
+					
+					if(item!=null && item.getNombreImg()!=null){
+						String dir = propertiesFile.getProperty("pedidosTortasDirectory") + item.getNombreImg();
+						File file = new File(dir);
+						file.delete();	
+					}
 					
 					request.setAttribute("info", "El pedido fue eliminado exitosamente.");
 					request.setAttribute("error", "");

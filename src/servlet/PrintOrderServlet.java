@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import command.CommandExecutor;
+
 import domain.Client;
 import domain.Estimation;
 import domain.Item;
@@ -19,10 +20,10 @@ import domain.Order;
 import domain.User;
 
 /**
- * Servlet implementation class ShowClientOrderServlet
+ * Servlet implementation class PrintOrderServlet
  */
-@WebServlet(description = "servlet to show client order", urlPatterns = { "/ShowClientOrderServlet" })
-public class ShowClientOrderServlet extends HttpServlet {
+@WebServlet(description = "servlet to print order", urlPatterns = { "/PrintOrderServlet" })
+public class PrintOrderServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -38,7 +39,7 @@ public class ShowClientOrderServlet extends HttpServlet {
 	/**
      * @see HttpServlet#HttpServlet()
      */
-    public ShowClientOrderServlet() {
+    public PrintOrderServlet() {
         super();
     }
     
@@ -53,11 +54,10 @@ public class ShowClientOrderServlet extends HttpServlet {
 			RequestDispatcher rd;
 			   
 			if(user != null){
-				Long clientId = Long.valueOf(request.getParameter("clientId"));
 				Long orderId = Long.valueOf(request.getParameter("orderId"));
 				Order orderInfo = (Order)CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectOrder(orderId));
 				
-				Client clientInfo = (Client)CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectClient(clientId));
+				Client clientInfo = (Client)CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectClient(orderInfo.getClientId()));
 				
 				orderInfo.setClient(clientInfo);
 				
@@ -72,10 +72,9 @@ public class ShowClientOrderServlet extends HttpServlet {
 				orderInfo.setItems(items);
 				
 				request.setAttribute("orderInfo", orderInfo);				
-				request.setAttribute("orderId", orderId);			
-				request.setAttribute("clientId", clientId);
+				request.setAttribute("orderId", orderId);	
 				
-				rd = getServletContext().getRequestDispatcher("/admin/showClientOrder.jsp");			
+				rd = getServletContext().getRequestDispatcher("/admin/printClientOrder.jsp");			
 
 				rd.forward(request, response);			
 			} else {

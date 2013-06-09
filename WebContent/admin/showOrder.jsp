@@ -44,8 +44,7 @@
         <div id="menu">
         	<div class="menuitemHome"><a href="UserLoginServlet">Home</a></div>	
 	  		<ul>
-           		<li class="menuitem"><a href="ListClientsServlet">Ver Clientes</a></li>
-           		<li class="menuitem"><a href="ListClientOrdersServlet?clientId=<%= request.getAttribute("clientId") %>">Ver Pedidos</a></li>
+           		<li class="menuitem"><a href="ListOrdersServlet">Ver Pedidos</a></li>
             </ul>
 			<div class="menuitemPass"><a href="EditUserPasswordServlet">Cambiar Contraseña</a></div>
         	<div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
@@ -62,7 +61,6 @@
         		<p>&nbsp;</p> 
 				<jsp:useBean id="orderInfo" type="domain.Order" scope="request"/> 
 				<input type="hidden" name="txtOrderId" value="<%= request.getAttribute("orderId") %>" />
-				<input type="hidden" name="txtClientId" value="<%= request.getAttribute("clientId") %>" />
 				<% 
 					domain.Client clientInfo = orderInfo.getClient();
 				%>
@@ -173,7 +171,7 @@
 					%>
 				</fieldset>					
 				<div style="text-align:center">
-					<form action="/armaTuTorta/PrintClientOrderServlet?orderId=<%= request.getAttribute("orderId") %>&clientId=<%= request.getAttribute("clientId") %>"  method="post">
+					<form action="/armaTuTorta/PrintClientOrderServlet?orderId=<%= request.getAttribute("orderId") %>"  method="post">
 						<div id="botonP">
 							<input type="submit"  class="button"  name="sbmtButton" value="Imprimir" style="margin-left:30%;" />
 						</div>

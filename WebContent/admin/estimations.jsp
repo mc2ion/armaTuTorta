@@ -133,17 +133,17 @@
 									<td><%= (e.getApplicationDate()==null)?"":e.getApplicationDate() %></td>
 									<td>
 										<a href="/armaTuTorta/ShowEstimationServlet?estimationId=<%= e.getId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/detail.png"  height="16" width="16" />
+											<img alt="logo" src="/armaTuTorta/images/detail.png"  height="16" width="16" title="Ver Detalle" />
 										</a> 
 										<a href="/armaTuTorta/PrintEstimationServlet?estimationId=<%= e.getId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/print.png"  height="16" width="16" />
+											<img alt="logo" src="/armaTuTorta/images/print.png"  height="16" width="16" title="Imprimir" />
 										</a> 
 										<a href="/armaTuTorta/ConvertInOrderServlet?estimationId=<%= e.getId() %>&clientId=<%= e.getClientId() %>&orderTypeId=4" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/convert.png"  height="16" width="16" />
+											<img alt="logo" src="/armaTuTorta/images/convert.png"  height="16" width="16" title="Convertir en Pedido" />
 										</a> 
 										<a id="go" rel="leanModal" href="#deleteEstimation" style="color: #f7941e; font-weight: bold;" 
 										onclick="return loadVars(<%= e.getId()%>,'<%= e.getId()%>' )" >
-										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" />
+										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" title="Eliminar Presupuesto" />
 										</a>
 									</td>
 								</tr>

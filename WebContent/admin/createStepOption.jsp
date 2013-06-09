@@ -46,8 +46,6 @@
 						<textarea name="txtDescription" id="txtDescription" rows="3" cols="50"></textarea> <br><br>
 						<label for="name">Precio:</label>
 						<input type="text" name="txtPrice" id="txtPrice" maxlength="5" size="5" /> <br><br>
-						<label for="image">Imagen Asociada:</label>
-						<input type="file" name="txtImage" id="txtImage" maxlength="50" lang="es" /> <br><br>
 						<input type="checkbox" name="txtIsUnavailable" class="check" id="txtIsUnavailable" maxlength="50" size="40" value="isUnavailable" />&nbsp; 
 							&nbsp;&nbsp; Está Agotado<br><br>
 						

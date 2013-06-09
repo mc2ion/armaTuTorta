@@ -68,10 +68,7 @@
         	<img alt="logo" src="/armaTuTorta/images/loguito5.png"/>
         </div>         
         <div id="menu">
-			<div class="menuitemHome" ><a href="UserLoginServlet">Home</a></div>	
-	    	<ul>
-            	<li class="menuitem"><a href="CreateClientServlet">Agregar Cliente</a></li>
-            </ul>
+			<div class="menuitemHome" ><a href="UserLoginServlet">Home</a></div>
 			<div class="menuitemPass"><a href="EditUserPasswordServlet">Cambiar Contraseña</a></div>
 			<div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
         </div>        
@@ -133,17 +130,17 @@
 									<td><%= (c.getOtherPhone()!=null && !c.getOtherPhone().equalsIgnoreCase(""))?c.getPhone() + " / " + c.getOtherPhone():c.getPhone() %></td>
 									<td>
 										<a href="/armaTuTorta/ListClientOrdersServlet?clientId=<%= c.getId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/orders.png"  height="16" width="16" />
+											<img alt="logo" src="/armaTuTorta/images/orders.png"  height="16" width="16" title="Ver Pedidos" />
 										</a> 
-										<a href="/armaTuTorta/EditClientServlet?clientId=<%= c.getId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/edit.png"  height="16" width="16" />
+										<a href="/armaTuTorta/ShowClientServlet?clientId=<%= c.getId() %>" style="color: transparent" >
+											<img alt="logo" src="/armaTuTorta/images/detail.png"  height="16" width="16" title="Ver Detalle" />
 										</a> 
 										<a href="/armaTuTorta/EditClientPasswordServlet?clientId=<%= c.getId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/editPassword2.png"  height="16" width="16" />
+											<img alt="logo" src="/armaTuTorta/images/editPassword2.png"  height="16" width="16" title="Cambiar Contraseña" />
 										</a> 
 										<a id="go" rel="leanModal" href="#deleteClient" style="color: #f7941e; font-weight: bold;" 
 										onclick="return loadVars(<%= c.getId()%>,'<%= (c.isCompany()==1)?c.getFirstName():c.getFirstName() + " " + c.getLastName()%>' )" >
-										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" />
+										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" title="Eliminar Cliente" />
 										</a>
 									</td>
 								</tr>

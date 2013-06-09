@@ -70,9 +70,12 @@ public class DeleteEstimationServlet extends HttpServlet {
 				
 				if(rowsUpdated == 1){
 					Estimation estimation = (Estimation) CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectEstimation(estimationId));
-					String dir = propertiesFile.getProperty("pedidosOcasionesEspecialesDirectory") + estimation.getImage();
-					File file = new File(dir);
-					file.delete();
+					
+					if(estimation.getImage()!=null){
+						String dir = propertiesFile.getProperty("pedidosOcasionesEspecialesDirectory") + estimation.getImage();
+						File file = new File(dir);
+						file.delete();						
+					}
 					
 					request.setAttribute("info", "La solicitud de presupuesto fue eliminada exitosamente.");
 					request.setAttribute("error", "");

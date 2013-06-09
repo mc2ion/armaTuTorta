@@ -105,10 +105,10 @@ public class RegisterServlet extends HttpServlet {
 				new Thread(new Runnable() {
 				    public void run() {
 				    	Properties propertiesFile = new Properties();
-						//String context = getServletContext().getInitParameter("properties");
+						String context = getServletContext().getInitParameter("properties");
 						try {
-							//propertiesFile.load(new FileInputStream(context));
-							propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
+							propertiesFile.load(new FileInputStream(context));
+							//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 						} catch (FileNotFoundException e) {
 							e.printStackTrace();
 						} catch (IOException e) {

@@ -92,7 +92,7 @@
         </div>  
 		<div id="content">  
         		<jsp:useBean id="options" type="java.util.ArrayList<domain.StepOption>" scope="request"/>  	
-        		<h2>Opciones Registradas:</h2>
+        		<h2>Opciones <%= typeInfo.getName() %>:</h2>
 				<%
         			String info = (String)request.getAttribute("info");
         			String error = (String)request.getAttribute("error");
@@ -141,10 +141,10 @@
 									<td><%= (o.isUnavailable()==1)?"Si":"No"  %></td>
 									<td><p> 
 										<a href="/armaTuTorta/EditStepOptionServlet?optionId=<%= o.getId() %>&stepId=<%= o.getOrderStepId() %>&typeId=<%= typeInfo.getId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/edit.png"  height="16" width="16" />
+											<img alt="logo" src="/armaTuTorta/images/edit.png"  height="16" width="16" title="Editar Opción" />
 										</a> 
 										<a id="go" rel="leanModal" href="#deleteOption" style="color: #f7941e; font-weight: bold;" onclick="return loadVars(<%= o.getId()%>, <%= o.getOrderStepId()%>, <%= typeInfo.getId() %>, '<%= o.getPosition()%>' )" >
-										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" />
+										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" title="Eliminar Opción" />
 										</a><br>
 										</p>
 									</td>

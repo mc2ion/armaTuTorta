@@ -17,6 +17,7 @@ public class Order {
 	private Long estimationId;
 	private List<Item> items;
 	private Estimation estimation;
+	private Client client;
 	
 	public void setId(long id) {
 		this.id = id;
@@ -125,5 +126,13 @@ public class Order {
 
 	public Estimation getEstimation() {
 		return estimation;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public Client getClient() {
+		return client;
 	}
 }

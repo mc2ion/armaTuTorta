@@ -63,7 +63,7 @@
         </div>  
 		<div id="content">  
         		<jsp:useBean id="steps" type="java.util.ArrayList<domain.OrderStep>" scope="request"/>  	
-        		<h2>Pasos Registrados:</h2>
+        		<h2>Pasos <%= typeInfo.getName() %>:</h2>
 				<%
         			String info = (String)request.getAttribute("info");
         			String error = (String)request.getAttribute("error");
@@ -110,10 +110,10 @@
 									<td><%= (s.isMultipleChoice()==1)?"Si":"No"  %></td>
 									<td><p>
 										<a href="/armaTuTorta/ListStepOptionsServlet?stepId=<%= s.getId() %>&typeId=<%= s.getOrderTypeId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/step-options.png"  height="16" width="16" />
+											<img alt="logo" src="/armaTuTorta/images/step-options.png"  height="16" width="16" title="Ver Opciones" />
 										</a> 
 										<a href="/armaTuTorta/EditOrderStepServlet?stepId=<%= s.getId() %>&typeId=<%= s.getOrderTypeId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/edit.png"  height="16" width="16" />
+											<img alt="logo" src="/armaTuTorta/images/edit.png"  height="16" width="16" title="Editar Paso" />
 										</a><br>
 										</p>
 									</td>
