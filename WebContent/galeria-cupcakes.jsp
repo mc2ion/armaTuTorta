@@ -49,9 +49,14 @@
 			});
 		});
 	</script>
-	
+	<script type="text/javascript" charset="utf-8">
+		function inhabilitar(){ 
+		   	return false;
+		} 
+		document.oncontextmenu=inhabilitar;
+	</script>
 </head>
-<body>
+<body oncontextmenu="return inhabilitar()">
 <jsp:useBean id="photos" type="java.util.ArrayList<domain.Photo>" scope="request"/>  	
     
 <%

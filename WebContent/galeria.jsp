@@ -16,8 +16,14 @@
 		$("a[rel*=leanModal]").leanModal({ top : 200, overlay : 0.4, closeButton: ".modal_close" });
 	});
 	</script>
+	<script type="text/javascript" charset="utf-8">
+		function inhabilitar(){ 
+		   	return false;
+		} 
+		document.oncontextmenu=inhabilitar;
+	</script>
 </head>
-<body>
+<body oncontextmenu="return inhabilitar()">
 <%
 	HttpSession infoPage = request.getSession();
 	session.setAttribute("prevPage", "GalleryServlet");

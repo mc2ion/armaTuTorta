@@ -33,8 +33,14 @@
 		$("#datepicker").datepicker({minDate: +1});
 	});
 	</script> 
+	<script type="text/javascript" charset="utf-8">
+		function inhabilitar(){ 
+		   	return false;
+		} 
+		document.oncontextmenu=inhabilitar;
+	</script>
 </head>
-<body>
+<body oncontextmenu="return inhabilitar()">
 <%
 	HttpSession infoPage = request.getSession();
 	session.setAttribute("prevPage", "DulcesTortasServlet?typeId=3");
