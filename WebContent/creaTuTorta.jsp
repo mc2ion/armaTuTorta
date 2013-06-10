@@ -18,9 +18,14 @@
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
 	<script type="text/javascript" src="/armaTuTorta/js/tortas.js"></script>
-
+	<script type="text/javascript" charset="utf-8">
+		function inhabilitar(){ 
+		   	return false;
+		} 
+		document.oncontextmenu=inhabilitar;
+	</script>
 </head>
-<body>
+<body oncontextmenu="return inhabilitar()">
 <%
 	HttpSession infoPage = request.getSession();
 	session.setAttribute("prevPage", "ArmaTuTortaServlet?typeId=1");
@@ -104,14 +109,13 @@
 									int aux2 = j - 1;
 									StepOption step = actualOptions.get(aux2);
 									String description = step.getDescription();
-									System.out.println("description" + description);
 									String imgDescription = "";
 									if (description != null && !description.equals(""))
 										imgDescription = "<img  id=\"imgFudge\" src=\"./images/question.png\" title=\"" +  description  + "\"/>";
 									String imagen = step.getImage();
 									hashMap.put(i + "" +j, step.getName());
-									hashMapPrice.put(step.getName(), step.getPrice());
-									hashMapId.put(step.getName(), step.getId());
+									hashMapPrice.put(i + "" +j, step.getPrice());
+									hashMapId.put(i + "" +j, step.getId());
 								%>
 							
 							<input  class="rdB<%= i %>" onClick="prueba('<%= imagen %>','<%= i %>', '<%= step.getId() %>', this);" type="<%= type %>" name="<%= i %>" value="<%= j %>" > <span id="name<%= i+ "" +j%>">  <%= step.getName()%><%= imgDescription %></span> <br>
@@ -143,8 +147,8 @@
 										StepOption step = actualOptions.get(aux2);
 										String imagen = step.getImage();
 										hashMap.put(i + "" +j, step.getName());
-										hashMapPrice.put(step.getName(), step.getPrice());
-										hashMapId.put(step.getName(), step.getId());
+										hashMapPrice.put(i + "" +j, step.getPrice());
+										hashMapId.put(i + "" +j, step.getId());
 											
 									%>
 									<option value="<%= j %>"> <%= step.getName()%>
@@ -220,8 +224,8 @@
 									int aux2 = j - 1;
 									StepOption step = actualOptions.get(aux2);
 									hashMap.put(i + "" +j, step.getName());
-									hashMapPrice.put(step.getName(), step.getPrice());
-									hashMapId.put(step.getName(), step.getId());
+									hashMapPrice.put(i + "" +j, step.getPrice());
+									hashMapId.put(i + "" +j, step.getId());
 									String imagen = step.getImage();	
 									String description = step.getDescription();
 									String imgDescription = "";

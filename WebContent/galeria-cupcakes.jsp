@@ -49,9 +49,32 @@
 			});
 		});
 	</script>
-	
+	<script type="text/javascript" charset="utf-8">
+		function inhabilitar(){ 
+		   	return false;
+		} 
+		document.oncontextmenu=inhabilitar;
+	</script>
+	<script>
+		jQuery(window).load(function(){
+			jQuery('#loading').fadeOut(500);
+			jQuery('#loadingMsg').fadeOut(500);
+		});
+	</script>
+	<style type="text/css">
+		#loading {
+			background: url(../images/ajax-loader.gif) no-repeat center center;
+			height: 50px;
+			width: 50px;
+			position: fixed;
+			left: 50%;
+			top: 50%;
+			margin: 10px 0 0 -25px;
+			z-index: 1000;
+		}
+	</style>
 </head>
-<body>
+<body oncontextmenu="return inhabilitar()">
 <jsp:useBean id="photos" type="java.util.ArrayList<domain.Photo>" scope="request"/>  	
     
 <%
@@ -79,6 +102,7 @@
 		</div>
 	</div>
 	<div id="content-aux">
+		<div id="loading"></div>
 	    <div class="title-img"><a href="/armaTuTorta/GalleryServlet"> <img src="images/return.png"> </a> Cupcakes </div>
 		<% 	if (photos.size() > 0){ %>
 		<div class="content example3">

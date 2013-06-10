@@ -40,9 +40,14 @@
 		});
 	</script>
 	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
-	
+	<script type="text/javascript" charset="utf-8">
+		function inhabilitar(){ 
+		   	return false;
+		} 
+		document.oncontextmenu=inhabilitar;
+	</script>
 </head>
-<body>
+<body oncontextmenu="return inhabilitar()">
 <%
 	HttpSession infoPage = request.getSession();
 	session.setAttribute("prevPage", "HomePageServlet");
