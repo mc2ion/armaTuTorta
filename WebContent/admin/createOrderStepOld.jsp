@@ -1,4 +1,3 @@
-<%@page import="domain.Photo"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -8,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleAdmin.css" />
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
-<title>Crear Foto</title>
+<title>Crear Paso</title>
 <script language=JavaScript> 
 	<!-- 
 	
@@ -29,8 +28,7 @@
         <div id="menu">
 			<div class="menuitemHome"><a href="UserLoginServlet">Home</a></div>	
 			<ul>      
-			<li class="menuitem"><a href="ListAlbumsServlet">Ver Álbumes</a></li>
-            <li class="menuitem"><a href="ListPhotosServlet?albumId=<%= request.getAttribute("albumId") %>">Ver Fotos</a></li>
+			<li class="menuitem"><a href="ListOrderStepsServlet?typeId=<%= request.getAttribute("typeId") %>">Ver Pasos</a></li>
 			</ul>
 			<div class="menuitemPass"><a href="EditUserPasswordServlet">Cambiar Contraseña</a></div>
 			 <div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
@@ -43,26 +41,24 @@
             <div id="leftmenu_bottom"></div>
         </div>  
 		<div id="content">
-				<h2>Agregar Foto:</h2>
+				<h2>Agregar Paso:</h2>
 	        	<p>&nbsp;</p>
            		<p>&nbsp;</p>
-				<form name="form" action="/armaTuTorta/CreatePhotoServlet?albumId=<%= request.getAttribute("albumId") %>" onsubmit="return validateCreatePhoto(this)" method="post" enctype="multipart/form-data">
-					<input type="hidden" name="txtAlbumId" value="<%= request.getAttribute("albumId") %>" />
+				<form name="form" action="/armaTuTorta/CreateOrderStepServlet" onsubmit="return validateCreateStep(this)" method="post">
+					<input type="hidden" name="txtTypeId" value="<%= request.getAttribute("typeId") %>" />
 					<fieldset>
+						<label for="name">Paso:</label>
+						<input type="number" min="1" name="txtPosition" id="txtPosition" maxlength="3" size="3" value="<%= request.getAttribute("position") %>" /> <br><br>
 						<label for="name">Nombre:</label>
-						<input type="text" name="txtName" id="txtName" maxlength="50" size="40" /> <br><br>
-						<label for="image">Imagen: (Máx. 200kb)</label>
-						<input type="file" name="txtImage" id="txtImage" maxlength="50" lang="es" /> <br><br>
-						<input type="checkbox" name="txtIsActive" class="check" id="txtIsActive" maxlength="50" size="40" value="isActive" />&nbsp; 
-							&nbsp;&nbsp; Activo <br>
-						<input type="checkbox" name="txtIsNew" class="check" id="txtIsNew" maxlength="50" size="40" value="isNew" />&nbsp; 
-							&nbsp;&nbsp; Marcar como Nuevo <br><br>
+						<textarea name="txtName" id="txtName" rows="4" cols="50"></textarea> <br><br>
+						<input type="checkbox" name="txtIsMultSel" class="check" id="txtIsMultSel" maxlength="50" size="40" value="isMulSel" />&nbsp; 
+							&nbsp;&nbsp; Es de Selección Múltiple<br><br>
 						
 					<%
 					String error = (String) request.getAttribute("error");
 					if (error != null){
 					%>
-						<div class="error-msg">
+						<div>
 							<%= error %>
 						</div>
 						<%

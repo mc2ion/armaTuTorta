@@ -672,6 +672,23 @@ function validateClient(form) {
 
 }
 
+function validateConverInOrder(form){
+	var price = form.txtPrice.value;
+	var deliveryDate = form.txtDeliveryDate.value;
+	  
+	  if(price == "") {
+	    inlineMsg('txtPrice','Debe introducir el precio del pedido.',2);
+	    return false;
+	  }
+	 
+	  if(deliveryDate == "") {
+	    inlineMsg('txtDeliveryDate','Debe introducir la fecha de entrega del pedido.', 2);
+	    return false;
+	  }
+	  
+	  return true;
+}
+
 function validateCreateAlbum(form) {
 	  var name = form.txtName.value;
 	  var image = form.txtImage.value;
@@ -862,6 +879,19 @@ function validateEditPhoto(form) {
 	  }
 	  
 	  return true;
+}
+
+function validateForgotPwd(form){
+	var email = form.txtEmail.value;
+	  
+	if(email == "") {
+		inlineMsg('txtEmail','Debe introducir un correo electrónico.',2);
+	    return false;
+	} else if (validateEmail(email) != true) {
+		return false;
+	}
+	  
+	return true;
 }
 
 var MSGTIMER = 20;

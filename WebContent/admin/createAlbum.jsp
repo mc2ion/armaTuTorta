@@ -9,8 +9,19 @@
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
 <title>Crear Álbum</title>
+<script language=JavaScript> 
+	<!-- 
+	
+	function inhabilitar(){ 
+	   	return false;
+	} 
+	
+	document.oncontextmenu=inhabilitar;
+	
+	// --> 
+	</script>
 </head>
-<body>
+<body oncontextmenu="return inhabilitar()">
 	<div id="container">
 		<div id="header">
         	<img alt="logo" src="/armaTuTorta/images/loguito5.png"/>
@@ -38,7 +49,7 @@
 					<fieldset>
 						<label for="name">Nombre:</label>
 						<input type="text" name="txtName" id="txtName" maxlength="50" size="40" /> <br><br>
-						<label for="image">Imagen:</label>
+						<label for="image">Imagen: (Máx. 200kb)</label>
 						<input type="file" name="txtImage" id="txtImage" maxlength="50" lang="es" /> <br><br>
 						<input type="checkbox" name="txtIsActive" class="check" id="txtIsActive" maxlength="50" size="40" value="isActive" />&nbsp; 
 							&nbsp;&nbsp; Activo <br>
@@ -49,7 +60,7 @@
 					String error = (String) request.getAttribute("error");
 					if (error != null){
 					%>
-						<div>
+						<div class="error-msg">
 							<%= error %>
 						</div>
 						<%

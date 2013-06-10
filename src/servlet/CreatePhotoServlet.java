@@ -67,16 +67,17 @@ public class CreatePhotoServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 		
 		RequestDispatcher rd;
 		Properties propertiesFile = new Properties();
-		//propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
-		propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
-		MultipartRequest multipart = new MultipartRequest(request, propertiesFile.getProperty("albumsDirectory"), 5*1024*1024, new DefaultFileRenamePolicy());
-		Integer albumId = Integer.valueOf(multipart.getParameter("txtAlbumId"));
+		Integer albumId = Integer.valueOf(request.getParameter("albumId"));
 		
-		try{
+		try{			
+			propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+			//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
+			MultipartRequest multipart = new MultipartRequest(request, propertiesFile.getProperty("albumsDirectory"), 200*1024, new DefaultFileRenamePolicy());
+			
 			String name = multipart.getParameter("txtName");
 			File imageFile = multipart.getFile("txtImage");
 			String image = imageFile.getName();
@@ -117,24 +118,42 @@ public class CreatePhotoServlet extends HttpServlet {
 			if(rowsUpdated == 1){
 				request.setAttribute("info", "La foto fue creada exitosamente.");
 				request.setAttribute("error", "");
-				rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);	
-				//rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);			
+				//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);	
+				rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);			
 				rd.forward(request, response);
 			} else {
 				request.setAttribute("info", "");
 				request.setAttribute("error", "Ocurrió un error durante la creación de la foto. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-				rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);		
-				//rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);		
+				//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);		
+				rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);		
 
 				rd.forward(request, response);
 			}
-		}catch (Exception e) {
+		} catch (IOException e) {
+			
+			request.setAttribute("info", "");
+			request.setAttribute("error", "La imagen supera el tamaño deseado (Máx. 200kb). Por favor intente de nuevo y si el error persiste contacte a su administrador.");
+			request.setAttribute("albumId", albumId);
+			rd = getServletContext().getRequestDispatcher("/admin/createPhoto.jsp");			
+			try {
+				rd.forward(request, response);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
+			
+		} catch (Exception e) {
 			request.setAttribute("info", "");
 			request.setAttribute("error", "Ocurrió un error durante la creación de la foto. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-			rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);			
-			//rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);			
+			//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);			
+			rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);			
 
-			rd.forward(request, response);
+			try {
+				rd.forward(request, response);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 }

@@ -8,38 +8,6 @@
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
 	<title>Detalle Presupuesto</title>
-	<script type="text/javascript">
-
-		function changeDir(){
-			var check = document.getElementById("txtIsShipping");
-			var div = document.getElementById("shippingAddress");
-			
-			if(check.checked){
-				div.style.display = "none";
-			} else {
-				div.style.display = "block";
-			}
-		}
-		
-		function changeForm(){
-			var select = document.getElementById("txtTypeId");
-			var position = select.options.selectedIndex;
-			var typeId = select.options[position].value;
-			var personDiv = document.getElementById("person");
-			var companyDiv = document.getElementById("company");
-			var span = document.getElementById("idCard");
-			
-			if((typeId == "V-") || (typeId == "E-")){
-				companyDiv.style.display="none";
-				personDiv.style.display = "block";
-				span.innerHTML = "Cédula de Identidad:";
-			} else {
-				companyDiv.style.display="block";
-				personDiv.style.display = "none";
-				span.innerHTML = "RIF:";
-			}
-		}
-	</script>
 	<script language="javascript">
 	/*****************************************************************************
 	Pop-up ajustada a foto. Script creado por Tunait!
@@ -67,8 +35,19 @@
 		ventana.moveTo((screen.width-ancho)/2,(screen.height-alto)/2); //centra la ventana. Eliminar si no se quiere centrar el popup
 	}
 	</script>
+<script language=JavaScript> 
+	<!-- 
+	
+	function inhabilitar(){ 
+	   	return false;
+	} 
+	
+	document.oncontextmenu=inhabilitar;
+	
+	// --> 
+	</script>
 </head>
-<body>
+<body oncontextmenu="return inhabilitar()">
 	<div id="container">
 		<div id="header">
         	<img alt="logo" src="/armaTuTorta/images/loguito5.png"/>

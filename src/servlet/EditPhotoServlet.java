@@ -76,17 +76,18 @@ public class EditPhotoServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException{
 		
 		RequestDispatcher rd;
 		Properties propertiesFile = new Properties();
-		//propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
-		propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
-		MultipartRequest multipart = new MultipartRequest(request, propertiesFile.getProperty("albumsDirectory"), 5*1024*1024, new DefaultFileRenamePolicy());
-		Long albumId = Long.valueOf(multipart.getParameter("txtAlbumId"));
-				
+		Long albumId = Long.valueOf(request.getParameter("albumId"));
+		Long photoId = Long.valueOf(request.getParameter("photoId"));
+						
 		try{
-			Long photoId = Long.valueOf(multipart.getParameter("txtPhotoId"));
+			propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+			//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
+			MultipartRequest multipart = new MultipartRequest(request, propertiesFile.getProperty("albumsDirectory"), 200*1024, new DefaultFileRenamePolicy());
+			
 			String name = multipart.getParameter("txtName");
 			File imageFile = multipart.getFile("txtImage");
 			String dir = propertiesFile.getProperty("albumsDirectory") + propertiesFile.getProperty("fileSeparator") + Album.getDirectory(albumId);
@@ -145,26 +146,43 @@ public class EditPhotoServlet extends HttpServlet {
 			if(rowsUpdated == 1){
 				request.setAttribute("info", "La foto fue editada exitosamente.");
 				request.setAttribute("error", "");
-				rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);	
-				//rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);			
+				//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);	
+				rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);			
 
 				rd.forward(request, response);
 			} else {
 				request.setAttribute("info", "");
 				request.setAttribute("error", "Ocurrió un error durante la edición de la foto. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-				rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);
-				//rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);						
+				//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);
+				rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);						
 
 				rd.forward(request, response);
 			}
+		} catch (IOException e) {
+			
+			request.setAttribute("info", "");
+			request.setAttribute("error", "La imagen supera el tamaño deseado (Máx. 200kb). Por favor intente de nuevo y si el error persiste contacte a su administrador.");
+			request.setAttribute("albumId", albumId);
+			request.setAttribute("photoId", photoId);
+			try {
+				doGet(request, response);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
 			
 		} catch (Exception e) {
 			request.setAttribute("info", "");
 			request.setAttribute("error", "Ocurrió un error durante la edición de la foto. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-			rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);
-			//rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);						
+			//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);
+			rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);						
 
-			rd.forward(request, response);
+			try {
+				rd.forward(request, response);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 }

@@ -8,8 +8,19 @@
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
 	<title>Modificar Contraseña</title>	
+<script language=JavaScript> 
+	<!-- 
+	
+	function inhabilitar(){ 
+	   	return false;
+	} 
+	
+	document.oncontextmenu=inhabilitar;
+	
+	// --> 
+	</script>
 </head>
-<body>
+<body oncontextmenu="return inhabilitar()">
 	<div id="container">
 		<div id="header">
         	<img alt="logo" src="/armaTuTorta/images/loguito5.png"/>

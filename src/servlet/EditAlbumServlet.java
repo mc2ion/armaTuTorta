@@ -77,12 +77,13 @@ public class EditAlbumServlet extends HttpServlet {
 		
 		RequestDispatcher rd;
 		Properties propertiesFile = new Properties();
-		//propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
-		propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
-		MultipartRequest multipart = new MultipartRequest(request, propertiesFile.getProperty("albumsDirectory"), 5*1024*1024, new DefaultFileRenamePolicy());
+		Long albumId = Long.valueOf(request.getParameter("albumId"));		
 				
 		try{
-			Long albumId = Long.valueOf(multipart.getParameter("txtAlbumId"));
+			propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+			//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
+			MultipartRequest multipart = new MultipartRequest(request, propertiesFile.getProperty("albumsDirectory"), 200*1024, new DefaultFileRenamePolicy());
+			
 			String name = multipart.getParameter("txtName");
 			File imageFile = multipart.getFile("txtImage");
 			String dir = propertiesFile.getProperty("albumsDirectory") + propertiesFile.getProperty("fileSeparator") + Album.getDirectory(albumId) + 
@@ -151,6 +152,18 @@ public class EditAlbumServlet extends HttpServlet {
 
 				rd.forward(request, response);
 			}
+			
+		} catch (IOException e) {
+			
+			request.setAttribute("info", "");
+			request.setAttribute("error", "La imagen supera el tamaño deseado (Máx. 200kb). Por favor intente de nuevo y si el error persiste contacte a su administrador.");
+			request.setAttribute("albumId", albumId);
+			try {
+				doGet(request, response);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
 			
 		} catch (Exception e) {
 			request.setAttribute("info", "");

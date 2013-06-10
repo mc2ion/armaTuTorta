@@ -29,8 +29,19 @@
 	} );
 </script>
 	<title>Convertir en Pedido</title>
+<script language=JavaScript> 
+	<!-- 
+	
+	function inhabilitar(){ 
+	   	return false;
+	} 
+	
+	document.oncontextmenu=inhabilitar;
+	
+	// --> 
+	</script>
 </head>
-<body>
+<body oncontextmenu="return inhabilitar()">
 	<div id="container">
 		<div id="header">
         	<img alt="logo" src="/armaTuTorta/images/loguito5.png"/>

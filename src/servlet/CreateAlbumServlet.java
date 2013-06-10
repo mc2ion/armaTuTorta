@@ -63,15 +63,17 @@ public class CreateAlbumServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 		
-		RequestDispatcher rd;	
-		Properties propertiesFile = new Properties();			
-		propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
-		//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
-		MultipartRequest multipart = new MultipartRequest(request, propertiesFile.getProperty("albumsDirectory"), 5*1024*1024, new DefaultFileRenamePolicy());
 		
-		try{			
+		RequestDispatcher rd;
+		Properties propertiesFile = new Properties();
+					
+		try{	
+			propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+			//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
+			MultipartRequest multipart = new MultipartRequest(request, propertiesFile.getProperty("albumsDirectory"), 200*1024, new DefaultFileRenamePolicy());
+			
 			String name = multipart.getParameter("txtName");
 			File imageFile = multipart.getFile("txtImage");
 			String image = imageFile.getName();
@@ -122,12 +124,29 @@ public class CreateAlbumServlet extends HttpServlet {
 
 				rd.forward(request, response);
 			}			
-		}catch (Exception e) {
+		} catch (IOException e) {
+			
+			request.setAttribute("info", "");
+			request.setAttribute("error", "La imagen supera el tamaño deseado (Máx. 200kb). Por favor intente de nuevo y si el error persiste contacte a su administrador.");
+			rd = getServletContext().getRequestDispatcher("/admin/createAlbum.jsp");			
+			try {
+				rd.forward(request, response);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
+			
+		} catch (Exception e) {
 			request.setAttribute("info", "");
 			request.setAttribute("error", "Ocurrió un error durante la creación del álbum. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
 			rd = getServletContext().getRequestDispatcher("/ListAlbumsServlet");			
 
-			rd.forward(request, response);
+			try {
+				rd.forward(request, response);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 }

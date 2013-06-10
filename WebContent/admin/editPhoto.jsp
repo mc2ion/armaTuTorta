@@ -8,8 +8,19 @@
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
 	<title>Editar Foto</title>
+<script language=JavaScript> 
+	<!-- 
+	
+	function inhabilitar(){ 
+	   	return false;
+	} 
+	
+	document.oncontextmenu=inhabilitar;
+	
+	// --> 
+	</script>
 </head>
-<body>
+<body oncontextmenu="return inhabilitar()">
 	<div id="container">
 		<div id="header">
         	<img alt="logo" src="/armaTuTorta/images/loguito5.png"/>
@@ -35,15 +46,15 @@
         		<h2>Editar Foto:</h2>
 	        	<p>&nbsp;</p>
            		<p>&nbsp;</p>
-				<form action="/armaTuTorta/EditPhotoServlet" onsubmit="return validateEditPhoto(this)" method="post" enctype="multipart/form-data">
-				<jsp:useBean id="photoInfo" type="domain.Photo" scope="request"/> 
-				<input type="hidden" name="txtPhotoId" value="<%= photoInfo.getId() %>" />
+           		<jsp:useBean id="photoInfo" type="domain.Photo" scope="request"/> 
+				<form action="/armaTuTorta/EditPhotoServlet?albumId=<%= request.getAttribute("albumId") %>&photoId=<%= photoInfo.getId() %>" onsubmit="return validateEditPhoto(this)" method="post" enctype="multipart/form-data">
+								<input type="hidden" name="txtPhotoId" value="<%= photoInfo.getId() %>" />
 				<input type="hidden" name="txtAlbumId" value="<%= request.getAttribute("albumId") %>" />
 				<input type="hidden" name="txtCurrentImage" value="<%= photoInfo.getImage() %>" />
 				<fieldset>
 					<label for="name">Nombre:</label>
 					<input type="text" name="txtName" id="txtName" maxlength="50" size="40" value="<%= photoInfo.getName() %>"/> <br><br>
-					<label for="image">Imagen:</label>
+					<label for="image">Imagen: (Máx. 200kb)</label>
 					<input type="file" name="txtImage" id="txtImage" maxlength="50" lang="es"/> <br>	
 					 <%= photoInfo.getImage() %><br><br>				
 					<%
@@ -73,7 +84,7 @@
 
 					if (error != null){
 					%>
-					<div>
+					<div class="error-msg">
 						<%= error %>
 					</div>
 					<%

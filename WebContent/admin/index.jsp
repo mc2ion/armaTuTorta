@@ -9,8 +9,19 @@
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<title>Arma Tu Torta - Administrador</title>
 	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
+	<script language=JavaScript> 
+	<!-- 
+	
+	function inhabilitar(){ 
+	   	return false;
+	} 
+	
+	document.oncontextmenu=inhabilitar;
+	
+	// --> 
+	</script>
 </head>
-<body>
+<body oncontextmenu="return inhabilitar()">
 	<div id="container">
 		<div id="header">
 			<img alt="logo" src="/armaTuTorta/images/loguito5.png"/>

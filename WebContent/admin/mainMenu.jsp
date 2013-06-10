@@ -7,8 +7,19 @@
 	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleAdmin.css" />
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<title>Menú Principal</title>
+<script language=JavaScript> 
+	<!-- 
+	
+	function inhabilitar(){ 
+	   	return false;
+	} 
+	
+	document.oncontextmenu=inhabilitar;
+	
+	// --> 
+	</script>
 </head>
-<body>
+<body oncontextmenu="return inhabilitar()">
 	<div id="container">
 		<div id="header">
             <img alt="logo" src="/armaTuTorta/images/loguito5.png"/>

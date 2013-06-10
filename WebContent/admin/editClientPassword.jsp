@@ -8,8 +8,19 @@
 	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
 	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
 	<title>Editar Cliente</title>	
+<script language=JavaScript> 
+	<!-- 
+	
+	function inhabilitar(){ 
+	   	return false;
+	} 
+	
+	document.oncontextmenu=inhabilitar;
+	
+	// --> 
+	</script>
 </head>
-<body>
+<body oncontextmenu="return inhabilitar()">
 	<div id="container">
 		<div id="header">
         	<img alt="logo" src="/armaTuTorta/images/loguito5.png"/>
@@ -18,7 +29,6 @@
         	<div class="menuitemHome"><a href="UserLoginServlet">Home</a></div>	
 	  		<ul>
            		<li class="menuitem"><a href="ListClientsServlet">Ver Clientes</a></li>
-           		<li class="menuitem"><a href="CreateClientServlet?clientId=<%= request.getAttribute("clientId") %>">Agregar Cliente</a></li>
             </ul>
 			<div class="menuitemPass"><a href="EditUserPasswordServlet">Cambiar Contraseña</a></div>
         	<div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
