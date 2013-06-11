@@ -19,6 +19,20 @@
 	
 	// --> 
 	</script>
+	<script src="../js/jquery.nicescroll.min.js"></script>
+	<script>
+	$(document).ready(
+	  function() { 
+	    $("#scrollDiv").niceScroll({cursorcolor:"#00F"});
+	  }
+	);
+	</script>
+	<style type="text/css">
+	#scrollDiv {
+		overflow: auto;
+		height: 350px;
+	}
+	</style>
 </head>
 <body oncontextmenu="return inhabilitar()">
 	<div id="container">
@@ -44,6 +58,7 @@
         		<h2>Detalle Cliente:</h2>
         		<p>&nbsp;</p> 
 				<jsp:useBean id="clientInfo" type="domain.Client" scope="request"/> 
+				<div id="scrollDiv">
 				<input type="hidden" name="txtClientId" value="<%= request.getAttribute("clientId") %>" />
 				<h3>Datos Cliente:</h3>
 				<fieldset>
@@ -81,6 +96,7 @@
 					}
 					%>						
 				</fieldset>	
+				</div>
 		    <div id="footer"></div>
 		</div>
 	</div>

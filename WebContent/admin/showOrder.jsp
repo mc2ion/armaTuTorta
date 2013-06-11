@@ -46,6 +46,20 @@
 	
 	// --> 
 	</script>
+	<script src="../js/jquery.nicescroll.min.js"></script>
+	<script>
+	$(document).ready(
+	  function() { 
+	    $("#scrollDiv").niceScroll({cursorcolor:"#00F"});
+	  }
+	);
+	</script>
+	<style type="text/css">
+	#scrollDiv {
+		overflow: auto;
+		height: 350px;
+	}
+	</style>
 </head>
 <body oncontextmenu="return inhabilitar()">
 	<div id="container">
@@ -75,6 +89,7 @@
 				<% 
 					domain.Client clientInfo = orderInfo.getClient();
 				%>
+				<div id="scrollDiv">
 				<h3>Datos Cliente:</h3>
 				<fieldset>
 					<label for="name" class="etiq"><span id="idCard"><%= clientInfo.getIdentityCard() %></span></label><br>
@@ -180,7 +195,8 @@
 						}
 					}					
 					%>
-				</fieldset>					
+				</fieldset>		
+				</div>
 				<div style="text-align:center">
 					<form action="/armaTuTorta/PrintClientOrderServlet?orderId=<%= request.getAttribute("orderId") %>"  method="post">
 						<div id="botonP">
