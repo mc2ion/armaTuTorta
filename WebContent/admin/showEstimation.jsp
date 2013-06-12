@@ -46,6 +46,21 @@
 	
 	// --> 
 	</script>
+	
+	<script src="../js/jquery.nicescroll.min.js"></script>
+	<script>
+	$(document).ready(
+	  function() { 
+	    $("#scrollDiv").niceScroll({cursorcolor:"#00F"});
+	  }
+	);
+	</script>
+	<style type="text/css">
+	#scrollDiv {
+		overflow: auto;
+		height: 350px;
+	}
+	</style>
 </head>
 <body oncontextmenu="return inhabilitar()">
 	<div id="container">
@@ -72,6 +87,7 @@
         		<p>&nbsp;</p> 
 				<jsp:useBean id="estimationInfo" type="domain.Estimation" scope="request"/> 
 				<input type="hidden" name="txtEstimationId" value="<%= request.getAttribute("estimationId") %>" />
+				<div id="scrollDiv">
 				<h3>Datos Cliente:</h3>
 				<fieldset>
 					<label for="name" class="etiq"><span id="idCard"><%= estimationInfo.getClient().getIdentityCard() %></span></label><br>
@@ -95,6 +111,7 @@
 				}
 				%>
 				</fieldset>
+				</div>
 				<div style="text-align:center">
 					<form action="/servlet/servlet.PrintEstimationServlet?estimationId=<%= estimationInfo.getId() %>"  method="post">
 						<div id="botonP">

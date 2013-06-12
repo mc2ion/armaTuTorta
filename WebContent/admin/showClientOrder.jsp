@@ -46,6 +46,20 @@
 	
 	// --> 
 	</script>
+	<script src="../js/jquery.nicescroll.min.js"></script>
+	<script>
+	$(document).ready(
+	  function() { 
+	    $("#scrollDiv").niceScroll({cursorcolor:"#00F"});
+	  }
+	);
+	</script>
+	<style type="text/css">
+	#scrollDiv {
+		overflow: auto;
+		height: 350px;
+	}
+	</style>
 </head>
 <body oncontextmenu="return inhabilitar()">
 	<div id="container">
@@ -77,112 +91,114 @@
 				<% 
 					domain.Client clientInfo = orderInfo.getClient();
 				%>
-				<h3>Datos Cliente:</h3>
-				<fieldset>
-					<label for="name" class="etiq"><span id="idCard"><%= clientInfo.getIdentityCard() %></span></label><br>
-					<label for="name" class="etiq"><span id="idCard"><%= clientInfo.getFirstName() + " " + clientInfo.getLastName() %></span></label><br>					
-					<label for="name" class="etiq"><span id="idCard">Correo Electrónico: </span></label><%= clientInfo.getEmail() %><br>
-					<label for="name" class="etiq"><span id="idCard">Teléfono: </span></label><%= (clientInfo.getOtherPhone()==null || clientInfo.getOtherPhone().equalsIgnoreCase(""))? clientInfo.getPhone(): clientInfo.getPhone() + " / "+clientInfo.getOtherPhone() %><br>
-					<label for="name" class="etiq"><span id="idCard">Dirección: </span></label><%= clientInfo.getAddress() %><br> 
-					<label for="name" class="etiq"><span id="idCard">Dirección Envío: </span></label><%= (clientInfo.getShippingAddress()==null || clientInfo.getShippingAddress().equalsIgnoreCase(""))?"(Igual a la anterior)":clientInfo.getShippingAddress() %>
-				</fieldset>
-				<h3>Datos Solicitud:</h3>
-				<fieldset>
-					<label for="name" class="etiq"><span id="idCard">Fecha Pedido: </span></label><%= orderInfo.getOrderDate() %><br>
-					<label for="name" class="etiq"><span id="idCard">Producto Pedido: </span></label><%= orderInfo.getOrderTypeName() %><br>
-					<label for="name" class="etiq"><span id="idCard">Fecha Entrega: </span></label><%= orderInfo.getDeliveryDate() %><br>
-					<label for="name" class="etiq"><span id="idCard">Status: </span></label><%= (orderInfo.getIsPending()==1)?"Pendiente":"Entregado" %><br>
-					<% 
-					java.util.List<domain.Item> items = orderInfo.getItems();
-					long lastStep = 0;
-					
-					if(orderInfo.getOrderTypeId()==3){
-						%>
-					<table id="sweetTable">
-					<tbody>
-						<tr>
-							<th>Cantidad</th>
-							<th>Dulce</th>
-						</tr>
-						<%
-						for(domain.Item item : items){
-						%>
-						<tr>
-							<td><%= item.getAdditionalInfo() %></td>
-							<td><%= item.getOptionName() %></td>
-						</tr>
-						<%
-						}
-						%>
-						<tr id="totalTr">
-							<td>Total</td>
-							<td><%= orderInfo.getTotal() %></td>
-						</tr>
-					</tbody>
-					</table>
-						<% 	
-					} else {
-						for(domain.Item item : items){
-							if(lastStep!=item.getOrderStepId()){
-								if(item.getStepOptionId()==46){
-						%>
-						<label for="name" class="etiq"><span id="idCard"><%= item.getStepLabel() %></span></label><%= item.getAdditionalInfo() %> Docena(s)<br>
+				<div id="scrollDiv">
+					<h3>Datos Cliente:</h3>
+					<fieldset>
+						<label for="name" class="etiq"><span id="idCard"><%= clientInfo.getIdentityCard() %></span></label><br>
+						<label for="name" class="etiq"><span id="idCard"><%= clientInfo.getFirstName() + " " + clientInfo.getLastName() %></span></label><br>					
+						<label for="name" class="etiq"><span id="idCard">Correo Electrónico: </span></label><%= clientInfo.getEmail() %><br>
+						<label for="name" class="etiq"><span id="idCard">Teléfono: </span></label><%= (clientInfo.getOtherPhone()==null || clientInfo.getOtherPhone().equalsIgnoreCase(""))? clientInfo.getPhone(): clientInfo.getPhone() + " / "+clientInfo.getOtherPhone() %><br>
+						<label for="name" class="etiq"><span id="idCard">Dirección: </span></label><%= clientInfo.getAddress() %><br> 
+						<label for="name" class="etiq"><span id="idCard">Dirección Envío: </span></label><%= (clientInfo.getShippingAddress()==null || clientInfo.getShippingAddress().equalsIgnoreCase(""))?"(Igual a la anterior)":clientInfo.getShippingAddress() %>
+					</fieldset>
+					<h3>Datos Solicitud:</h3>
+					<fieldset>
+						<label for="name" class="etiq"><span id="idCard">Fecha Pedido: </span></label><%= orderInfo.getOrderDate() %><br>
+						<label for="name" class="etiq"><span id="idCard">Producto Pedido: </span></label><%= orderInfo.getOrderTypeName() %><br>
+						<label for="name" class="etiq"><span id="idCard">Fecha Entrega: </span></label><%= orderInfo.getDeliveryDate() %><br>
+						<label for="name" class="etiq"><span id="idCard">Status: </span></label><%= (orderInfo.getIsPending()==1)?"Pendiente":"Entregado" %><br>
 						<% 
-								}else{
-						%>
-						<label for="name" class="etiq"><span id="idCard"><%= item.getStepLabel() %></span></label><%= item.getOptionName() %><br>
-						<% 			
-								}
-							}else{
-								if(item.getStepOptionId()==46){
-						%>
-						<label for="name" class="etiq"><span id="idCard" style="color:white;"><%= item.getStepLabel() %></span></label><%= item.getAdditionalInfo() %> Docena(s)<br>
-						<% 
-								}else{
-						%>
-						<label for="name" class="etiq"><span id="idCard" style="color:white;"><%= item.getStepLabel() %></span></label><%= item.getOptionName() %><br>
-						<% 
-								}
-							}
-							
-							if(item.getStepOptionId()==45){
-						%>
-						<label for="name" class="etiq"><span id="idCard">Texto Calcomania:</span></label>"<%= item.getAdditionalInfo() %>"<br>
-						<%
-							} else if(item.getStepOptionId()==42){
-						%>
-						<br>
-						<a class="seeImage" href= "<%= "/files/pedidosTortas/" + item.getAdditionalInfo() %>" onclick="afoto('<%= "/files/pedidosTortas/" + item.getAdditionalInfo() %>','Imagen Fondant');return false" > Ver Imagen de Fondant </a><br>
-						<%		
-							}
-							
-							lastStep = item.getOrderStepId();
-						}
+						java.util.List<domain.Item> items = orderInfo.getItems();
+						long lastStep = 0;
 						
-						if(orderInfo.getEstimationId()!=null && orderInfo.getEstimationId()!=0){
-							domain.Estimation estimationInfo = orderInfo.getEstimation();
-						%>							
-							<label for="name" class="etiq"><span id="idCard">Ocasión Especial: </span></label><%= estimationInfo.getSpecialOccasion() %><br>
-							<label for="name" class="etiq"><span id="idCard">Productos Deseados: </span></label><%= estimationInfo.getProducts() %><br>
-							<label for="name" class="etiq"><span id="idCard">Número Invitados: </span></label><%= estimationInfo.getGuestsNumber() %><br>
-							<label for="name" class="etiq"><span id="idCard">Detalles Adicionales: </span></label>"<%= estimationInfo.getDescription() %>"<br><br>	
-							<%
-							if(estimationInfo.getImage()!=null && !estimationInfo.getImage().equalsIgnoreCase("")){
+						if(orderInfo.getOrderTypeId()==3){
 							%>
-							<a class="seeImage" href= "<%= "/files/pedidosOcasionesEspeciales/" + estimationInfo.getImage() %>" onclick="afoto('<%= "/files/pedidosOcasionesEspeciales/" + estimationInfo.getImage() %>','Imagen Referencia');return false" > Ver Imagen de Referencia </a>
+						<table id="sweetTable">
+						<tbody>
+							<tr>
+								<th>Cantidad</th>
+								<th>Dulce</th>
+							</tr>
+							<%
+							for(domain.Item item : items){
+							%>
+							<tr>
+								<td><%= item.getAdditionalInfo() %></td>
+								<td><%= item.getOptionName() %></td>
+							</tr>
 							<%
 							}
-						}
-						
-						if(orderInfo.getAdditionalInfo()!=null){
+							%>
+							<tr id="totalTr">
+								<td>Total</td>
+								<td><%= orderInfo.getTotal() %></td>
+							</tr>
+						</tbody>
+						</table>
+							<% 	
+						} else {
+							for(domain.Item item : items){
+								if(lastStep!=item.getOrderStepId()){
+									if(item.getStepOptionId()==46){
+							%>
+							<label for="name" class="etiq"><span id="idCard"><%= item.getStepLabel() %></span></label><%= item.getAdditionalInfo() %> Docena(s)<br>
+							<% 
+									}else{
+							%>
+							<label for="name" class="etiq"><span id="idCard"><%= item.getStepLabel() %></span></label><%= item.getOptionName() %><br>
+							<% 			
+									}
+								}else{
+									if(item.getStepOptionId()==46){
+							%>
+							<label for="name" class="etiq"><span id="idCard" style="color:white;"><%= item.getStepLabel() %></span></label><%= item.getAdditionalInfo() %> Docena(s)<br>
+							<% 
+									}else{
+							%>
+							<label for="name" class="etiq"><span id="idCard" style="color:white;"><%= item.getStepLabel() %></span></label><%= item.getOptionName() %><br>
+							<% 
+									}
+								}
+								
+								if(item.getStepOptionId()==45){
+							%>
+							<label for="name" class="etiq"><span id="idCard">Texto Calcomania:</span></label>"<%= item.getAdditionalInfo() %>"<br>
+							<%
+								} else if(item.getStepOptionId()==42){
+							%>
+							<br>
+							<a class="seeImage" href= "<%= "/files/pedidosTortas/" + item.getAdditionalInfo() %>" onclick="afoto('<%= "/files/pedidosTortas/" + item.getAdditionalInfo() %>','Imagen Fondant');return false" > Ver Imagen de Fondant </a><br>
+							<%		
+								}
+								
+								lastStep = item.getOrderStepId();
+							}
+
+							if(orderInfo.getEstimationId()!=null && orderInfo.getEstimationId()!=0){
+								domain.Estimation estimationInfo = orderInfo.getEstimation();
+							%>							
+								<label for="name" class="etiq"><span id="idCard">Ocasión Especial: </span></label><%= estimationInfo.getSpecialOccasion() %><br>
+								<label for="name" class="etiq"><span id="idCard">Productos Deseados: </span></label><%= estimationInfo.getProducts() %><br>
+								<label for="name" class="etiq"><span id="idCard">Número Invitados: </span></label><%= estimationInfo.getGuestsNumber() %><br>
+								<label for="name" class="etiq"><span id="idCard">Detalles Adicionales: </span></label>"<%= estimationInfo.getDescription() %>"<br><br>	
+								<%
+								if(estimationInfo.getImage()!=null && !estimationInfo.getImage().equalsIgnoreCase("")){
+								%>
+								<a class="seeImage" href= "<%= "/files/pedidosOcasionesEspeciales/" + estimationInfo.getImage() %>" onclick="afoto('<%= "/files/pedidosOcasionesEspeciales/" + estimationInfo.getImage() %>','Imagen Referencia');return false" > Ver Imagen de Referencia </a>
+								<%
+								}
+							}
+							
+							if(orderInfo.getAdditionalInfo()!=null){
+							%>
+								<br><br>
+								<label for="name" class="etiq"><span id="idCard">Otras Anotaciones:</span></label>"<%= orderInfo.getAdditionalInfo() %>"
+							<%
+							}
+						}					
 						%>
-							<br><br>
-							<label for="name" class="etiq"><span id="idCard">Otras Anotaciones:</span></label>"<%= orderInfo.getAdditionalInfo() %>"
-						<%
-						}
-					}					
-					%>
-				</fieldset>					
+					</fieldset>		
+				</div>	
 				<div style="text-align:center">
 					<form action="/servlet/servlet.PrintClientOrderServlet?orderId=<%= request.getAttribute("orderId") %>&clientId=<%= request.getAttribute("clientId") %>"  method="post">
 						<div id="botonP">
