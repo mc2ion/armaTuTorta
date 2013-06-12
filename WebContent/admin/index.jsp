@@ -5,10 +5,9 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<link rel="stylesheet" type="text/css" href="../css/styleAdmin.css" />
-	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleAdmin.css" />
-	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
+	<link rel="shortcut icon" href="../images/ico.ico">
 	<title>Arma Tu Torta - Administrador</title>
-	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
+	<script type="text/javascript" src="../js/messages.js"></script>
 	<script language=JavaScript> 
 	<!-- 
 	
@@ -24,11 +23,11 @@
 <body oncontextmenu="return inhabilitar()">
 	<div id="container">
 		<div id="header">
-			<img alt="logo" src="/armaTuTorta/images/loguito5.png"/>
+			<img alt="logo" src="../images/loguito5.png"/>
         </div>           
        
 		<div id="contentLogin">
-				<form name="userForm" action="/armaTuTorta/UserLoginServlet" onsubmit="return validateLogin(this)" method="post">
+				<form name="userForm" action="/servlet/servlet.UserLoginServlet" onsubmit="return validateLogin(this)" method="post">
 				<%
         			String info = (String)request.getAttribute("info");
         			String error = (String)request.getAttribute("error");

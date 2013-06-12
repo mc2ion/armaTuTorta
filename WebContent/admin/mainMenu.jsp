@@ -4,8 +4,8 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleAdmin.css" />
-	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
+	<link rel="stylesheet" type="text/css" href="../css/styleAdmin.css" />
+	<link rel="shortcut icon" href="../images/ico.ico">
 	<title>Menú Principal</title>
 <script language=JavaScript> 
 	<!-- 
@@ -22,12 +22,12 @@
 <body oncontextmenu="return inhabilitar()">
 	<div id="container">
 		<div id="header">
-            <img alt="logo" src="/armaTuTorta/images/loguito5.png"/>
+            <img alt="logo" src="../images/loguito5.png"/>
         </div>  
         <div id="menu">
-			<div class="menuitemHome"><a href="UserLoginServlet">Home</a></div>
-			<div class="menuitemPass"><a href="EditUserPasswordServlet">Cambiar Contraseña</a></div>	
-			<div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
+			<div class="menuitemHome"><a href="/servlet/servlet.UserLoginServlet">Home</a></div>
+			<div class="menuitemPass"><a href="/servlet/servlet.EditUserPasswordServlet">Cambiar Contraseña</a></div>	
+			<div class="menuitemSalir"><a href="../admin/index.jsp">Salir</a></div>	
         </div>   	
         <div id="leftmenu">
         	<div id="leftmenu_top"></div>

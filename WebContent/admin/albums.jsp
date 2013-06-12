@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleAdmin.css" />
-<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
+<link rel="stylesheet" type="text/css" href="../css/styleAdmin.css" />
+<link rel="shortcut icon" href="../images/ico.ico">
 <title>Administrador Galería</title>
-<script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.js"></script>
-<script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.dataTables.js"></script>
-<script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
+<script type="text/javascript" language="javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" language="javascript" src="../js/jquery.dataTables.js"></script>
+<script type="text/javascript" language="javascript" src="../js/jquery.leanModal.min.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#example').dataTable( {
@@ -76,20 +76,20 @@
 <body oncontextmenu="return inhabilitar()">
 	<div id="container">
 		<div id="header">
-        	<img alt="logo" src="/armaTuTorta/images/loguito5.png"/>
+        	<img alt="logo" src="../images/loguito5.png"/>
         </div>         
         <div id="menu">
-			<div class="menuitemHome" ><a href="UserLoginServlet">Home</a></div>	
+			<div class="menuitemHome" ><a href="/servlet/servlet.UserLoginServlet">Home</a></div>	
 	    	<ul>
-            	<li class="menuitem"><a href="CreateAlbumServlet">Agregar Álbum</a></li>
+            	<li class="menuitem"><a href="/servlet/servlet.CreateAlbumServlet">Agregar Álbum</a></li>
             </ul>
-			<div class="menuitemPass"><a href="EditUserPasswordServlet">Cambiar Contraseña</a></div>
-			<div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
+			<div class="menuitemPass"><a href="/servlet/servlet.EditUserPasswordServlet">Cambiar Contraseña</a></div>
+			<div class="menuitemSalir"><a href="../admin/index.jsp">Salir</a></div>	
         </div>        
        <div id="leftmenu">
         	<div id="leftmenu_top"></div>
 			<div id="leftmenu_main">                    
-				<jsp:include page="/inc/adminMenu.jsp"></jsp:include>
+				<jsp:include page="../inc/adminMenu.jsp"></jsp:include>
 			</div>
             <div id="leftmenu_bottom"></div>
         </div>  
@@ -140,19 +140,19 @@
 									<td><%= a.getId() %></td>
 									<td><%= a.getName() %></td>
 									<td>
-										<img alt="cover" src="<%= "/armaTuTorta/files/" + a.getDirectory() + "/" + a.getImage() %>" width="50" height="50" />
+										<img alt="cover" src="<%= "/files/" + a.getDirectory() + "/" + a.getImage() %>" width="50" height="50" />
 									</td>
 									<td><%= (a.isActive()==1)?"Si":"No"  %></td>
 									<td><%= (a.isNew()==1)?"Si":"No" %></td>
 									<td><p>
-										<a href="/armaTuTorta/ListPhotosServlet?albumId=<%= a.getId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/photos.png"  height="16" width="16" title="Ver Fotos" />
+										<a href="/servlet/servlet.ListPhotosServlet?albumId=<%= a.getId() %>" style="color: transparent" >
+											<img alt="logo" src="/images/photos.png"  height="16" width="16" title="Ver Fotos" />
 										</a> 
-										<a href="/armaTuTorta/EditAlbumServlet?albumId=<%= a.getId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/edit.png"  height="16" width="16" title="Editar Álbum" />
+										<a href="/servlet/servlet.EditAlbumServlet?albumId=<%= a.getId() %>" style="color: transparent" >
+											<img alt="logo" src="/images/edit.png"  height="16" width="16" title="Editar Álbum" />
 										</a> 
 										<a id="go" rel="leanModal" href="#deleteAlbum" style="color: #f7941e; font-weight: bold;" onclick="return loadVars(<%= a.getId()%>,'<%= a.getName()%>' )" >
-										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" title="Eliminar Álbum" />
+										<img alt="logo" src="/images/delete.png" height="16" width="16" title="Eliminar Álbum" />
 										</a><br>
 										</p>
 									</td>
@@ -180,7 +180,7 @@
 			<div id="signup-header">
 				<a class="close_x" id="close_x"  href="#"></a>
 			</div>
-			<form action="/armaTuTorta/DeleteAlbumServlet" method="post"  onsubmit="return setV(this)">
+			<form action="/servlet/servlet.DeleteAlbumServlet" method="post"  onsubmit="return setV(this)">
 				<input type="hidden" id="albumId" class="good_input" name="albumId"  value=""/>
 				<div class="btn-fld">
 					<input type="submit"  class="buttonPopUpDelete"  name="sbmtButton" value="Aceptar"  />

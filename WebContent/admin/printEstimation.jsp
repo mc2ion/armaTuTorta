@@ -3,8 +3,8 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleAdmin.css" />
-		<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
+		<link rel="stylesheet" type="text/css" href="../css/styleAdmin.css" />
+		<link rel="shortcut icon" href="../images/ico.ico">
 		<title>Presupuesto</title>	
 		<script type="text/javascript">
 		
@@ -48,7 +48,7 @@
 </head>
 	<body id="especial" oncontextmenu="return inhabilitar()">
 		<div id="printHeader">
-        	<img alt="logo" src="/armaTuTorta/images/loguito5.png"/>
+        	<img alt="logo" src="../images/loguito5.png"/>
         </div>  
 		<jsp:useBean id="estimationInfo" type="domain.Estimation" scope="request"/>
 		<br>
@@ -77,7 +77,7 @@
 		<br>
 		<h3>Imagen de Referencia:</h3>
 		<fieldset>
-			<img alt="ref" src="<%= "/armaTuTorta/files/pedidosOcasionesEspeciales/" + estimationInfo.getImage() %>"/><br>
+			<img alt="ref" src="<%= "/files/pedidosOcasionesEspeciales/" + estimationInfo.getImage() %>"/><br>
 		</fieldset>
 		<%
 		}

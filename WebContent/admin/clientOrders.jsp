@@ -5,12 +5,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleAdmin.css" />
-<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
+<link rel="stylesheet" type="text/css" href="../css/styleAdmin.css" />
+<link rel="shortcut icon" href="../images/ico.ico">
 <title>Administrador Clientes</title>
-<script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.js"></script>
-<script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.dataTables.js"></script>
-<script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
+<script type="text/javascript" language="javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" language="javascript" src="../js/jquery.dataTables.js"></script>
+<script type="text/javascript" language="javascript" src="../js/jquery.leanModal.min.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#example').dataTable( {
@@ -79,20 +79,20 @@
 <body oncontextmenu="return inhabilitar()">
 	<div id="container">
 		<div id="header">
-        	<img alt="logo" src="/armaTuTorta/images/loguito5.png"/>
+        	<img alt="logo" src="../images/loguito5.png"/>
         </div>         
         <div id="menu">
-			<div class="menuitemHome" ><a href="UserLoginServlet">Home</a></div>	
+			<div class="menuitemHome" ><a href="/servlet/servlet.UserLoginServlet">Home</a></div>	
 	    	<ul>
-            	<li class="menuitem"><a href="ListClientsServlet">Ver Clientes</a></li>
+            	<li class="menuitem"><a href="/servlet/servlet.ListClientsServlet">Ver Clientes</a></li>
             </ul>
-			<div class="menuitemPass"><a href="EditUserPasswordServlet">Cambiar Contraseña</a></div>
-			<div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
+			<div class="menuitemPass"><a href="/servlet/servlet.EditUserPasswordServlet">Cambiar Contraseña</a></div>
+			<div class="menuitemSalir"><a href="../admin/index.jsp">Salir</a></div>	
         </div>        
        <div id="leftmenu">
         	<div id="leftmenu_top"></div>
 			<div id="leftmenu_main">                    
-				<jsp:include page="/inc/adminMenu.jsp"></jsp:include>
+				<jsp:include page="../inc/adminMenu.jsp"></jsp:include>
 			</div>
             <div id="leftmenu_bottom"></div>
         </div>  
@@ -146,24 +146,24 @@
 									<td><%= (o.getIsPending()==1)?"Pendiente":"Entregado" %></td>
 									<td><%= o.getDeliveryDate() %></td>
 									<td>
-										<a href="/armaTuTorta/ShowClientOrderServlet?orderId=<%= o.getId() %>&clientId=<%= o.getClientId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/detail.png"  height="16" width="16" title="Ver Detalle" />
+										<a href="/servlet/servlet.ShowClientOrderServlet?orderId=<%= o.getId() %>&clientId=<%= o.getClientId() %>" style="color: transparent" >
+											<img alt="logo" src="/images/detail.png"  height="16" width="16" title="Ver Detalle" />
 										</a> 
-										<a href="/armaTuTorta/PrintClientOrderServlet?orderId=<%= o.getId() %>&clientId=<%= o.getClientId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/print.png"  height="16" width="16" title="Imprimir" />
+										<a href="/servlet/servlet.PrintClientOrderServlet?orderId=<%= o.getId() %>&clientId=<%= o.getClientId() %>" style="color: transparent" >
+											<img alt="logo" src="/images/print.png"  height="16" width="16" title="Imprimir" />
 										</a>
 										<% if(o.getIsPending()==1){ %>
-										<a href="/armaTuTorta/CompleteClientOrderServlet?orderId=<%= o.getId() %>&clientId=<%= o.getClientId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/pending.png"  height="16" width="16"  title="Marcar como Listo" />
+										<a href="/servlet/servlet.CompleteClientOrderServlet?orderId=<%= o.getId() %>&clientId=<%= o.getClientId() %>" style="color: transparent" >
+											<img alt="logo" src="/images/pending.png"  height="16" width="16"  title="Marcar como Listo" />
 										</a> 
 										<% } else { %>
 										<a href="#" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/solved.png"  height="16" width="16" title="Listo" />
+											<img alt="logo" src="/images/solved.png"  height="16" width="16" title="Listo" />
 										</a>
 										<% } %> 
 										<a id="go" rel="leanModal" href="#deleteClientOrder" style="color: #f7941e; font-weight: bold;" 
 										onclick="return loadVars(<%= o.getId()%>,<%= o.getClientId()%>,'<%= o.getId()%>' )" >
-										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" title="Eliminar Pedido" />
+										<img alt="logo" src="/images/delete.png" height="16" width="16" title="Eliminar Pedido" />
 										</a>
 									</td>
 								</tr>
@@ -190,7 +190,7 @@
 			<div id="signup-header">
 				<a class="close_x" id="close_x"  href="#"></a>
 			</div>
-			<form action="/armaTuTorta/DeleteClientOrderServlet" method="post"  onsubmit="return setV(this)">
+			<form action="/servlet/servlet.DeleteClientOrderServlet" method="post"  onsubmit="return setV(this)">
 				<input type="hidden" id="orderId" class="good_input" name="orderId"  value=""/>
 				<input type="hidden" id="clientId" class="good_input" name="clientId"  value=""/>
 				<div class="btn-fld">

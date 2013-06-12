@@ -5,9 +5,9 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleAdmin.css" />
-	<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
-	<script type="text/javascript" src="/armaTuTorta/js/messages.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/styleAdmin.css" />
+	<link rel="shortcut icon" href="../images/ico.ico">
+	<script type="text/javascript" src="../js/messages.js"></script>
 <title>Crear Álbum</title>
 <script language=JavaScript> 
 	<!-- 
@@ -24,20 +24,20 @@
 <body oncontextmenu="return inhabilitar()">
 	<div id="container">
 		<div id="header">
-        	<img alt="logo" src="/armaTuTorta/images/loguito5.png"/>
+        	<img alt="logo" src="../images/loguito5.png"/>
         </div>           
         <div id="menu">
-			<div class="menuitemHome"><a href="UserLoginServlet">Home</a></div>	
+			<div class="menuitemHome"><a href="/servlet/servlet.UserLoginServlet">Home</a></div>	
 			<ul>      
-			<li class="menuitem"><a href="ListAlbumsServlet">Ver Álbumes</a></li>
+			<li class="menuitem"><a href="/servlet/servlet.ListAlbumsServlet">Ver Álbumes</a></li>
 			</ul>
-			<div class="menuitemPass"><a href="EditUserPasswordServlet">Cambiar Contraseña</a></div>
-			<div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
+			<div class="menuitemPass"><a href="/servlet/servlet.EditUserPasswordServlet">Cambiar Contraseña</a></div>
+			<div class="menuitemSalir"><a href="../admin/index.jsp">Salir</a></div>	
         </div>       
 	  <div id="leftmenu">
         	<div id="leftmenu_top"></div>
 			<div id="leftmenu_main">                    
-                <jsp:include page="/inc/adminMenu.jsp"></jsp:include>
+                <jsp:include page="../inc/adminMenu.jsp"></jsp:include>
 			</div>
             <div id="leftmenu_bottom"></div>
         </div>  
@@ -45,7 +45,7 @@
 				<h2>Agregar Álbum:</h2>
 	        	<p>&nbsp;</p>
            		<p>&nbsp;</p>
-				<form name="form" action="/armaTuTorta/CreateAlbumServlet" onsubmit="return validateCreateAlbum(this)" method="post" enctype="multipart/form-data">
+				<form name="form" action="/servlet/servlet.CreateAlbumServlet" onsubmit="return validateCreateAlbum(this)" method="post" enctype="multipart/form-data">
 					<fieldset>
 						<label for="name">Nombre:</label>
 						<input type="text" name="txtName" id="txtName" maxlength="50" size="40" /> <br><br>

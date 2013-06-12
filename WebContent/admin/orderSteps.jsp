@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleAdmin.css" />
-<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
+<link rel="stylesheet" type="text/css" href="../css/styleAdmin.css" />
+<link rel="shortcut icon" href="../images/ico.ico">
 <jsp:useBean id="typeInfo" type="domain.OrderType" scope="request"/> 
 <title>Administrador <%= typeInfo.getName() %></title>
-<script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.js"></script>
-<script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.dataTables.js"></script>
-<script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
+<script type="text/javascript" language="javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" language="javascript" src="../js/jquery.dataTables.js"></script>
+<script type="text/javascript" language="javascript" src="../js/jquery.leanModal.min.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#example').dataTable( {
@@ -58,17 +58,17 @@
 <body oncontextmenu="return inhabilitar()">
 	<div id="container">
 		<div id="header">
-        	<img alt="logo" src="/armaTuTorta/images/loguito5.png"/>
+        	<img alt="logo" src="../images/loguito5.png"/>
         </div>         
         <div id="menu">
-			<div class="menuitemHome" ><a href="UserLoginServlet">Home</a></div>	
-			<div class="menuitemPass"><a href="EditUserPasswordServlet">Cambiar Contraseña</a></div>
-			<div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
+			<div class="menuitemHome" ><a href="/servlet/servlet.UserLoginServlet">Home</a></div>	
+			<div class="menuitemPass"><a href="/servlet/servlet.EditUserPasswordServlet">Cambiar Contraseña</a></div>
+			<div class="menuitemSalir"><a href="../admin/index.jsp">Salir</a></div>	
         </div>        
        <div id="leftmenu">
         	<div id="leftmenu_top"></div>
 			<div id="leftmenu_main">                    
-				<jsp:include page="/inc/adminMenu.jsp"></jsp:include>
+				<jsp:include page="../inc/adminMenu.jsp"></jsp:include>
 			</div>
             <div id="leftmenu_bottom"></div>
         </div>  
@@ -120,11 +120,11 @@
 									<td><%= s.getName() %></td>
 									<td><%= (s.isMultipleChoice()==1)?"Si":"No"  %></td>
 									<td><p>
-										<a href="/armaTuTorta/ListStepOptionsServlet?stepId=<%= s.getId() %>&typeId=<%= s.getOrderTypeId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/step-options.png"  height="16" width="16" title="Ver Opciones" />
+										<a href="/servlet/servlet.ListStepOptionsServlet?stepId=<%= s.getId() %>&typeId=<%= s.getOrderTypeId() %>" style="color: transparent" >
+											<img alt="logo" src="/images/step-options.png"  height="16" width="16" title="Ver Opciones" />
 										</a> 
-										<a href="/armaTuTorta/EditOrderStepServlet?stepId=<%= s.getId() %>&typeId=<%= s.getOrderTypeId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/edit.png"  height="16" width="16" title="Editar Paso" />
+										<a href="/servlet/servlet.EditOrderStepServlet?stepId=<%= s.getId() %>&typeId=<%= s.getOrderTypeId() %>" style="color: transparent" >
+											<img alt="logo" src="/images/edit.png"  height="16" width="16" title="Editar Paso" />
 										</a><br>
 										</p>
 									</td>

@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="/armaTuTorta/css/styleAdmin.css" />
-<link rel="shortcut icon" href="/armaTuTorta/images/ico.ico">
+<link rel="stylesheet" type="text/css" href="../css/styleAdmin.css" />
+<link rel="shortcut icon" href="../images/ico.ico">
 <jsp:useBean id="typeInfo" type="domain.OrderType" scope="request"/> 
 <title>Administrador <%= typeInfo.getName() %></title>
-<script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.js"></script>
-<script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.dataTables.js"></script>
-<script type="text/javascript" language="javascript" src="/armaTuTorta/js/jquery.leanModal.min.js"></script>
+<script type="text/javascript" language="javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" language="javascript" src="../js/jquery.dataTables.js"></script>
+<script type="text/javascript" language="javascript" src="../js/jquery.leanModal.min.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#example').dataTable( {
@@ -83,21 +83,21 @@
 <body oncontextmenu="return inhabilitar()">
 	<div id="container">
 		<div id="header">
-        	<img alt="logo" src="/armaTuTorta/images/loguito5.png"/>
+        	<img alt="logo" src="../images/loguito5.png"/>
         </div>         
         <div id="menu">
-			<div class="menuitemHome" ><a href="UserLoginServlet">Home</a></div>	
+			<div class="menuitemHome" ><a href="/servlet/servlet.UserLoginServlet">Home</a></div>	
 	    	<ul>
-	    		<li class="menuitem"><a href="ListOrderStepsServlet?typeId=<%= typeInfo.getId() %>">Ver Pasos</a></li>
-            	<li class="menuitem"><a href="CreateStepOptionServlet?typeId=<%= typeInfo.getId() %>&stepId=<%= request.getAttribute("stepId") %>">Agregar opción</a></li>
+	    		<li class="menuitem"><a href="/servlet/servlet.ListOrderStepsServlet?typeId=<%= typeInfo.getId() %>">Ver Pasos</a></li>
+            	<li class="menuitem"><a href="/servlet/servlet.CreateStepOptionServlet?typeId=<%= typeInfo.getId() %>&stepId=<%= request.getAttribute("stepId") %>">Agregar opción</a></li>
             </ul>
-			<div class="menuitemPass"><a href="EditUserPasswordServlet">Cambiar Contraseña</a></div>
-			<div class="menuitemSalir"><a href="admin/index.jsp">Salir</a></div>	
+			<div class="menuitemPass"><a href="/servlet/servlet.EditUserPasswordServlet">Cambiar Contraseña</a></div>
+			<div class="menuitemSalir"><a href="../admin/index.jsp">Salir</a></div>	
         </div>        
        <div id="leftmenu">
         	<div id="leftmenu_top"></div>
 			<div id="leftmenu_main">                    
-				<jsp:include page="/inc/adminMenu.jsp"></jsp:include>
+				<jsp:include page="../inc/adminMenu.jsp"></jsp:include>
 			</div>
             <div id="leftmenu_bottom"></div>
         </div>  
@@ -151,11 +151,11 @@
 									<td><%= o.getPrice() %></td>
 									<td><%= (o.isUnavailable()==1)?"Si":"No"  %></td>
 									<td><p> 
-										<a href="/armaTuTorta/EditStepOptionServlet?optionId=<%= o.getId() %>&stepId=<%= o.getOrderStepId() %>&typeId=<%= typeInfo.getId() %>" style="color: transparent" >
-											<img alt="logo" src="/armaTuTorta/images/edit.png"  height="16" width="16" title="Editar Opción" />
+										<a href="/servlet/servlet.EditStepOptionServlet?optionId=<%= o.getId() %>&stepId=<%= o.getOrderStepId() %>&typeId=<%= typeInfo.getId() %>" style="color: transparent" >
+											<img alt="logo" src="/images/edit.png"  height="16" width="16" title="Editar Opción" />
 										</a> 
 										<a id="go" rel="leanModal" href="#deleteOption" style="color: #f7941e; font-weight: bold;" onclick="return loadVars(<%= o.getId()%>, <%= o.getOrderStepId()%>, <%= typeInfo.getId() %>, '<%= o.getPosition()%>' )" >
-										<img alt="logo" src="/armaTuTorta/images/delete.png" height="16" width="16" title="Eliminar Opción" />
+										<img alt="logo" src="/images/delete.png" height="16" width="16" title="Eliminar Opción" />
 										</a><br>
 										</p>
 									</td>
@@ -183,7 +183,7 @@
 			<div id="signup-header">
 				<a class="close_x" id="close_x"  href="#"></a>
 			</div>
-			<form action="/armaTuTorta/DeleteStepOptionServlet" method="post"  onsubmit="return setV(this)">
+			<form action="/servlet/servlet.DeleteStepOptionServlet" method="post"  onsubmit="return setV(this)">
 				<input type="hidden" id="optionId" class="good_input" name="optionId"  value=""/>
 				<input type="hidden" id="stepId" class="good_input" name="stepId"  value=""/>
 				<input type="hidden" id="orderTypeId" class="good_input" name="orderTypeId"  value=""/>
