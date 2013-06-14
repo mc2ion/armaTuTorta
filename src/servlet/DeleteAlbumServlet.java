@@ -64,8 +64,8 @@ public class DeleteAlbumServlet extends HttpServlet {
 				Long albumId = Long.valueOf(request.getParameter("albumId"));
 				Integer rowsUpdated = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.DeleteAlbum(albumId));
 				Properties propertiesFile = new Properties();
-				propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
-				//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
+				//propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+				propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 				
 				if(rowsUpdated == 1){
 					String dir = propertiesFile.getProperty("albumsDirectory") + propertiesFile.getProperty("fileSeparator") + Album.getDirectory(albumId);
@@ -75,25 +75,28 @@ public class DeleteAlbumServlet extends HttpServlet {
 					
 					request.setAttribute("info", "El álbum fue eliminado exitosamente.");
 					request.setAttribute("error", "");
-					rd = getServletContext().getRequestDispatcher("/ListAlbumsServlet");			
+					//rd = getServletContext().getRequestDispatcher("/ListAlbumsServlet");	
+					rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListAlbumsServlet");			
 
 					rd.forward(request, response);
 				} else {
 					request.setAttribute("info", "");
 					request.setAttribute("error", "Ocurrió un error durante la eliminación del álbum. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-					rd = getServletContext().getRequestDispatcher("/ListAlbumsServlet");			
+					//rd = getServletContext().getRequestDispatcher("/ListAlbumsServlet");	
+					rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListAlbumsServlet");			
 
 					rd.forward(request, response);
 				}
 			} else {
-				rd = getServletContext().getRequestDispatcher("admin/index.jsp");
+				rd = getServletContext().getRequestDispatcher("/admin/index.jsp");
 				rd.forward(request, response);
 			}
 			
 		} catch (Exception e) {
 			request.setAttribute("info", "");
 			request.setAttribute("error", "Ocurrió un error durante la eliminación del álbum. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-			rd = getServletContext().getRequestDispatcher("/ListAlbumsServlet");			
+			//rd = getServletContext().getRequestDispatcher("/ListAlbumsServlet");	
+			rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListAlbumsServlet");	
 
 			rd.forward(request, response);
 		}

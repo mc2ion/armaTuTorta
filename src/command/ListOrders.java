@@ -15,7 +15,7 @@ public class ListOrders implements DatabaseCommand {
 		// List orders of a client in the database		
 		ArrayList<Order> list = new ArrayList<Order>();
 		PreparedStatement sta = conn.prepareStatement("SELECT O.ID, O.CLIENT_ID, O.ORDER_TYPE_ID, DATE_FORMAT(O.ORDER_DATE, '%d/%m/%Y'), O.TOTAL, DATE_FORMAT(O.DELIVERY_DATE, '%d/%m/%Y'), " +
-				"O.IS_PENDING, OT.NAME, C.FIRST_NAME, C.LAST_NAME FROM `order` O, ORDER_TYPE OT, CLIENT C WHERE O.IS_DELETED=0 AND O.ORDER_TYPE_ID = OT.ID AND O.CLIENT_ID = C.ID");
+				"O.IS_PENDING, OT.NAME, C.FIRST_NAME, C.LAST_NAME FROM `order` O, order_type OT, client C WHERE O.IS_DELETED=0 AND O.ORDER_TYPE_ID = OT.ID AND O.CLIENT_ID = C.ID");
 		ResultSet rs = sta.executeQuery();
 		
 		while(rs.next()) {

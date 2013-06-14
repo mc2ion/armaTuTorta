@@ -21,7 +21,7 @@ public class SelectMaxPhoto implements DatabaseCommand {
 		// Selects the most recent album
 
 		Photo photo = new Photo();
-		PreparedStatement sta = conn.prepareStatement("SELECT MAX(P.ID), P.NAME, P.IMAGE, P.IS_ACTIVE, P.IS_NEW FROM PHOTO P WHERE P.IS_DELETED = 0 AND P.ALBUM_ID = ?");
+		PreparedStatement sta = conn.prepareStatement("SELECT MAX(P.ID), P.NAME, P.IMAGE, P.IS_ACTIVE, P.IS_NEW FROM photo P WHERE P.IS_DELETED = 0 AND P.ALBUM_ID = ?");
 		sta.setLong(1, albumId);
 		ResultSet rs = sta.executeQuery();
 		

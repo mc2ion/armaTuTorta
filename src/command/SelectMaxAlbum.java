@@ -15,7 +15,7 @@ public class SelectMaxAlbum implements DatabaseCommand {
 		// Selects the most recent album
 
 		Album album = new Album();
-		PreparedStatement sta = conn.prepareStatement("SELECT MAX(A.ID), A.NAME, A.IMAGE, A.IS_ACTIVE, A.IS_NEW FROM ALBUM A WHERE A.IS_DELETED = 0");
+		PreparedStatement sta = conn.prepareStatement("SELECT MAX(A.ID), A.NAME, A.IMAGE, A.IS_ACTIVE, A.IS_NEW FROM album A WHERE A.IS_DELETED = 0");
 		ResultSet rs = sta.executeQuery();
 		
 		if (rs.next()) {

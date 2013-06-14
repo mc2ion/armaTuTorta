@@ -22,7 +22,7 @@ public class ListClientOrders implements DatabaseCommand {
 		// List orders of a client in the database		
 		ArrayList<Order> list = new ArrayList<Order>();
 		PreparedStatement sta = conn.prepareStatement("SELECT O.ID, O.CLIENT_ID, O.ORDER_TYPE_ID, DATE_FORMAT(O.ORDER_DATE, '%d/%m/%Y'), O.TOTAL, DATE_FORMAT(O.DELIVERY_DATE, '%d/%m/%Y'), " +
-				"O.IS_PENDING, OT.NAME FROM `ORDER` O, ORDER_TYPE OT WHERE O.CLIENT_ID = ? AND O.IS_DELETED=0 AND O.ORDER_TYPE_ID = OT.ID");
+				"O.IS_PENDING, OT.NAME FROM `order` O, order_type OT WHERE O.CLIENT_ID = ? AND O.IS_DELETED=0 AND O.ORDER_TYPE_ID = OT.ID");
 		sta.setInt(1, this.clientId);
 		ResultSet rs = sta.executeQuery();
 		

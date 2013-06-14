@@ -66,8 +66,8 @@ public class DeletePhotoServlet extends HttpServlet {
 				Long photoId = Long.valueOf(request.getParameter("photoId"));
 				Integer rowsUpdated = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.DeletePhoto(photoId));
 				Properties propertiesFile = new Properties();
-				propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
-				//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
+				//propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+				propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 				
 				if(rowsUpdated == 1){
 					Photo photo = (Photo) CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectPhoto(photoId));
@@ -78,15 +78,15 @@ public class DeletePhotoServlet extends HttpServlet {
 					
 					request.setAttribute("info", "La foto fue eliminada exitosamente.");
 					request.setAttribute("error", "");
-					//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);	
-					rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);		
+					rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);	
+					//rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);		
 
 					rd.forward(request, response);
 				} else {
 					request.setAttribute("info", "");
 					request.setAttribute("error", "Ocurrió un error durante la eliminación de la foto. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-					//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);	
-					rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);					
+					rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);	
+					//rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);					
 
 					rd.forward(request, response);
 				}
@@ -98,8 +98,8 @@ public class DeletePhotoServlet extends HttpServlet {
 		} catch (Exception e) {
 			request.setAttribute("info", "");
 			request.setAttribute("error", "Ocurrió un error durante la eliminación de la foto. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-			//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);		
-			rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);					
+			rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);		
+			//rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);					
 
 			rd.forward(request, response);
 		}

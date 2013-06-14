@@ -80,8 +80,8 @@ public class EditAlbumServlet extends HttpServlet {
 		Long albumId = Long.valueOf(request.getParameter("albumId"));		
 				
 		try{
-			propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
-			//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
+			//propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+			propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 			MultipartRequest multipart = new MultipartRequest(request, propertiesFile.getProperty("albumsDirectory"), 200*1024, new DefaultFileRenamePolicy());
 			
 			String name = multipart.getParameter("txtName");
@@ -142,13 +142,15 @@ public class EditAlbumServlet extends HttpServlet {
 			if(rowsUpdated == 1){
 				request.setAttribute("info", "El álbum fue editado exitosamente.");
 				request.setAttribute("error", "");
-				rd = getServletContext().getRequestDispatcher("/ListAlbumsServlet");			
+				//rd = getServletContext().getRequestDispatcher("/ListAlbumsServlet");
+				rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListAlbumsServlet");			
 
 				rd.forward(request, response);
 			} else {
 				request.setAttribute("info", "");
 				request.setAttribute("error", "Ocurrió un error durante la edición del álbum. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-				rd = getServletContext().getRequestDispatcher("/ListAlbumsServlet");			
+				//rd = getServletContext().getRequestDispatcher("/ListAlbumsServlet");
+				rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListAlbumsServlet");
 
 				rd.forward(request, response);
 			}
@@ -168,7 +170,8 @@ public class EditAlbumServlet extends HttpServlet {
 		} catch (Exception e) {
 			request.setAttribute("info", "");
 			request.setAttribute("error", "Ocurrió un error durante la edición del álbum. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-			rd = getServletContext().getRequestDispatcher("/ListAlbumsServlet");			
+			//rd = getServletContext().getRequestDispatcher("/ListAlbumsServlet");	
+			rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListAlbumsServlet");		
 
 			rd.forward(request, response);
 		}

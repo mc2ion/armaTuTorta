@@ -84,8 +84,8 @@ public class EditPhotoServlet extends HttpServlet {
 		Long photoId = Long.valueOf(request.getParameter("photoId"));
 						
 		try{
-			propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
-			//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
+			//propertiesFile.load( new FileInputStream( getServletContext().getInitParameter("properties") ) );
+			propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 			MultipartRequest multipart = new MultipartRequest(request, propertiesFile.getProperty("albumsDirectory"), 200*1024, new DefaultFileRenamePolicy());
 			
 			String name = multipart.getParameter("txtName");
@@ -146,15 +146,15 @@ public class EditPhotoServlet extends HttpServlet {
 			if(rowsUpdated == 1){
 				request.setAttribute("info", "La foto fue editada exitosamente.");
 				request.setAttribute("error", "");
-				//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);	
-				rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);			
+				rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);	
+				//rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);			
 
 				rd.forward(request, response);
 			} else {
 				request.setAttribute("info", "");
 				request.setAttribute("error", "Ocurrió un error durante la edición de la foto. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-				//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);
-				rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);						
+				rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);
+				//rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);						
 
 				rd.forward(request, response);
 			}
@@ -174,8 +174,8 @@ public class EditPhotoServlet extends HttpServlet {
 		} catch (Exception e) {
 			request.setAttribute("info", "");
 			request.setAttribute("error", "Ocurrió un error durante la edición de la foto. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-			//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);
-			rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);						
+			rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListPhotosServlet?albumId="+albumId);
+			//rd = getServletContext().getRequestDispatcher("/ListPhotosServlet?albumId="+albumId);						
 
 			try {
 				rd.forward(request, response);

@@ -16,7 +16,7 @@ public class ListEstimations implements DatabaseCommand {
 		// List estimations in the database		
 		ArrayList<Estimation> list = new ArrayList<Estimation>();
 		PreparedStatement sta = conn.prepareStatement("SELECT E.ID, E.CLIENT_ID, E.SPECIAL_OCCASION, E.PRODUCTS, E.GUESTS_NUMBER, E.IMAGE, " +
-				"E.DESCRIPTION, DATE_FORMAT(E.APPLICATION_DATE, '%d/%m/%Y'), C.FIRST_NAME, C.LAST_NAME FROM `estimation` E, CLIENT C WHERE E.IS_DELETED=0 AND E.BECAME_AN_ORDER = 0 AND E.CLIENT_ID = C.ID");
+				"E.DESCRIPTION, DATE_FORMAT(E.APPLICATION_DATE, '%d/%m/%Y'), C.FIRST_NAME, C.LAST_NAME FROM `estimation` E, client C WHERE E.IS_DELETED=0 AND E.BECAME_AN_ORDER = 0 AND E.CLIENT_ID = C.ID");
 		ResultSet rs = sta.executeQuery();
 		
 		while(rs.next()) {

@@ -78,7 +78,8 @@ public class EditClientPasswordServlet extends HttpServlet {
 			if(rowsUpdated == 1){
 				request.setAttribute("info", "La contraseña del cliente fue modificada exitosamente.");
 				request.setAttribute("error", "");
-				rd = getServletContext().getRequestDispatcher("/ListClientsServlet");			
+				//rd = getServletContext().getRequestDispatcher("/ListClientsServlet");
+				rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListClientsServlet");			
 
 				rd.forward(request, response);
 			} 
@@ -92,7 +93,8 @@ public class EditClientPasswordServlet extends HttpServlet {
 			else {
 				request.setAttribute("info", "");
 				request.setAttribute("error", "Ocurrió un error durante la modificación de la contraseña del cliente. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-				rd = getServletContext().getRequestDispatcher("/ListClientsServlet");			
+				//rd = getServletContext().getRequestDispatcher("/ListClientsServlet");	
+				rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListClientsServlet");				
 
 				rd.forward(request, response);
 			}
@@ -100,7 +102,8 @@ public class EditClientPasswordServlet extends HttpServlet {
 		} catch (Exception e) {
 			request.setAttribute("info", "");
 			request.setAttribute("error", "Ocurrió un error durante la modificación de la contraseña del cliente. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-			rd = getServletContext().getRequestDispatcher("/ListClientsServlet");			
+			//rd = getServletContext().getRequestDispatcher("/ListClientsServlet");	
+			rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListClientsServlet");				
 
 			rd.forward(request, response);
 		}

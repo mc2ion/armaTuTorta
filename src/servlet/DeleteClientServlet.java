@@ -57,25 +57,28 @@ public class DeleteClientServlet extends HttpServlet {
 					
 					request.setAttribute("info", "El cliente fue eliminado exitosamente.");
 					request.setAttribute("error", "");
-					rd = getServletContext().getRequestDispatcher("/ListClientsServlet");			
+					//rd = getServletContext().getRequestDispatcher("/ListClientsServlet");	
+					rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListClientsServlet");		
 
 					rd.forward(request, response);
 				} else {
 					request.setAttribute("info", "");
 					request.setAttribute("error", "Ocurrió un error durante la eliminación del cliente. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-					rd = getServletContext().getRequestDispatcher("/ListClientsServlet");	
+					//rd = getServletContext().getRequestDispatcher("/ListClientsServlet");	
+					rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListClientsServlet");
 
 					rd.forward(request, response);
 				}
 			} else {
-				rd = getServletContext().getRequestDispatcher("admin/index.jsp");
+				rd = getServletContext().getRequestDispatcher("/admin/index.jsp");
 				rd.forward(request, response);
 			}
 			
 		} catch (Exception e) {			
 			request.setAttribute("info", "");
 			request.setAttribute("error", "Ocurrió un error durante la eliminación del cliente. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-			rd = getServletContext().getRequestDispatcher("/ListClientsServlet");			
+			//rd = getServletContext().getRequestDispatcher("/ListClientsServlet");		
+			rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListClientsServlet");
 
 			rd.forward(request, response);
 		}

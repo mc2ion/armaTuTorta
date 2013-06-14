@@ -9,16 +9,16 @@
 	domain.User user = (domain.User) session.getAttribute("user");
 
 	if (user == null){
-		response.sendRedirect("/armaTuTorta/admin");
+		response.sendRedirect("/admin");
 	} else {
 %>
-    <li><a href="/armaTuTorta/ListEstimationsServlet">Presupuestos</a></li>
-    <li><a href="/armaTuTorta/ListOrdersServlet">Pedidos</a></li>
-    <li><a href="/armaTuTorta/ListClientsServlet">Clientes</a></li>
-	<li><a href="/armaTuTorta/ListOrderStepsServlet?typeId=2">Cupcakes</a></li>
-    <li><a href="/armaTuTorta/ListOrderStepsServlet?typeId=1">Tortas</a></li>
-    <li><a href="/armaTuTorta/ListOrderStepsServlet?typeId=3">Dulces Tortas</a></li>
-	<li><a href="/armaTuTorta/ListAlbumsServlet">Galería</a></li>
+    <li><a href="/servlet/servlet.ListEstimationsServlet">Presupuestos</a></li>
+    <li><a href="/servlet/servlet.ListOrdersServlet">Pedidos</a></li>
+    <li><a href="/servlet/servlet.ListClientsServlet">Clientes</a></li>
+	<li><a href="/servlet/servlet.ListOrderStepsServlet?typeId=2">Cupcakes</a></li>
+    <li><a href="/servlet/servlet.ListOrderStepsServlet?typeId=1">Tortas</a></li>
+    <li><a href="/servlet/servlet.ListOrderStepsServlet?typeId=3">Dulces Tortas</a></li>
+	<li><a href="/servlet/servlet.ListAlbumsServlet">Galería</a></li>
 <%
 	}
 %>	    

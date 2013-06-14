@@ -21,7 +21,7 @@ public class ListItems implements DatabaseCommand {
 		// List orders of a client in the database		
 		ArrayList<Item> list = new ArrayList<Item>();
 		PreparedStatement sta = conn.prepareStatement("SELECT OI.ID, OI.ORDER_ID, OI.STEP_OPTION_ID, OI.ADDITIONAL_INFO, OI.PRICE, SO.ORDER_STEP_ID, OS.LABEL, SO.NAME AS OPTION_NAME, " +
-				"OS.POSITION, OS.IS_MULTIPLE_CHOICE FROM ORDER_ITEM OI, STEP_OPTION SO, ORDER_STEP OS WHERE OI.ORDER_ID = ? AND OI.IS_DELETED = 0 AND OI.STEP_OPTION_ID = SO.ID AND " +
+				"OS.POSITION, OS.IS_MULTIPLE_CHOICE FROM order_item OI, step_option SO, order_step OS WHERE OI.ORDER_ID = ? AND OI.IS_DELETED = 0 AND OI.STEP_OPTION_ID = SO.ID AND " +
 				"SO.ORDER_STEP_ID = OS.ID ORDER BY POSITION ASC");
 		sta.setLong(1, this.orderId);
 		

@@ -59,15 +59,15 @@ public class DeleteOrderStepServlet extends HttpServlet {
 					
 					request.setAttribute("info", "El paso fue eliminado exitosamente.");
 					request.setAttribute("error", "");
-					//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListOrderStepsServlet?typeId="+orderTypeId);	
-					rd = getServletContext().getRequestDispatcher("/ListOrderStepsServlet?typeId="+orderTypeId);			
+					rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListOrderStepsServlet?typeId="+orderTypeId);	
+					//rd = getServletContext().getRequestDispatcher("/ListOrderStepsServlet?typeId="+orderTypeId);			
 
 					rd.forward(request, response);
 				} else {
 					request.setAttribute("info", "");
 					request.setAttribute("error", "Ocurrió un error durante la eliminación del paso. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-					//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListOrderStepsServlet?typeId="+orderTypeId);	
-					rd = getServletContext().getRequestDispatcher("/ListOrderStepsServlet?typeId="+orderTypeId);			
+					rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListOrderStepsServlet?typeId="+orderTypeId);	
+					//rd = getServletContext().getRequestDispatcher("/ListOrderStepsServlet?typeId="+orderTypeId);			
 
 					rd.forward(request, response);
 				}
@@ -79,8 +79,8 @@ public class DeleteOrderStepServlet extends HttpServlet {
 		} catch (Exception e) {
 			request.setAttribute("info", "");
 			request.setAttribute("error", "Ocurrió un error durante la eliminación del paso. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-			//rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListOrderStepsServlet?typeId="+orderTypeId);
-			rd = getServletContext().getRequestDispatcher("/ListOrderStepsServlet?typeId="+orderTypeId);				
+			rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListOrderStepsServlet?typeId="+orderTypeId);
+			//rd = getServletContext().getRequestDispatcher("/ListOrderStepsServlet?typeId="+orderTypeId);				
 
 			rd.forward(request, response);
 		}
