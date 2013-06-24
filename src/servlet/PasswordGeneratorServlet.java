@@ -38,30 +38,37 @@ public class PasswordGeneratorServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		final String email = request.getParameter("email");
-		final String name = request.getParameter("name");
+		String name = request.getParameter("name");		
 		RequestDispatcher rd;
 		final String password = Util.PasswordGenerator.getPassword(Util.PasswordGenerator.MINUSCULAS+Util.PasswordGenerator.MAYUSCULAS+Util.PasswordGenerator.ESPECIALES,10);
 		final String encryptPassword = UserLoginServlet.getEncryptPassword(password);
 		String prevPage = (String) request.getSession().getAttribute("prevPage");
+		
 		if (prevPage == null)
 			prevPage = "index.jsp";
 		
 		try{
+			if(name.equalsIgnoreCase("")){
+				name = (String) CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectClientName(email));
+			}
+			
+			final String nameStr = name;
+			
 			Integer userId = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.RestoreClientPassword(email, encryptPassword));
 			if(userId > 0){
 				new Thread(new Runnable() {
 				    public void run() {
 				    	Properties propertiesFile = new Properties();
-						//String context = getServletContext().getInitParameter("properties");
+				    	String context = getServletContext().getInitParameter("properties");
 						try {
-							//propertiesFile.load(new FileInputStream(context));
-							propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
+							propertiesFile.load(new FileInputStream(context));
+							//propertiesFile.load( new FileInputStream("/home/armatuto/public_html/conf/armatutorta.properties"));
 						} catch (FileNotFoundException e) {
 							e.printStackTrace();
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-						SendEmail.sendEmailPassword(propertiesFile, email, name, password, false, "soporte");
+						SendEmail.sendEmailPassword(propertiesFile, email, nameStr, password, false, "soporte");
 						
 				    }
 				}).start();

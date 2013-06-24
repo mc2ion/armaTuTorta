@@ -45,7 +45,7 @@ public class GalleryCupcakesServlet extends HttpServlet {
 		try {
 			Integer albumId = Integer.valueOf(request.getParameter("albumId"));
 			@SuppressWarnings("unchecked")
-			ArrayList<Photo> list = (ArrayList<Photo>)CommandExecutor.getInstance().executeDatabaseCommand(new command.ListPhotos(albumId));
+			ArrayList<Photo> list = (ArrayList<Photo>)CommandExecutor.getInstance().executeDatabaseCommand(new command.ListActivePhotos(albumId));
 			request.setAttribute("photos", list);
 			
 			rd = getServletContext().getRequestDispatcher("/galeria-cupcakes.jsp");			

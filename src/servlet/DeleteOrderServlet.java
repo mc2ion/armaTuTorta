@@ -88,7 +88,7 @@ public class DeleteOrderServlet extends HttpServlet {
 					request.setAttribute("info", "El pedido fue eliminado exitosamente.");
 					request.setAttribute("error", "");
 					rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListOrdersServlet");	
-					rd = getServletContext().getRequestDispatcher("/ListOrdersServlet");			
+					//rd = getServletContext().getRequestDispatcher("/ListOrdersServlet");			
 
 					rd.forward(request, response);
 				} else {

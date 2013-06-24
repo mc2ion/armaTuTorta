@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="../css/styleAdmin.css" />
 	<link rel="shortcut icon" href="../images/ico.ico">
 	<script type="text/javascript" src="../js/messages.js"></script>
+	<script type="text/javascript" language="javascript" src="../js/jquery.js"></script>
 	<title>Editar Paso</title>
 <script language=JavaScript> 
 	<!-- 
@@ -51,7 +52,7 @@
 				<input type="hidden" name="txtCurrentPosition" value="<%= stepInfo.getPosition() %>" />
 				<fieldset>
 					<label for="name">Paso:</label>
-					<input type="number" min="1" name="txtPosition" id="txtPosition" maxlength="3" size="3" value="<%= stepInfo.getPosition() %>" disabled /> <br><br>
+					<input type="number" min="1" name="txtPosition" id="txtPosition" maxlength="3" size="3" value="<%= stepInfo.getPosition() %>" readonly /> <br><br>
 					<label for="name">Nombre:</label>
 					<textarea name="txtName" id="txtName" rows="4" cols="50"><%= stepInfo.getName() %></textarea> <br><br>
 					<%

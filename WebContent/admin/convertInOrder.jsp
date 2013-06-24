@@ -11,13 +11,12 @@
 	<script type="text/javascript" src="../js/messages.js"></script>
 	<script type="text/javascript" src="../js/jquery-1.8.2.min.js"></script>
 	<script type="text/javascript" src="../js/jquery-ui-1.8.24.custom.min.js"></script>
-	<script type="text/javascript" src="../js/jquery.ui.datepicker-es.js"></script>
+	<script type="text/javascript" src="../js/jquery.ui.datepicker.js"></script>
 	<script type="text/javascript">
 	$(function(){
-		$.datepicker.setDefaults($.datepicker.regional['es']);
 		$('#txtDeliveryDate').datepicker({
 			showOn: "button",
-			buttonImage: "images/calendar.png",
+			buttonImage: "../images/calendar.png",
 			buttonImageOnly: true,
 			buttonText: "Seleccione una fecha",
 			dateFormat:'dd/mm/yy',
@@ -48,6 +47,9 @@
         </div>           
         <div id="menu">
 			<div class="menuitemHome"><a href="/servlet/servlet.UserLoginServlet">Home</a></div>	
+	  		<ul>
+           		<li class="menuitem"><a href="/servlet/servlet.ListEstimationsServlet">Ver Presupuestos</a></li>
+            </ul>	
 			<div class="menuitemPass"><a href="/servlet/servlet.EditUserPasswordServlet">Cambiar Contraseña</a></div>
 			<div class="menuitemSalir"><a href="../admin/index.jsp">Salir</a></div>	
         </div>       

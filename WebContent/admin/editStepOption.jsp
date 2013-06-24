@@ -6,6 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<link rel="stylesheet" type="text/css" href="../css/styleAdmin.css" />
 	<link rel="shortcut icon" href="../images/ico.ico">
+	<script type="text/javascript" language="javascript" src="../js/jquery.js"></script>
 	<script type="text/javascript" src="../js/messages.js"></script>
 <title>Editar Opción</title>
 <script language=JavaScript> 

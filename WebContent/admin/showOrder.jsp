@@ -198,7 +198,7 @@
 				</fieldset>		
 				</div>
 				<div style="text-align:center">
-					<form action="/servlet/servlet.PrintClientOrderServlet?orderId=<%= request.getAttribute("orderId") %>"  method="post">
+					<form action="/servlet/servlet.PrintOrderServlet?orderId=<%= request.getAttribute("orderId") %>"  method="post">
 						<div id="botonP">
 							<input type="submit"  class="button"  name="sbmtButton" value="Imprimir" style="margin-left:30%;" />
 						</div>

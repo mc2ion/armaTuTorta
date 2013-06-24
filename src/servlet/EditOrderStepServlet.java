@@ -110,8 +110,10 @@ public class EditOrderStepServlet extends HttpServlet {
 			}
 			
 		} catch (Exception e) {
+			
+			
 			request.setAttribute("info", "");
-			request.setAttribute("error", "Ocurrió un error durante la edición del paso. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
+			request.setAttribute("error", "Ocurrió un error durante la edición del paso. Por favor intente de nuevo y si el error persiste contacte a su administrador." + e.getMessage() + e.getCause());
 			rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListOrderStepsServlet?typeId="+typeId);		
 			//rd = getServletContext().getRequestDispatcher("/ListOrderStepsServlet?typeId="+typeId);				
 	
