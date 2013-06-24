@@ -68,7 +68,7 @@ public class SendEmail  extends Thread  {
     			" A continuaci&oacute;n encontrar&aacute;s la informaci&oacute;n de tu cuenta: <br><br> " +
     			" <strong> Nombre de Usuario: </strong>" + email + "<br><br>"+	 
     			" <strong> Contrase&ntilde;a </strong>" + passwordUser + "<br><br>"+	 
-    			" Atentamente, equipo de apoyo de <a href=\"www.armatutorta.com.ve\"> Arma Tu Torta </a>";
+    			" Atentamente, equipo de soporte de <a href=\"www.armatutorta.com.ve\"> Arma Tu Torta </a>.";
 	                	
         	mimemessage.setContent( messa , "text/html");
 	          
@@ -129,11 +129,11 @@ public class SendEmail  extends Thread  {
         	mimemessage.setRecipients(Message.RecipientType.TO, addressTo);
         	mimemessage.setSubject( "Recuperación de Contraseña", "ISO-8859-1" );
 	          
-        	String messa = "<div style='color: gray;'>Hola " + name + ",<br>" +
+        	String messa = "Hola " + name + ",<br>" +
 		    	"A continuación encontrarás la información para acceder a tu cuenta: <br><br>"
 		    	+ "Tu usuario es: " + userName + "<br>"+
 		     	"Tu nueva contrase&ntilde;a es:" + newPassword +"<br><br>"+
-		    	"Atentamente, equipo de apoyo de Arma Tu Torta.</div>";
+		    	"Atentamente, equipo de soporte de <a href=\"www.armatutorta.com.ve\"> Arma Tu Torta </a>.";
 
         	mimemessage.setContent( messa , "text/html");
 	          
@@ -193,11 +193,11 @@ public class SendEmail  extends Thread  {
 	          mimemessage.setRecipients(Message.RecipientType.TO, addressTo);
 	          mimemessage.setSubject( "Recuperación de Contraseña", "ISO-8859-1" );
 	          
-	          String messa = "<div style='color: gray;'>Hola " + name + ",<br>" +
+	          String messa = "Hola " + name + ",<br>" +
 		 		 "A continuación encontrará la información para acceder a su cuenta: <br><br>"
 		 		 + "Su usuario es: " + email + "<br>"+
 		 		 "Su nueva contrase&ntilde;a es:" + newPassword +"<br><br>"+
-		 		 "Atentamente, equipo de apoyo de Arma Tu Torta.</div>";
+		 		 "Atentamente, equipo de soporte de <a href=\"www.armatutorta.com.ve\"> Arma Tu Torta </a>.";
 
 	          mimemessage.setContent( messa , "text/html");
 	          
@@ -258,7 +258,7 @@ public class SendEmail  extends Thread  {
         	mimemessage.setRecipients(Message.RecipientType.TO, addressTo);
         	mimemessage.setSubject("Tienes un nuevo comentario o mensaje", "ISO-8859-1");
 	          
-        	String messa = "<div style='color: #222222;'>Hola, has recibido un nuevo comentario a través de " +
+        	String messa = "Hola, has recibido un nuevo comentario a través de " +
 	          	"la p&aacute;gina web de Arma Tu Torta.<br><br>" +
 	          	"A continuación encontrarás los datos de la persona que escribi&oacute; y su mensaje: <br><br>"
 	          	+ "<strong>Nombre: </strong>" + name + "<br>"
@@ -328,15 +328,18 @@ public class SendEmail  extends Thread  {
         	mimemessage.setRecipients(Message.RecipientType.TO, addressTo);
         	mimemessage.setSubject("Copia de mensaje envíado a Arma Tu Torta", "ISO-8859-1");
 	          
-        	String messa = "<div style='color: #222222;'>Hola " + name + ", <br><br>"
-   		 		+ "A continuación encontrarás una copia del mensaje que nos enviaste " +
+        	String messa = "Hola " + name + ", <br><br>"
+   		 		+ "A continuación encontrarás una copia del mensaje que nos enviaste a trav&eacute;s de la p&aacute;gina web de " +
    		 		" Arma Tu Torta <br><br>"
    		 		+ "<strong> Nombre:</strong>  " + name + "<br>"
-   		 		+ "<strong> Email:</strong> " + email + "<br>"
-   		 		+ "<strong> Tel&eacute;fono:</strong> " + phone + "<br>"
-   		 		+ "<strong> Mensaje:</strong> " + msg + "<br><br>" +
+   		 		+ "<strong> Email:</strong> " + email + "<br>";
+        	
+        	if (phone != "")
+        		messa += "<strong>Tel&eacute;fono:</strong> " + phone + "<br>";
+   		 	
+        	messa += "<strong> Mensaje:</strong> " + msg + "<br><br>" +
    		 		"Gracias por escribirnos, te responderemos en la brevedad posible.<br><br>" +
-   		 		"Atentamente, Equipo de Apoyo de Arma Tu Torta.";
+   		 		"Atentamente, equipo de soporte de <a href=\"www.armatutorta.com.ve\"> Arma Tu Torta </a>.";
 
         	mimemessage.setContent( messa , "text/html");
 	          
