@@ -43,14 +43,28 @@ public class CreateStepOptionServlet extends HttpServlet {
 			if(user != null){
 				Integer typeId = Integer.valueOf(request.getParameter("typeId"));
 				Integer stepId = Integer.valueOf(request.getParameter("stepId"));
+				Integer priceMode = Integer.valueOf(request.getParameter("priceMode"));
 				Integer position = (Integer)CommandExecutor.getInstance().executeDatabaseCommand(new command.SelectNextOption(stepId));
 				
 				request.setAttribute("typeId", typeId);
 				request.setAttribute("stepId", stepId);
 				request.setAttribute("position", position);
+				request.setAttribute("priceMode", priceMode);
 				
-				rd = getServletContext().getRequestDispatcher("/admin/createStepOption.jsp");			
-				rd.forward(request, response);							
+				if(priceMode == 1){
+					rd = getServletContext().getRequestDispatcher("/admin/createStepOption.jsp");	
+					rd.forward(request, response);
+					
+				} else if(priceMode == 2){					
+					rd = getServletContext().getRequestDispatcher("/admin/createCupcakeStepOption.jsp");
+					rd.forward(request, response);
+					
+				} else if(priceMode == 3){							
+					rd = getServletContext().getRequestDispatcher("/admin/createCakeStepOption.jsp");
+					rd.forward(request, response);
+					
+				}
+				
 			} else {
 				rd = getServletContext().getRequestDispatcher("/admin/index.jsp");			
 				rd.forward(request, response);
@@ -68,16 +82,26 @@ public class CreateStepOptionServlet extends HttpServlet {
 		RequestDispatcher rd;
 		Integer typeId = Integer.valueOf(request.getParameter("txtTypeId"));
 		Long stepId = Long.valueOf(request.getParameter("txtStepId"));
+		Integer priceMode = Integer.valueOf(request.getParameter("txtPriceMode"));
 		
 		try{
 			String name = request.getParameter("txtName");
 			String description = request.getParameter("txtDescription");
 			Integer position = Integer.valueOf(request.getParameter("txtPosition"));
 			Double price = Double.valueOf(request.getParameter("txtPrice"));
+			Double priceTwo = 0.0;
+			Double priceThree = 0.0;
+			
 			int isUnavailable = 0;
 			
 			if (request.getParameter("txtIsUnavailable") != null)
 				isUnavailable = 1;			
+			
+			if (request.getParameter("txtPrice2")!= null)
+				priceTwo = Double.valueOf(request.getParameter("txtPrice2"));
+			
+			if (request.getParameter("txtPrice3") != null)
+				priceThree = Double.valueOf(request.getParameter("txtPrice3"));
 					
 			StepOption option = new StepOption();
 			option.setOrderStepId(stepId);
@@ -86,6 +110,8 @@ public class CreateStepOptionServlet extends HttpServlet {
 			option.setPosition(position);
 			option.setPrice(price);
 			option.setUnavailable(isUnavailable);
+			option.setPriceTwo(priceTwo);
+			option.setPriceThree(priceThree);
 		
 			Integer rowsUpdated  = (Integer) CommandExecutor.getInstance().executeDatabaseCommand(new command.CreateStepOption(option));
 			
@@ -94,13 +120,13 @@ public class CreateStepOptionServlet extends HttpServlet {
 			if(rowsUpdated != -1){
 				request.setAttribute("info", "La opción fue creada exitosamente.");
 				request.setAttribute("error", "");
-				rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);		
+				rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId+"&priceMode="+priceMode);		
 				//rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);		
 				rd.forward(request, response);
 			} else {
 				request.setAttribute("info", "");
 				request.setAttribute("error", "Ocurrió un error durante la creación de la opción. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-				rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);	
+				rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId+"&priceMode="+priceMode);	
 				//rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);		
 
 				rd.forward(request, response);
@@ -108,7 +134,7 @@ public class CreateStepOptionServlet extends HttpServlet {
 		}catch (Exception e) {
 			request.setAttribute("info", "");
 			request.setAttribute("error", "Ocurrió un error durante la creación de la opción. Por favor intente de nuevo y si el error persiste contacte a su administrador.");
-			rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);	
+			rd = getServletContext().getRequestDispatcher("/servlet/servlet.ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId+"&priceMode="+priceMode);	
 			//rd = getServletContext().getRequestDispatcher("/ListStepOptionsServlet?typeId="+typeId+"&stepId="+stepId);		
 
 			rd.forward(request, response);

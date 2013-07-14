@@ -8,6 +8,8 @@ public class StepOption {
 	private int position;
 	private int oldPosition;
 	private double price;
+	private double priceTwo;
+	private double priceThree;
 	private int isUnavailable;
 	private String description;
 	private String image;
@@ -82,6 +84,22 @@ public class StepOption {
 
 	public String getImage() {
 		return image;
+	}
+
+	public void setPriceTwo(double priceTwo) {
+		this.priceTwo = priceTwo;
+	}
+
+	public double getPriceTwo() {
+		return priceTwo;
+	}
+
+	public void setPriceThree(double priceThree) {
+		this.priceThree = priceThree;
+	}
+
+	public double getPriceThree() {
+		return priceThree;
 	}
 	
 	

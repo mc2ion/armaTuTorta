@@ -53,6 +53,7 @@
 					<input type="hidden" name="txtStepId" value="<%= request.getAttribute("stepId") %>" />
 					<input type="hidden" name="txtOptionId" value="<%= request.getAttribute("optionId") %>" />
 					<input type="hidden" name="txtCurrentPosition" value="<%= optionInfo.getPosition() %>" />
+					<input type="hidden" name="txtPriceMode" value="<%= request.getAttribute("priceMode") %>" />
 					<fieldset>
 						<label for="name">Posición:</label>
 						<input type="number" min="1" name="txtPosition" id="txtPosition" maxlength="3" size="3" value="<%= optionInfo.getPosition() %>" /> <br><br>

@@ -8,7 +8,7 @@
 	<link rel="shortcut icon" href="../images/ico.ico">
 	<script type="text/javascript" language="javascript" src="../js/jquery.js"></script>
 	<script type="text/javascript" src="../js/messages.js"></script>
-<title>Crear Opción</title>
+<title>Editar Opción</title>
 <script language=JavaScript> 
 	<!-- 
 	
@@ -29,8 +29,9 @@
         <div id="menu">
 			<div class="menuitemHome"><a href="/servlet/servlet.UserLoginServlet">Home</a></div>	
 			<ul>      
-			<li class="menuitem"><a href="/servlet/servlet.ListOrderStepsServlet?typeId=<%= request.getAttribute("typeId") %>">Ver Pasos</a></li>      
-			<li class="menuitem"><a href="/servlet/servlet.ListStepOptionsServlet?typeId=<%= request.getAttribute("typeId") %>&stepId=<%= request.getAttribute("stepId") %>&priceMode=<%= request.getAttribute("priceMode") %>">Ver Opciones</a></li>
+				<li class="menuitem"><a href="/servlet/servlet.ListOrderStepsServlet?typeId=<%= request.getAttribute("typeId") %>">Ver Pasos</a></li>      
+				<li class="menuitem"><a href="/servlet/servlet.ListStepOptionsServlet?typeId=<%= request.getAttribute("typeId") %>&stepId=<%= request.getAttribute("stepId") %>">Ver Opciones</a></li>
+            	<li class="menuitem"><a href="/servlet/servlet.CreateStepOptionServlet?typeId=<%= request.getAttribute("typeId") %>&stepId=<%= request.getAttribute("stepId") %>">Agregar opción</a></li>
 			</ul>
 			<div class="menuitemPass"><a href="/servlet/servlet.EditUserPasswordServlet">Cambiar Contraseña</a></div>
 			 <div class="menuitemSalir"><a href="../admin/index.jsp">Salir</a></div>	
@@ -43,39 +44,54 @@
             <div id="leftmenu_bottom"></div>
         </div>  
 		<div id="content">
-				<h2>Agregar Opción:</h2>
+				<h2>Editar Opción:</h2>
 	        	<p>&nbsp;</p>
            		<p>&nbsp;</p>
-				<form name="form" action="/servlet/servlet.CreateStepOptionServlet" onsubmit="return validateCreateOption(this)" method="post">
+				<form name="form" action="/servlet/servlet.EditStepOptionServlet" onsubmit="return validateEditOption(this)" method="post">
+					<jsp:useBean id="optionInfo" type="domain.StepOption" scope="request"/> 
 					<input type="hidden" name="txtTypeId" value="<%= request.getAttribute("typeId") %>" />
 					<input type="hidden" name="txtStepId" value="<%= request.getAttribute("stepId") %>" />
+					<input type="hidden" name="txtOptionId" value="<%= request.getAttribute("optionId") %>" />
+					<input type="hidden" name="txtCurrentPosition" value="<%= optionInfo.getPosition() %>" />
 					<input type="hidden" name="txtPriceMode" value="<%= request.getAttribute("priceMode") %>" />
 					<fieldset>
 						<label for="name">Posición:</label>
-						<input type="number" min="1" name="txtPosition" id="txtPosition" maxlength="3" size="3" value="<%= request.getAttribute("position") %>" /> <br><br>
+						<input type="number" min="1" name="txtPosition" id="txtPosition" maxlength="3" size="3" value="<%= optionInfo.getPosition() %>" /> <br><br>
 						<label for="name">Nombre:</label>
-						<textarea name="txtName" id="txtName" rows="2" cols="50"></textarea> <br><br>
+						<textarea name="txtName" id="txtName" rows="2" cols="50"><%= optionInfo.getName() %></textarea> <br><br>
 						<label for="name">Descripción:</label>
-						<textarea name="txtDescription" id="txtDescription" rows="3" cols="50"></textarea> <br><br>
-						<label for="name">Precio:</label>
-						<input type="text" name="txtPrice" id="txtPrice" maxlength="5" size="5" /> <br><br>
+						<textarea name="txtDescription" id="txtDescription" rows="2" cols="50"><%= (optionInfo.getDescription()!=null)?optionInfo.getDescription():"" %></textarea> <br><br>
+						<label for="name">Precio Pequeña:</label>
+						<input type="text" name="txtPrice" id="txtPrice" maxlength="5" size="5" value="<%= optionInfo.getPrice() %>" /> <br><br>
+						<label for="name">Precio Mediana:</label>
+						<input type="text" name="txtPrice2" id="txtPrice2" maxlength="5" size="5" value="<%= optionInfo.getPriceTwo() %>" /> <br><br>
+						<label for="name">Precio Grande:</label>
+						<input type="text" name="txtPrice3" id="txtPrice3" maxlength="5" size="5" value="<%= optionInfo.getPriceThree() %>" /> <br><br>
+						<%
+						if (optionInfo.isUnavailable() == 1){
+						%>
+						<input type="checkbox" name="txtIsUnavailable" class="check" id="txtIsUnavailable" maxlength="50" size="40" value="isUnavailable" checked />&nbsp; 
+							&nbsp;&nbsp; Está Agotado<br><br>
+						<%
+						}else{
+						%>
 						<input type="checkbox" name="txtIsUnavailable" class="check" id="txtIsUnavailable" maxlength="50" size="40" value="isUnavailable" />&nbsp; 
 							&nbsp;&nbsp; Está Agotado<br><br>
-						
 					<%
-					String error = (String) request.getAttribute("error");
-					if (error != null){
+						}
+						String error = (String) request.getAttribute("error");
+						if (error != null){
 					%>
 						<div>
 							<%= error %>
 						</div>
 						<%
-					}
+						}
 					%>	
 					<br>
 					<div style="text-align:center">
 							<input type="button" class="button" value="Volver"  onClick="javascript:history.back();"/>
-							<input type="submit"  class="button"  name="sbmtButton" value="Agregar" style="margin-left:20px;" />
+							<input type="submit"  class="button"  name="sbmtButton" value="Editar" style="margin-left:20px;" />
 					</div>	
 					</fieldset>			
 			</form>

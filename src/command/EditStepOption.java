@@ -33,14 +33,17 @@ public class EditStepOption implements DatabaseCommand {
 			rowsUpdated = sta.executeUpdate();
 		}
 				
-		sta = conn.prepareStatement("UPDATE step_option SET NAME = ?, DESCRIPTION = ?, POSITION = ?, IMAGE = ?, PRICE = ?, IS_UNAVAILABLE = ? WHERE ID = ?");
+		sta = conn.prepareStatement("UPDATE step_option SET NAME = ?, DESCRIPTION = ?, POSITION = ?, IMAGE = ?, PRICE = ?, IS_UNAVAILABLE = ?, " +
+				"PRICE_TWO = ?, PRICE_THREE = ? WHERE ID = ?");
 		sta.setString(1, option.getName());
 		sta.setString(2, option.getDescription());
 		sta.setInt(3, option.getPosition());
 		sta.setString(4, option.getImage());
 		sta.setDouble(5, option.getPrice());
 		sta.setInt(6, option.isUnavailable());
-		sta.setLong(7, option.getId());
+		sta.setDouble(7, option.getPriceTwo());
+		sta.setDouble(8, option.getPriceThree());
+		sta.setLong(9, option.getId());
 		rowsUpdated = sta.executeUpdate();				
 		sta.close();
 		

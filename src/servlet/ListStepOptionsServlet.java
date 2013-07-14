@@ -40,11 +40,13 @@ public class ListStepOptionsServlet extends HttpServlet {
 		try {
 			HttpSession session = request.getSession();
 			User user = (User)session.getAttribute("user");
+			RequestDispatcher rd;
 			
 			if(user != null){
 				// perform list user operations
 				Integer typeId = Integer.valueOf(request.getParameter("typeId"));
 				Integer stepId = Integer.valueOf(request.getParameter("stepId"));
+				Integer priceMode = Integer.valueOf(request.getParameter("priceMode"));
 				String info = (String)request.getAttribute("info")!=null?(String)request.getAttribute("info"):"";
 				String error = (String)request.getAttribute("error")!=null?(String)request.getAttribute("error"):"";
 				@SuppressWarnings("unchecked")
@@ -54,12 +56,26 @@ public class ListStepOptionsServlet extends HttpServlet {
 				request.setAttribute("options", list);
 				request.setAttribute("typeInfo", typeInfo);
 				request.setAttribute("stepId", stepId);
+				request.setAttribute("priceMode", priceMode);
 				request.setAttribute("info", info);
 				request.setAttribute("error", error);
-				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/stepOptions.jsp");
-				rd.forward(request, response);
+				
+				if(priceMode == 1){
+					rd = getServletContext().getRequestDispatcher("/admin/stepOptions.jsp");
+					rd.forward(request, response);
+					
+				} else if(priceMode == 2){					
+					rd = getServletContext().getRequestDispatcher("/admin/cupcakeStepOptions.jsp");
+					rd.forward(request, response);
+					
+				} else if(priceMode == 3){							
+					rd = getServletContext().getRequestDispatcher("/admin/cakeStepOptions.jsp");
+					rd.forward(request, response);
+					
+				}
+
 			} else {
-				RequestDispatcher rd = getServletContext().getRequestDispatcher("/admin/index.jsp");
+				rd = getServletContext().getRequestDispatcher("/admin/index.jsp");
 				rd.forward(request, response);
 			}
 			

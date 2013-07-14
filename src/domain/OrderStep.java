@@ -8,6 +8,7 @@ public class OrderStep {
 	private int position;
 	private int oldPosition;
 	private int isMultipleChoice;
+	private int priceMode;
 	
 	public void setId(long id) {
 		this.id = id;
@@ -55,6 +56,14 @@ public class OrderStep {
 
 	public int getOldPosition() {
 		return oldPosition;
+	}
+
+	public void setPriceMode(int priceMode) {
+		this.priceMode = priceMode;
+	}
+
+	public int getPriceMode() {
+		return priceMode;
 	}
 
 }

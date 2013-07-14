@@ -48,16 +48,18 @@
 	var idOption;
 	var idStep;
 	var idOrderType;
+	var priceMode;
 			
 	$(function() {
 		$('a[rel*=leanModal]').leanModal({ top : 200, closeButton: ".close_x" });		
 	});
 	
-	function loadVars(var0, var1, var2, var3) {
+	function loadVars(var0, var1, var2, var3, var4) {
 		idOption = var0;
 		idStep = var1;
 		idOrderType = var2;
 		$('.option').text(var3);
+		priceMode = var4;
 		
 	};
 	
@@ -65,6 +67,7 @@
 		f.elements['optionId'].value = idOption;
 		f.elements['stepId'].value = idStep;
 		f.elements['orderTypeId'].value = idOrderType;
+		f.elements['priceMode'].value = priceMode;
 		return true;
 	}
 </script>
@@ -81,6 +84,9 @@
 	</script>
 </head>
 <body oncontextmenu="return inhabilitar()">
+<%
+	int priceMode = (Integer)request.getAttribute("priceMode");
+%>
 	<div id="container">
 		<div id="header">
         	<img alt="logo" src="../images/loguito5.png"/>
@@ -89,7 +95,7 @@
 			<div class="menuitemHome" ><a href="/servlet/servlet.UserLoginServlet">Home</a></div>	
 	    	<ul>
 	    		<li class="menuitem"><a href="/servlet/servlet.ListOrderStepsServlet?typeId=<%= typeInfo.getId() %>">Ver Pasos</a></li>
-            	<li class="menuitem"><a href="/servlet/servlet.CreateStepOptionServlet?typeId=<%= typeInfo.getId() %>&stepId=<%= request.getAttribute("stepId") %>">Agregar opción</a></li>
+            	<li class="menuitem"><a href="/servlet/servlet.CreateStepOptionServlet?typeId=<%= typeInfo.getId() %>&stepId=<%= request.getAttribute("stepId") %>&priceMode=<%= priceMode %>">Agregar opción</a></li>
             </ul>
 			<div class="menuitemPass"><a href="/servlet/servlet.EditUserPasswordServlet">Cambiar Contraseña</a></div>
 			<div class="menuitemSalir"><a href="../admin/index.jsp">Salir</a></div>	
@@ -102,7 +108,7 @@
             <div id="leftmenu_bottom"></div>
         </div>  
 		<div id="content">  
-        		<jsp:useBean id="options" type="java.util.ArrayList<domain.StepOption>" scope="request"/>  	
+        		<jsp:useBean id="options" type="java.util.ArrayList<domain.StepOption>" scope="request"/>
         		<h2>Opciones <%= typeInfo.getName() %>:</h2>
 				<%
         			String info = (String)request.getAttribute("info");
@@ -151,10 +157,10 @@
 									<td><%= o.getPrice() %></td>
 									<td><%= (o.isUnavailable()==1)?"Si":"No"  %></td>
 									<td><p> 
-										<a href="/servlet/servlet.EditStepOptionServlet?optionId=<%= o.getId() %>&stepId=<%= o.getOrderStepId() %>&typeId=<%= typeInfo.getId() %>" style="color: transparent" >
+										<a href="/servlet/servlet.EditStepOptionServlet?optionId=<%= o.getId() %>&stepId=<%= o.getOrderStepId() %>&typeId=<%= typeInfo.getId() %>&priceMode=<%= priceMode %>" style="color: transparent" >
 											<img alt="logo" src="/images/edit.png"  height="16" width="16" title="Editar Opción" />
 										</a> 
-										<a id="go" rel="leanModal" href="#deleteOption" style="color: #f7941e; font-weight: bold;" onclick="return loadVars(<%= o.getId()%>, <%= o.getOrderStepId()%>, <%= typeInfo.getId() %>, '<%= o.getPosition()%>' )" >
+										<a id="go" rel="leanModal" href="#deleteOption" style="color: #f7941e; font-weight: bold;" onclick="return loadVars(<%= o.getId()%>, <%= o.getOrderStepId()%>, <%= typeInfo.getId() %>, '<%= o.getPosition()%>', <%= priceMode %> )" >
 										<img alt="logo" src="/images/delete.png" height="16" width="16" title="Eliminar Opción" />
 										</a><br>
 										</p>
@@ -187,6 +193,7 @@
 				<input type="hidden" id="optionId" class="good_input" name="optionId"  value=""/>
 				<input type="hidden" id="stepId" class="good_input" name="stepId"  value=""/>
 				<input type="hidden" id="orderTypeId" class="good_input" name="orderTypeId"  value=""/>
+				<input type="hidden" id="priceMode" class="good_input" name="priceMode"  value=""/>
 				<div class="btn-fld">
 					<input type="submit"  class="buttonPopUpDelete"  name="sbmtButton" value="Aceptar"  />
 				</div>
